@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -23,9 +25,15 @@ import { AuthGuardServiceService } from './guard/auth-guard-service.service';
     AppRoutingModule,
     NgbModule.forRoot(),
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({config: {
+      tokenGetter: () => {
+        return localStorage.getItem('token.access_token');
+      },
+      whitelistedDomains: ['localhost:8080']
+    }})
   ],
-  providers: [LoginService, AuthGuardServiceService],
+  providers: [JwtHelperService, LoginService, AuthGuardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
