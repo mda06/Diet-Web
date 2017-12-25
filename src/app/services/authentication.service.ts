@@ -51,6 +51,11 @@ export class AuthenticationService {
     return !this.jwtHelper.isTokenExpired(this._token.access_token);
   }
 
+  getConnectedUser(): Observable<any> {
+    httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
+    return this.http.get<any>(this.connectedUserUrl, httpOptions);
+  }
+
   private initRole(): Observable<Role> {
     httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
     return this.http.get<Role>(this.roleUrl, httpOptions);

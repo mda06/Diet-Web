@@ -13,6 +13,7 @@ import { AuthenticationService} from "./services/authentication.service";
 import { DietGuardServiceService } from "./guard/diet-guard-service.service";
 import { PatientGuardServiceService } from "./guard/patient-guard-service.service";
 import { AdminGuardServiceService } from "./guard/admin-guard-service.service";
+import { DietService } from "./services/diet.service";
 import { SelectPatientComponent } from './diet/select-patient/select-patient.component';
 import { DietDashboardComponent } from "./diet/diet-dashboard/diet-dashboard.component";
 import { AdminDashboardComponent } from "./admin/admin-dashboard/admin-dashboard.component";
@@ -46,7 +47,8 @@ import { LoginComponent } from './login/login.component';
     AuthenticationService,
     AdminGuardServiceService,
     DietGuardServiceService,
-    PatientGuardServiceService],
+    PatientGuardServiceService,
+    DietService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

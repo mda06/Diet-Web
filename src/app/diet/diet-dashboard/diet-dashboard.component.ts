@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from "../../services/authentication.service";
+import { DietService } from "../../services/diet.service";
+import {Dietetist} from "../../model/dietetist";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -8,15 +9,15 @@ import { AuthenticationService } from "../../services/authentication.service";
 })
 export class DietDashboardComponent implements OnInit {
 
-  constructor(private authService: AuthenticationService) { }
+  private diet: Dietetist;
+
+  constructor(private dietService: DietService) { }
 
   ngOnInit() {
-
-  }
-
-  test() {
-    console.log("Role: %s, Token: %s",
-      this.authService.role, this.authService.token.access_token);
+    this.dietService.getConnectedUser().subscribe(
+      data => {this.diet = data;},
+      err => {console.log("Error trying to get the connected user");}
+    );
   }
 
 }

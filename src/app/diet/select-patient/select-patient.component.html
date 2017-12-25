@@ -1,3 +1,7 @@
-<p>
-  select-patient works!
-</p>
+<div *ngIf="patients" class="container">
+  <ul>
+    <li *ngFor="let patient of patients">
+      <strong>{{patient.firstName}}</strong> {{patient.lastName}}
+    </li>
+  </ul>
+</div>

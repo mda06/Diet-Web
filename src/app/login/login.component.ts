@@ -12,8 +12,8 @@ import {Role} from "../model/role.enum";
 export class LoginComponent implements OnInit {
 
   auth: Authentication = {
-    username: 'caline@patient.com',
-    password: 'caline'
+    username: 'momo@diet.com',
+    password: 'momo'
   };
   ret: string = '';
   error: string = '';

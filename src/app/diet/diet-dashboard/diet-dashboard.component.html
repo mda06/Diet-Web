@@ -1,4 +1,10 @@
-<p>
-  diet-dashboard works!
-  <button (click)="test()">Test it</button>
-</p>
+<div *ngIf="!diet; else dietReady">
+  <p>Fetching data from the server....</p>
+</div>
+
+<ng-template #dietReady>
+  <h2>{{ diet.id }}) {{ diet.firstName}} {{diet.middleName}} {{diet.lastName}}</h2>
+
+  <app-select-patient [patients]="diet.patients"></app-select-patient>
+</ng-template>
+
