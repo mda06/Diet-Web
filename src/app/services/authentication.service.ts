@@ -4,7 +4,7 @@ import { Token } from '../model/token';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {isNullOrUndefined} from "util";
+import {Role} from "../model/role.enum";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,7 +31,7 @@ export class AuthenticationService {
           localStorage.setItem("token", JSON.stringify(this.token));
           this.initRole().subscribe(role => {
             this.role = role;
-            observer.next(role);
+            observer.next(this.role);
             observer.complete();
           }, err => {
             observer.error(err);
@@ -55,11 +55,8 @@ export class AuthenticationService {
     return this.http.get<Role>(this.roleUrl, httpOptions);
   }
 
-  /*getRole(): Role {
-    if(isNullOrUndefined(this.role))
-      this.role = Role.PATIENT;
-    else
-      return this.role;
-  }*/
+  getRole(): Role {
+    return this.role;
+  }
 
 }

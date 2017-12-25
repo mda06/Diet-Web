@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Authentication } from "../model/authentication";
 import { AuthenticationService } from "../services/authentication.service";
 import { Router, ActivatedRoute } from '@angular/router';
+import {Role} from "../model/role.enum";
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,17 @@ export class LoginComponent implements OnInit {
     this.authService.onLogin(this.auth).subscribe(
       (role) => {
         if(this.return === '/login') {
-
+          switch(role) {
+            case Role.PATIENT:
+              this.router.navigateByUrl('patient/dashboard');
+              break;
+            case Role.ADMIN:
+              this.router.navigateByUrl('admin/dashboard');
+              break;
+            case Role.DIET:
+              this.router.navigateByUrl('diet/dashboard');
+              break;
+          }
         } else {
           this.router.navigateByUrl(this.return)
         }
