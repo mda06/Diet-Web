@@ -1,8 +1,15 @@
-<div *ngIf="patients" class="container">
-  <ul>
-    <li *ngFor="let patient of patients">
-      <strong>{{patient.firstName}}</strong> {{patient.lastName}}
-      <button (click)="select(patient)">Select</button>
-    </li>
-  </ul>
+<div class="container">
+  <div class="card" id="patients-holder">
+    <h4 class="card-header">Select a patient</h4>
+    <div *ngIf="patients" class="list-group list-group-flush">
+
+      <li class="list-group-item patient-holder " *ngFor="let patient of patients" (click)="switch(patient)"
+          [class.text-primary]="selectedPatient === patient">
+        {{patient.firstName + ' ' + patient.lastName}}
+      </li>
+
+      <button type="button" class="btn btn-primary" (click)="select()"
+      [class.disabled]="!selectedPatient">Select</button>
+    </div>
+  </div>
 </div>

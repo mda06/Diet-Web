@@ -1,65 +1,109 @@
 <div class="container-fluid" *ngIf="patient">
   <div class="row">
-    {{patient.firstName}} {{patient.middleName}} {{patient.lastName}}
+    <div class="col-md-4">
+      <div class="card">
+        <h4 class="card-header">Meta data</h4>
+        <div class="card-body">
+          <label for="firstName">First name</label>
+          <input type="text" class="form-control" id="firstName"
+                 required
+                 [(ngModel)]="patient.firstName" name="firstName">
+          <label for="middleName">Middle name</label>
+          <input type="text" class="form-control" id="middleName"
+                 [(ngModel)]="patient.middleName" name="middleName">
+          <label for="lastName">Last name</label>
+          <input type="text" class="form-control" id="lastName"
+                 [(ngModel)]="patient.lastName" name="lastName">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email"
+                 required
+                 [(ngModel)]="patient.email" name="email">
+          <label for="phone">Phone</label>
+          <input type="text" class="form-control" id="phone"
+                 [(ngModel)]="patient.phone" name="phone">
+          <label for="birthday">Birthday</label>
+          <input type="text" class="form-control" id="birthday"
+                 required
+                 [(ngModel)]="patient.birthday" name="birthday">
+          <label for="gender">Gender</label>
+          <input type="text" class="form-control" id="gender"
+                 required
+                 [(ngModel)]="patient.gender" name="gender">
+
+          <button type="button" class="btn btn-outline-primary" (click)="isAddressCollapsed = !isAddressCollapsed"
+                  [attr.aria-expanded]="!isAddressCollapsed" aria-controls="addressCollapse">
+            Toggle address
+          </button>
+          <div id="addressCollapse" [ngbCollapse]="isAddressCollapsed">
+            <div class="card">
+              <div class="card-body">
+                <label for="street">Street</label>
+                <input type="text" class="form-control" id="street"
+                       required
+                       [(ngModel)]="patient.address.street" name="street">
+                <label for="number">Number</label>
+                <input type="text" class="form-control" id="number"
+                       required
+                       [(ngModel)]="patient.address.number" name="number">
+                <label for="postcode">Postcode</label>
+                <input type="number" class="form-control" id="postcode"
+                       required
+                       [(ngModel)]="patient.address.postcode" name="postcode">
+                <label for="city">City</label>
+                <input type="text" class="form-control" id="city"
+                       required
+                       [(ngModel)]="patient.address.city" name="city">
+                <label for="country">Country</label>
+                <input type="text" class="form-control" id="country"
+                       required
+                       [(ngModel)]="patient.address.country" name="country">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <h4 class="card-header">Anthropometric parameters</h4>
+        <div class="card-body">
+            <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+              <div *ngFor="let param of patient.anthropometricParameters">
+                <ngb-panel title={{param.date}}>
+                  <ng-template ngbPanelContent>
+                    <label for="length">Length</label>
+                    <input type="text" class="form-control" id="length"
+                           [(ngModel)]="param.length" name="length">
+                    <label for="weight">weight</label>
+                    <input type="text" class="form-control" id="weight"
+                           [(ngModel)]="param.weight" name="weight">
+                    <label for="bodyFat">Body fat</label>
+                    <input type="text" class="form-control" id="bodyFat"
+                           [(ngModel)]="param.bodyFat" name="bodyFat">
+                    <label for="waistCircumference">Waist circumference</label>
+                    <input type="text" class="form-control" id="waistCircumference"
+                           [(ngModel)]="param.waistCircumference" name="waistCircumference">
+                    <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) }}</label>
+                  </ng-template>
+                </ngb-panel>
+              </div>
+            </ngb-accordion>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <h4 class="card-header">Extra info</h4>
+        <div class="card-body">
+          <label for="extraInfo">Extra Info</label>
+          <input type="text" class="form-control" id="extraInfo"
+               [(ngModel)]="patient.extraInfo" name="extraInfo">
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row">
-    <div class="col-md-4">
-      <h3>Meta data</h3>
-      <label for="firstName">First name</label>
-      <input type="text" class="form-control" id="firstName"
-             required
-             [(ngModel)]="patient.firstName" name="firstName">
-      <label for="middleName">Middle name</label>
-      <input type="text" class="form-control" id="middleName"
-             [(ngModel)]="patient.middleName" name="middleName">
-      <label for="email">Email</label>
-      <input type="text" class="form-control" id="email"
-             required
-             [(ngModel)]="patient.email" name="email">
-      <label for="phone">Phone</label>
-      <input type="text" class="form-control" id="phone"
-             [(ngModel)]="patient.phone" name="phone">
-      <label for="birthday">Birthday</label>
-      <input type="text" class="form-control" id="birthday"
-             required
-             [(ngModel)]="patient.birthday" name="birthday">
-      <label for="gender">Gender</label>
-      <input type="text" class="form-control" id="gender"
-             required
-             [(ngModel)]="patient.gender" name="gender">
-      <p>Address comming here</p>
-    </div>
-    <div class="col-md-4">
-      <h3>Anthropometric parameters</h3>
-
-
-      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
-        <div *ngFor="let param of patient.anthropometricParameters">
-          <ngb-panel title={{param.date}}>
-            <ng-template ngbPanelContent>
-              <label for="length">Length</label>
-              <input type="text" class="form-control" id="length"
-                     [(ngModel)]="param.length" name="length">
-              <label for="weight">weight</label>
-              <input type="text" class="form-control" id="weight"
-                     [(ngModel)]="param.weight" name="weight">
-              <label for="bodyFat">Body fat</label>
-              <input type="text" class="form-control" id="bodyFat"
-                     [(ngModel)]="param.bodyFat" name="bodyFat">
-              <label for="waistCircumference">Waist circumference</label>
-              <input type="text" class="form-control" id="waistCircumference"
-                     [(ngModel)]="param.waistCircumference" name="waistCircumference">
-              <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) }}</label>
-            </ng-template>
-          </ngb-panel>
-        </div>
-      </ngb-accordion>
-    </div>
-    <div class="col-md-4">
-      <h3>Extra info</h3>
-      <label for="extraInfo">Extra Info</label>
-      <input type="text" class="form-control" id="extraInfo"
-             [(ngModel)]="patient.extraInfo" name="extraInfo">
-    </div>
+    <button type="button" class="btn btn-secondary" (click)="goBack()">Return</button>
+    <button type="button" class="btn btn-success">Save</button>
   </div>
 </div>

@@ -10,14 +10,19 @@ export class SelectPatientComponent implements OnInit {
 
   @Input() patients: Array<Patient>
   @Output() selectPatient = new EventEmitter<Patient>();
+  selectedPatient: Patient;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  select(patient: Patient) {
-    this.selectPatient.emit(patient);
+  select() {
+    this.selectPatient.emit(this.selectedPatient);
+  }
+
+  switch(patient: Patient) {
+    this.selectedPatient = patient;
   }
 
 }
