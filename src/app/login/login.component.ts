@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     username: 'caline@patient.com',
     password: 'caline'
   };
-  return: string = '';
+  ret: string = '';
   error: string = '';
 
   constructor(private authService: AuthenticationService,
@@ -25,13 +25,13 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     //Check the return param and go to /login if nothing is set
     this.route.queryParams
-      .subscribe(params => this.return = params['return'] || '/login');
+      .subscribe(params => this.ret = params['ret'] || '/login');
   }
 
   onLogin() {
     this.authService.onLogin(this.auth).subscribe(
       (role) => {
-        if(this.return === '/login') {
+        if(this.ret === '/login') {
           switch(role) {
             case Role.PATIENT:
               this.router.navigateByUrl('patient/dashboard');
@@ -44,7 +44,7 @@ export class LoginComponent implements OnInit {
               break;
           }
         } else {
-          this.router.navigateByUrl(this.return)
+          this.router.navigateByUrl(this.ret)
         }
       },
       (err) => this.error = 'Cannot connect !'

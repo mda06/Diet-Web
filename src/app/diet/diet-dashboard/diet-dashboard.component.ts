@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthenticationService } from "../../services/authentication.service";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DietDashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(private authService: AuthenticationService) { }
 
   ngOnInit() {
+
+  }
+
+  test() {
+    console.log("Role: %s, Token: %s",
+      this.authService.role, this.authService.token.access_token);
   }
 
 }

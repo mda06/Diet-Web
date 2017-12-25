@@ -9,12 +9,12 @@ export class DietGuardServiceService implements CanActivate {
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    if (this.authService.isAuthenticated() && this.authService.getRole() === Role.DIET) {
+    if (this.authService.isAuthenticated() && this.authService.role === Role.DIET) {
       return true;
     } else {
       this.router.navigate(['/login'], {
         queryParams: {
-          return: state.url
+          ret: state.url
         }
       });
       return false;

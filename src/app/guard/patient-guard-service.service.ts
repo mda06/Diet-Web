@@ -9,13 +9,12 @@ export class PatientGuardServiceService implements CanActivate {
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log(this.authService.getRole());
-    if (this.authService.isAuthenticated() && this.authService.getRole() === Role.PATIENT) {
+    if (this.authService.isAuthenticated() && this.authService.role === Role.PATIENT) {
       return true;
     } else {
       this.router.navigate(['/login'], {
         queryParams: {
-          return: state.url
+          ret: state.url
         }
       });
       return false;
