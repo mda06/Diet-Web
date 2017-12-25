@@ -7,18 +7,20 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { DietSelectPatientComponent } from './diet-select-patient/diet-select-patient.component';
 import { AppRoutingModule } from './app-routing.module';
 
-import { LoginService} from './login/login.service';
+import { AuthenticationService} from "./services/authentication.service";
 import { AuthGuardServiceService } from './guard/auth-guard-service.service';
+import { SelectPatientComponent } from './diet/select-patient/select-patient.component';
+import { DashboardComponent } from './diet/dashboard/dashboard.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    DietSelectPatientComponent,
+    SelectPatientComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,7 @@ import { AuthGuardServiceService } from './guard/auth-guard-service.service';
       whitelistedDomains: ['localhost:8080']
     }})
   ],
-  providers: [JwtHelperService, LoginService, AuthGuardServiceService],
+  providers: [JwtHelperService, AuthenticationService, AuthGuardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

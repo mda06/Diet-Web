@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Login } from './login';
-import { LoginService} from './login.service';
+import { Authentication } from "../model/authentication";
+import { AuthenticationService } from "../services/authentication.service";
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -10,13 +10,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  login: Login = {
+  auth: Authentication = {
     username: 'caline@patient.com',
     password: 'caline'
   };
   return: string = '';
 
-  constructor(private loginService: LoginService,
+  constructor(private authService: AuthenticationService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.loginService.onLogin(this.login);
+    this.authService.onLogin(this.auth);
     this.router.navigateByUrl(this.return);
   }
 
