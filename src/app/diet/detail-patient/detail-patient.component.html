@@ -1,0 +1,65 @@
+<div class="container-fluid" *ngIf="patient">
+  <div class="row">
+    {{patient.firstName}} {{patient.middleName}} {{patient.lastName}}
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <h3>Meta data</h3>
+      <label for="firstName">First name</label>
+      <input type="text" class="form-control" id="firstName"
+             required
+             [(ngModel)]="patient.firstName" name="firstName">
+      <label for="middleName">Middle name</label>
+      <input type="text" class="form-control" id="middleName"
+             [(ngModel)]="patient.middleName" name="middleName">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email"
+             required
+             [(ngModel)]="patient.email" name="email">
+      <label for="phone">Phone</label>
+      <input type="text" class="form-control" id="phone"
+             [(ngModel)]="patient.phone" name="phone">
+      <label for="birthday">Birthday</label>
+      <input type="text" class="form-control" id="birthday"
+             required
+             [(ngModel)]="patient.birthday" name="birthday">
+      <label for="gender">Gender</label>
+      <input type="text" class="form-control" id="gender"
+             required
+             [(ngModel)]="patient.gender" name="gender">
+      <p>Address comming here</p>
+    </div>
+    <div class="col-md-4">
+      <h3>Anthropometric parameters</h3>
+
+
+      <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+        <div *ngFor="let param of patient.anthropometricParameters">
+          <ngb-panel title={{param.date}}>
+            <ng-template ngbPanelContent>
+              <label for="length">Length</label>
+              <input type="text" class="form-control" id="length"
+                     [(ngModel)]="param.length" name="length">
+              <label for="weight">weight</label>
+              <input type="text" class="form-control" id="weight"
+                     [(ngModel)]="param.weight" name="weight">
+              <label for="bodyFat">Body fat</label>
+              <input type="text" class="form-control" id="bodyFat"
+                     [(ngModel)]="param.bodyFat" name="bodyFat">
+              <label for="waistCircumference">Waist circumference</label>
+              <input type="text" class="form-control" id="waistCircumference"
+                     [(ngModel)]="param.waistCircumference" name="waistCircumference">
+              <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) }}</label>
+            </ng-template>
+          </ngb-panel>
+        </div>
+      </ngb-accordion>
+    </div>
+    <div class="col-md-4">
+      <h3>Extra info</h3>
+      <label for="extraInfo">Extra Info</label>
+      <input type="text" class="form-control" id="extraInfo"
+             [(ngModel)]="patient.extraInfo" name="extraInfo">
+    </div>
+  </div>
+</div>

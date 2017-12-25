@@ -1,5 +1,6 @@
 import {Gender} from "./gender";
 import {AnthropometricParameter} from "./anthropometricParameter";
+import {Address} from "./address";
 
 export class Patient {
   authId: string;
@@ -14,4 +15,5 @@ export class Patient {
   middleName: string;
   phone: string;
   anthropometricParameters: Array<AnthropometricParameter>;
+  address: Address;
 }

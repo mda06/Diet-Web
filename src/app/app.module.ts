@@ -19,6 +19,7 @@ import { DietDashboardComponent } from "./diet/diet-dashboard/diet-dashboard.com
 import { AdminDashboardComponent } from "./admin/admin-dashboard/admin-dashboard.component";
 import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-dashboard.component";
 import { LoginComponent } from './login/login.component';
+import { DetailPatientComponent } from './diet/detail-patient/detail-patient.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { LoginComponent } from './login/login.component';
     SelectPatientComponent,
     DietDashboardComponent,
     AdminDashboardComponent,
-    PatientDashboardComponent
+    PatientDashboardComponent,
+    DetailPatientComponent
   ],
   imports: [
     BrowserModule,

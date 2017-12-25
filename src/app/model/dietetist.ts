@@ -1,5 +1,6 @@
 import {Gender} from "./gender";
 import {Patient} from "./patient";
+import {Address} from "./address";
 
 export class Dietetist {
   authId: string;
@@ -13,5 +14,6 @@ export class Dietetist {
   middleName: string;
   phone: string;
   vat: string;
+  address: Address;
   patients: Array<Patient>
 }
