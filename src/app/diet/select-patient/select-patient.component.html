@@ -2,6 +2,7 @@
   <ul>
     <li *ngFor="let patient of patients">
       <strong>{{patient.firstName}}</strong> {{patient.lastName}}
+      <button (click)="select(patient)">Select</button>
     </li>
   </ul>
 </div>

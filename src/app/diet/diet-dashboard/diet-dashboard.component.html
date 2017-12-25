@@ -5,6 +5,6 @@
 <ng-template #dietReady>
   <h2>{{ diet.id }}) {{ diet.firstName}} {{diet.middleName}} {{diet.lastName}}</h2>
 
-  <app-select-patient [patients]="diet.patients"></app-select-patient>
+  <app-select-patient [patients]="diet.patients" (selectPatient)="selectPatient($event)"></app-select-patient>
 </ng-template>
 
