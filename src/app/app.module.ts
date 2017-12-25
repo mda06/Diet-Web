@@ -10,11 +10,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AuthenticationService} from "./services/authentication.service";
-import { AuthGuardServiceService } from './guard/auth-guard-service.service';
+import { DietGuardServiceService } from "./guard/diet-guard-service.service";
+import { PatientGuardServiceService } from "./guard/patient-guard-service.service";
+import { AdminGuardServiceService } from "./guard/admin-guard-service.service";
 import { SelectPatientComponent } from './diet/select-patient/select-patient.component';
 import { DietDashboardComponent } from "./diet/diet-dashboard/diet-dashboard.component";
-import {AdminDashboardComponent} from "./admin/admin-dashboard/admin-dashboard.component";
-import {PatientDashboardComponent} from "./patient/patient-dashboard/patient-dashboard.component";
+import { AdminDashboardComponent } from "./admin/admin-dashboard/admin-dashboard.component";
+import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-dashboard.component";
 import { LoginComponent } from './login/login.component';
 
 @NgModule({
@@ -39,7 +41,12 @@ import { LoginComponent } from './login/login.component';
       whitelistedDomains: ['localhost:8080']
     }})
   ],
-  providers: [JwtHelperService, AuthenticationService, AuthGuardServiceService],
+  providers: [
+    JwtHelperService,
+    AuthenticationService,
+    AdminGuardServiceService,
+    DietGuardServiceService,
+    PatientGuardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
