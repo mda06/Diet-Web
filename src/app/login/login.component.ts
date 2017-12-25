@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
     password: 'caline'
   };
   return: string = '';
+  error: string = '';
 
   constructor(private authService: AuthenticationService,
               private router: Router,
@@ -27,8 +28,16 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
-    this.authService.onLogin(this.auth);
-    this.router.navigateByUrl(this.return);
+    this.authService.onLogin(this.auth).subscribe(
+      (role) => {
+        if(this.return === '/login') {
+
+        } else {
+          this.router.navigateByUrl(this.return)
+        }
+      },
+      (err) => this.error = 'Cannot connect !'
+    );
   }
 
 }

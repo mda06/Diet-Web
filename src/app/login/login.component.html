@@ -15,5 +15,11 @@
       <button type="button" class="cancelbtn">Cancel</button>
       <span class="psw">Forgot <a href="#">password?</a></span>
     </div>
+
+    <div class="container">
+      <div class="alert alert-danger" *ngIf="error !== ''">
+        <strong>{{ error }}</strong>
+      </div>
+    </div>
   </form>
 </div>
