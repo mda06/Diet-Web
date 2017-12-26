@@ -1,3 +1,7 @@
+<p *ngFor="let alert of alerts">
+  <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+</p>
+
 <div class="container-fluid" *ngIf="patient">
   <div class="row">
     <div class="col-md-4">
@@ -87,13 +91,13 @@
                     <input type="number" class="form-control" id="length"
                            [(ngModel)]="param.length" name="length">
                     <label for="weight">weight</label>
-                    <input type="number" class="form-control" id="weight"
+                    <input type="number" step="any" class="form-control" id="weight"
                            [(ngModel)]="param.weight" name="weight">
                     <label for="bodyFat">Body fat</label>
-                    <input type="number" class="form-control" id="bodyFat"
+                    <input type="number" step="any" class="form-control" id="bodyFat"
                            [(ngModel)]="param.bodyFat" name="bodyFat">
                     <label for="waistCircumference">Waist circumference</label>
-                    <input type="number" class="form-control" id="waistCircumference"
+                    <input type="number" step="any" class="form-control" id="waistCircumference"
                            [(ngModel)]="param.waistCircumference" name="waistCircumference">
                     <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) | number:'1.0-0' }}</label>
                   </ng-template>
@@ -105,13 +109,13 @@
                   <input type="number" class="form-control" id="nLength"
                          [(ngModel)]="param.length" name="nLength">
                   <label for="weight">weight</label>
-                  <input type="number" class="form-control" id="nWeight"
+                  <input type="number" step="any" class="form-control" id="nWeight"
                          [(ngModel)]="param.weight" name="nWeight">
                   <label for="nBodyFat">Body fat</label>
-                  <input type="number" class="form-control" id="nBodyFat"
+                  <input type="number" step="any" class="form-control" id="nBodyFat"
                          [(ngModel)]="param.bodyFat" name="nBodyFat">
                   <label for="nWaistCircumference">Waist circumference</label>
-                  <input type="number" class="form-control" id="nWaistCircumference"
+                  <input type="number" step="any" class="form-control" id="nWaistCircumference"
                          [(ngModel)]="param.waistCircumference" name="nWaistCircumference">
                   <button class="btn btn-outline-primary" (click)="addParam()">Add</button>
                 </ng-template>

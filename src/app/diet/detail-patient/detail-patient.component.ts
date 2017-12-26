@@ -4,6 +4,8 @@ import {Patient} from "../../model/patient";
 import {DetailReturn} from "./detail-return";
 import {AnthropometricParameter} from "../../model/anthropometricParameter";
 import {Gender} from "../../model/gender";
+import {DietService} from "../../services/diet.service";
+import {IAlert} from "../../model/i-alert";
 
 const now = new Date();
 
@@ -20,9 +22,12 @@ export class DetailPatientComponent implements OnInit {
   public isAddressCollapsed = true;
   model: NgbDateStruct;
   public genders = this.enumSelector(Gender);
+  public alerts: Array<IAlert> = [];
 
-  constructor(/*private route: ActivatedRoute,
-              private dietService: DietService*/) { }
+  constructor(
+    private dietService: DietService
+    /*private route: ActivatedRoute,
+    private dietService: DietService*/) { }
 
   ngOnInit() {
     /*if(isNullOrUndefined(this.patient)) {
@@ -64,7 +69,26 @@ export class DetailPatientComponent implements OnInit {
     this.detailReturn.emit(DetailReturn.BACK);
   }
 
+  public closeAlert(alert: IAlert) {
+    const index: number = this.alerts.indexOf(alert);
+    this.alerts.splice(index, 1);
+  }
+
   save() {
     this.detailReturn.emit(DetailReturn.SAVE);
+    this.alerts.push({id: 0, type:'secondary', message:'Saving ' + this.patient.firstName});
+    console.log("Saving the patient");
+    console.log(this.patient);
+    this.dietService.savePatient(this.patient).subscribe(
+      data => {
+        console.log("Patient saved");
+        console.log(data);
+        this.alerts.push({id: 1, type:'success', message:'Saved ' + this.patient.firstName});
+        },
+      err => {
+        console.log("Error"); console.log(err);
+        this.alerts.push({id: 2, type:'danger', message:'Error cannot save ' + this.patient.firstName});
+      }
+    );
   }
 }
