@@ -34,11 +34,14 @@
               </div>
             </div>
           </form>
-          <label for="gender">Gender</label>
-          <input type="text" class="form-control" id="gender"
-                 required
-                 [(ngModel)]="patient.gender" name="gender">
-
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select class="form-control" placeholder="Gender" [(ngModel)]="patient.gender" name="gender" id="gender">
+              <option *ngFor="let g of genders" [value]="g.value">
+                {{ g.title }}
+              </option>
+            </select>
+          </div>
           <button type="button" class="btn btn-outline-primary" (click)="isAddressCollapsed = !isAddressCollapsed"
                   [attr.aria-expanded]="!isAddressCollapsed" aria-controls="addressCollapse">
             Toggle address
@@ -81,21 +84,38 @@
                 <ngb-panel title={{param.date}}>
                   <ng-template ngbPanelContent>
                     <label for="length">Length</label>
-                    <input type="text" class="form-control" id="length"
+                    <input type="number" class="form-control" id="length"
                            [(ngModel)]="param.length" name="length">
                     <label for="weight">weight</label>
-                    <input type="text" class="form-control" id="weight"
+                    <input type="number" class="form-control" id="weight"
                            [(ngModel)]="param.weight" name="weight">
                     <label for="bodyFat">Body fat</label>
-                    <input type="text" class="form-control" id="bodyFat"
+                    <input type="number" class="form-control" id="bodyFat"
                            [(ngModel)]="param.bodyFat" name="bodyFat">
                     <label for="waistCircumference">Waist circumference</label>
-                    <input type="text" class="form-control" id="waistCircumference"
+                    <input type="number" class="form-control" id="waistCircumference"
                            [(ngModel)]="param.waistCircumference" name="waistCircumference">
-                    <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) }}</label>
+                    <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) | number:'1.0-0' }}</label>
                   </ng-template>
                 </ngb-panel>
               </div>
+              <ngb-panel title={{selectToday()}}>
+                <ng-template ngbPanelContent>
+                  <label for="nLength">Length</label>
+                  <input type="number" class="form-control" id="nLength"
+                         [(ngModel)]="param.length" name="nLength">
+                  <label for="weight">weight</label>
+                  <input type="number" class="form-control" id="nWeight"
+                         [(ngModel)]="param.weight" name="nWeight">
+                  <label for="nBodyFat">Body fat</label>
+                  <input type="number" class="form-control" id="nBodyFat"
+                         [(ngModel)]="param.bodyFat" name="nBodyFat">
+                  <label for="nWaistCircumference">Waist circumference</label>
+                  <input type="number" class="form-control" id="nWaistCircumference"
+                         [(ngModel)]="param.waistCircumference" name="nWaistCircumference">
+                  <button class="btn btn-outline-primary" (click)="addParam()">Add</button>
+                </ng-template>
+              </ngb-panel>
             </ngb-accordion>
         </div>
       </div>

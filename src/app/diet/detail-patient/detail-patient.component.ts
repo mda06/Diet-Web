@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
 import {DetailReturn} from "./detail-return";
+import {AnthropometricParameter} from "../../model/anthropometricParameter";
+import {Gender} from "../../model/gender";
 
 const now = new Date();
 
@@ -14,9 +16,10 @@ export class DetailPatientComponent implements OnInit {
 
   @Input() patient: Patient;
   @Output() detailReturn = new EventEmitter<DetailReturn>();
+  param: AnthropometricParameter;
   public isAddressCollapsed = true;
   model: NgbDateStruct;
-  date: {year: number, month: number};
+  public genders = this.enumSelector(Gender);
 
   constructor(/*private route: ActivatedRoute,
               private dietService: DietService*/) { }
@@ -28,14 +31,26 @@ export class DetailPatientComponent implements OnInit {
         data => this.patient = data
       );
     }*/
+    this.param = new AnthropometricParameter();
     console.log(this.patient.birthday);
     this.model = { day: this.patient.birthday.getUTCDate(), month: this.patient.birthday.getUTCMonth() + 1,
       year: this.patient.birthday.getUTCFullYear()};
     console.log(this.model);
   }
 
+  enumSelector(definition) {
+    return Object.keys(definition)
+      .map(key => ({ value: definition[key], title: key }));
+  }
+
   selectToday() {
-    this.model = {year: now.getFullYear(), month: now.getMonth() + 1, day: now.getDate()};
+    return "Today: " + now.getUTCFullYear()+ "-" + (now.getUTCMonth()+1) + "-" + now.getUTCDate();
+  }
+
+  addParam() {
+    this.param.date = now;
+    this.patient.anthropometricParameters.push(this.param);
+    this.param = new AnthropometricParameter();
   }
 
   birthdayChange() {
