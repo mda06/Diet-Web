@@ -24,22 +24,6 @@ export class DietService {
   getConnectedUser(): Observable<Dietetist> {
     httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
     return this.http.get<Dietetist>(this.connectedUserUrl, httpOptions);
-    //First we need to catch the http here to define the dates and after this we can pass the diet to the rest
-    /*return new Observable<Dietetist>((observer) => {
-      this.http.get<Dietetist>(this.connectedUserUrl, httpOptions)
-        .subscribe(
-          data => {
-            for(let pat of data.patients) {
-              //TODO: change the created date also
-              pat.birthday = new Date(pat.birthday);
-            }
-            observer.next(data);
-            observer.complete();
-        },
-          error2 => {
-            observer.error(error2)
-          });
-    });*/
   }
 
   //NOT TESTED

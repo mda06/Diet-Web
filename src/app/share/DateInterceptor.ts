@@ -15,10 +15,10 @@ export class DateInterceptor implements HttpInterceptor {
   constructor(private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.loggingRequest(req, next);
+    return this.logAndConvertDate(req, next);
   }
 
-  private loggingRequest(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  private logAndConvertDate(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const started = Date.now();
     return next
       .handle(req)
@@ -27,7 +27,6 @@ export class DateInterceptor implements HttpInterceptor {
           this.convertDateStringsToDates(event.body);
           const elapsed = Date.now() - started;
           console.log(`Request for ${req.urlWithParams} took ${elapsed} ms.`);
-          console.log(event);
         }
       });
   }
@@ -36,17 +35,14 @@ export class DateInterceptor implements HttpInterceptor {
   private convertDateStringsToDates(input) {
     // Ignore things that aren't objects.
     if (typeof input !== "object") return input;
-    console.log(input);
 
     for (var key in input) {
-      console.log("Looking for: " + key);
       if (!input.hasOwnProperty(key)) continue;
 
       var value = input[key];
       var match;
       // Check for string properties which look like dates.
       if (typeof value === "string" && (match = value.match(this.regexIso8601))) {
-        console.log("Find a string: " + value);
         var milliseconds = Date.parse(match[0])
         if (!isNaN(milliseconds)) {
           input[key] = new Date(milliseconds);
