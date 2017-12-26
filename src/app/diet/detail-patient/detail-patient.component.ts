@@ -33,9 +33,9 @@ export class DetailPatientComponent implements OnInit {
     }*/
     this.param = new AnthropometricParameter();
     console.log(this.patient.birthday);
-    this.model = { day: this.patient.birthday.getUTCDate(), month: this.patient.birthday.getUTCMonth() + 1,
+    /*this.model = { day: this.patient.birthday.getUTCDate(), month: this.patient.birthday.getUTCMonth() + 1,
       year: this.patient.birthday.getUTCFullYear()};
-    console.log(this.model);
+    console.log(this.model);*/
   }
 
   enumSelector(definition) {

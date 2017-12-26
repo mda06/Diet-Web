@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
 
@@ -20,6 +20,7 @@ import { AdminDashboardComponent } from "./admin/admin-dashboard/admin-dashboard
 import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-dashboard.component";
 import { LoginComponent } from './login/login.component';
 import { DetailPatientComponent } from './diet/detail-patient/detail-patient.component';
+import {DateInterceptor} from "./share/DateInterceptor";
 
 @NgModule({
   declarations: [
@@ -50,7 +51,12 @@ import { DetailPatientComponent } from './diet/detail-patient/detail-patient.com
     AdminGuardServiceService,
     DietGuardServiceService,
     PatientGuardServiceService,
-    DietService],
+    DietService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: DateInterceptor,
+      multi: true,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

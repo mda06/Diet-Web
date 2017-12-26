@@ -124,9 +124,11 @@
       <div class="card">
         <h4 class="card-header">Extra info</h4>
         <div class="card-body">
-          <label for="extraInfo">Extra Info</label>
-          <input type="text" class="form-control" id="extraInfo"
-               [(ngModel)]="patient.extraInfo" name="extraInfo">
+          <div class="form-group">
+            <label for="extraInfo">Extra Info</label>
+            <textarea type="text" class="form-control" id="extraInfo" rows="15"
+                      [(ngModel)]="patient.extraInfo" name="extraInfo"></textarea>
+          </div>
         </div>
       </div>
     </div>
