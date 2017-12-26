@@ -49,6 +49,7 @@ export class DetailPatientComponent implements OnInit {
 
   addParam() {
     this.param.date = now;
+    this.param.patientId = this.patient.id;
     this.patient.anthropometricParameters.push(this.param);
     this.param = new AnthropometricParameter();
   }
@@ -63,4 +64,7 @@ export class DetailPatientComponent implements OnInit {
     this.detailReturn.emit(DetailReturn.BACK);
   }
 
+  save() {
+    this.detailReturn.emit(DetailReturn.SAVE);
+  }
 }

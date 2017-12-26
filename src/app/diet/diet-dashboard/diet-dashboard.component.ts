@@ -31,6 +31,13 @@ export class DietDashboardComponent implements OnInit {
   detailReturn(detailReturn: DetailReturn) {
     if(detailReturn === DetailReturn.BACK) {
       this.selectedPatient = null;
+    } else {
+      console.log("Saving the patient");
+      console.log(this.selectedPatient);
+      this.dietService.savePatient(this.selectedPatient).subscribe(
+        data => {console.log("Patient saved"); console.log(data);},
+        err => {console.log("Error"); console.log(err);}
+      );
     }
   }
 

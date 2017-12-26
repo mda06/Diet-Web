@@ -16,4 +16,5 @@ export class Patient {
   phone: string;
   anthropometricParameters: Array<AnthropometricParameter>;
   address: Address;
+  dietetistId: Number;
 }

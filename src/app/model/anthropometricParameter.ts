@@ -5,4 +5,5 @@ export class AnthropometricParameter {
   bodyFat: number;
   waistCircumference: number;
   date: Date;
+  patientId: number;
 }

@@ -13,7 +13,7 @@ const httpOptions = {
 @Injectable()
 export class DietService {
 
-  private getPatientUrl = "api/patient/";
+  private patientUrl = "api/patient/";
   private connectedUserUrl = "api/auth/connecteduser";
   private _token: Token;
 
@@ -29,7 +29,12 @@ export class DietService {
   //NOT TESTED
   getPatient(id: number): Observable<Patient> {
     httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
-    return this.http.get<Patient>(this.connectedUserUrl + id, httpOptions);
+    return this.http.get<Patient>(this.patientUrl + id, httpOptions);
+  }
+
+  savePatient(patient: Patient): Observable<Patient> {
+    httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
+    return this.http.post<Patient>(this.patientUrl, patient, httpOptions);
   }
 
   get token(): Token {
