@@ -28,6 +28,7 @@ export class DetailPatientComponent implements OnInit {
   model: NgbDateStruct;
   public genders = this.enumSelector(Gender);
   public alerts: Array<IAlert> = [];
+  alertCounter: number = 0;
 
   constructor(
     private dietService: DietService,
@@ -125,8 +126,19 @@ export class DetailPatientComponent implements OnInit {
     this.alerts.splice(index, 1);
   }
 
+  closeAlertWithId(id: number) {
+    const alert = this.alerts.find(a => a.id == id);
+    const index = this.alerts.indexOf(alert);
+    this.alerts.splice(index, 1);
+  }
+
   save() {
-    this.alerts.push({id: 0, type:'secondary', message:'Saving ' + this.patient.firstName});
+    this.alerts.push({id: this.alertCounter, type:'secondary', message:'Saving ' + this.patient.firstName});
+    setTimeout((index) => {
+      this.closeAlertWithId(index);
+      console.log(index);
+      },1500, this.alertCounter++);
+
     console.log("Saving the patient");
     console.log(this.patient);
     this.dietService.savePatient(this.patient).subscribe(
@@ -134,11 +146,18 @@ export class DetailPatientComponent implements OnInit {
         console.log("Patient saved");
         console.log(data);
         this.initPatientBackup();
-        this.alerts.push({id: 1, type:'success', message:'Saved ' + this.patient.firstName});
+        this.alerts.push({id: this.alertCounter, type:'success', message:'Saved ' + this.patient.firstName});
+        setTimeout((index) => {
+          this.closeAlertWithId(index);
+          console.log(index);
+        },1500, this.alertCounter++);
         },
       err => {
         console.log("Error"); console.log(err);
-        this.alerts.push({id: 2, type:'danger', message:'Error cannot save ' + this.patient.firstName});
+        this.alerts.push({id: this.alertCounter, type:'danger', message:'Error cannot save ' + this.patient.firstName});
+        setTimeout((index) => {
+          this.closeAlertWithId(index);
+        },1500, this.alertCounter++);
       }
     );
   }
