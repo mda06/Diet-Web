@@ -1,19 +1,29 @@
-<div *ngIf="!diet; else dietReady">
-  <p>Fetching data from the server....</p>
-</div>
+<ng-sidebar-container style="height: 100vh;">
+  <ng-sidebar
+    [(opened)]="_opened"
+    mode="push"
+    autoCollapseWidth=500>
+    <app-navbar></app-navbar>
+  </ng-sidebar>
+  <div ng-sidebar-content id="dashboard">
+    <button class="btn btn-secondary" (click)="_toggleSidebar()"><i class="fa fa-bars" aria-hidden="true"></i></button>
 
-<ng-template #dietReady>
-  <!--<p>{{ diet.id }}) {{ diet.firstName}} {{diet.middleName}} {{diet.lastName}}</p>-->
+    <div *ngIf="!diet; else dietReady">
+      <p>Fetching data from the server....</p>
+    </div>
 
-  <div *ngIf="displayAddNewPatient; else patientSelect">
-    <app-detail-patient (back)="backFromDetail($event)"
-                        (patientAdded)="patientAdded($event)"></app-detail-patient>
+    <ng-template #dietReady>
+      <div *ngIf="displayAddNewPatient; else patientSelect">
+        <app-detail-patient (back)="backFromDetail($event)"
+                            (patientAdded)="patientAdded($event)"></app-detail-patient>
+      </div>
+      <ng-template #patientSelect>
+        <app-select-patient *ngIf="!selectedPatient" [patients]="diet.patients"
+                            (selectPatient)="selectPatient($event)" (addNewPatient)="addNewPatient()"></app-select-patient>
+        <app-detail-patient *ngIf="selectedPatient" [patient]="selectedPatient"
+                            (back)="backFromDetail($event)" (patientSaved)="patientSaved($event)"></app-detail-patient>
+      </ng-template>
+    </ng-template>
   </div>
-  <ng-template #patientSelect>
-    <app-select-patient *ngIf="!selectedPatient" [patients]="diet.patients"
-                        (selectPatient)="selectPatient($event)" (addNewPatient)="addNewPatient()"></app-select-patient>
-    <app-detail-patient *ngIf="selectedPatient" [patient]="selectedPatient"
-                        (back)="backFromDetail($event)" (patientSaved)="patientSaved($event)"></app-detail-patient>
-  </ng-template>
-</ng-template>
+</ng-sidebar-container>
 

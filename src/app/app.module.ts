@@ -22,6 +22,8 @@ import { LoginComponent } from './login/login.component';
 import { DetailPatientComponent } from './diet/detail-patient/detail-patient.component';
 import {DateInterceptor} from "./share/DateInterceptor";
 import {PatientFilterPipe} from "./share/PatientFilterPipe";
+import { NavbarComponent } from './navbar/navbar.component';
+import {SidebarModule} from "ng-sidebar";
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import {PatientFilterPipe} from "./share/PatientFilterPipe";
     AdminDashboardComponent,
     PatientDashboardComponent,
     DetailPatientComponent,
-    PatientFilterPipe
+    PatientFilterPipe,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -45,7 +48,8 @@ import {PatientFilterPipe} from "./share/PatientFilterPipe";
         return localStorage.getItem('token.access_token');
       },
       whitelistedDomains: ['localhost:8080']
-    }})
+    }}),
+    SidebarModule.forRoot()
   ],
   providers: [
     JwtHelperService,

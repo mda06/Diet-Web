@@ -13,6 +13,7 @@ export class DietDashboardComponent implements OnInit {
   private diet: Dietetist;
   private selectedPatient: Patient;
   private displayAddNewPatient = false;
+  private _opened: boolean = true;
 
   constructor(private dietService: DietService) { }
 
@@ -21,6 +22,10 @@ export class DietDashboardComponent implements OnInit {
       data => {this.diet = data;},
       err => {console.log("Error trying to get the connected user");}
     );
+  }
+
+  private _toggleSidebar() {
+    this._opened = !this._opened;
   }
 
   selectPatient(patient: Patient) {
