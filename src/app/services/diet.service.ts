@@ -26,7 +26,6 @@ export class DietService {
     return this.http.get<Dietetist>(this.connectedUserUrl, httpOptions);
   }
 
-  //NOT TESTED
   getPatient(id: number): Observable<Patient> {
     httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
     return this.http.get<Patient>(this.patientUrl + id, httpOptions);

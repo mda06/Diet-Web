@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Location } from '@angular/common';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
 import {DetailReturn} from "./detail-return";
@@ -6,6 +7,8 @@ import {AnthropometricParameter} from "../../model/anthropometricParameter";
 import {Gender} from "../../model/gender";
 import {DietService} from "../../services/diet.service";
 import {IAlert} from "../../model/i-alert";
+import {ActivatedRoute} from "@angular/router";
+import {isNullOrUndefined} from "util";
 
 const now = new Date();
 
@@ -18,6 +21,7 @@ export class DetailPatientComponent implements OnInit {
 
   @Input() patient: Patient;
   @Output() detailReturn = new EventEmitter<DetailReturn>();
+  private copyPatient: Patient;
   param: AnthropometricParameter;
   public isAddressCollapsed = true;
   model: NgbDateStruct;
@@ -25,22 +29,36 @@ export class DetailPatientComponent implements OnInit {
   public alerts: Array<IAlert> = [];
 
   constructor(
-    private dietService: DietService
-    /*private route: ActivatedRoute,
-    private dietService: DietService*/) { }
+    private dietService: DietService,
+    private route: ActivatedRoute,
+    private location: Location) { }
 
   ngOnInit() {
-    /*if(isNullOrUndefined(this.patient)) {
-      const id = +this.route.snapshot.paramMap.get('id');
+    const id = +this.route.snapshot.paramMap.get('id');
+    if(id != 0) {
       this.dietService.getPatient(id).subscribe(
-        data => this.patient = data
+        data => {
+          if(!isNullOrUndefined(data)) {
+            this.patient = data;
+            this.initDateModel();
+          }
+        }
       );
-    }*/
+    }
+
     this.param = new AnthropometricParameter();
-    console.log(this.patient.birthday);
+    if(!isNullOrUndefined(this.patient))
+      this.initDateModel();
+  }
+
+  initDateModel() {
     this.model = { day: this.patient.birthday.getUTCDate(), month: this.patient.birthday.getUTCMonth() + 1,
       year: this.patient.birthday.getUTCFullYear()};
-    console.log(this.model);
+
+
+    this.copyPatient = (JSON.parse(JSON.stringify(this.patient)));
+    console.log(this.copyPatient);
+    console.log(this.patient);
   }
 
   enumSelector(definition) {
@@ -61,12 +79,17 @@ export class DetailPatientComponent implements OnInit {
 
   birthdayChange() {
     this.patient.birthday.setUTCFullYear(this.model.year, this.model.month - 1, this.model.day);
+    console.log(this.copyPatient);
     console.log(this.patient);
-    console.log(this.model);
   }
 
   goBack() {
-    this.detailReturn.emit(DetailReturn.BACK);
+    //If there's at least 1 observer it means that it's inside a component and not requested directly in the url
+    //Else it's requested from the url and we go back
+    if(this.detailReturn.observers.length >= 1)
+      this.detailReturn.emit(DetailReturn.BACK);
+    else
+      this.location.back();
   }
 
   public closeAlert(alert: IAlert) {

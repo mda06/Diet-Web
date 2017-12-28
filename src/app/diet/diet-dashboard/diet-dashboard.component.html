@@ -3,7 +3,7 @@
 </div>
 
 <ng-template #dietReady>
-  <p>{{ diet.id }}) {{ diet.firstName}} {{diet.middleName}} {{diet.lastName}}</p>
+  <!--<p>{{ diet.id }}) {{ diet.firstName}} {{diet.middleName}} {{diet.lastName}}</p>-->
 
   <app-select-patient *ngIf="!selectedPatient" [patients]="diet.patients" (selectPatient)="selectPatient($event)"></app-select-patient>
   <app-detail-patient *ngIf="selectedPatient" [patient]="selectedPatient" (detailReturn)="detailReturn($event)"></app-detail-patient>
