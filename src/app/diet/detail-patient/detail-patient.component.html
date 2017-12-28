@@ -138,7 +138,25 @@
     </div>
   </div>
   <div class="row">
-    <button type="button" class="btn btn-secondary" (click)="goBack()">Return</button>
-    <button type="button" class="btn btn-success" (click)="save()">Save</button>
+    <button type="button" class="btn btn-secondary" (click)="goBack(content)">Return</button>
+    <button type="button" class="btn btn-success" (click)="save()">
+      Save <span class="badge badge-pill badge-danger" *ngIf="isPatientModified()">*</span>
+    </button>
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Attention</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Patient data has been modified without saving it</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">Cancel</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Return')">Return anyway</button>
+  </div>
+</ng-template>

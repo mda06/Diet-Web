@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Location } from '@angular/common';
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {ModalDismissReasons, NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
 import {DetailReturn} from "./detail-return";
 import {AnthropometricParameter} from "../../model/anthropometricParameter";
@@ -9,6 +9,7 @@ import {DietService} from "../../services/diet.service";
 import {IAlert} from "../../model/i-alert";
 import {ActivatedRoute} from "@angular/router";
 import {isNullOrUndefined} from "util";
+import * as _ from 'lodash';
 
 const now = new Date();
 
@@ -31,7 +32,8 @@ export class DetailPatientComponent implements OnInit {
   constructor(
     private dietService: DietService,
     private route: ActivatedRoute,
-    private location: Location) { }
+    private location: Location,
+    private modalService: NgbModal) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -41,24 +43,27 @@ export class DetailPatientComponent implements OnInit {
           if(!isNullOrUndefined(data)) {
             this.patient = data;
             this.initDateModel();
+            this.initPatientBackup();
           }
         }
       );
     }
 
     this.param = new AnthropometricParameter();
-    if(!isNullOrUndefined(this.patient))
+    if(!isNullOrUndefined(this.patient)) {
       this.initDateModel();
+      this.initPatientBackup();
+    }
   }
 
   initDateModel() {
     this.model = { day: this.patient.birthday.getUTCDate(), month: this.patient.birthday.getUTCMonth() + 1,
       year: this.patient.birthday.getUTCFullYear()};
+  }
 
-
-    this.copyPatient = (JSON.parse(JSON.stringify(this.patient)));
-    console.log(this.copyPatient);
-    console.log(this.patient);
+  initPatientBackup() {
+    //Copy patient for ui approvement (is patient modified)
+    this.copyPatient = _.cloneDeep(this.patient);
   }
 
   enumSelector(definition) {
@@ -68,6 +73,10 @@ export class DetailPatientComponent implements OnInit {
 
   selectToday() {
     return "Today: " + now.getUTCFullYear()+ "-" + (now.getUTCMonth()+1) + "-" + now.getUTCDate();
+  }
+
+  isPatientModified() {
+    return !_.isEqual(this.copyPatient, this.patient);
   }
 
   addParam() {
@@ -83,13 +92,32 @@ export class DetailPatientComponent implements OnInit {
     console.log(this.patient);
   }
 
-  goBack() {
-    //If there's at least 1 observer it means that it's inside a component and not requested directly in the url
-    //Else it's requested from the url and we go back
-    if(this.detailReturn.observers.length >= 1)
-      this.detailReturn.emit(DetailReturn.BACK);
-    else
-      this.location.back();
+  goBack(content) {
+    if(this.isPatientModified()) {
+      this.modalService.open(content).result.then((result) => {
+        if (result === 'Cancel') {
+          console.log('Stay here');
+        } else if (result === 'Return') {
+          //If there's at least 1 observer it means that it's inside a component and not requested directly in the url
+          //Else it's requested from the url and we go back
+          if (this.detailReturn.observers.length >= 1) {
+            this.handleBack();
+          } else {
+            //No need to restore the patient because it's referencing nowhere
+            this.location.back();
+          }
+        }
+      });
+    } else {
+      this.handleBack();
+    }
+  }
+
+  handleBack() {
+    //Restore patient like it was before
+    console.log(_.merge(this.patient, this.copyPatient));
+    //Go back
+    this.detailReturn.emit(DetailReturn.BACK);
   }
 
   public closeAlert(alert: IAlert) {
@@ -98,7 +126,6 @@ export class DetailPatientComponent implements OnInit {
   }
 
   save() {
-    this.detailReturn.emit(DetailReturn.SAVE);
     this.alerts.push({id: 0, type:'secondary', message:'Saving ' + this.patient.firstName});
     console.log("Saving the patient");
     console.log(this.patient);
@@ -106,6 +133,7 @@ export class DetailPatientComponent implements OnInit {
       data => {
         console.log("Patient saved");
         console.log(data);
+        this.initPatientBackup();
         this.alerts.push({id: 1, type:'success', message:'Saved ' + this.patient.firstName});
         },
       err => {
