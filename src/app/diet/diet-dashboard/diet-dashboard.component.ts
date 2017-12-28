@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { DietService } from "../../services/diet.service";
 import {Dietetist} from "../../model/dietetist";
 import {Patient} from "../../model/patient";
-import {DetailReturn} from "../detail-patient/detail-return";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -13,7 +12,6 @@ export class DietDashboardComponent implements OnInit {
 
   private diet: Dietetist;
   private selectedPatient: Patient;
-  private newPatient: Patient = new Patient();
   private displayAddNewPatient = false;
 
   constructor(private dietService: DietService) { }
@@ -31,17 +29,20 @@ export class DietDashboardComponent implements OnInit {
   }
 
   addNewPatient() {
-    this.newPatient.dietetistId = this.diet.id;
     this.displayAddNewPatient = true;
   }
 
-  detailReturn(detailReturn: DetailReturn) {
-    if(detailReturn === DetailReturn.BACK) {
-      this.displayAddNewPatient = false;
-      this.selectedPatient = null;
-    } else {
+  patientAdded(patient: Patient) {
+    this.diet.patients.push(patient);
+  }
 
-    }
+  patientSaved(patient: Patient) {
+    console.log();
+  }
+
+  backFromDetail() {
+    this.displayAddNewPatient = false;
+    this.selectedPatient = null;
   }
 
 }

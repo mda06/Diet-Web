@@ -6,12 +6,14 @@
   <!--<p>{{ diet.id }}) {{ diet.firstName}} {{diet.middleName}} {{diet.lastName}}</p>-->
 
   <div *ngIf="displayAddNewPatient; else patientSelect">
-    <app-detail-patient [patient]="newPatient" (detailReturn)="detailReturn($event)"></app-detail-patient>
+    <app-detail-patient (back)="backFromDetail($event)"
+                        (patientAdded)="patientAdded($event)"></app-detail-patient>
   </div>
   <ng-template #patientSelect>
     <app-select-patient *ngIf="!selectedPatient" [patients]="diet.patients"
                         (selectPatient)="selectPatient($event)" (addNewPatient)="addNewPatient()"></app-select-patient>
-    <app-detail-patient *ngIf="selectedPatient" [patient]="selectedPatient" (detailReturn)="detailReturn($event)"></app-detail-patient>
+    <app-detail-patient *ngIf="selectedPatient" [patient]="selectedPatient"
+                        (back)="backFromDetail($event)" (patientSaved)="patientSaved($event)"></app-detail-patient>
   </ng-template>
 </ng-template>
 

@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Location } from '@angular/common';
-import {ModalDismissReasons, NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
-import {DetailReturn} from "./detail-return";
 import {AnthropometricParameter} from "../../model/anthropometricParameter";
 import {Gender} from "../../model/gender";
 import {DietService} from "../../services/diet.service";
@@ -21,8 +20,11 @@ const now = new Date();
 export class DetailPatientComponent implements OnInit {
 
   @Input() patient: Patient;
-  @Output() detailReturn = new EventEmitter<DetailReturn>();
   private copyPatient: Patient;
+  @Output() back = new EventEmitter();
+  @Output() patientSaved = new EventEmitter();
+  @Output() patientAdded = new EventEmitter<Patient>();
+  isAddPatient: boolean = false;
   param: AnthropometricParameter;
   public isAddressCollapsed = true;
   model: NgbDateStruct;
@@ -48,6 +50,11 @@ export class DetailPatientComponent implements OnInit {
           }
         }
       );
+    }
+
+    if(isNullOrUndefined(this.patient)) {
+      this.patient = new Patient();
+      this.isAddPatient = true;
     }
 
     if(!isNullOrUndefined(this.patient)) {
@@ -99,7 +106,7 @@ export class DetailPatientComponent implements OnInit {
         } else if (result === 'Return') {
           //If there's at least 1 observer it means that it's inside a component and not requested directly in the url
           //Else it's requested from the url and we go back
-          if (this.detailReturn.observers.length >= 1) {
+          if (this.back.observers.length >= 1) {
             this.handleBack();
           } else {
             //No need to restore the patient because it's referencing nowhere
@@ -116,7 +123,7 @@ export class DetailPatientComponent implements OnInit {
     //Restore patient like it was before
     _.merge(this.patient, this.copyPatient);
     //Go back
-    this.detailReturn.emit(DetailReturn.BACK);
+    this.back.emit();
   }
 
   public closeAlert(alert: IAlert) {
@@ -138,6 +145,13 @@ export class DetailPatientComponent implements OnInit {
 
     this.dietService.savePatient(this.patient).subscribe(
       data => {
+        if(this.isAddPatient) {
+          this.patient = _.merge(this.patient, data);
+          this.patientAdded.emit(this.patient);
+          this.isAddPatient = false;
+        } else {
+          this.patientSaved.emit(this.patient);
+        }
         this.initPatientBackup();
         this.alerts.push({id: this.alertCounter, type:'success', message:'Saved ' + this.patient.firstName});
         setTimeout((index) => {
