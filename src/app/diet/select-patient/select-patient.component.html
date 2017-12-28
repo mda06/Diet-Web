@@ -4,12 +4,12 @@
     <div *ngIf="patients" class="list-group list-group-flush">
 
       <li class="list-group-item patient-holder " *ngFor="let patient of patients" (click)="switch(patient)"
-          [class.text-primary]="selectedPatient === patient">
+          [class.active]="selectedPatient === patient">
         {{patient.firstName + ' ' + patient.lastName}}
       </li>
 
       <button type="button" class="btn btn-primary" (click)="select()"
-      [class.disabled]="!selectedPatient">Select</button>
+      [disabled]="!selectedPatient">Select</button>
     </div>
   </div>
 </div>
