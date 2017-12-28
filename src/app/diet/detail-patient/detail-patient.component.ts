@@ -89,6 +89,7 @@ export class DetailPatientComponent implements OnInit {
 
   addParam() {
     this.param.date = now;
+    this.param.id = undefined;
     this.param.patientId = this.patient.id;
     this.patient.anthropometricParameters.push(this.param);
     this.param = new AnthropometricParameter();
@@ -142,7 +143,7 @@ export class DetailPatientComponent implements OnInit {
     setTimeout((index) => {
       this.closeAlertWithId(index);
       },1500, this.alertCounter++);
-
+    console.log(this.patient);
     this.dietService.savePatient(this.patient).subscribe(
       data => {
         if(this.isAddPatient) {
