@@ -20,7 +20,6 @@
                  [(ngModel)]="patient.lastName" name="lastName">
           <label for="email">Email</label>
           <input type="text" class="form-control" id="email"
-                 required
                  [(ngModel)]="patient.email" name="email">
           <label for="phone">Phone</label>
           <input type="text" class="form-control" id="phone"
@@ -55,23 +54,18 @@
               <div class="card-body">
                 <label for="street">Street</label>
                 <input type="text" class="form-control" id="street"
-                       required
                        [(ngModel)]="patient.address.street" name="street">
                 <label for="number">Number</label>
                 <input type="text" class="form-control" id="number"
-                       required
                        [(ngModel)]="patient.address.number" name="number">
                 <label for="postcode">Postcode</label>
                 <input type="number" class="form-control" id="postcode"
-                       required
                        [(ngModel)]="patient.address.postcode" name="postcode">
                 <label for="city">City</label>
                 <input type="text" class="form-control" id="city"
-                       required
                        [(ngModel)]="patient.address.city" name="city">
                 <label for="country">Country</label>
                 <input type="text" class="form-control" id="country"
-                       required
                        [(ngModel)]="patient.address.country" name="country">
               </div>
             </div>

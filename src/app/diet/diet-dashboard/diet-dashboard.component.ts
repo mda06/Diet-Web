@@ -13,6 +13,8 @@ export class DietDashboardComponent implements OnInit {
 
   private diet: Dietetist;
   private selectedPatient: Patient;
+  private newPatient: Patient = new Patient();
+  private displayAddNewPatient = false;
 
   constructor(private dietService: DietService) { }
 
@@ -28,8 +30,14 @@ export class DietDashboardComponent implements OnInit {
     console.log("Selected patient: " + patient.firstName);
   }
 
+  addNewPatient() {
+    this.newPatient.dietetistId = this.diet.id;
+    this.displayAddNewPatient = true;
+  }
+
   detailReturn(detailReturn: DetailReturn) {
     if(detailReturn === DetailReturn.BACK) {
+      this.displayAddNewPatient = false;
       this.selectedPatient = null;
     } else {
 

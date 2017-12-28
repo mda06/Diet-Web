@@ -50,8 +50,8 @@ export class DetailPatientComponent implements OnInit {
       );
     }
 
-    this.param = new AnthropometricParameter();
     if(!isNullOrUndefined(this.patient)) {
+      this.param = new AnthropometricParameter();
       this.initDateModel();
       this.initPatientBackup();
     }
@@ -89,8 +89,6 @@ export class DetailPatientComponent implements OnInit {
 
   birthdayChange() {
     this.patient.birthday.setUTCFullYear(this.model.year, this.model.month - 1, this.model.day);
-    console.log(this.copyPatient);
-    console.log(this.patient);
   }
 
   goBack(content) {
@@ -116,7 +114,7 @@ export class DetailPatientComponent implements OnInit {
 
   handleBack() {
     //Restore patient like it was before
-    console.log(_.merge(this.patient, this.copyPatient));
+    _.merge(this.patient, this.copyPatient);
     //Go back
     this.detailReturn.emit(DetailReturn.BACK);
   }
@@ -136,20 +134,14 @@ export class DetailPatientComponent implements OnInit {
     this.alerts.push({id: this.alertCounter, type:'secondary', message:'Saving ' + this.patient.firstName});
     setTimeout((index) => {
       this.closeAlertWithId(index);
-      console.log(index);
       },1500, this.alertCounter++);
 
-    console.log("Saving the patient");
-    console.log(this.patient);
     this.dietService.savePatient(this.patient).subscribe(
       data => {
-        console.log("Patient saved");
-        console.log(data);
         this.initPatientBackup();
         this.alerts.push({id: this.alertCounter, type:'success', message:'Saved ' + this.patient.firstName});
         setTimeout((index) => {
           this.closeAlertWithId(index);
-          console.log(index);
         },1500, this.alertCounter++);
         },
       err => {

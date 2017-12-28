@@ -1,8 +1,8 @@
 export class Address {
-  city: string;
-  country: string;
-  id: number;
-  number: string;
-  postcode: number;
-  street: string;
+  city: string = "";
+  country: string = "";
+  id: number = 0;
+  number: string = "";
+  postcode: number = 0;
+  street: string = "";
 }

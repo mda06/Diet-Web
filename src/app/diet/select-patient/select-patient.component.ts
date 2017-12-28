@@ -10,6 +10,7 @@ export class SelectPatientComponent implements OnInit {
 
   @Input() patients: Array<Patient>
   @Output() selectPatient = new EventEmitter<Patient>();
+  @Output() addNewPatient = new EventEmitter();
   selectedPatient: Patient;
   //filter: Patient = new Patient();
   filter: String = new String();
@@ -21,6 +22,10 @@ export class SelectPatientComponent implements OnInit {
 
   select() {
     this.selectPatient.emit(this.selectedPatient);
+  }
+
+  newPatient() {
+    this.addNewPatient.emit();
   }
 
   switch(patient: Patient) {
