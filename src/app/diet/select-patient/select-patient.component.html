@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <div class="card" id="patients-holder">
     <h4 class="card-header">Select a patient</h4>
     <div *ngIf="patients" class="list-group list-group-flush">
@@ -12,4 +12,24 @@
       [disabled]="!selectedPatient">Select</button>
     </div>
   </div>
+</div>-->
+
+<div class="jumbotron">
+  <h4 class="display-4">Select a patient</h4>
+
+  <label for="search">Search for a patient:</label>
+  <input id="search" type="text" name="search" [(ngModel)]="filter" placeholder="name" class="form-control"/>
+
+  <hr class="my-4">
+
+  <ul *ngIf="patients" class="list-group list-group-flush" >
+      <li class="list-group-item patient-holder " *ngFor="let patient of patients | patientfilter:filter" (click)="switch(patient)"
+          [class.active]="selectedPatient === patient">
+        {{patient.firstName + ' ' + patient.lastName}}
+      </li>
+  </ul>
+
+  <hr class="my-4">
+  <button type="button" class="btn btn-primary float-right" (click)="select()"
+          [disabled]="!selectedPatient">Select</button>
 </div>

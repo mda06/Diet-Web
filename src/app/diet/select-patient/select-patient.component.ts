@@ -11,6 +11,8 @@ export class SelectPatientComponent implements OnInit {
   @Input() patients: Array<Patient>
   @Output() selectPatient = new EventEmitter<Patient>();
   selectedPatient: Patient;
+  //filter: Patient = new Patient();
+  filter: String = new String();
 
   constructor() { }
 

@@ -21,6 +21,7 @@ import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-d
 import { LoginComponent } from './login/login.component';
 import { DetailPatientComponent } from './diet/detail-patient/detail-patient.component';
 import {DateInterceptor} from "./share/DateInterceptor";
+import {PatientFilterPipe} from "./share/PatientFilterPipe";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {DateInterceptor} from "./share/DateInterceptor";
     DietDashboardComponent,
     AdminDashboardComponent,
     PatientDashboardComponent,
-    DetailPatientComponent
+    DetailPatientComponent,
+    PatientFilterPipe
   ],
   imports: [
     BrowserModule,
