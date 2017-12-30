@@ -6,8 +6,8 @@
 
   <hr class="my-4">
 
-  <div>
-    <ul *ngIf="patients" class="list-group list-group-flush" >
+  <div *ngIf="patients" >
+    <ul class="list-group list-group-flush" >
         <li class="list-group-item patient-holder " *ngFor="let patient of
         (patients.slice((this.currentPage-1) * this.patientsPerPage, this.currentPage * this.patientsPerPage))
         | patientfilter:filter" (click)="switch(patient)"
@@ -16,7 +16,7 @@
         </li>
     </ul>
 
-    <div>Default pagination</div>
+    <div>Pages</div>
     <ngb-pagination [pageSize]="patientsPerPage" [collectionSize]="(patients | patientfilter:filter).length"
                     [(page)]="currentPage" aria-label="Default pagination"></ngb-pagination>
   </div>

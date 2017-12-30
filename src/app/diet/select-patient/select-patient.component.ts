@@ -1,5 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Patient } from "../../model/patient";
+import {isNullOrUndefined} from "util";
+import {DietService} from "../../services/diet.service";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-select-patient',
@@ -16,10 +19,17 @@ export class SelectPatientComponent implements OnInit {
   currentPage = 1;
   patientsPerPage = 5;
 
-  constructor() {
+  constructor(private dietService: DietService,
+              private authService: AuthenticationService) {
   }
 
   ngOnInit() {
+    if(isNullOrUndefined(this.patients)) {
+      this.authService.getId().subscribe(id => {
+        this.dietService.getPatientsOfDiet(id).subscribe(data => this.patients = data);
+      }, err => console.log("Error getting the id"));
+
+    }
   }
 
   select() {
@@ -32,10 +42,6 @@ export class SelectPatientComponent implements OnInit {
 
   switch(patient: Patient) {
     this.selectedPatient = patient;
-  }
-
-  getCollectionSize(): number {
-    return (this.patients.length / this.patientsPerPage);
   }
 
 }

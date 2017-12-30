@@ -13,11 +13,13 @@ const httpOptions = {
 @Injectable()
 export class AuthenticationService {
 
+  private idUrl = "api/auth/id";
   private loginUrl = "api/auth/login";
   private connectedUserUrl = "api/auth/connecteduser";
   private roleUrl = "api/auth/role";
   private _token: Token;
   private _role: Role;
+  private _id: number;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
     this._token = JSON.parse(localStorage.getItem("token"));
@@ -64,6 +66,15 @@ export class AuthenticationService {
   private initRole(): Observable<Role> {
     httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
     return this.http.get<Role>(this.roleUrl, httpOptions);
+  }
+
+  getId() : Observable<number> {
+    httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
+    return this.http.get<number>(this.idUrl, httpOptions);
+  }
+
+  get id(): number {
+    return this._id;
   }
 
   get role(): Role {

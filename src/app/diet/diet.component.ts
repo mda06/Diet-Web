@@ -18,6 +18,7 @@ export class DietComponent implements OnInit {
 
   ngOnInit() {
     this.initNavItems();
+    console.log("Diet component !");
   }
 
   initNavItems() {
