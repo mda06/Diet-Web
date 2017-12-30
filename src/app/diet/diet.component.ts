@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/switchMap';
+import {ActivatedRoute, Router, ParamMap} from "@angular/router";
 import {NavItem} from "../model/nav-item";
+import {AuthenticationService} from "../services/authentication.service";
+import {Patient} from "../model/patient";
+import {DietService} from "../services/diet.service";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-diet',
@@ -13,24 +20,50 @@ export class DietComponent implements OnInit {
   private selectPatientItem: NavItem = {img: "../../assets/img/select-patient.png", title: "Select Patient", routerLink: "/diet/select-patient"};
   private dashboardItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
   private navItems: Array<NavItem> = new Array();
+  patient$: Observable<Patient>;
+  private patientId: number;
 
-  constructor() { }
+  constructor(private authService: AuthenticationService,
+              private dietService: DietService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.patient$ = this.route.paramMap
+      .switchMap((params: ParamMap) => {
+        this.patientId = +params.get("patientId");
+        console.log("Patient selected with id: " + this.patientId);
+        return this.dietService.getPatient(this.patientId);
+      });
+    console.log("Init diet");
+    this.patient$.subscribe(data => {
+      if(isNullOrUndefined(data)) {
+        const index: number = this.navItems.indexOf(this.aboutPatientItem);
+        console.log("Index delete: " + index);
+        if(index >= 0)
+          this.navItems.splice(index, 1);
+      } else {
+        const index: number = this.navItems.indexOf(this.aboutPatientItem);
+        if(index <= 0)
+          this.navItems.push(this.aboutPatientItem);
+        this.aboutPatientItem.routerLink = "/diet/detail-patient/" + data.id;
+      }
+    }, err => console.log("Error"));
     this.initNavItems();
-    console.log("Diet component !");
   }
 
   initNavItems() {
     this.navItems.push(this.dashboardItem);
     this.navItems.push(this.foodItemItem);
     this.navItems.push(this.selectPatientItem);
-    //Show only if there's a patient selected
-    //this.navItems.push(this.aboutPatientItem);
   }
 
   private _toggleSidebar() {
     this._opened = !this._opened;
   }
 
+  navItemClicked(item: NavItem) {
+    console.log("Navigate to %s", item.routerLink);
+    this.router.navigate([item.routerLink], );
+  }
 }

@@ -24,10 +24,6 @@ export class DietDashboardComponent implements OnInit {
     );
   }
 
-  navItemClicked(item: NavItem) {
-    console.log("Navigate to %s", item.routerLink);
-  }
-
   selectPatient(patient: Patient) {
     this.selectedPatient = patient;
   }

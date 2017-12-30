@@ -3,6 +3,7 @@ import { Patient } from "../../model/patient";
 import {isNullOrUndefined} from "util";
 import {DietService} from "../../services/diet.service";
 import {AuthenticationService} from "../../services/authentication.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-select-patient',
@@ -20,7 +21,8 @@ export class SelectPatientComponent implements OnInit {
   patientsPerPage = 5;
 
   constructor(private dietService: DietService,
-              private authService: AuthenticationService) {
+              private authService: AuthenticationService,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -28,12 +30,12 @@ export class SelectPatientComponent implements OnInit {
       this.authService.getId().subscribe(id => {
         this.dietService.getPatientsOfDiet(id).subscribe(data => this.patients = data);
       }, err => console.log("Error getting the id"));
-
     }
   }
 
   select() {
-    this.selectPatient.emit(this.selectedPatient);
+    this.router.navigate(['diet', { patientId: this.selectedPatient.id}], );
+    //this.selectPatient.emit(this.selectedPatient);
   }
 
   newPatient() {
