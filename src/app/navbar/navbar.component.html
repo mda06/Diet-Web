@@ -1,9 +1,14 @@
 <nav class="p-1 bg-light">
   <h2 class="pb-4">Diet Pro</h2>
 
-  <ul>
-    <li>
+  <ul *ngIf="navItems">
+    <li *ngFor="let item of navItems">
       <!-- Look for rounded images -->
+      <img src="{{item.img}}" alt="logo" class="mx-auto d-block" width="80px" height="80px">
+      <h4 class="text-center"><a routerLink="{{item.routerLink}}">{{item.title}}</a></h4>
+      <hr width="75%">
+    </li>
+    <!--<li>
       <img src="../../assets/img/food.ico" alt="logo" class="mx-auto d-block" width="80px" height="80px">
       <h4 class="text-center"><a routerLink="/diet/food">Quick food overview</a></h4>
       <hr width="75%">
@@ -17,7 +22,7 @@
       <img src="../../assets/img/dashboard.png" alt="logo" class="mx-auto d-block" width="80px" height="80px">
       <h4 class="text-center"><a routerLink="/diet/dashboard">Dashboard</a></h4>
       <hr width="75%">
-    </li>
+    </li>-->
   </ul>
   <div class="fixed-bottom" id="bottom">
     <button type="button" class="btn btn-warning" id="logout" (click)="logout()">Log out</button>

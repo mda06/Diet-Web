@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DietService } from "../../services/diet.service";
 import {Dietetist} from "../../model/dietetist";
 import {Patient} from "../../model/patient";
+import {NavItem} from "../../model/nav-item";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -14,6 +15,11 @@ export class DietDashboardComponent implements OnInit {
   private selectedPatient: Patient;
   private displayAddNewPatient = false;
   private _opened: boolean = true;
+  private navItems: Array<NavItem> = [
+    {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/diet/food"},
+    {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient/1"},
+    {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"}
+    ];
 
   constructor(private dietService: DietService) { }
 
