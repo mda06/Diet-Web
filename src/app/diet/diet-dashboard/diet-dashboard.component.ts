@@ -14,12 +14,6 @@ export class DietDashboardComponent implements OnInit {
   private diet: Dietetist;
   private selectedPatient: Patient;
   private displayAddNewPatient = false;
-  private _opened: boolean = true;
-  private foodItemItem: NavItem = {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/diet/food"};
-  private aboutPatientItem: NavItem = {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient/1"};
-  private selectPatientItem: NavItem = {img: "../../assets/img/select-patient.png", title: "Select Patient", routerLink: "/diet/select-patient"};
-  private dashboardItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
-  private navItems: Array<NavItem> = new Array();
 
   constructor(private dietService: DietService) { }
 
@@ -28,26 +22,14 @@ export class DietDashboardComponent implements OnInit {
       data => {this.diet = data;},
       err => {console.log("Error trying to get the connected user");}
     );
-    this.initNavItems();
-  }
-
-  initNavItems() {
-    this.navItems.push(this.dashboardItem);
-    this.navItems.push(this.foodItemItem);
-    this.navItems.push(this.selectPatientItem);
   }
 
   navItemClicked(item: NavItem) {
     console.log("Navigate to %s", item.routerLink);
   }
 
-  private _toggleSidebar() {
-    this._opened = !this._opened;
-  }
-
   selectPatient(patient: Patient) {
     this.selectedPatient = patient;
-    this.navItems.push(this.aboutPatientItem);
   }
 
   addNewPatient() {

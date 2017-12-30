@@ -12,6 +12,7 @@ import {DietGuardServiceService} from "../guard/diet-guard-service.service";
 import {DietRoutingModule} from "./diet-routing.module";
 import {PatientFilterPipe} from "../share/PatientFilterPipe";
 import { NavbarComponent } from '../navbar/navbar.component';
+import { DietComponent } from './diet.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NavbarComponent } from '../navbar/navbar.component';
     DetailPatientComponent,
     SelectPatientComponent,
     PatientFilterPipe,
-    NavbarComponent
+    NavbarComponent,
+    DietComponent
   ],
   providers: [ DietService, DietGuardServiceService ]
 })
