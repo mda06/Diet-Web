@@ -7,6 +7,7 @@ import {AuthenticationService} from "../services/authentication.service";
 import {Patient} from "../model/patient";
 import {DietService} from "../services/diet.service";
 import {isNullOrUndefined} from "util";
+import {Dietetist} from "../model/dietetist";
 
 @Component({
   selector: 'app-diet',
@@ -20,8 +21,10 @@ export class DietComponent implements OnInit {
   private selectPatientItem: NavItem = {img: "../../assets/img/select-patient.png", title: "Select Patient", routerLink: "/diet/select-patient"};
   private dashboardItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
   private navItems: Array<NavItem> = new Array();
-  patient$: Observable<Patient>;
+  private patient$: Observable<Patient>;
   private patientId: number;
+  private selectedPatient: Patient;
+  private diet: Dietetist;
 
   constructor(private authService: AuthenticationService,
               private dietService: DietService,
@@ -29,6 +32,7 @@ export class DietComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.initDiet();
     this.patient$ = this.route.paramMap
       .switchMap((params: ParamMap) => {
         this.patientId = +params.get("patientId");
@@ -37,19 +41,22 @@ export class DietComponent implements OnInit {
       });
     console.log("Init diet");
     this.patient$.subscribe(data => {
-      if(isNullOrUndefined(data)) {
-        const index: number = this.navItems.indexOf(this.aboutPatientItem);
-        console.log("Index delete: " + index);
-        if(index >= 0)
-          this.navItems.splice(index, 1);
-      } else {
+      if(!isNullOrUndefined(data)) {
         const index: number = this.navItems.indexOf(this.aboutPatientItem);
         if(index <= 0)
           this.navItems.push(this.aboutPatientItem);
         this.aboutPatientItem.routerLink = "/diet/detail-patient/" + data.id;
+        this.selectedPatient = data;
       }
     }, err => console.log("Error"));
     this.initNavItems();
+  }
+
+  initDiet() {
+    this.dietService.getConnectedUser().subscribe(
+      data => {this.diet = data;},
+      err => {console.log("Error trying to get the connected user");}
+    );
   }
 
   initNavItems() {

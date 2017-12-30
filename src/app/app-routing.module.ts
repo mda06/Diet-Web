@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AdminGuardServiceService]},
   {path: 'patient/dashboard', component: PatientDashboardComponent, canActivate: [PatientGuardServiceService]},
+  {path: '', redirectTo:"/login"},
   {path: '**', redirectTo:"/login"}
 ]
 

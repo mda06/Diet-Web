@@ -107,16 +107,18 @@ export class DetailPatientComponent implements OnInit {
         } else if (result === 'Return') {
           //If there's at least 1 observer it means that it's inside a component and not requested directly in the url
           //Else it's requested from the url and we go back
-          if (this.back.observers.length >= 1) {
+          /*if (this.back.observers.length >= 1) {
             this.handleBack();
           } else {
             //No need to restore the patient because it's referencing nowhere
             this.location.back();
-          }
+          }*/
+          this.location.back();
         }
       });
     } else {
-      this.handleBack();
+      //this.handleBack();
+      this.location.back();
     }
   }
 

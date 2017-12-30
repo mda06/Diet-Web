@@ -39,7 +39,8 @@ export class SelectPatientComponent implements OnInit {
   }
 
   newPatient() {
-    this.addNewPatient.emit();
+    //this.addNewPatient.emit();
+    this.router.navigate(['diet/add-patient']);
   }
 
   switch(patient: Patient) {

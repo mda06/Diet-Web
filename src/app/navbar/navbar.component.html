@@ -6,9 +6,9 @@
       <!-- Look for rounded images -->
       <img src="{{item.img}}" alt="logo" class="mx-auto d-block" width="50px" height="50px" (click)="navigate(item)">
       <h4 class="text-center" (click)="navigate(item)" placement="bottom" ngbTooltip="{{item.routerLink}}">
-        {{item.title}}
+        <a routerLink="{{item.routerLink}}">{{item.title}}</a>
       </h4>
-      <a routerLink="{{item.routerLink}}">Navigate</a>
+
       <hr width="75%">
     </li>
   </ul>
