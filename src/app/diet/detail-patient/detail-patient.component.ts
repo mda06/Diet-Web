@@ -4,7 +4,7 @@ import {NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
 import {AnthropometricParameter} from "../../model/anthropometricParameter";
 import {Gender} from "../../model/gender";
-import {DietService} from "../../services/diet.service";
+import {DietService} from "../service/diet.service";
 import {IAlert} from "../../model/i-alert";
 import {ActivatedRoute} from "@angular/router";
 import {isNullOrUndefined} from "util";

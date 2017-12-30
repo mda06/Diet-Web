@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Token } from '../model/token';
+import { Token } from '../../model/token';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {Dietetist} from "../model/dietetist";
-import {Patient} from "../model/patient";
+import {Dietetist} from "../../model/dietetist";
+import {Patient} from "../../model/patient";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

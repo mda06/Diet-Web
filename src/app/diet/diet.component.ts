@@ -5,9 +5,10 @@ import {ActivatedRoute, Router, ParamMap} from "@angular/router";
 import {NavItem} from "../model/nav-item";
 import {AuthenticationService} from "../services/authentication.service";
 import {Patient} from "../model/patient";
-import {DietService} from "../services/diet.service";
+import {DietService} from "./service/diet.service";
 import {isNullOrUndefined} from "util";
 import {Dietetist} from "../model/dietetist";
+import {SharedService} from "./service/shared.service";
 
 @Component({
   selector: 'app-diet',
@@ -24,10 +25,10 @@ export class DietComponent implements OnInit {
   private patient$: Observable<Patient>;
   private patientId: number;
   private selectedPatient: Patient;
-  private diet: Dietetist;
 
   constructor(private authService: AuthenticationService,
               private dietService: DietService,
+              private sharedService: SharedService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -47,6 +48,7 @@ export class DietComponent implements OnInit {
           this.navItems.push(this.aboutPatientItem);
         this.aboutPatientItem.routerLink = "/diet/detail-patient/" + data.id;
         this.selectedPatient = data;
+        this.sharedService.onSelectedPatient.emit(this.selectedPatient);
       }
     }, err => console.log("Error"));
     this.initNavItems();
@@ -54,7 +56,7 @@ export class DietComponent implements OnInit {
 
   initDiet() {
     this.dietService.getConnectedUser().subscribe(
-      data => {this.diet = data;},
+      data => {this.sharedService.diet.emit(data);},
       err => {console.log("Error trying to get the connected user");}
     );
   }

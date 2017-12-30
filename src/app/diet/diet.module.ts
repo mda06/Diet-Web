@@ -4,7 +4,8 @@ import { CommonModule }   from '@angular/common';
 import { FormsModule }    from '@angular/forms';
 import {SidebarModule} from "ng-sidebar";
 
-import {DietService} from "../services/diet.service";
+import {DietService} from "./service/diet.service";
+import {SharedService} from "./service/shared.service";
 import {DetailPatientComponent} from "./detail-patient/detail-patient.component";
 import {DietDashboardComponent} from "./diet-dashboard/diet-dashboard.component";
 import {SelectPatientComponent} from "./select-patient/select-patient.component";
@@ -31,6 +32,6 @@ import { DietComponent } from './diet.component';
     NavbarComponent,
     DietComponent
   ],
-  providers: [ DietService, DietGuardServiceService ]
+  providers: [ DietService, DietGuardServiceService, SharedService ]
 })
 export class DietModule {}

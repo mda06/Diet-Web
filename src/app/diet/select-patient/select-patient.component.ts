@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import { Patient } from "../../model/patient";
 import {isNullOrUndefined} from "util";
-import {DietService} from "../../services/diet.service";
+import {DietService} from "../service/diet.service";
 import {AuthenticationService} from "../../services/authentication.service";
 import {Router} from "@angular/router";
+import {SharedService} from "../service/shared.service";
 
 @Component({
   selector: 'app-select-patient',
@@ -21,6 +22,7 @@ export class SelectPatientComponent implements OnInit {
   patientsPerPage = 5;
 
   constructor(private dietService: DietService,
+              private sharedService: SharedService,
               private authService: AuthenticationService,
               private router: Router) {
   }
@@ -31,6 +33,10 @@ export class SelectPatientComponent implements OnInit {
         this.dietService.getPatientsOfDiet(id).subscribe(data => this.patients = data);
       }, err => console.log("Error getting the id"));
     }
+
+    this.sharedService.onSelectedPatient.subscribe((data) => {
+      this.selectedPatient = data; console.log("New patient on select");
+    });
   }
 
   select() {

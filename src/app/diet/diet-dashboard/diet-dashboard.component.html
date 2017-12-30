@@ -1,19 +1,10 @@
-<!--<div id="dashboard">
-  <div *ngIf="!diet; else dietReady">
-    <p>Fetching data from the server....</p>
-  </div>
-
-  <ng-template #dietReady>
-    <div *ngIf="displayAddNewPatient; else patientSelect">
-      <app-detail-patient (back)="backFromDetail($event)"
-                          (patientAdded)="patientAdded($event)"></app-detail-patient>
-    </div>
-    <ng-template #patientSelect>
-      <app-select-patient *ngIf="!selectedPatient" [patients]="diet.patients"
-                          (selectPatient)="selectPatient($event)" (addNewPatient)="addNewPatient()"></app-select-patient>
-      <app-detail-patient *ngIf="selectedPatient" [patient]="selectedPatient"
-                          (back)="backFromDetail($event)" (patientSaved)="patientSaved($event)"></app-detail-patient>
-    </ng-template>
-  </ng-template>
-</div>-->
 <h3>Dashboard</h3>
+<div *ngIf="diet">
+  <p>{{diet.firstName}}</p>
+</div>
+<div *ngIf="selectedPatient">
+  <pre>
+    {{getJson()}}
+  </pre>
+  Patient selected: {{selectedPatient.firstName}}
+</div>

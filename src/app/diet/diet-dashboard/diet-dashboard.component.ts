@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { DietService } from "../../services/diet.service";
 import {Dietetist} from "../../model/dietetist";
 import {Patient} from "../../model/patient";
-import {NavItem} from "../../model/nav-item";
+import {SharedService} from "../service/shared.service";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -13,36 +12,15 @@ export class DietDashboardComponent implements OnInit {
 
   private diet: Dietetist;
   private selectedPatient: Patient;
-  private displayAddNewPatient = false;
 
-  constructor(private dietService: DietService) { }
+  constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.dietService.getConnectedUser().subscribe(
-      data => {this.diet = data;},
-      err => {console.log("Error trying to get the connected user");}
-    );
+    this.sharedService.diet.subscribe(data => this.diet = data);
+    this.sharedService.onSelectedPatient.subscribe(data => this.selectedPatient = data);
   }
 
-  selectPatient(patient: Patient) {
-    this.selectedPatient = patient;
+  getJson(): string {
+    return JSON.stringify(this.selectedPatient);
   }
-
-  addNewPatient() {
-    this.displayAddNewPatient = true;
-  }
-
-  patientAdded(patient: Patient) {
-    this.diet.patients.push(patient);
-  }
-
-  patientSaved(patient: Patient) {
-    console.log();
-  }
-
-  backFromDetail() {
-    this.displayAddNewPatient = false;
-    this.selectedPatient = null;
-  }
-
 }
