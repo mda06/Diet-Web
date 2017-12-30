@@ -1,7 +1,15 @@
 .jumbotron {
-  width: 40%;
+  width: 50%;
   margin: auto;
+  min-width: 450px;
 }
 
 .patient-holder {
+}
+
+@media (max-width: 768px) {
+  .jumbotron {
+    width: 100%;
+    min-width: 50%;
+  }
 }

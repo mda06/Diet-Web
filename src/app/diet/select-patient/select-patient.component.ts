@@ -12,10 +12,12 @@ export class SelectPatientComponent implements OnInit {
   @Output() selectPatient = new EventEmitter<Patient>();
   @Output() addNewPatient = new EventEmitter();
   selectedPatient: Patient;
-  //filter: Patient = new Patient();
   filter: String = new String();
+  currentPage = 1;
+  patientsPerPage = 5;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -30,6 +32,10 @@ export class SelectPatientComponent implements OnInit {
 
   switch(patient: Patient) {
     this.selectedPatient = patient;
+  }
+
+  getCollectionSize(): number {
+    return (this.patients.length / this.patientsPerPage);
   }
 
 }

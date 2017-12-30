@@ -45,6 +45,11 @@ export class AuthenticationService {
     });
   }
 
+  onLogout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('role');
+  }
+
   isAuthenticated(): boolean {
     if(this._token == null) return false;
     console.log("Expiration date of token: %s", this.jwtHelper.getTokenExpirationDate(this._token.access_token));

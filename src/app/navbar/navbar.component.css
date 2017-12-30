@@ -1,5 +1,16 @@
 nav {
   width: 200px;
+  height: 100vh;
+}
+
+#bottom {
+  width: 200px;
+}
+
+#logout {
+  width: 180px;
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 ul {
