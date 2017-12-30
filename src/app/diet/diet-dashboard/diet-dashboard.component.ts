@@ -15,11 +15,11 @@ export class DietDashboardComponent implements OnInit {
   private selectedPatient: Patient;
   private displayAddNewPatient = false;
   private _opened: boolean = true;
-  private navItems: Array<NavItem> = [
-    {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/diet/food"},
-    {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient/1"},
-    {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"}
-    ];
+  private foodItemItem: NavItem = {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/diet/food"};
+  private aboutPatientItem: NavItem = {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient/1"};
+  private selectPatientItem: NavItem = {img: "../../assets/img/select-patient.png", title: "Select Patient", routerLink: "/diet/select-patient"};
+  private dashboardItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
+  private navItems: Array<NavItem> = new Array();
 
   constructor(private dietService: DietService) { }
 
@@ -28,6 +28,17 @@ export class DietDashboardComponent implements OnInit {
       data => {this.diet = data;},
       err => {console.log("Error trying to get the connected user");}
     );
+    this.initNavItems();
+  }
+
+  initNavItems() {
+    this.navItems.push(this.dashboardItem);
+    this.navItems.push(this.foodItemItem);
+    this.navItems.push(this.selectPatientItem);
+  }
+
+  navItemClicked(item: NavItem) {
+    console.log("Navigate to %s", item.routerLink);
   }
 
   private _toggleSidebar() {
@@ -36,7 +47,9 @@ export class DietDashboardComponent implements OnInit {
 
   selectPatient(patient: Patient) {
     this.selectedPatient = patient;
-    console.log("Selected patient: " + patient.firstName);
+    const index: number = this.navItems.indexOf(this.selectPatientItem);
+    this.navItems.splice(index, 1);
+    this.navItems.push(this.aboutPatientItem);
   }
 
   addNewPatient() {
