@@ -47,8 +47,6 @@ export class DietDashboardComponent implements OnInit {
 
   selectPatient(patient: Patient) {
     this.selectedPatient = patient;
-    const index: number = this.navItems.indexOf(this.selectPatientItem);
-    this.navItems.splice(index, 1);
     this.navItems.push(this.aboutPatientItem);
   }
 
