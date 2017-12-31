@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(this.ret)
         }
       },
-      (err) => this.error = 'Cannot connect !'
+      (err) => {this.error = 'Cannot connect !'; console.log(err);}
     );
   }
 

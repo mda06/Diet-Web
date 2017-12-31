@@ -5,6 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Role} from "../model/role.enum";
+import {isNullOrUndefined} from "util";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,7 +24,6 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
     this._token = JSON.parse(localStorage.getItem("token"));
-    this._role = JSON.parse(localStorage.getItem("role"));
   }
 
   onLogin(auth: Authentication): Observable<Role> {
@@ -34,7 +34,6 @@ export class AuthenticationService {
           localStorage.setItem("token", JSON.stringify(this._token));
           this.initRole().subscribe(role => {
             this._role = role;
-            localStorage.setItem("role", JSON.stringify(this._role));
             observer.next(this._role);
             observer.complete();
           }, err => {
@@ -49,7 +48,6 @@ export class AuthenticationService {
 
   onLogout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('role');
   }
 
   isAuthenticated(): boolean {
@@ -74,8 +72,21 @@ export class AuthenticationService {
     return this._id;
   }
 
-  get role(): Role {
-    return this._role;
+  getRole(): Observable<Role>{
+    return new Observable<Role>((observer) => {
+      if(isNullOrUndefined(this._role)) {
+        this.initRole().subscribe(role => {
+          this._role = role;
+          observer.next(this._role);
+          observer.complete();
+        }, err => {
+          observer.error(err);
+        });
+      } else {
+        observer.next(this._role);
+        observer.complete();
+      }
+    });
   }
 
   get token(): Token {
