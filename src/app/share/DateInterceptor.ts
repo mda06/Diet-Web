@@ -1,21 +1,26 @@
-import {Injectable} from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse,
-  HttpErrorResponse
+  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse
 } from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import {Router} from "@angular/router";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Injectable()
 export class DateInterceptor implements HttpInterceptor {
   private regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
+  private authService: AuthenticationService
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+              private injector: Injector) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return this.logAndConvertDate(req, next);
+    this.authService = this.injector.get(AuthenticationService);
+    const authHeader = this.authService.getAuthorizationHeader();
+    const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
+    return this.logAndConvertDate(authReq, next);
   }
 
   private logAndConvertDate(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

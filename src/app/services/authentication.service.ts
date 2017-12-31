@@ -59,17 +59,14 @@ export class AuthenticationService {
   }
 
   getConnectedUser(): Observable<any> {
-    httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
     return this.http.get<any>(this.connectedUserUrl, httpOptions);
   }
 
   private initRole(): Observable<Role> {
-    httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
     return this.http.get<Role>(this.roleUrl, httpOptions);
   }
 
   getId() : Observable<number> {
-    httpOptions.headers = httpOptions.headers.set("Authorization", "Bearer: " + this._token.access_token);
     return this.http.get<number>(this.idUrl, httpOptions);
   }
 
@@ -83,5 +80,9 @@ export class AuthenticationService {
 
   get token(): Token {
     return this._token;
+  }
+
+  getAuthorizationHeader() {
+    return "Bearer: " + (this._token ? this._token.access_token : 0);
   }
 }
