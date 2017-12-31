@@ -25,6 +25,7 @@ export class DietComponent implements OnInit {
   private patient$: Observable<Patient>;
   private patientId: number;
   private selectedPatient: Patient;
+  private diet: Dietetist;
 
   constructor(private authService: AuthenticationService,
               private dietService: DietService,
@@ -37,10 +38,8 @@ export class DietComponent implements OnInit {
     this.patient$ = this.route.paramMap
       .switchMap((params: ParamMap) => {
         this.patientId = +params.get("patientId");
-        console.log("Patient selected with id: " + this.patientId);
         return this.dietService.getPatient(this.patientId);
       });
-    console.log("Init diet");
     this.patient$.subscribe(data => {
       if(!isNullOrUndefined(data)) {
         const index: number = this.navItems.indexOf(this.aboutPatientItem);
@@ -48,7 +47,7 @@ export class DietComponent implements OnInit {
           this.navItems.push(this.aboutPatientItem);
         this.aboutPatientItem.routerLink = "/diet/detail-patient/" + data.id;
         this.selectedPatient = data;
-        this.sharedService.onSelectedPatient.emit(this.selectedPatient);
+        this.sharedService.setPatient(this.selectedPatient);
       }
     }, err => console.log("Error"));
     this.initNavItems();
@@ -57,7 +56,7 @@ export class DietComponent implements OnInit {
   initDiet() {
     this.dietService.getConnectedUser().subscribe(
       data => {
-        this.sharedService.diet.emit(data);
+        this.diet = data;
         this.sharedService.setDietetist(data);
         },
       err => {console.log("Error trying to get the connected user");}
