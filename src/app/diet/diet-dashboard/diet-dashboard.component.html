@@ -8,7 +8,7 @@
     <p>{{getAge()}} Years old</p>
   </div>
   <div id="paramChart" class="row" *ngIf="selectedPatient.anthropometricParameters.length > 0">
-    <div style="display: block">
+    <div>
       <canvas baseChart
               [datasets]="barChartData"
               [labels]="barChartLabels"

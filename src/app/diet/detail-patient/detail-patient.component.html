@@ -83,7 +83,7 @@
         <div class="card-body">
             <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
               <div *ngFor="let param of patient.anthropometricParameters">
-                <ngb-panel title={{param.date}}>
+                <ngb-panel title={{getFormattedDate(param.date)}}>
                   <ng-template ngbPanelContent>
                     <label for="length">Length</label>
                     <input type="number" class="form-control" id="length"

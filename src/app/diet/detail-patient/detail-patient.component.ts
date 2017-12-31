@@ -9,6 +9,7 @@ import {IAlert} from "../../model/i-alert";
 import {ActivatedRoute} from "@angular/router";
 import {isNullOrUndefined} from "util";
 import * as _ from 'lodash';
+import * as moment from 'moment';
 import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
 
@@ -99,6 +100,10 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
 
   selectToday() {
     return "Today: " + now.getUTCFullYear()+ "-" + (now.getUTCMonth()+1) + "-" + now.getUTCDate();
+  }
+
+  getFormattedDate(date: Date): string {
+    return moment(date).format("DD/MM/YYYY");
   }
 
   isPatientModified() {
