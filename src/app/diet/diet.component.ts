@@ -56,7 +56,10 @@ export class DietComponent implements OnInit {
 
   initDiet() {
     this.dietService.getConnectedUser().subscribe(
-      data => {this.sharedService.diet.emit(data);},
+      data => {
+        this.sharedService.diet.emit(data);
+        this.sharedService.setDietetist(data);
+        },
       err => {console.log("Error trying to get the connected user");}
     );
   }

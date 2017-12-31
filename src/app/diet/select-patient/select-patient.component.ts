@@ -29,9 +29,11 @@ export class SelectPatientComponent implements OnInit {
 
   ngOnInit() {
     if(isNullOrUndefined(this.patients)) {
-      this.authService.getId().subscribe(id => {
+      this.sharedService.dietetist$.subscribe(data => {this.patients = data.patients; console.log("Getting the diet");});
+      //this.sharedService.diet.subscribe(data => this.patients = data.patients);
+      /*this.authService.getId().subscribe(id => {
         this.dietService.getPatientsOfDiet(id).subscribe(data => this.patients = data);
-      }, err => console.log("Error getting the id"));
+      }, err => console.log("Error getting the id"));*/
     }
 
     this.sharedService.onSelectedPatient.subscribe((data) => {

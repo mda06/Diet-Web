@@ -16,7 +16,9 @@ export class DietDashboardComponent implements OnInit {
   constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
-    this.sharedService.diet.subscribe(data => this.diet = data);
+    //this.sharedService.diet.subscribe(data => this.diet = data);
+    console.log("Init dashboard");
+    this.sharedService.dietetist$.subscribe(data => {this.diet = data; console.log("Getting the diet");});
     this.sharedService.onSelectedPatient.subscribe(data => this.selectedPatient = data);
   }
 
