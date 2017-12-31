@@ -18,3 +18,8 @@ ul {
   margin: 0;
   padding: 0;
 }
+
+a.active {
+  font-style  : italic;
+  font-weight: bold;
+}
