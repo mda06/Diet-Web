@@ -1,10 +1,20 @@
-<h3>Dashboard</h3>
-<div *ngIf="diet">
-  <p>{{diet.firstName}}</p>
+<div class="container" *ngIf="diet">
+  <h2 class="text-center">Dashboard of {{diet.firstName + ' ' + diet.lastName}}</h2>
 </div>
-<div *ngIf="selectedPatient">
-  <pre>
-    {{getJson()}}
-  </pre>
-  Patient selected: {{selectedPatient.firstName}}
+<div class="container" *ngIf="selectedPatient">
+  <div class="row">
+    <p>Patient selected: {{selectedPatient.firstName}}</p>
+    <p>Created at {{selectedPatient.created | date:"dd/MM/yyyy" }}</p>
+    <p>{{getAge()}} Years old</p>
+  </div>
+  <div id="paramChart" class="row" *ngIf="selectedPatient.anthropometricParameters.length > 0">
+    <div style="display: block">
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"></canvas>
+    </div>
+  </div>
 </div>

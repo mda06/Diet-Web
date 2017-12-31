@@ -3,6 +3,9 @@ import {Dietetist} from "../../model/dietetist";
 import {Patient} from "../../model/patient";
 import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
+import * as moment from 'moment';
+import * as _ from 'lodash';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -15,6 +18,19 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
   private selectedPatient: Patient;
   private subscriptions = new Subscription();
 
+  public barChartOptions:any = {
+    scaleShowVerticalLines: false,
+    responsive: true
+  };
+  public barChartLabels:string[] = ["Length", "Weight"];
+  public barChartType:string = 'bar';
+  public barChartLegend:boolean = true;
+
+  public barChartData:any[] = [
+    {data: [180, 95], label: '12 Nov 2017'},
+    {data: [181, 90], label: '12 Dec 2017'}
+  ];
+
   constructor(private sharedService: SharedService) { }
 
   ngOnInit() {
@@ -25,7 +41,27 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
     );
     this.subscriptions.add(this.sharedService.patient$.subscribe(
       data => {
-        this.selectedPatient = data;
+        if(!isNullOrUndefined(data)) {
+          /*this.selectedPatient = data;
+          let clone = _.clone(this.barChartData);
+          console.log(this.barChartData);
+          console.log(clone);
+          let values = [];*/
+          //this.barChartData.splice(0, this.barChartData.length);
+          //this.barChartLabels.splice(0, this.barChartLabels.length);
+          for(var param of this.selectedPatient.anthropometricParameters) {
+            //values.push({data:[param.length, param.weight],
+              //label:moment(param.date).format("DD/MM/YYYY")});
+          }
+
+          /*let clone = JSON.parse(JSON.stringify(this.barChartData));
+          for(var row of clone) {
+
+          }
+          clone[0].data = values[0].data;
+          clone[0].label = values[0].label;
+          this.barChartData = clone;*/
+        }
       })
     );
   }
@@ -34,7 +70,7 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  getJson(): string {
-    return JSON.stringify(this.selectedPatient);
+  getAge(): number {
+    return moment().diff(this.selectedPatient.birthday, 'years',false);
   }
 }
