@@ -42,8 +42,8 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
     this.subscriptions.add(this.sharedService.patient$.subscribe(
       data => {
         if(!isNullOrUndefined(data)) {
-          /*this.selectedPatient = data;
-          let clone = _.clone(this.barChartData);
+          this.selectedPatient = data;
+          /*let clone = _.clone(this.barChartData);
           console.log(this.barChartData);
           console.log(clone);
           let values = [];*/
