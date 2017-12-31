@@ -16,6 +16,7 @@ const dietRoutes: Routes = [
       {path: '', component: DietDashboardComponent, canActivate: [DietGuardServiceService]},
       {path: 'dashboard', component: DietDashboardComponent, canActivate: [DietGuardServiceService]},
       {path: 'select-patient', component: SelectPatientComponent, canActivate: [DietGuardServiceService]},
+      {path: 'detail-patient', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
       {path: 'detail-patient/:id', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
       {path: 'add-patient', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
     ]

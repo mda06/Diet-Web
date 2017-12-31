@@ -18,7 +18,7 @@ import {SharedService} from "./service/shared.service";
 export class DietComponent implements OnInit {
   private _opened: boolean = true;
   private foodItemItem: NavItem = {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/diet/food"};
-  private aboutPatientItem: NavItem = {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient/1"};
+  private aboutPatientItem: NavItem = {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient"};
   private selectPatientItem: NavItem = {img: "../../assets/img/select-patient.png", title: "Select Patient", routerLink: "/diet/select-patient"};
   private dashboardItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
   private navItems: Array<NavItem> = new Array();
@@ -35,6 +35,11 @@ export class DietComponent implements OnInit {
 
   ngOnInit() {
     this.initDiet();
+    this.initPatient();
+    this.initNavItems();
+  }
+
+  initPatient() {
     this.patient$ = this.route.paramMap
       .switchMap((params: ParamMap) => {
         this.patientId = +params.get("patientId");
@@ -45,12 +50,10 @@ export class DietComponent implements OnInit {
         const index: number = this.navItems.indexOf(this.aboutPatientItem);
         if(index <= 0)
           this.navItems.push(this.aboutPatientItem);
-        this.aboutPatientItem.routerLink = "/diet/detail-patient/" + data.id;
         this.selectedPatient = data;
         this.sharedService.setPatient(this.selectedPatient);
       }
     }, err => console.log("Error"));
-    this.initNavItems();
   }
 
   initDiet() {

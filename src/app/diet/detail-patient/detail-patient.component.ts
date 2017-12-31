@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import { Location } from '@angular/common';
 import {NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
@@ -9,6 +9,8 @@ import {IAlert} from "../../model/i-alert";
 import {ActivatedRoute} from "@angular/router";
 import {isNullOrUndefined} from "util";
 import * as _ from 'lodash';
+import {SharedService} from "../service/shared.service";
+import {Subscription} from "rxjs/Subscription";
 
 const now = new Date();
 
@@ -17,13 +19,11 @@ const now = new Date();
   templateUrl: './detail-patient.component.html',
   styleUrls: ['./detail-patient.component.css']
 })
-export class DetailPatientComponent implements OnInit {
+export class DetailPatientComponent implements OnInit, OnDestroy {
 
-  @Input() patient: Patient;
+  patient: Patient;
   private copyPatient: Patient;
-  @Output() back = new EventEmitter();
-  @Output() patientSaved = new EventEmitter();
-  @Output() patientAdded = new EventEmitter<Patient>();
+  private subscriptions = new Subscription();
   isAddPatient: boolean = false;
   param: AnthropometricParameter;
   public isAddressCollapsed = true;
@@ -34,14 +34,30 @@ export class DetailPatientComponent implements OnInit {
 
   constructor(
     private dietService: DietService,
+    private sharedService: SharedService,
     private route: ActivatedRoute,
     private location: Location,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    if(this.location.path().indexOf('detail') >= 0) {
+      this.initDetailPatient();
+    } else if(this.location.path().indexOf('add') >= 0) {
+      this.initAddPatient();
+    }
+  }
+
+  initAddPatient() {
+    this.param = new AnthropometricParameter();
+    this.patient = new Patient();
+    this.isAddPatient = true;
+  }
+
+  initDetailPatient() {
     const id = +this.route.snapshot.paramMap.get('id');
+    //If the request is by id
     if(id != 0) {
-      this.dietService.getPatient(id).subscribe(
+      this.subscriptions.add(this.dietService.getPatient(id).subscribe(
         data => {
           if(!isNullOrUndefined(data)) {
             this.patient = data;
@@ -49,12 +65,14 @@ export class DetailPatientComponent implements OnInit {
             this.initPatientBackup();
           }
         }
+      ));
+    } else {
+      //If the request is by shared context
+      this.subscriptions.add(this.sharedService.patient$.subscribe(
+        data => {
+          this.patient = data;
+        })
       );
-    }
-
-    if(isNullOrUndefined(this.patient)) {
-      this.patient = new Patient();
-      this.isAddPatient = true;
     }
 
     if(!isNullOrUndefined(this.patient)) {
@@ -105,28 +123,15 @@ export class DetailPatientComponent implements OnInit {
         if (result === 'Cancel') {
           console.log('Stay here');
         } else if (result === 'Return') {
-          //If there's at least 1 observer it means that it's inside a component and not requested directly in the url
-          //Else it's requested from the url and we go back
-          /*if (this.back.observers.length >= 1) {
-            this.handleBack();
-          } else {
-            //No need to restore the patient because it's referencing nowhere
-            this.location.back();
-          }*/
+          //Restore patient like it was before
+          _.merge(this.patient, this.copyPatient);
+          //Go back
           this.location.back();
         }
       });
     } else {
-      //this.handleBack();
       this.location.back();
     }
-  }
-
-  handleBack() {
-    //Restore patient like it was before
-    _.merge(this.patient, this.copyPatient);
-    //Go back
-    this.back.emit();
   }
 
   public closeAlert(alert: IAlert) {
@@ -150,10 +155,16 @@ export class DetailPatientComponent implements OnInit {
       data => {
         if(this.isAddPatient) {
           this.patient = _.merge(this.patient, data);
-          this.patientAdded.emit(this.patient);
+          this.subscriptions.add(this.sharedService.dietetist$.subscribe(
+            data => {
+              if(!isNullOrUndefined(data)) {
+                data.patients.push(this.patient);
+              }
+            })
+          );
           this.isAddPatient = false;
         } else {
-          this.patientSaved.emit(this.patient);
+          //Patient is saved
         }
         this.initPatientBackup();
         this.alerts.push({id: this.alertCounter, type:'success', message:'Saved ' + this.patient.firstName});
@@ -169,5 +180,9 @@ export class DetailPatientComponent implements OnInit {
         },1500, this.alertCounter++);
       }
     );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 }

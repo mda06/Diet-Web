@@ -2,6 +2,10 @@
   <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
 </p>
 
+<div *ngIf="!patient">
+  Please select first a patient
+</div>
+
 <div class="container-fluid" *ngIf="patient">
   <div class="row">
     <div class="col-md-4">
