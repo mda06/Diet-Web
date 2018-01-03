@@ -23,7 +23,15 @@ export class AdminGuardServiceService implements CanActivate {
       return new Observable<boolean>((observer) => {
         this.authService.getRole().subscribe(
           (data) => {
-            observer.next(data == Role.ADMIN);
+            let access = data == Role.ADMIN;
+            observer.next(access);
+            if(!access) {
+              this.router.navigate(['/login'], {
+                queryParams: {
+                  ret: state.url
+                }
+              });
+            }
             observer.complete();
           }, (err) => {
             observer.error(err);
