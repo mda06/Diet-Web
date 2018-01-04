@@ -5,6 +5,8 @@ import { Observable } from "rxjs/Observable";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Dietetist} from "../../model/dietetist";
 import {Patient} from "../../model/patient";
+import { of } from 'rxjs/observable/of';
+import { catchError} from 'rxjs/operators';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,8 +32,13 @@ export class DietService {
     return this.http.get<Array<Patient>>(this.patientByDietUrl + id, httpOptions);
   }
 
+  //Need to catch the error because diet.component used a route param for the selected patient
+  //this id can be 0 so if we don't catch it it will crash the web app
   getPatient(id: number): Observable<Patient> {
-    return this.http.get<Patient>(this.patientUrl + id, httpOptions);
+    return this.http.get<Patient>(this.patientUrl + id, httpOptions).pipe(
+     catchError(this.handleError<Patient>('getPatient'))
+    );
+    //return this.http.get<Patient>(this.patientUrl + id, httpOptions);
   }
 
   savePatient(patient: Patient): Observable<Patient> {
@@ -42,4 +49,20 @@ export class DietService {
     return this._token;
   }
 
+  /**
+   * https://angular.io/tutorial/toh-pt6
+   * Handle Http operation that failed.
+   * Let the app continue.
+   * @param operation - name of the operation that failed
+   * @param result - optional value to return as the observable result
+   */
+  private handleError<T> (operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 }

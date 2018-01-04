@@ -9,6 +9,7 @@ import {DietService} from "./service/diet.service";
 import {isNullOrUndefined} from "util";
 import {Dietetist} from "../model/dietetist";
 import {SharedService} from "./service/shared.service";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-diet',
@@ -52,8 +53,18 @@ export class DietComponent implements OnInit {
           this.navItems.push(this.aboutPatientItem);
         this.selectedPatient = data;
         this.sharedService.setPatient(this.selectedPatient);
+        console.log("Getting data: ", data);
+      } else {
+        console.log("Error with data: ", data);
       }
-    }, err => console.log("Error"));
+    }, err => {
+        console.log(err);
+        if(err instanceof HttpErrorResponse) {
+          console.log("Httperror");
+        } else {
+          console.log("Not a httperror");
+        }
+    });
   }
 
   initDiet() {
