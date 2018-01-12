@@ -1,20 +1,39 @@
-<ng-template #rt let-r="result" let-t="term">
-  {{ r.name}}
-</ng-template>
+<div class="card" style="width: 25rem;">
+  <div class="card-body">
+    <h5 class="card-title">Search products</h5>
 
-<div class="form-group">
-  <label for="typeahead-http">Search for a wiki page:</label>
-  <input id="typeahead-http"
-         type="text"
-         class="form-control"
-         [class.is-invalid]="searchFailed"
-         [(ngModel)]="model"
-         [ngbTypeahead]="search" placeholder="Products search"
-         [resultTemplate]="rt"
-         [inputFormatter]="formatter" />
-  <span *ngIf="searching">searching...</span>
-  <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div>
+    <div class="form-group">
+      <label for="search">Name:</label>
+      <input #input="ngModel" id="search" type="text" name="search"
+             [(ngModel)]="name" placeholder="name" class="form-control"/>
+    </div>
+
+    <hr>
+    <h6 class="card-subtitle mb-2 text-muted">Products</h6>
+    <div *ngIf="searching">
+      <p class="card-text">Searching...</p>
+    </div>
+    <div *ngIf="searchFailed" class="bg-danger">
+      <p class="card-text">Error while searching !</p>
+    </div>
+    <div *ngIf="productsPaging" class="card">
+      <div *ngIf="productsPaging.numberOfElements > 0">
+        <ul class="list-group list-group-flush" >
+          <li class="list-group-item patient-holder " *ngFor="let product of productsPaging.content"
+              [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
+            <p class="card-text">{{product.name}}</p>
+          </li>
+        </ul>
+        <div class="card-footer">
+        <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
+                        [(page)]="productsPaging.number" aria-label="Default pagination"></ngb-pagination>
+        </div>
+      </div>
+      <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
+        <p class="card-text">No products found</p>
+      </div>
+    </div>
+  </div>
 </div>
 
-<hr>
-<pre>Model: {{ model | json }}</pre>
+{{page}}
