@@ -14,8 +14,8 @@ import {isNullOrUndefined} from "util";
 })
 export class DietDashboardComponent implements OnInit, OnDestroy {
 
-  private diet: Dietetist;
-  private selectedPatient: Patient;
+  diet: Dietetist;
+  selectedPatient: Patient;
   private subscriptions = new Subscription();
 
   public barChartOptions:any = {

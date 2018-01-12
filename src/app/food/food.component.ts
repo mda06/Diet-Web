@@ -8,10 +8,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./food.component.css']
 })
 export class FoodComponent implements OnInit {
-  private _opened: boolean = true;
+  _opened: boolean = true;
   private dietItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
   private searchItem: NavItem = {img: "../../assets/img/food.ico", title: "Search", routerLink: "/food/search"};
-  private navItems: Array<NavItem> = new Array();
+  navItems: Array<NavItem> = new Array();
 
   constructor(private router: Router) { }
 
@@ -24,7 +24,7 @@ export class FoodComponent implements OnInit {
     this.navItems.push(this.searchItem);
   }
 
-  private _toggleSidebar() {
+  _toggleSidebar() {
     this._opened = !this._opened;
   }
 
