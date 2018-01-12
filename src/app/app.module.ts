@@ -17,6 +17,7 @@ import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-d
 import { LoginComponent } from './login/login.component';
 import {DateInterceptor} from "./share/DateInterceptor";
 import {DietModule} from "./diet/diet.module";
+import { FoodModule } from "./diet/food/food.module";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {DietModule} from "./diet/diet.module";
       whitelistedDomains: ['localhost:8080']
     }}),
     DietModule,
-    AppRoutingModule,
+    FoodModule,
+    AppRoutingModule
   ],
   providers: [
     JwtHelperService,

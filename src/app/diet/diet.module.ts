@@ -12,9 +12,10 @@ import {SelectPatientComponent} from "./select-patient/select-patient.component"
 import {DietGuardServiceService} from "../guard/diet-guard-service.service";
 import {DietRoutingModule} from "./diet-routing.module";
 import {PatientFilterPipe} from "../share/PatientFilterPipe";
-import { NavbarComponent } from '../navbar/navbar.component';
 import { DietComponent } from './diet.component';
 import { ChartsModule } from 'ng2-charts';
+import {NavbarComponent} from "../navbar/navbar.component";
+import {NavbarModule} from "../navbar/navbar.module";
 
 
 @NgModule({
@@ -24,14 +25,14 @@ import { ChartsModule } from 'ng2-charts';
     NgbModule,
     DietRoutingModule,
     SidebarModule.forRoot(),
-    ChartsModule
+    ChartsModule,
+    NavbarModule
   ],
   declarations: [
     DietDashboardComponent,
     DetailPatientComponent,
     SelectPatientComponent,
     PatientFilterPipe,
-    NavbarComponent,
     DietComponent
   ],
   providers: [ DietService, DietGuardServiceService, SharedService ]

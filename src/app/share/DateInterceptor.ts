@@ -32,7 +32,6 @@ export class DateInterceptor implements HttpInterceptor {
     return next
       .handle(req)
       .do(event => {
-        console.log(req);
         if (event instanceof HttpResponse) {
           this.convertDateStringsToDates(event.body);
           const elapsed = Date.now() - started;

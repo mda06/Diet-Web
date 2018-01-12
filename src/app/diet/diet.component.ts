@@ -18,7 +18,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class DietComponent implements OnInit {
   private _opened: boolean = true;
-  private foodItemItem: NavItem = {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/diet/food"};
+  private foodItemItem: NavItem = {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/food"};
   private aboutPatientItem: NavItem = {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient"};
   private selectPatientItem: NavItem = {img: "../../assets/img/select-patient.png", title: "Select Patient", routerLink: "/diet/select-patient"};
   private dashboardItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
@@ -89,6 +89,6 @@ export class DietComponent implements OnInit {
 
   navItemClicked(item: NavItem) {
     console.log("Navigate to %s", item.routerLink);
-    this.router.navigate([item.routerLink], );
+    this.router.navigate([item.routerLink]);
   }
 }
