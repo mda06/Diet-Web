@@ -1,39 +1,72 @@
-<div class="card" style="width: 25rem;">
-  <div class="card-body">
-    <h5 class="card-title">Search products</h5>
+<div class="container">
+  <div class="row">
+    <div class="card col-md-4">
+      <div class="card-body">
+        <h5 class="card-title">Search products</h5>
 
-    <div class="form-group">
-      <label for="search">Name:</label>
-      <input #input="ngModel" id="search" type="text" name="search"
-             [(ngModel)]="name" placeholder="name" class="form-control"/>
-    </div>
+        <div class="form-group">
+          <label for="search">Name:</label>
+          <input #input="ngModel" id="search" type="text" name="search"
+                 [(ngModel)]="name" placeholder="name" class="form-control"/>
+        </div>
 
-    <hr>
-    <h6 class="card-subtitle mb-2 text-muted">Products</h6>
-    <div *ngIf="searching">
-      <p class="card-text">Searching...</p>
-    </div>
-    <div *ngIf="searchFailed" class="bg-danger">
-      <p class="card-text">Error while searching !</p>
-    </div>
-    <div *ngIf="productsPaging" class="card">
-      <div *ngIf="productsPaging.numberOfElements > 0">
-        <ul class="list-group list-group-flush" >
-          <li class="list-group-item patient-holder " *ngFor="let product of productsPaging.content"
-              [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
-            <p class="card-text">{{product.name}}</p>
-          </li>
-        </ul>
-        <div class="card-footer">
-        <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
-                        [(page)]="productsPaging.number" aria-label="Default pagination"></ngb-pagination>
+        <hr>
+        <h6 class="card-subtitle mb-2 text-muted">Products</h6>
+        <div *ngIf="searching">
+          <p class="card-text">Searching...</p>
+        </div>
+        <div *ngIf="searchFailed" class="bg-danger">
+          <p class="card-text">Error while searching !</p>
+        </div>
+        <div *ngIf="productsPaging" class="card">
+          <div *ngIf="productsPaging.numberOfElements > 0">
+            <ul class="list-group list-group-flush" >
+              <li class="list-group-item patient-holder " *ngFor="let product of productsPaging.content"
+                  [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
+                <p class="card-text">{{product.name}}</p>
+              </li>
+            </ul>
+            <div class="card-footer">
+            <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
+                            [(page)]="productsPaging.number" aria-label="Default pagination"></ngb-pagination>
+            </div>
+          </div>
+          <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
+            <p class="card-text">No products found</p>
+          </div>
         </div>
       </div>
-      <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
-        <p class="card-text">No products found</p>
+  </div>
+
+  <div *ngIf="selectedProduct" class="card col-md-8">
+    <img class="card-img-top" src="{{selectedProduct.imgUrl}}" alt="Product image">
+    <div class="card-body">
+      <h5 class="card-title">{{selectedProduct.name}}</h5>
+      <div>
+        <h6 class="card-subtitle mb-2 text-muted">Units</h6>
+        <ul>
+          <li *ngFor="let nutriment of selectedProduct.units">
+            <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+          </li>
+        </ul>
       </div>
+      <div>
+        <h6 class="card-subtitle mb-2 text-muted">Macros</h6>
+        <ul>
+          <li *ngFor="let nutriment of selectedProduct.macros">
+            <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h6 class="card-subtitle mb-2 text-muted">Micros</h6>
+        <ul>
+          <li *ngFor="let nutriment of selectedProduct.micros">
+            <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+          </li>
+        </ul>
+      </div>
+    </div>
     </div>
   </div>
 </div>
-
-{{page}}

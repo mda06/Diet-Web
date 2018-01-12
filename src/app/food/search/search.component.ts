@@ -47,7 +47,6 @@ export class SearchComponent implements OnInit {
     this.foodService.getProducts(this.name, this.lang, this.page - 1, this.size)
       .subscribe(
         data => {
-          console.log("Data fetched");
           this.productsPaging = data;
         }, err => {
           console.log(err);
@@ -60,5 +59,12 @@ export class SearchComponent implements OnInit {
 
   selectProduct(prod: Product) {
     this.selectedProduct = prod;
+    this.foodService.getProduct(prod.id, this.lang)
+      .subscribe(data => {
+        this.selectedProduct = data;
+        console.log(data);
+      }, err => {
+        console.log("Cannot find product with id: " + prod.id);
+      });
   }
 }
