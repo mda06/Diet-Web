@@ -14,7 +14,6 @@ import {DietRoutingModule} from "./diet-routing.module";
 import {PatientFilterPipe} from "../share/PatientFilterPipe";
 import { DietComponent } from './diet.component';
 import { ChartsModule } from 'ng2-charts';
-import {NavbarComponent} from "../navbar/navbar.component";
 import {NavbarModule} from "../navbar/navbar.module";
 
 

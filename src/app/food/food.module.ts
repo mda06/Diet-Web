@@ -7,7 +7,7 @@ import {SidebarModule} from "ng-sidebar";
 import {FoodRoutingModule} from "./food-routing.module";
 import {DietGuardServiceService} from "../guard/diet-guard-service.service";
 import {FoodService} from "./service/food.service";
-import { SearchComponent } from './search/search.component';
+import {SearchComponent} from './search/search.component';
 import {NavbarModule} from "../navbar/navbar.module";
 
 @NgModule({
@@ -23,6 +23,6 @@ import {NavbarModule} from "../navbar/navbar.module";
     FoodComponent,
     SearchComponent
   ],
-  providers: [ FoodService, DietGuardServiceService, ]
+  providers: [ FoodService, DietGuardServiceService]
 })
 export class FoodModule { }
