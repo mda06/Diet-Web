@@ -17,7 +17,7 @@ import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-d
 import { LoginComponent } from './login/login.component';
 import {DateInterceptor} from "./share/DateInterceptor";
 import {DietModule} from "./diet/diet.module";
-import { FoodModule } from "./diet/food/food.module";
+import { FoodModule } from "./food/food.module";
 
 @NgModule({
   declarations: [

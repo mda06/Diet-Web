@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NavItem} from "../../model/nav-item";
+import {NavItem} from "../model/nav-item";
 import {Router} from "@angular/router";
 
 @Component({
@@ -9,8 +9,8 @@ import {Router} from "@angular/router";
 })
 export class FoodComponent implements OnInit {
   private _opened: boolean = true;
-  private dietItem: NavItem = {img: "../../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
-  private searchItem: NavItem = {img: "../../../assets/img/food.ico", title: "Search", routerLink: "/food/search"};
+  private dietItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
+  private searchItem: NavItem = {img: "../../assets/img/food.ico", title: "Search", routerLink: "/food/search"};
   private navItems: Array<NavItem> = new Array();
 
   constructor(private router: Router) { }
