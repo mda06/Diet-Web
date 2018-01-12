@@ -94,6 +94,6 @@ export class AuthenticationService {
   }
 
   getAuthorizationHeader() {
-    return "Bearer: " + (this._token ? this._token.access_token : 0);
+    return "Bearer " + (this.isAuthenticated() ? this._token.access_token : 0);
   }
 }

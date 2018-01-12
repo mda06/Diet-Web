@@ -18,9 +18,13 @@ export class DateInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthenticationService);
-    const authHeader = this.authService.getAuthorizationHeader();
-    const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
-    return this.logAndConvertDate(authReq, next);
+    if(this.authService.isAuthenticated()) {
+      const authHeader = this.authService.getAuthorizationHeader();
+      const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
+      return this.logAndConvertDate(authReq, next);
+    } else {
+      return this.logAndConvertDate(req, next);
+    }
   }
 
   private logAndConvertDate(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -28,6 +32,7 @@ export class DateInterceptor implements HttpInterceptor {
     return next
       .handle(req)
       .do(event => {
+        console.log(req);
         if (event instanceof HttpResponse) {
           this.convertDateStringsToDates(event.body);
           const elapsed = Date.now() - started;
