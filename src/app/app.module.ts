@@ -32,9 +32,7 @@ import { FoodModule } from "./food/food.module";
     FormsModule,
     HttpClientModule,
     JwtModule.forRoot({config: {
-      tokenGetter: () => {
-        return localStorage.getItem('token.access_token');
-      },
+      tokenGetter: getToken,
       whitelistedDomains: ['localhost:8080']
     }}),
     DietModule,
@@ -54,3 +52,7 @@ import { FoodModule } from "./food/food.module";
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function getToken() {
+  return localStorage.getItem('token.access_token');
+}

@@ -1,6 +1,5 @@
-<div class="container">
-  <div class="row">
-    <div class="card col-md-4">
+<div>
+    <div class="card w-30">
       <div class="card-body">
         <h5 class="card-title">Search products</h5>
 
@@ -8,6 +7,15 @@
           <label for="search">Name:</label>
           <input #input="ngModel" id="search" type="text" name="search"
                  [(ngModel)]="name" placeholder="name" class="form-control"/>
+
+          <label for="size">Size per page:</label>
+          <select class="form-control" id="size" name="size" [(ngModel)]="size">
+            <option>5</option>
+            <option>8</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
         </div>
 
         <hr>
@@ -38,11 +46,11 @@
       </div>
   </div>
 
-  <div *ngIf="selectedProduct" class="card col-md-8">
-    <img class="card-img-top" src="{{selectedProduct.imgUrl}}" alt="Product image">
+  <div *ngIf="selectedProduct" class="card w-65">
     <div class="card-body">
       <h5 class="card-title">{{selectedProduct.name}}</h5>
-      <div>
+      <img src="{{selectedProduct.imgUrl}}" alt="Product image" width="300">
+      <div *ngIf="selectedProduct.units">
         <h6 class="card-subtitle mb-2 text-muted">Units</h6>
         <ul>
           <li *ngFor="let nutriment of selectedProduct.units">
@@ -50,7 +58,7 @@
           </li>
         </ul>
       </div>
-      <div>
+      <div *ngIf="selectedProduct.macros">
         <h6 class="card-subtitle mb-2 text-muted">Macros</h6>
         <ul>
           <li *ngFor="let nutriment of selectedProduct.macros">
@@ -58,7 +66,7 @@
           </li>
         </ul>
       </div>
-      <div>
+      <div *ngIf="selectedProduct.micros">
         <h6 class="card-subtitle mb-2 text-muted">Micros</h6>
         <ul>
           <li *ngFor="let nutriment of selectedProduct.micros">
@@ -68,5 +76,4 @@
       </div>
     </div>
     </div>
-  </div>
 </div>
