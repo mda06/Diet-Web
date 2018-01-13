@@ -22,7 +22,7 @@
 
         <hr>
         <h6 class="card-subtitle mb-2 text-muted">Products</h6>
-        <div *ngIf="searching">
+        <div *ngIf="searching && productsPaging && productsPaging.numberOfElements == 0">
           <p class="card-text">Searching...</p>
         </div>
         <div *ngIf="searchFailed" class="bg-danger">
@@ -58,8 +58,8 @@
             <h5 class="card-title">{{selectedProduct.name}}</h5>
           </div>
           <div class="row">
-            <img src="{{selectedProduct.imgUrl}}" alt="Product image" id="product-img">
-            <div *ngIf="selectedProduct.units">
+            <img src="{{selectedProduct.imgUrl}}" alt="Product image" id="product-img" class="col-md-4">
+            <div *ngIf="selectedProduct.units" class="col-md-8">
               <h6 class="card-subtitle mb-2 text-muted">Units</h6>
               <ul>
                 <li *ngFor="let nutriment of selectedProduct.units">
@@ -68,8 +68,9 @@
               </ul>
             </div>
           </div>
+          <hr>
           <div class="row">
-            <div *ngIf="selectedProduct.macros">
+            <div *ngIf="selectedProduct.macros" class="col-md-6">
               <h6 class="card-subtitle mb-2 text-muted">Macros</h6>
               <ul>
                 <li *ngFor="let nutriment of selectedProduct.macros">
@@ -77,7 +78,7 @@
                 </li>
               </ul>
             </div>
-            <div *ngIf="selectedProduct.micros">
+            <div *ngIf="selectedProduct.micros" class="col-md-6">
               <h6 class="card-subtitle mb-2 text-muted">Micros</h6>
               <ul>
                 <li *ngFor="let nutriment of selectedProduct.micros">
