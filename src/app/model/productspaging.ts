@@ -1,6 +1,9 @@
 import {Product} from "./product";
 
 export class ProductsPaging {
+  constructor(size: number = 0) {
+    this.size = size;
+  }
   content: Array<Product> = [];
   first: boolean = false;
   last: boolean = false;

@@ -9,7 +9,7 @@
                  [(ngModel)]="name" placeholder="name" class="form-control"/>
 
           <label for="size">Size per page:</label>
-          <select class="form-control" id="size" name="size">
+          <select class="form-control" id="size" name="size" [(ngModel)]="productsPaging.size" (change)="sizeChanged()">
             <option>5</option>
             <option>8</option>
             <option>10</option>

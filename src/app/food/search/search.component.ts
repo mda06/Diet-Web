@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FoodService} from "../service/food.service";
 import {ProductsPaging} from "../../model/productspaging";
-import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Product} from "../../model/product";
@@ -16,8 +15,7 @@ export class SearchComponent implements OnInit {
   @ViewChild('input') input;
   lang: string = "fr";
   name: string = "";
-  productsPaging: ProductsPaging = new ProductsPaging();
-  //[(ngModel)]="productsPaging.size"
+  productsPaging: ProductsPaging = new ProductsPaging(5);
   selectedProduct: Product;
 
   searching = false;
@@ -26,7 +24,7 @@ export class SearchComponent implements OnInit {
   constructor(private foodService: FoodService) { }
 
   ngOnInit() {
-    this.nameChanged(this.name);
+    this.findProducts();
   }
 
   ngAfterViewInit(){
@@ -34,12 +32,13 @@ export class SearchComponent implements OnInit {
       .debounceTime(200)
       .distinctUntilChanged()
       .subscribe(model => {
-        this.nameChanged(model);
+        //Need to reset the page number else we cannot find every product
+        this.productsPaging.number = 1;
+        this.findProducts();
       });
   }
 
-  nameChanged(name: string) {
-    console.log("Name: ",name);
+  findProducts() {
     this.searching = true;
     this.searchFailed = false;
     //this.productsPaging = null;
@@ -70,6 +69,12 @@ export class SearchComponent implements OnInit {
   }
 
   pageChanged(event: number) {
-    this.nameChanged(this.name);
+    this.findProducts();
+  }
+
+  sizeChanged() {
+    //Need to reset the page number else we cannot find every product
+    this.productsPaging.number = 1;
+    this.findProducts();
   }
 }
