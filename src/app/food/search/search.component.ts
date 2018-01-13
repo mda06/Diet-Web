@@ -16,9 +16,8 @@ export class SearchComponent implements OnInit {
   @ViewChild('input') input;
   lang: string = "fr";
   name: string = "";
-  page: number = 1;
-  size: number = 5;
-  productsPaging: ProductsPaging;
+  productsPaging: ProductsPaging = new ProductsPaging();
+  //[(ngModel)]="productsPaging.size"
   selectedProduct: Product;
 
   searching = false;
@@ -43,10 +42,13 @@ export class SearchComponent implements OnInit {
     console.log("Name: ",name);
     this.searching = true;
     this.searchFailed = false;
-    this.productsPaging = null;
-    this.foodService.getProducts(this.name, this.lang, this.page - 1, this.size)
+    //this.productsPaging = null;
+    //The pagination begins with page index 1 but the api is counting from page index 0
+    //So when we ask the api -1 and when we get the data back +1
+    this.foodService.getProducts(this.name, this.lang, this.productsPaging.number - 1, this.productsPaging.size)
       .subscribe(
         data => {
+          data.number++;
           this.productsPaging = data;
         }, err => {
           console.log(err);
@@ -65,5 +67,9 @@ export class SearchComponent implements OnInit {
       }, err => {
         console.log("Cannot find product with id: " + prod.id);
       });
+  }
+
+  pageChanged(event: number) {
+    this.nameChanged(this.name);
   }
 }

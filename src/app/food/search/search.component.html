@@ -9,7 +9,7 @@
                  [(ngModel)]="name" placeholder="name" class="form-control"/>
 
           <label for="size">Size per page:</label>
-          <select class="form-control" id="size" name="size" [(ngModel)]="size">
+          <select class="form-control" id="size" name="size">
             <option>5</option>
             <option>8</option>
             <option>10</option>
@@ -35,8 +35,9 @@
               </li>
             </ul>
             <div class="card-footer">
-            <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
-                            [(page)]="productsPaging.number" aria-label="Default pagination"></ngb-pagination>
+            <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements" [maxSize]="5"
+                            [(page)]="productsPaging.number" (pageChange)="pageChanged($event)" [rotate]="true"
+                            aria-label="Default pagination"></ngb-pagination>
             </div>
           </div>
           <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
