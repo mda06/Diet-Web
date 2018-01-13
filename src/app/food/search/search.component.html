@@ -1,5 +1,7 @@
-<div>
-    <div class="card w-30">
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-4">
+    <div class="card">
       <div class="card-body">
         <h5 class="card-title">Search products</h5>
 
@@ -35,9 +37,9 @@
               </li>
             </ul>
             <div class="card-footer">
-            <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements" [maxSize]="5"
+              <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
                             [(page)]="productsPaging.number" (pageChange)="pageChanged($event)" [rotate]="true"
-                            aria-label="Default pagination"></ngb-pagination>
+                            aria-label="Default pagination" [maxSize]="5" [ellipses]="false"></ngb-pagination>
             </div>
           </div>
           <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
@@ -45,36 +47,48 @@
           </div>
         </div>
       </div>
+    </div>
   </div>
 
-  <div *ngIf="selectedProduct" class="card w-65">
-    <div class="card-body">
-      <h5 class="card-title">{{selectedProduct.name}}</h5>
-      <img src="{{selectedProduct.imgUrl}}" alt="Product image" width="300">
-      <div *ngIf="selectedProduct.units">
-        <h6 class="card-subtitle mb-2 text-muted">Units</h6>
-        <ul>
-          <li *ngFor="let nutriment of selectedProduct.units">
-            <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
-          </li>
-        </ul>
-      </div>
-      <div *ngIf="selectedProduct.macros">
-        <h6 class="card-subtitle mb-2 text-muted">Macros</h6>
-        <ul>
-          <li *ngFor="let nutriment of selectedProduct.macros">
-            <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
-          </li>
-        </ul>
-      </div>
-      <div *ngIf="selectedProduct.micros">
-        <h6 class="card-subtitle mb-2 text-muted">Micros</h6>
-        <ul>
-          <li *ngFor="let nutriment of selectedProduct.micros">
-            <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
-          </li>
-        </ul>
+  <div class="col-md-8">
+    <div *ngIf="selectedProduct" class="card">
+      <div class="card-body">
+        <div class="container">
+          <div class="row">
+            <h5 class="card-title">{{selectedProduct.name}}</h5>
+          </div>
+          <div class="row">
+            <img src="{{selectedProduct.imgUrl}}" alt="Product image" id="product-img">
+            <div *ngIf="selectedProduct.units">
+              <h6 class="card-subtitle mb-2 text-muted">Units</h6>
+              <ul>
+                <li *ngFor="let nutriment of selectedProduct.units">
+                  <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div *ngIf="selectedProduct.macros">
+              <h6 class="card-subtitle mb-2 text-muted">Macros</h6>
+              <ul>
+                <li *ngFor="let nutriment of selectedProduct.macros">
+                  <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+                </li>
+              </ul>
+            </div>
+            <div *ngIf="selectedProduct.micros">
+              <h6 class="card-subtitle mb-2 text-muted">Micros</h6>
+              <ul>
+                <li *ngFor="let nutriment of selectedProduct.micros">
+                  <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-    </div>
+  </div>
+</div>
 </div>
