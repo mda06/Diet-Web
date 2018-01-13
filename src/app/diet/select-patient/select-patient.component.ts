@@ -40,7 +40,7 @@ export class SelectPatientComponent implements OnInit, OnDestroy {
   }
 
   select() {
-    this.router.navigate(['diet', { patientId: this.selectedPatient.id}], );
+    this.router.navigate(['diet', { patientId: this.selectedPatient.id}]);
   }
 
   newPatient() {
@@ -48,7 +48,6 @@ export class SelectPatientComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log("Unsubscribe from select");
     this.subscriptions.unsubscribe();
   }
 

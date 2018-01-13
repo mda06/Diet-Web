@@ -4,7 +4,6 @@ import {Patient} from "../../model/patient";
 import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
 import * as moment from 'moment';
-import * as _ from 'lodash';
 import {isNullOrUndefined} from "util";
 
 @Component({

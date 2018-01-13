@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
 import {NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
