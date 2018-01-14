@@ -17,10 +17,14 @@ import {Subscription} from "rxjs/Subscription";
 })
 export class DietComponent implements OnInit {
   _opened: boolean = true;
-  private foodItemItem: NavItem = {img: "../../assets/img/food.ico", title: "Food overview", routerLink: "/food"};
-  private aboutPatientItem: NavItem = {img: "../../assets/img/about.ico", title: "About Patient", routerLink: "/diet/detail-patient"};
-  private selectPatientItem: NavItem = {img: "../../assets/img/select-patient.png", title: "Select Patient", routerLink: "/diet/select-patient"};
-  private dashboardItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
+  private foodItemItem: NavItem =
+    {img: "../../assets/img/food.ico", title: "NAV.FOOD_OVERVIEW", routerLink: "/food"};
+  private aboutPatientItem: NavItem =
+    {img: "../../assets/img/about.ico", title: "NAV.ABOUT_PATIENT", routerLink: "/diet/detail-patient"};
+  private selectPatientItem: NavItem =
+    {img: "../../assets/img/select-patient.png", title: "NAV.SELECT_PATIENT", routerLink: "/diet/select-patient"};
+  private dashboardItem: NavItem =
+    {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/diet/dashboard"};
   navItems: Array<NavItem> = [];
   private subscriptions = new Subscription();
   private selectedPatient: Patient;

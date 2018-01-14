@@ -2,6 +2,7 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
 import {NavItem} from "../model/nav-item";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,8 @@ export class NavbarComponent implements OnInit {
   @Input() navItems: Array<NavItem>
   @Output() navItemClicked = new EventEmitter<NavItem>();
 
-  constructor(private authService: AuthenticationService,
+  constructor(public translate: TranslateService,
+              private authService: AuthenticationService,
               private router: Router) { }
 
   ngOnInit() {

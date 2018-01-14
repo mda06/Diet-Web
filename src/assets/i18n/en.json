@@ -9,5 +9,12 @@
     "CANCEL": "CANCEL",
     "FORGET_PASSWORD": "Forgot password?",
     "CANNOT_CONNECT": "Cannot connect !"
+  },
+  "NAV": {
+    "FOOD_OVERVIEW": "Food overview",
+    "ABOUT_PATIENT": "About patient",
+    "SELECT_PATIENT": "Select patient",
+    "DASHBOARD": "Dashboard",
+    "LOG_OUT": "Log out"
   }
 }
