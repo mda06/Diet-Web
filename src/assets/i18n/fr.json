@@ -1,7 +1,92 @@
 {
-  "HELLO": "bonjour",
-  "HOME": {
-    "TITLE": "Bonjour Angular avec ngx-translate !",
-    "SELECT": "Changer la langue"
+  "LOGIN": {
+    "USERNAME": "Nom de compte",
+    "USERNAME_PLACEHOLDER": "Entrer nom de compte",
+    "PASSWORD": "Mot de passe",
+    "USERNAME_PASSWORD": "Entrer le mot de passe",
+    "REMEMBER": "Se souvenir de moi",
+    "LOGIN": "Connecter",
+    "CANCEL": "Annuler",
+    "FORGET_PASSWORD": "Mot de passe oublié ?",
+    "CANNOT_CONNECT": "Imposible de se connecter !"
+  },
+  "NAV": {
+    "FOOD_OVERVIEW": "Aperçu alimentaire",
+    "FOOD_SEARCH": "chercher",
+    "ABOUT_PATIENT": "À propos du patient",
+    "SELECT_PATIENT": "Selectionner patient",
+    "DASHBOARD": "Tableau de bord",
+    "LOG_OUT": "Déconnection"
+  },
+  "DIET": {
+    "SELECT": {
+      "TITLE": "Selectionner un patient",
+      "SEARCH": "Chercher un patient",
+      "SEARCH_PLACEHOLDER": "nom",
+      "PAGES": "Pages",
+      "ADD": "Ajouter un patient",
+      "SELECT": "Selectionner"
+    },
+    "DASHBOARD": {
+      "TITLE": "Tableau de bord de ",
+      "SELECTED": "Patient selectionner: ",
+      "CREATED": "Crée le ",
+      "YEARS_OLD": " ans"
+    },
+    "DETAIL": {
+      "SELECT_FIRST": "Selectionner un patient avant",
+      "META_DATA": "Meta data",
+      "FIRST_NAME": "Prénom",
+      "MIDDLE_NAME": "2ème nom",
+      "LAST_NAME": "Nom de famille",
+      "EMAIL": "Email",
+      "PHONE": "Téléphone",
+      "BIRTHDAY": "Naissance",
+      "GENDER": "Sexe",
+      "EXTRA_INFO": "Info extra",
+      "SAVE": "Sauvegarder",
+      "RETURN": "Retour",
+      "ATTENTION": "Attention",
+      "PATIENT_MODIFIED": "Le patient a été modifié sans être sauvegardé",
+      "CANCEL": "Annuler",
+      "RETURN_WITHOUT_SAVING": "Retour sans sauvegarder",
+      "ADDRESS": {
+        "STREET": "Rue",
+        "NUMBER": "Numéro",
+        "POSTCODE": "Code postale",
+        "CITY": "Ville",
+        "COUNTRY": "Pays",
+        "TOGGLE": "Ouvrire/Fermer addresse"
+      },
+      "PARAMS": {
+        "TITLE": "Paramètres anthropometriques",
+        "LENGTH": "Taille (cm)",
+        "WEIGHT": "Poids (kg)",
+        "BODY_FAT": "Graisse",
+        "WAIST": "Taille aux hanches (cm)",
+        "ADD": "Ajouter"
+      },
+      "ALERT": {
+        "SAVING": "En train de sauvergarder {{name}}",
+        "SAVED": "Sauvegarder {{name}}",
+        "ERROR": "Erreur pas possible de sauvegarder {{name}}"
+      }
+    }
+  },
+  "FOOD": {
+    "SEARCH": {
+      "TITLE": "Chercher un produit",
+      "NAME": "Nom: ",
+      "NAME_PLACEHOLDER": "nom",
+      "SIZE": "Nombre de produits par page: ",
+      "PRODUCTS": "Produits",
+      "SEARCHING": "Chercher...",
+      "ERROR_SEARCHING": "Erreur pendant la recherche !",
+      "EMPTY": "Pas de produits trouvé",
+      "UNITS": "Unités",
+      "MACROS": "Macros",
+      "MICROS": "Micros",
+      "NO_IMG": "Pas d'image"
+    }
   }
 }
