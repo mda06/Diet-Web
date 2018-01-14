@@ -153,7 +153,8 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.alerts.push({id: this.alertCounter, type:'secondary', message:'DIET.DETAIL.ALERT.SAVING ' + this.patient.firstName});
+    this.alerts.push({id: this.alertCounter, type:'secondary',
+      message:'DIET.DETAIL.ALERT.SAVING', subMessage: this.patient.firstName});
     setTimeout((index) => {
       this.closeAlertWithId(index);
       },1500, this.alertCounter++);
@@ -174,14 +175,16 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
           //Patient is saved
         }
         this.initPatientBackup();
-        this.alerts.push({id: this.alertCounter, type:'success', message:'DIET.DETAIL.ALERT.SAVED ' + this.patient.firstName});
+        this.alerts.push({id: this.alertCounter, type:'success',
+          message:'DIET.DETAIL.ALERT.SAVED', subMessage: this.patient.firstName});
         setTimeout((index) => {
           this.closeAlertWithId(index);
         },1500, this.alertCounter++);
         },
       err => {
         console.log("Error"); console.log(err);
-        this.alerts.push({id: this.alertCounter, type:'danger', message:'DIET.DETAIL.ALERT.ERROR ' + this.patient.firstName});
+        this.alerts.push({id: this.alertCounter, type:'danger',
+          message:'DIET.DETAIL.ALERT.ERROR', subMessage: this.patient.firstName});
         setTimeout((index) => {
           this.closeAlertWithId(index);
         },1500, this.alertCounter++);

@@ -72,9 +72,9 @@
         "ADD": "Ajouter"
       },
       "ALERT": {
-        "SAVING": "En train de sauvergarder {{name}}",
-        "SAVED": "Sauvegarder {{name}}",
-        "ERROR": "Erreur pas possible de sauvegarder {{name}}"
+        "SAVING": "En train de sauvergarder ",
+        "SAVED": "Sauvegarder ",
+        "ERROR": "Erreur pas possible de sauvegarder "
       }
     }
   },

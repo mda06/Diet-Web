@@ -72,9 +72,9 @@
         "ADD": "Add"
       },
       "ALERT": {
-        "SAVING": "Saving {{name}}",
-        "SAVED": "Saved {{name}}",
-        "ERROR": "Error cannot save {{name}}"
+        "SAVING": "Saving ",
+        "SAVED": "Saved ",
+        "ERROR": "Error cannot save "
       }
     }
   },
