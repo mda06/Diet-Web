@@ -16,5 +16,60 @@
     "SELECT_PATIENT": "Select patient",
     "DASHBOARD": "Dashboard",
     "LOG_OUT": "Log out"
+  },
+  "DIET": {
+    "SELECT": {
+      "TITLE": "Select a patient",
+      "SEARCH": "Search for a patient",
+      "SEARCH_PLACEHOLDER": "name",
+      "PAGES": "Pages",
+      "ADD": "Add new patient",
+      "SELECT": "Select"
+    },
+    "DASHBOARD": {
+      "TITLE": "Dashboard of ",
+      "SELECTED": "Patient selected: ",
+      "CREATED": "Created at ",
+      "YEARS_OLD": " years old"
+    },
+    "DETAIL": {
+      "SELECT_FIRST": "Please select first a patient",
+      "META_DATA": "Meta data",
+      "FIRST_NAME": "First name",
+      "MIDDLE_NAME": "Middle name",
+      "LAST_NAME": "Last name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "BIRTHDAY": "Birthday",
+      "GENDER": "Gender",
+      "EXTRA_INFO": "Extra info",
+      "SAVE": "Save",
+      "RETURN": "Return",
+      "ATTENTION": "Attention",
+      "PATIENT_MODIFIED": "Patient data has been modified without saving it",
+      "CANCEL": "Cancel",
+      "RETURN_WITHOUT_SAVING": "Return without saving",
+      "ADDRESS": {
+        "STREET": "Street",
+        "NUMBER": "Number",
+        "POSTCODE": "Postcode",
+        "CITY": "City",
+        "COUNTRY": "Country",
+        "TOGGLE": "Toggle address"
+      },
+      "PARAMS": {
+        "TITLE": "Anthropometric parameters",
+        "LENGTH": "Length (cm)",
+        "WEIGHT": "Weight (kg)",
+        "BODY_FAT": "Body fat",
+        "WAIST": "Waist circumference (cm)",
+        "ADD": "Add"
+      },
+      "ALERT": {
+        "SAVING": "Saving {{name}}",
+        "SAVED": "Saved {{name}}",
+        "ERROR": "Error cannot save {{name}}"
+      }
+    }
   }
 }

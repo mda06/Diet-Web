@@ -1,11 +1,11 @@
 <div class="container" *ngIf="diet">
-  <h2 class="text-center">Dashboard of {{diet.firstName + ' ' + diet.lastName}}</h2>
+  <h2 class="text-center">{{ 'DIET.DASHBOARD.TITLE' | translate }} {{diet.firstName + ' ' + diet.lastName}}</h2>
 </div>
 <div class="container" *ngIf="selectedPatient">
   <div class="row">
-    <p>Patient selected: {{selectedPatient.firstName}}</p>
-    <p>Created at {{selectedPatient.created | date:"dd/MM/yyyy" }}</p>
-    <p>{{getAge()}} Years old</p>
+    <p>{{ 'DIET.DASHBOARD.SELECTED' | translate }}{{selectedPatient.firstName}}</p>
+    <p>{{ 'DIET.DASHBOARD.CREATED' | translate }} {{selectedPatient.created | date:"dd/MM/yyyy" }}</p>
+    <p>{{getAge()}} {{ 'DIET.DASHBOARD.YEARS_OLD' | translate }}</p>
   </div>
   <div id="paramChart" class="row" *ngIf="selectedPatient.anthropometricParameters.length > 0">
     <div>

@@ -1,34 +1,34 @@
 <p *ngFor="let alert of alerts">
-  <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+  <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message || translate }}</ngb-alert>
 </p>
 
 <div *ngIf="!patient">
-  Please select first a patient
+  {{ 'DIET.DETAIL.SELECT_FIRST' | translate }}
 </div>
 
 <div class="container-fluid" *ngIf="patient">
   <div class="row">
     <div class="col-md-4">
       <div class="card">
-        <h4 class="card-header">Meta data</h4>
+        <h4 class="card-header">{{ 'DIET.DETAIL.META_DATA' | translate }}</h4>
         <div class="card-body">
-          <label for="firstName">First name</label>
+          <label for="firstName">{{ 'DIET.DETAIL.SELECT_FIRST' | translate }}</label>
           <input type="text" class="form-control" id="firstName"
                  required
                  [(ngModel)]="patient.firstName" name="firstName">
-          <label for="middleName">Middle name</label>
+          <label for="middleName">{{ 'DIET.DETAIL.MIDDLE_NAME' | translate }}</label>
           <input type="text" class="form-control" id="middleName"
                  [(ngModel)]="patient.middleName" name="middleName">
-          <label for="lastName">Last name</label>
+          <label for="lastName">{{ 'DIET.DETAIL.MIDDLE_NAME' | translate }}</label>
           <input type="text" class="form-control" id="lastName"
                  [(ngModel)]="patient.lastName" name="lastName">
-          <label for="email">Email</label>
+          <label for="email">{{ 'DIET.DETAIL.EMAIL' | translate }}</label>
           <input type="text" class="form-control" id="email"
                  [(ngModel)]="patient.email" name="email">
-          <label for="phone">Phone</label>
+          <label for="phone">{{ 'DIET.DETAIL.PHONE' | translate }}</label>
           <input type="text" class="form-control" id="phone"
                  [(ngModel)]="patient.phone" name="phone">
-          <label for="birthday">Birthday</label>
+          <label for="birthday">{{ 'DIET.DETAIL.BIRTHDAY' | translate }}</label>
           <form class="form-inline">
             <div class="form-group">
               <div class="input-group">
@@ -42,7 +42,7 @@
             </div>
           </form>
           <div class="form-group">
-            <label for="gender">Gender</label>
+            <label for="gender">{{ 'DIET.DETAIL.GENDER' | translate }}</label>
             <select class="form-control" placeholder="Gender" [(ngModel)]="patient.gender" name="gender" id="gender">
               <option *ngFor="let g of genders" [value]="g.value">
                 {{ g.title }}
@@ -51,24 +51,24 @@
           </div>
           <button type="button" class="btn btn-outline-primary" (click)="isAddressCollapsed = !isAddressCollapsed"
                   [attr.aria-expanded]="!isAddressCollapsed" aria-controls="addressCollapse">
-            Toggle address
+            {{ 'DIET.DETAIL.ADDRESS.TOGGLE' | translate }}
           </button>
           <div id="addressCollapse" [ngbCollapse]="isAddressCollapsed">
             <div class="card">
               <div class="card-body">
-                <label for="street">Street</label>
+                <label for="street">{{ 'DIET.DETAIL.ADDRESS.STREET' | translate }}</label>
                 <input type="text" class="form-control" id="street"
                        [(ngModel)]="patient.address.street" name="street">
-                <label for="number">Number</label>
+                <label for="number">{{ 'DIET.DETAIL.ADDRESS.NUMBER' | translate }}</label>
                 <input type="text" class="form-control" id="number"
                        [(ngModel)]="patient.address.number" name="number">
-                <label for="postcode">Postcode</label>
+                <label for="postcode">{{ 'DIET.DETAIL.ADDRESS.POSTCODE' | translate }}</label>
                 <input type="number" class="form-control" id="postcode"
                        [(ngModel)]="patient.address.postcode" name="postcode">
-                <label for="city">City</label>
+                <label for="city">{{ 'DIET.DETAIL.ADDRESS.CITY' | translate }}</label>
                 <input type="text" class="form-control" id="city"
                        [(ngModel)]="patient.address.city" name="city">
-                <label for="country">Country</label>
+                <label for="country">{{ 'DIET.DETAIL.ADDRESS.COUNTRY' | translate }}</label>
                 <input type="text" class="form-control" id="country"
                        [(ngModel)]="patient.address.country" name="country">
               </div>
@@ -79,22 +79,22 @@
     </div>
     <div class="col-md-4">
       <div class="card">
-        <h4 class="card-header">Anthropometric parameters</h4>
+        <h4 class="card-header">{{ 'DIET.DETAIL.PARAMS.TITLE' | translate }}</h4>
         <div class="card-body">
             <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
               <div *ngFor="let param of patient.anthropometricParameters">
                 <ngb-panel title={{getFormattedDate(param.date)}}>
                   <ng-template ngbPanelContent>
-                    <label for="length">Length</label>
+                    <label for="length">{{ 'DIET.DETAIL.PARAMS.LENGTH' | translate }}</label>
                     <input type="number" class="form-control" id="length"
                            [(ngModel)]="param.length" name="length">
-                    <label for="weight">weight</label>
+                    <label for="weight">{{ 'DIET.DETAIL.PARAMS.WEIGTH' | translate }}</label>
                     <input type="number" step="any" class="form-control" id="weight"
                            [(ngModel)]="param.weight" name="weight">
-                    <label for="bodyFat">Body fat</label>
+                    <label for="bodyFat">{{ 'DIET.DETAIL.PARAMS.BODY_FAT' | translate }}</label>
                     <input type="number" step="any" class="form-control" id="bodyFat"
                            [(ngModel)]="param.bodyFat" name="bodyFat">
-                    <label for="waistCircumference">Waist circumference</label>
+                    <label for="waistCircumference">{{ 'DIET.DETAIL.PARAMS.WAIST' | translate }}</label>
                     <input type="number" step="any" class="form-control" id="waistCircumference"
                            [(ngModel)]="param.waistCircumference" name="waistCircumference">
                     <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) | number:'1.0-0' }}</label>
@@ -103,19 +103,19 @@
               </div>
               <ngb-panel title={{selectToday()}}>
                 <ng-template ngbPanelContent>
-                  <label for="nLength">Length</label>
+                  <label for="nLength">{{ 'DIET.DETAIL.PARAMS.LENGTH' | translate }}</label>
                   <input type="number" class="form-control" id="nLength"
                          [(ngModel)]="param.length" name="nLength">
-                  <label for="weight">weight</label>
+                  <label for="weight">{{ 'DIET.DETAIL.PARAMS.WEIGHT' | translate }}</label>
                   <input type="number" step="any" class="form-control" id="nWeight"
                          [(ngModel)]="param.weight" name="nWeight">
-                  <label for="nBodyFat">Body fat</label>
+                  <label for="nBodyFat">{{ 'DIET.DETAIL.PARAMS.BODY_FAT' | translate }}</label>
                   <input type="number" step="any" class="form-control" id="nBodyFat"
                          [(ngModel)]="param.bodyFat" name="nBodyFat">
-                  <label for="nWaistCircumference">Waist circumference</label>
+                  <label for="nWaistCircumference">{{ 'DIET.DETAIL.PARAMS.WAIST' | translate }}</label>
                   <input type="number" step="any" class="form-control" id="nWaistCircumference"
                          [(ngModel)]="param.waistCircumference" name="nWaistCircumference">
-                  <button class="btn btn-outline-primary" (click)="addParam()">Add</button>
+                  <button class="btn btn-outline-primary" (click)="addParam()">{{ 'DIET.DETAIL.PARAMS.ADD' | translate }}</button>
                 </ng-template>
               </ngb-panel>
             </ngb-accordion>
@@ -124,10 +124,10 @@
     </div>
     <div class="col-md-4">
       <div class="card">
-        <h4 class="card-header">Extra info</h4>
+        <h4 class="card-header">{{ 'DIET.DETAIL.EXTRA_INFO' | translate }}</h4>
         <div class="card-body">
           <div class="form-group">
-            <label for="extraInfo">Extra Info</label>
+            <label for="extraInfo">{{ 'DIET.DETAIL.EXTRA_INFO' | translate }}</label>
             <textarea type="text" class="form-control" id="extraInfo" rows="15"
                       [(ngModel)]="patient.extraInfo" name="extraInfo"></textarea>
           </div>
@@ -136,25 +136,32 @@
     </div>
   </div>
   <div class="row">
-    <button type="button" class="btn btn-secondary" (click)="goBack(content)">Return</button>
+    <button type="button" class="btn btn-secondary" (click)="goBack(content)">
+      {{ 'DIET.DETAIL.RETURN' | translate }}
+    </button>
     <button type="button" class="btn btn-success" (click)="save()">
-      Save <span class="badge badge-pill badge-danger" *ngIf="isPatientModified()">*</span>
+      {{ 'DIET.DETAIL.SAVE' | translate }}
+      <span class="badge badge-pill badge-danger" *ngIf="isPatientModified()">*</span>
     </button>
   </div>
 </div>
 
 <ng-template #content let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Attention</h4>
+    <h4 class="modal-title">{{ 'DIET.DETAIL.ATTENTION' | translate }}</h4>
     <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>Patient data has been modified without saving it</p>
+    <p>{{ 'DIET.DETAIL.PATIENT_MODIFIED' | translate }}</p>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">Cancel</button>
-    <button type="button" class="btn btn-outline-dark" (click)="c('Return')">Return anyway</button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
+      {{ 'DIET.DETAIL.CANCEL' | translate }}
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Return')">
+      {{ 'DIET.DETAIL.RETURN_WITHOUT_SAVING' | translate }}
+    </button>
   </div>
 </ng-template>

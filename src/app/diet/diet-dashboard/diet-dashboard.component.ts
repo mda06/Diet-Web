@@ -5,6 +5,7 @@ import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
 import * as moment from 'moment';
 import {isNullOrUndefined} from "util";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -30,7 +31,8 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
     {data: [181, 90], label: '12 Dec 2017'}
   ];
 
-  constructor(private sharedService: SharedService) { }
+  constructor(public translate: TranslateService,
+              private sharedService: SharedService) { }
 
   ngOnInit() {
     this.subscriptions.add(this.sharedService.dietetist$.subscribe(

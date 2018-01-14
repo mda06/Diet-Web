@@ -12,6 +12,7 @@ import * as _ from 'lodash';
 import * as moment from 'moment';
 import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
+import {TranslateService} from "@ngx-translate/core";
 
 const now = new Date();
 
@@ -34,6 +35,7 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
   alertCounter: number = 0;
 
   constructor(
+    public translate: TranslateService,
     private dietService: DietService,
     private sharedService: SharedService,
     private route: ActivatedRoute,
@@ -151,7 +153,7 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    this.alerts.push({id: this.alertCounter, type:'secondary', message:'Saving ' + this.patient.firstName});
+    this.alerts.push({id: this.alertCounter, type:'secondary', message:'DIET.DETAIL.ALERT.SAVING ' + this.patient.firstName});
     setTimeout((index) => {
       this.closeAlertWithId(index);
       },1500, this.alertCounter++);
@@ -172,14 +174,14 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
           //Patient is saved
         }
         this.initPatientBackup();
-        this.alerts.push({id: this.alertCounter, type:'success', message:'Saved ' + this.patient.firstName});
+        this.alerts.push({id: this.alertCounter, type:'success', message:'DIET.DETAIL.ALERT.SAVED ' + this.patient.firstName});
         setTimeout((index) => {
           this.closeAlertWithId(index);
         },1500, this.alertCounter++);
         },
       err => {
         console.log("Error"); console.log(err);
-        this.alerts.push({id: this.alertCounter, type:'danger', message:'Error cannot save ' + this.patient.firstName});
+        this.alerts.push({id: this.alertCounter, type:'danger', message:'DIET.DETAIL.ALERT.ERROR ' + this.patient.firstName});
         setTimeout((index) => {
           this.closeAlertWithId(index);
         },1500, this.alertCounter++);

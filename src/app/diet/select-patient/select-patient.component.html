@@ -1,8 +1,9 @@
 <div class="jumbotron">
-  <h4 class="display-4">Select a patient</h4>
+  <h4 class="display-4">{{ 'DIET.SELECT.TITLE' | translate }}</h4>
 
-  <label for="search">Search for a patient:</label>
-  <input id="search" type="text" name="search" [(ngModel)]="filter" placeholder="name" class="form-control"/>
+  <label for="search">{{ 'DIET.SELECT.SEARCH' | translate }}</label>
+  <input id="search" type="text" name="search" [(ngModel)]="filter"
+         placeholder="{{ 'DIET.SELECT.SEARCH_PLACEHOLDER' | translate }}" class="form-control"/>
 
   <hr class="my-4">
 
@@ -16,13 +17,15 @@
         </li>
     </ul>
 
-    <div>Pages</div>
+    <div>{{ 'DIET.SELECT.PAGES' | translate }}</div>
     <ngb-pagination [pageSize]="patientsPerPage" [collectionSize]="(patients | patientfilter:filter).length"
                     [(page)]="currentPage" aria-label="Default pagination"></ngb-pagination>
   </div>
 
   <hr class="my-4">
-  <button type="button" class="btn btn-secondary float-left" (click)="newPatient()">Add new Patient</button>
+  <button type="button" class="btn btn-secondary float-left" (click)="newPatient()">
+    {{ 'DIET.SELECT.ADD' | translate }}
+  </button>
   <button type="button" class="btn btn-primary float-right" (click)="select()"
-          [disabled]="!selectedPatient">Select</button>
+          [disabled]="!selectedPatient">{{ 'DIET.SELECT.SELECT' | translate }}</button>
 </div>

@@ -4,6 +4,7 @@ import {isNullOrUndefined} from "util";
 import {Router} from "@angular/router";
 import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-select-patient',
@@ -19,7 +20,8 @@ export class SelectPatientComponent implements OnInit, OnDestroy {
   currentPage = 1;
   patientsPerPage = 5;
 
-  constructor(private sharedService: SharedService,
+  constructor(public translate: TranslateService,
+              private sharedService: SharedService,
               private router: Router) {
   }
 
