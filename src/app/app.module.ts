@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JwtModule } from '@auth0/angular-jwt';
+import {TranslateModule} from "ng2-translate";
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,6 +30,7 @@ import { FoodModule } from "./food/food.module";
   imports: [
     BrowserModule,
     NgbModule.forRoot(),
+    TranslateModule.forRoot(),
     FormsModule,
     HttpClientModule,
     JwtModule.forRoot({config: {
