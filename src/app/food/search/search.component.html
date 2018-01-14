@@ -3,14 +3,14 @@
     <div class="col-md-4">
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title" i18n>Search products</h5>
+        <h5 class="card-title" i18n>{{ 'FOOD.SEARCH.TITLE' | translate }}</h5>
 
         <div class="form-group">
-          <label for="search">Name:</label>
+          <label for="search">{{ 'FOOD.SEARCH.NAME' | translate }}</label>
           <input #input="ngModel" id="search" type="text" name="search"
-                 [(ngModel)]="name" placeholder="name" class="form-control"/>
+                 [(ngModel)]="name" placeholder="{{ 'FOOD.SEARCH.NAME_PLACEHOLDER' | translate }}" class="form-control"/>
 
-          <label for="size">Size per page:</label>
+          <label for="size">{{ 'FOOD.SEARCH.SIZE' | translate }}</label>
           <select class="form-control" id="size" name="size" [(ngModel)]="productsPaging.size" (change)="sizeChanged()">
             <option>5</option>
             <option>8</option>
@@ -21,12 +21,12 @@
         </div>
 
         <hr>
-        <h6 class="card-subtitle mb-2 text-muted">Products</h6>
+        <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.PRODUCTS' | translate }}</h6>
         <div *ngIf="searching && productsPaging && productsPaging.numberOfElements == 0">
-          <p class="card-text">Searching...</p>
+          <p class="card-text">{{ 'FOOD.SEARCH.SEARCHING' | translate }}</p>
         </div>
         <div *ngIf="searchFailed" class="bg-danger">
-          <p class="card-text">Error while searching !</p>
+          <p class="card-text">{{ 'FOOD.SEARCH.ERROR_SEARCHING' | translate }}</p>
         </div>
         <div *ngIf="productsPaging" class="card">
           <div *ngIf="productsPaging.numberOfElements > 0">
@@ -43,7 +43,7 @@
             </div>
           </div>
           <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
-            <p class="card-text">No products found</p>
+            <p class="card-text">{{ 'FOOD.SEARCH.EMPTY' | translate }}</p>
           </div>
         </div>
       </div>
@@ -58,9 +58,9 @@
             <h5 class="card-title">{{selectedProduct.name}}</h5>
           </div>
           <div class="row">
-            <img src="{{selectedProduct.imgUrl}}" alt="Product image" id="product-img" class="col-md-4">
+            <img src="{{selectedProduct.imgUrl}}" alt="{{ 'FOOD.SEARCH.NO_IMG' | translate }}" id="product-img" class="col-md-4">
             <div *ngIf="selectedProduct.units" class="col-md-8">
-              <h6 class="card-subtitle mb-2 text-muted">Units</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.UNITS' | translate }}</h6>
               <ul>
                 <li *ngFor="let nutriment of selectedProduct.units">
                   <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
@@ -71,7 +71,7 @@
           <hr>
           <div class="row">
             <div *ngIf="selectedProduct.macros" class="col-md-6">
-              <h6 class="card-subtitle mb-2 text-muted">Macros</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.MACROS' | translate }}</h6>
               <ul>
                 <li *ngFor="let nutriment of selectedProduct.macros">
                   <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
@@ -79,7 +79,7 @@
               </ul>
             </div>
             <div *ngIf="selectedProduct.micros" class="col-md-6">
-              <h6 class="card-subtitle mb-2 text-muted">Micros</h6>
+              <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.MICROS' | translate }}</h6>
               <ul>
                 <li *ngFor="let nutriment of selectedProduct.micros">
                   <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>

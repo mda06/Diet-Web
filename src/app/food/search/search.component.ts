@@ -4,6 +4,7 @@ import {ProductsPaging} from "../../model/productspaging";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Product} from "../../model/product";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-search',
@@ -21,7 +22,8 @@ export class SearchComponent implements OnInit {
   searching = false;
   searchFailed = false;
 
-  constructor(private foodService: FoodService) { }
+  constructor(private foodService: FoodService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.findProducts();

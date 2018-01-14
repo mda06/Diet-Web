@@ -12,6 +12,7 @@
   },
   "NAV": {
     "FOOD_OVERVIEW": "Food overview",
+    "FOOD_SEARCH": "Search",
     "ABOUT_PATIENT": "About patient",
     "SELECT_PATIENT": "Select patient",
     "DASHBOARD": "Dashboard",
@@ -70,6 +71,22 @@
         "SAVED": "Saved {{name}}",
         "ERROR": "Error cannot save {{name}}"
       }
+    }
+  },
+  "FOOD": {
+    "SEARCH": {
+      "TITLE": "Search products",
+      "NAME": "Name: ",
+      "NAME_PLACEHOLDER": "name",
+      "SIZE": "Size per page: ",
+      "PRODUCTS": "Products",
+      "SEARCHING": "Searching...",
+      "ERROR_SEARCHING": "Error while searching !",
+      "EMPTY": "No products found",
+      "UNITS": "Units",
+      "MACROS": "Macros",
+      "MICROS": "Micros",
+      "NO_IMG": "No image"
     }
   }
 }

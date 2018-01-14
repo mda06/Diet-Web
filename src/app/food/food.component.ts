@@ -9,9 +9,9 @@ import {Router} from "@angular/router";
 })
 export class FoodComponent implements OnInit {
   _opened: boolean = true;
-  private dietItem: NavItem = {img: "../../assets/img/dashboard.png", title: "Dashboard", routerLink: "/diet/dashboard"};
-  private searchItem: NavItem = {img: "../../assets/img/food.ico", title: "Search", routerLink: "/food/search"};
-  navItems: Array<NavItem> = new Array();
+  private dietItem: NavItem = {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/diet/dashboard"};
+  private searchItem: NavItem = {img: "../../assets/img/food.ico", title: "NAV.FOOD_SEARCH", routerLink: "/food/search"};
+  navItems: Array<NavItem> = [];
 
   constructor(private router: Router) { }
 
