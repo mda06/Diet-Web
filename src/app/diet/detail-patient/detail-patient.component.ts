@@ -189,7 +189,7 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
     );
   }
 
-  public formatGender(gender: Gender): string {
+  public formatGender(gender: string): string {
     return "DIET.DETAIL.GENDER." + gender;
   }
 

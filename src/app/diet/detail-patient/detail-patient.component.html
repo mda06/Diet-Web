@@ -45,7 +45,7 @@
             <label for="gender">{{ 'DIET.DETAIL.GENDER.TITLE' | translate }}</label>
             <select class="form-control" [(ngModel)]="patient.gender" name="gender" id="gender">
               <option *ngFor="let g of genders" [value]="g.value">
-                {{ formatGender(g) | translate }}
+                {{ formatGender(g.value) | translate }}
               </option>
             </select>
           </div>
