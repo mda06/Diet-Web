@@ -4,7 +4,7 @@ import {ProductsPaging} from "../../model/productspaging";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Product} from "../../model/product";
-import {TranslateService} from "@ngx-translate/core";
+import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-search',
@@ -14,7 +14,6 @@ import {TranslateService} from "@ngx-translate/core";
 export class SearchComponent implements OnInit {
 
   @ViewChild('input') input;
-  lang: string = "fr";
   name: string = "";
   productsPaging: ProductsPaging = new ProductsPaging(5);
   selectedProduct: Product;
@@ -27,6 +26,9 @@ export class SearchComponent implements OnInit {
 
   ngOnInit() {
     this.findProducts();
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+        this.findProducts();
+    });
   }
 
   ngAfterViewInit(){
@@ -46,7 +48,7 @@ export class SearchComponent implements OnInit {
     //this.productsPaging = null;
     //The pagination begins with page index 1 but the api is counting from page index 0
     //So when we ask the api -1 and when we get the data back +1
-    this.foodService.getProducts(this.name, this.lang, this.productsPaging.number - 1, this.productsPaging.size)
+    this.foodService.getProducts(this.name, this.translate.currentLang, this.productsPaging.number - 1, this.productsPaging.size)
       .subscribe(
         data => {
           data.number++;
@@ -62,7 +64,7 @@ export class SearchComponent implements OnInit {
 
   selectProduct(prod: Product) {
     this.selectedProduct = prod;
-    this.foodService.getProduct(prod.id, this.lang)
+    this.foodService.getProduct(prod.id, this.translate.currentLang)
       .subscribe(data => {
         this.selectedProduct = data;
       }, err => {

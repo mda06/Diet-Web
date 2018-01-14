@@ -12,10 +12,7 @@ export class AppComponent {
   constructor(public translate: TranslateService) {
     translate.addLangs(["en", "fr"]);
     translate.setDefaultLang('en');
-    //TODO: Check for the browser lang
-    translate.get('HELLO').subscribe((res: string) => {
-      console.log(res);
-      //=> 'hello world'
-    });
+    let browserLang = translate.getBrowserLang();
+    translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
   }
 }
