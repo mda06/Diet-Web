@@ -42,7 +42,12 @@
       "EMAIL": "Email",
       "PHONE": "Phone",
       "BIRTHDAY": "Birthday",
-      "GENDER": "Gender",
+      "GENDER": {
+        "TITLE": "Gender",
+        "OTHER": "Other",
+        "MALE": "Man",
+        "FEMALE": "Woman"
+      },
       "EXTRA_INFO": "Extra info",
       "SAVE": "Save",
       "RETURN": "Return",

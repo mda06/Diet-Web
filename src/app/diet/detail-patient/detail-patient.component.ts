@@ -189,6 +189,10 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
     );
   }
 
+  public formatGender(gender: Gender): string {
+    return "DIET.DETAIL.GENDER." + gender;
+  }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

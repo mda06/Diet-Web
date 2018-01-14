@@ -42,10 +42,10 @@
             </div>
           </form>
           <div class="form-group">
-            <label for="gender">{{ 'DIET.DETAIL.GENDER' | translate }}</label>
-            <select class="form-control" placeholder="Gender" [(ngModel)]="patient.gender" name="gender" id="gender">
+            <label for="gender">{{ 'DIET.DETAIL.GENDER.TITLE' | translate }}</label>
+            <select class="form-control" [(ngModel)]="patient.gender" name="gender" id="gender">
               <option *ngFor="let g of genders" [value]="g.value">
-                {{ g.title }}
+                {{ formatGender(g) | translate }}
               </option>
             </select>
           </div>
