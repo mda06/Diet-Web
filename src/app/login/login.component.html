@@ -1,24 +1,26 @@
 <div class="container-fluid" id="form-holder">
   <form action="/action_page.php">
     <div class="container">
-      <label><b>Username</b></label>
-      <input type="text" [(ngModel)]="auth.username" placeholder="Enter username" name="username" id="username" required>
+      <label><b>{{ 'LOGIN.USERNAME' | translate }}</b></label>
+      <input type="text" [(ngModel)]="auth.username" placeholder="{{ 'LOGIN.USERNAME_PLACEHOLDER' | translate }}"
+             name="username" id="username" required>
 
-      <label><b>Password</b></label>
-      <input type="password" [(ngModel)]="auth.password" placeholder="Enter password" name="password" id="password" required>
+      <label><b>{{ 'LOGIN.PASSWORD' | translate }}</b></label>
+      <input type="password" [(ngModel)]="auth.password" placeholder="{{ 'LOGIN.PASSWORD' | translate }}"
+             name="password" id="password" required>
 
-      <button type="submit" (click)="onLogin()">Login</button>
-      <input type="checkbox" checked="checked"> Remember me
+      <button type="submit" (click)="onLogin()">{{ 'LOGIN.LOGIN' | translate }}</button>
+      <input type="checkbox" checked="checked"> {{ 'LOGIN.REMEMBER' | translate }}
     </div>
 
     <div class="container" style="background-color:#f1f1f1">
-      <button type="button" class="cancelbtn">Cancel</button>
-      <span class="psw">Forgot <a href="#">password?</a></span>
+      <button type="button" class="cancelbtn">{{ 'LOGIN.CANCEL' | translate }}</button>
+      <span class="psw">{{ 'LOGIN.FORGET_PASSWORD' | translate }}</span>
     </div>
 
     <div class="container">
       <div class="alert alert-danger" *ngIf="error !== ''">
-        <strong>{{ error }}</strong>
+        <strong>{{ error | translate }}</strong>
       </div>
     </div>
   </form>

@@ -1,7 +1,13 @@
 {
-  "HELLO": "hello",
-  "HOME": {
-    "TITLE": "Hello Angular with ngx-translate!",
-    "SELECT": "Change language"
+  "LOGIN": {
+    "USERNAME": "Username",
+    "USERNAME_PLACEHOLDER": "Enter username",
+    "PASSWORD": "Password",
+    "USERNAME_PASSWORD": "Enter password",
+    "REMEMBER": "Remember me",
+    "LOGIN": "Login",
+    "CANCEL": "CANCEL",
+    "FORGET_PASSWORD": "Forgot password?",
+    "CANNOT_CONNECT": "Cannot connect !"
   }
 }

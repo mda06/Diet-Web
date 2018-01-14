@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Authentication } from "../model/authentication";
 import { AuthenticationService } from "../services/authentication.service";
 import { Router, ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import {Role} from "../model/role.enum";
 
 @Component({
@@ -18,7 +19,8 @@ export class LoginComponent implements OnInit {
   ret: string = '';
   error: string = '';
 
-  constructor(private authService: AuthenticationService,
+  constructor(public translate: TranslateService,
+              private authService: AuthenticationService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(this.ret)
         }
       },
-      (err) => {this.error = 'Cannot connect !'; console.log(err);}
+      (err) => {this.error = 'LOGIN.CANNOT_CONNECT'; console.log(err);}
     );
   }
 
