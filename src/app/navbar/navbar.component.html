@@ -1,5 +1,8 @@
 <nav class="p-1 bg-light">
-  <h2 class="pb-4">Diet Pro</h2>
+  <h2 class="pb-4">
+    Diet Pro
+  </h2>
+
 
   <ul *ngIf="navItems">
     <li *ngFor="let item of navItems">
@@ -14,7 +17,14 @@
       <hr width="75%">
     </li>
   </ul>
+
   <div class="fixed-bottom" id="bottom">
+    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" id="lang">
+      <label ngbButtonLabel class="btn btn-primary" *ngFor="let lang of translate.getLangs()">
+             <!--[class.active]="lang !== translate.currentLang"-->
+        <input ngbButton type="radio" [value]="lang" (change)="translate.use(lang)"> {{lang}}
+      </label>
+    </div>
     <button type="button" class="btn btn-warning" id="logout" (click)="logout()">{{ 'NAV.LOG_OUT' | translate}}</button>
   </div>
 </nav>

@@ -7,7 +7,7 @@ nav {
   width: 200px;
 }
 
-#logout {
+#logout, #lang {
   width: 180px;
   margin-left: 10px;
   margin-bottom: 10px;
