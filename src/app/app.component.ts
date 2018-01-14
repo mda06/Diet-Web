@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TranslateService} from "ng2-translate";
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +10,12 @@ export class AppComponent {
   title = 'Diet Pro';
 
   constructor(translate: TranslateService) {
-    translate.setDefaultLang('en');
+    translate.addLangs(["en", "fr"]);
+    translate.setDefaultLang('fr');
+    translate.use("en");
+    translate.get('HELLO').subscribe((res: string) => {
+      console.log(res);
+      //=> 'hello world'
+    });
   }
 }

@@ -13,7 +13,7 @@ const routes: Routes = [
   {path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AdminGuardServiceService]},
   {path: 'patient/dashboard', component: PatientDashboardComponent, canActivate: [PatientGuardServiceService]},
   {path: '', redirectTo:"/login",  pathMatch: 'full'},
-  {path: '**', redirectTo:"/login"}
+  //{path: '**', redirectTo:"/login"}
 ]
 
 @NgModule({
