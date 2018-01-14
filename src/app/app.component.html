@@ -8,8 +8,14 @@
   </div>
 </div>-->
 
-<div>{{ 'HOME' | translate}}</div>
-<div>{{ 'HOME'}}</div>
+<div>{{ 'HELLO' | translate}}</div>
+<div>{{ 'HELLO'}}</div>
 azertyui
+<label>
+  {{ 'HOME.SELECT' | translate }}
+  <select #langSelect (change)="translate.use(langSelect.value)">
+    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
+  </select>
+</label>
 
 <router-outlet></router-outlet>

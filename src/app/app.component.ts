@@ -9,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class AppComponent {
   title = 'Diet Pro';
 
-  constructor(translate: TranslateService) {
+  constructor(public translate: TranslateService) {
     translate.addLangs(["en", "fr"]);
     translate.setDefaultLang('fr');
     translate.use("en");
