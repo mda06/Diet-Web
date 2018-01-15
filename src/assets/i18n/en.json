@@ -11,6 +11,10 @@
     "CANNOT_CONNECT": "Cannot connect !"
   },
   "NAV": {
+    "ADMIN": {
+      "DASHBOARD": "Dashboard",
+      "FOOD": "Products"
+    },
     "FOOD_OVERVIEW": "Food overview",
     "FOOD_SEARCH": "Search",
     "ABOUT_PATIENT": "About patient",
@@ -92,6 +96,26 @@
       "MACROS": "Macros",
       "MICROS": "Micros",
       "NO_IMG": "No image"
+    }
+  },
+  "ADMIN": {
+    "DELETE" : {
+      "WARNING": "Your deleting definitely a product",
+      "ATTENTION": "Attention !",
+      "CANCEL": "Cancel",
+      "CONFIRM": "Delete anyway"
+    },
+    "PRODUCT": {
+      "SEARCHING": "Searching product...",
+      "NOT_FOUND": "Product not found !",
+      "DEL_ID": "ID of product to remove: ",
+      "ERROR_DELETE": "Error while deleting product",
+      "DELETE": "Delete",
+      "DELETED": "Product has been deleted",
+      "PURGE": "Purge the database of products",
+      "SIZE": "Actually number of product in the database: {{size}}",
+      "UPLOAD": "Upload new products to the database",
+      "SAVE": "Save"
     }
   }
 }

@@ -8,6 +8,9 @@ import {AdminGuardServiceService} from "../guard/admin-guard-service.service";
 import {AdminRoutingModule} from "./admin-routing.module";
 import { AdminComponent } from './admin.component';
 import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.component";
+import {FoodService} from "../food/service/food.service";
+import {AdminService} from "./service/admin.service";
+import { FoodComponent } from './food/food.component';
 
 @NgModule({
   imports: [
@@ -18,7 +21,7 @@ import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.compone
     SidebarModule.forRoot(),
     NavbarModule
   ],
-  declarations: [AdminComponent, AdminDashboardComponent],
-  providers: [ AdminGuardServiceService]
+  declarations: [AdminComponent, AdminDashboardComponent, FoodComponent],
+  providers: [ AdminGuardServiceService, FoodService, AdminService]
 })
 export class AdminModule { }

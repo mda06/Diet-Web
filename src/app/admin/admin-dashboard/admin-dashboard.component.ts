@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AdminService} from "../service/admin.service";
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminDashboardComponent implements OnInit {
 
-  constructor() { }
+  sizeOfProducts: number;
+
+  constructor(private service: AdminService) { }
 
   ngOnInit() {
+    this.service.food.getSize().subscribe(data => this.sizeOfProducts = data);
   }
 
 }

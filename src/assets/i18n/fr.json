@@ -11,6 +11,10 @@
     "CANNOT_CONNECT": "Imposible de se connecter !"
   },
   "NAV": {
+    "ADMIN": {
+      "DASHBOARD": "Tableau de bord",
+      "FOOD": "Produits"
+    },
     "FOOD_OVERVIEW": "Aperçu alimentaire",
     "FOOD_SEARCH": "chercher",
     "ABOUT_PATIENT": "À propos du patient",
@@ -92,6 +96,26 @@
       "MACROS": "Macros",
       "MICROS": "Micros",
       "NO_IMG": "Pas d'image"
+    }
+  },
+  "ADMIN": {
+    "DELETE" : {
+      "WARNING": "Vous êtes sur le point de supprimer un produit définitivement",
+      "ATTENTION": "Attention !",
+      "CANCEL": "Annuler",
+      "CONFIRM": "Supprimer quand même"
+    },
+    "PRODUCT": {
+      "SEARCHING": "En train de chercher le produit...",
+      "NOT_FOUND": "Produit non trouvé !",
+      "DEL_ID": "ID du produit à supprimer: ",
+      "ERROR_DELETE": "Erreur pendant la suppression du produit",
+      "DELETE": "Supprimer",
+      "DELETED": "Produit a éte supprimé",
+      "PURGE": "Purger la base de données des produits",
+      "SIZE": "Il y a {{size}} produits dans la base de données actuellement",
+      "UPLOAD": "Enregistrer d'autres produits",
+      "SAVE": "Sauvegarder"
     }
   }
 }

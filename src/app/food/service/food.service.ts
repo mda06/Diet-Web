@@ -12,6 +12,7 @@ const httpOptions = {
 export class FoodService {
 
   private productUrl = "api/product";
+  private productSizeUrl = "api/product/size";
 
   constructor(private http: HttpClient) { }
 
@@ -33,5 +34,13 @@ export class FoodService {
       headers: httpOptions.headers,
       params: params
     });
+  }
+
+  deleteProduct(id: number) : Observable<any> {
+    return this.http.delete<any>(this.productUrl + "/" + id, httpOptions);
+  }
+
+  getSize() : Observable<number> {
+    return this.http.get<number>(this.productSizeUrl, httpOptions);
   }
 }
