@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {NavItem} from "../model/nav-item";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin',
@@ -6,10 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  _opened: boolean = true;
+  private dashboard: NavItem = {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/admin/dashboard"};
+  navItems: Array<NavItem> = [];
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.initNavItems();
+  }
+
+  initNavItems() {
+    this.navItems.push(this.dashboard);
+  }
+
+  _toggleSidebar() {
+    this._opened = !this._opened;
+  }
+
+  navItemClicked(item: NavItem) {
+    console.log("Navigate to %s", item.routerLink);
+    this.router.navigate([item.routerLink]);
   }
 
 }
