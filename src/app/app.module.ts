@@ -13,19 +13,17 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AuthenticationService} from "./services/authentication.service";
 import { PatientGuardServiceService } from "./guard/patient-guard-service.service";
-import { AdminGuardServiceService } from "./guard/admin-guard-service.service";
-import { AdminDashboardComponent } from "./admin/admin-dashboard/admin-dashboard.component";
 import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-dashboard.component";
 import { LoginComponent } from './login/login.component';
 import {DateInterceptor} from "./share/DateInterceptor";
 import {DietModule} from "./diet/diet.module";
 import { FoodModule } from "./food/food.module";
+import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminDashboardComponent,
     PatientDashboardComponent
   ],
   imports: [
@@ -46,12 +44,12 @@ import { FoodModule } from "./food/food.module";
     }}),
     DietModule,
     FoodModule,
+    AdminModule,
     AppRoutingModule
   ],
   providers: [
     JwtHelperService,
     AuthenticationService,
-    AdminGuardServiceService,
     PatientGuardServiceService,
     {
       provide: HTTP_INTERCEPTORS,
