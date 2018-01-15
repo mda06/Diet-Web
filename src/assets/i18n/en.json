@@ -105,6 +105,16 @@
       "CANCEL": "Cancel",
       "CONFIRM": "Delete anyway"
     },
+    "PURGE" : {
+      "CHECK": "I want to purge the products database",
+      "TITLE": "Danger !",
+      "BODY": "You're purging the hole product database !",
+      "CANCEL": "Cancel",
+      "CONFIRM": "I'm sure that i want to delete it !",
+      "DELETE": "Purging the products database",
+      "DELETED": "Products database has been deleted",
+      "ERROR_DELETE": "Error while purging product"
+    },
     "PRODUCT": {
       "SEARCHING": "Searching product...",
       "NOT_FOUND": "Product not found !",

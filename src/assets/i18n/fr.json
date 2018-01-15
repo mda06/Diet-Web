@@ -105,6 +105,16 @@
       "CANCEL": "Annuler",
       "CONFIRM": "Supprimer quand même"
     },
+    "PURGE" : {
+      "CHECK": "Je veux purger la base de données des produits",
+      "TITLE": "Danger !",
+      "BODY": "Vous êtes sur le point de supprimer toute la base de données des produits !",
+      "CANCEL": "Annuler",
+      "CONFIRM": "Je suis sûr de vouloir supprimer toute la base de données",
+      "DELELTE": "En train de purger la base de données des produits",
+      "DELETED": "La base de données des produits a éte supprimé",
+      "ERROR_DELETE": "Erreur pendant la purge des produits"
+    },
     "PRODUCT": {
       "SEARCHING": "En train de chercher le produit...",
       "NOT_FOUND": "Produit non trouvé !",

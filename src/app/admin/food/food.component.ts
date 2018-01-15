@@ -14,6 +14,7 @@ export class FoodComponent implements OnInit {
 
   productToDelete: Product;
   searchingProductToDelete: boolean = false;
+  purgingCheck: boolean = false;
   productId: number;
   sizeOfProducts: number;
   public alerts: Array<IAlert> = [];
@@ -24,6 +25,10 @@ export class FoodComponent implements OnInit {
               private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.initFoodSize();
+  }
+
+  initFoodSize() {
     this.service.food.getSize().subscribe(data => this.sizeOfProducts = data);
   }
 
@@ -43,6 +48,7 @@ export class FoodComponent implements OnInit {
             setTimeout((index) => this.closeAlertWithId(index) ,2500, this.alertCounter++);
             this.service.food.deleteProduct(this.productId).subscribe(
               data => {
+                this.initFoodSize();
                 this.alerts.push({id: this.alertCounter, type:'danger',
                   message:'ADMIN.PRODUCT.DELETED', subMessage: ''});
                 setTimeout((index) => this.closeAlertWithId(index) ,2500, this.alertCounter++);
@@ -76,11 +82,33 @@ export class FoodComponent implements OnInit {
     this.alerts.splice(index, 1);
   }
 
-  purgeDB() {
-    console.log("Purge db");
+  purgeDB(purge) {
+    this.purgingCheck = false;
+    this.modalService.open(purge).result.then((result) => {
+      if (result === 'Cancel') {
+        console.log('Stay here');
+      } else if (result === 'Confirm') {
+        //Purge it here
+        this.alerts.push({id: this.alertCounter, type:'warning',
+          message:'ADMIN.PURGE.DELETE', subMessage: ''});
+        setTimeout((index) => this.closeAlertWithId(index) ,5000, this.alertCounter++);
+        /*this.service.food.purgeProducts().subscribe(
+          data => {
+            this.initFoodSize();
+            this.alerts.push({id: this.alertCounter, type:'danger',
+              message:'ADMIN.PURGE.DELETED', subMessage: ''});
+            setTimeout((index) => this.closeAlertWithId(index) ,5000, this.alertCounter++);
+          }, err => {
+            this.alerts.push({id: this.alertCounter, type:'warning',
+              message:'ADMIN.PURGE.ERROR_DELETE', subMessage: ''});
+            setTimeout((index) => this.closeAlertWithId(index) ,5000, this.alertCounter++);
+          }
+        );*/
+      }
+    });
   }
 
-  onSaveProduct() {
+  onSaveProducts() {
     console.log("Save product");
   }
 }

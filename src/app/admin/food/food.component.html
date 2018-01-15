@@ -27,9 +27,17 @@
   <hr>
   <div class="row">
     <form>
-      <button class="btn btn-danger" (click)="purgeDB()">
-        {{ 'ADMIN.PRODUCT.PURGE' | translate }}
-      </button>
+      <div class="form-group row">
+        <label for="purgingCheck" class="col-md-5 col-form-label">{{ 'ADMIN.PURGE.CHECK' | translate }}</label>
+        <div class="col-md-3">
+          <input type="checkbox" [(ngModel)]="purgingCheck" class="form-control" name="purgingCheck" id="purgingCheck">
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-danger" (click)="purgeDB(purge)" [class.disabled]="!purgingCheck">
+            {{ 'ADMIN.PRODUCT.PURGE' | translate }}
+          </button>
+        </div>
+      </div>
     </form>
   </div>
   <hr>
@@ -39,7 +47,7 @@
         <label for="uploadFile">{{ 'ADMIN.PRODUCT.UPLOAD' | translate }}</label>
         <input type="file" class="form-control-file" id="uploadFile">
       </div>
-      <button class="btn btn-warning" (click)="onSaveProduct()">
+      <button class="btn btn-warning" (click)="onSaveProducts()">
         {{ 'ADMIN.PRODUCT.SAVE' | translate }}
       </button>
     </form>
@@ -64,6 +72,26 @@
     </button>
     <button type="button" class="btn btn-outline-dark" (click)="c('Confirm')">
       {{ 'ADMIN.DELETE.CONFIRM' | translate }}
+    </button>
+  </div>
+</ng-template>
+
+<ng-template #purge let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ 'ADMIN.PURGE.TITLE' | translate }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ 'ADMIN.PURGE.BODY' | translate }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
+      {{ 'ADMIN.PURGE.CANCEL' | translate }}
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Confirm')">
+      {{ 'ADMIN.PURGE.CONFIRM' | translate }}
     </button>
   </div>
 </ng-template>
