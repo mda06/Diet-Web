@@ -99,6 +99,10 @@
     }
   },
   "ADMIN": {
+    "UPLOAD": {
+      "DONE": "Enregistrement fait",
+      "ERROR": "Erreur pendant l'enregistrement"
+    },
     "DELETE" : {
       "WARNING": "Vous êtes sur le point de supprimer un produit définitivement",
       "ATTENTION": "Attention !",
@@ -110,7 +114,7 @@
       "TITLE": "Danger !",
       "BODY": "Vous êtes sur le point de supprimer toute la base de données des produits !",
       "CANCEL": "Annuler",
-      "CONFIRM": "Je suis sûr de vouloir supprimer toute la base de données",
+      "CONFIRM": "Je suis sûr",
       "DELELTE": "En train de purger la base de données des produits",
       "DELETED": "La base de données des produits a éte supprimé",
       "ERROR_DELETE": "Erreur pendant la purge des produits"

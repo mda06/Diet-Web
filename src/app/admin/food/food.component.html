@@ -42,16 +42,22 @@
   </div>
   <hr>
   <div class="row">
-    <form>
-      <div class="form-group">
-        <label for="uploadFile">{{ 'ADMIN.PRODUCT.UPLOAD' | translate }}</label>
-        <input type="file" class="form-control-file" id="uploadFile">
-      </div>
-      <button class="btn btn-warning" (click)="onSaveProducts()">
-        {{ 'ADMIN.PRODUCT.SAVE' | translate }}
-      </button>
-    </form>
+
   </div>
+
+  <div *ngIf="currentFileUpload" class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped"
+         role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+         aria-valuemin="0" aria-valuemax="100"
+         [ngStyle]="{width:progress.percentage+'%'}">
+      {{progress.percentage}}%</div>
+  </div>
+
+  <label class="btn btn-default">
+    <input type="file" (change)="selectFile($event)">
+  </label>
+  <button class="btn btn-success" [disabled]="!selectedFiles"
+          (click)="upload()">{{ 'ADMIN.PRODUCT.UPLOAD' | translate }}</button>
 </div>
 
 

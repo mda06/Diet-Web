@@ -99,6 +99,10 @@
     }
   },
   "ADMIN": {
+    "UPLOAD": {
+      "DONE": "Uploaded done",
+      "ERROR": "Error while uploading"
+    },
     "DELETE" : {
       "WARNING": "Your deleting definitely a product",
       "ATTENTION": "Attention !",

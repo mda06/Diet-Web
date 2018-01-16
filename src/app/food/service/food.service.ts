@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {ProductsPaging} from "../../model/productspaging";
 import {Product} from "../../model/product";
@@ -14,6 +14,7 @@ export class FoodService {
   private productUrl = "api/product";
   private productSizeUrl = "api/product/size";
   private productPurgeUrl = "api/product/purge";
+  private productBatchUrl = "api/product/batch/upload";
 
   constructor(private http: HttpClient) { }
 
@@ -35,6 +36,18 @@ export class FoodService {
       headers: httpOptions.headers,
       params: params
     });
+  }
+
+  batch(file: File): Observable<HttpEvent<{}>> {
+    let formdata: FormData = new FormData();
+    formdata.append('file', file);
+
+    const req = new HttpRequest('POST', this.productBatchUrl, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.http.request(req);
   }
 
   purgeProducts() : Observable<any> {
