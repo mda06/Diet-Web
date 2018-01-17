@@ -34,7 +34,7 @@ export class FoodComponent implements OnInit {
   }
 
   initFoodSize() {
-    this.service.food.getSize().subscribe(data => this.sizeOfProducts = data);
+    this.service.food.getSize().subscribe(data => this.sizeOfProducts = +data, err => console.log(err));
   }
 
   onDeleteProduct(content) {
@@ -90,14 +90,14 @@ export class FoodComponent implements OnInit {
       } else if (result === 'Confirm') {
         //Purge it here
         this.addAlert('danger', 'ADMIN.PURGE.DELETE', '');
-        /*this.service.food.purgeProducts().subscribe(
+        this.service.food.purgeProducts().subscribe(
           data => {
             this.initFoodSize();
             this.addAlert('danger', 'ADMIN.PURGE.DELETED', '');
           }, err => {
             this.addAlert('warning', 'ADMIN.PURGE.ERROR_DELETE', '');
           }
-        );*/
+        );
       }
     });
   }
@@ -118,15 +118,13 @@ export class FoodComponent implements OnInit {
       event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress.percentage = Math.round(100 * event.loaded / event.total);
-          console.log(this.progress.percentage);
         } else if (event instanceof HttpResponse) {
-          console.log('File is completely uploaded!');
-          this.addAlert('primary', 'ADMIN.UPLOAD.DONE', '');
           this.currentFileUpload = undefined;
+          this.addAlert('primary', 'ADMIN.UPLOAD.DONE', '');
+          this.initFoodSize();
           console.log(event);
         }}, err => {
-          console.log(event);
-          console.log("Error baby");
+          console.log(err);
           this.currentFileUpload = undefined;
           this.addAlert('danger', 'ADMIN.UPLOAD.ERROR', '');
       });
