@@ -38,7 +38,15 @@ export class AuthenticationService {
             observer.complete();
           }, err => {
             observer.error(err);
-          });},
+          });
+          this.initId().subscribe(id => {
+            console.log("Id is ", id, " of the user");
+            this._id = id;
+          }, err => {
+            console.log("Error while trying to get the id");
+            console.log(err);
+          })
+          },
         (err) => {
           console.log("AuthService error in logging on - code:%s  msg:%s", err.status, err.message);
           observer.error(err);
@@ -64,10 +72,10 @@ export class AuthenticationService {
     return this.http.get<Role>(this.roleUrl, httpOptions);
   }
 
-  getId() : Observable<number> {
+  private initId() : Observable<number> {
     return this.http.get<number>(this.idUrl, httpOptions);
   }
-
+  //TODO: Merge init and id in the same method
   get id(): number {
     return this._id;
   }

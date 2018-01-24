@@ -5,6 +5,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import {Product} from "../../model/product";
 import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
+import {AuthenticationService} from "../../services/authentication.service";
 
 @Component({
   selector: 'app-search',
@@ -22,7 +23,8 @@ export class SearchComponent implements OnInit {
   searchFailed = false;
 
   constructor(private foodService: FoodService,
-              private translate: TranslateService) { }
+              private translate: TranslateService,
+              private authService: AuthenticationService) { }
 
   ngOnInit() {
     this.findProducts();
@@ -64,8 +66,9 @@ export class SearchComponent implements OnInit {
 
   selectProduct(prod: Product) {
     this.selectedProduct = prod;
-    this.foodService.getProduct(prod.id, this.translate.currentLang)
+    this.foodService.getProduct(prod.id, this.translate.currentLang, this.authService.id)
       .subscribe(data => {
+        console.log(data);
         this.selectedProduct = data;
       }, err => {
         console.log("Cannot find product with id: " + prod.id);

@@ -30,8 +30,8 @@ export class FoodService {
     });
   }
 
-  getProduct(id: number, language: string): Observable<Product> {
-    var params = new HttpParams().set('lang', language)
+  getProduct(id: number, language: string, dietId: number = 0): Observable<Product> {
+    var params = new HttpParams().set('lang', language).set("dietId",  dietId.toString());
     return this.http.get<Product>(this.productUrl + "/" + id, {
       headers: httpOptions.headers,
       params: params

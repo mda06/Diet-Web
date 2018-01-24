@@ -55,7 +55,11 @@
       <div class="card-body">
         <div class="container">
           <div class="row">
-            <h5 class="card-title">{{selectedProduct.name}}</h5>
+            <h5 class="card-title">
+              <i class="fa" aria-hidden="true"
+                 [class.fa-heart]="selectedProduct.favorite" [class.fa-heart-o]="!selectedProduct.favorite"></i>
+              {{selectedProduct.name}}</h5>
+            <p *ngIf="selectedProduct.favorite">Yeah babe</p>
           </div>
           <div class="row">
             <img src="{{selectedProduct.imgUrl}}" alt="{{ 'FOOD.SEARCH.NO_IMG' | translate }}" id="product-img" class="col-md-4">
