@@ -81,6 +81,19 @@ export class SearchComponent implements OnInit {
     this.findProducts();
   }
 
+  onFavChanged() {
+    this.selectedProduct.favorite = !this.selectedProduct.favorite;
+    this.authService.id.subscribe(id => {
+      console.log(id);
+      if(this.selectedProduct.favorite)
+        this.foodService.addProductToFav(id, this.selectedProduct.id).subscribe(data => console.log("Added to fav")
+          , err => {console.log("Err fav: ", err)});
+      else
+        this.foodService.removeProductToFav(id, this.selectedProduct.id).subscribe(data => console.log("Removed from fav")
+          , err => {console.log("Err fav: ", err)});
+    });
+  }
+
   sizeChanged() {
     //Need to reset the page number else we cannot find every product
     this.productsPaging.number = 1;
