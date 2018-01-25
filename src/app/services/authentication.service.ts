@@ -39,13 +39,6 @@ export class AuthenticationService {
           }, err => {
             observer.error(err);
           });
-          this.initId().subscribe(id => {
-            console.log("Id is ", id, " of the user");
-            this._id = id;
-          }, err => {
-            console.log("Error while trying to get the id");
-            console.log(err);
-          })
           },
         (err) => {
           console.log("AuthService error in logging on - code:%s  msg:%s", err.status, err.message);
@@ -72,12 +65,25 @@ export class AuthenticationService {
     return this.http.get<Role>(this.roleUrl, httpOptions);
   }
 
-  private initId() : Observable<number> {
-    return this.http.get<number>(this.idUrl, httpOptions);
-  }
-  //TODO: Merge init and id in the same method
-  get id(): number {
-    return this._id;
+  get id(): Observable<number> {
+    //If id is null or not !
+    return new Observable<number>((observer) => {
+      if(!isNullOrUndefined(this._id)) {
+        observer.next(this._id);
+        observer.complete();
+      } else {
+        this.http.get<number>(this.idUrl, httpOptions).subscribe((data) => {
+            console.log("AuthService: id of the user is %s", data);
+            this._id = data;
+            observer.next(this._id);
+            observer.complete();
+          },
+          (err) => {
+            console.log("AuthService error in getting id on - code:%s  msg:%s", err.status, err.message);
+            observer.error(err);
+          });
+      }
+    });
   }
 
   getRole(): Observable<Role>{

@@ -9,6 +9,7 @@ import {Dietetist} from "../model/dietetist";
 import {SharedService} from "./service/shared.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Subscription} from "rxjs/Subscription";
+import {AuthenticationService} from "../services/authentication.service";
 
 @Component({
   selector: 'app-diet',
@@ -32,6 +33,7 @@ export class DietComponent implements OnInit {
 
   constructor(private dietService: DietService,
               private sharedService: SharedService,
+              private authService: AuthenticationService,
               private router: Router,
               private route: ActivatedRoute) { }
 
@@ -81,7 +83,7 @@ export class DietComponent implements OnInit {
   }
 
   initDiet() {
-    this.dietService.getConnectedUser().subscribe(
+    this.authService.getConnectedUser().subscribe(
       data => {
         this.diet = data;
         this.sharedService.setDietetist(data);

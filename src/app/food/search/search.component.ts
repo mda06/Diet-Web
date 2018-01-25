@@ -66,13 +66,15 @@ export class SearchComponent implements OnInit {
 
   selectProduct(prod: Product) {
     this.selectedProduct = prod;
-    this.foodService.getProduct(prod.id, this.translate.currentLang, this.authService.id)
-      .subscribe(data => {
-        console.log(data);
-        this.selectedProduct = data;
-      }, err => {
-        console.log("Cannot find product with id: " + prod.id);
-      });
+    this.authService.id.subscribe(id => {
+      this.foodService.getProduct(prod.id, this.translate.currentLang, id)
+        .subscribe(data => {
+          console.log(data);
+          this.selectedProduct = data;
+        }, err => {
+          console.log("Cannot find product with id: " + prod.id);
+        });
+    }, err => console.log("Error getting id"));
   }
 
   pageChanged(event: number) {
