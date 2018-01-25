@@ -69,7 +69,6 @@ export class SearchComponent implements OnInit {
     this.authService.id.subscribe(id => {
       this.foodService.getProduct(prod.id, this.translate.currentLang, id)
         .subscribe(data => {
-          console.log(data);
           this.selectedProduct = data;
         }, err => {
           console.log("Cannot find product with id: " + prod.id);
