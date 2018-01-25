@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
 
   searching = false;
   searchFailed = false;
+  onlyFavs = false;
 
   constructor(private foodService: FoodService,
               private translate: TranslateService,
@@ -50,18 +51,37 @@ export class SearchComponent implements OnInit {
     //this.productsPaging = null;
     //The pagination begins with page index 1 but the api is counting from page index 0
     //So when we ask the api -1 and when we get the data back +1
-    this.foodService.getProducts(this.name, this.translate.currentLang, this.productsPaging.number - 1, this.productsPaging.size)
-      .subscribe(
-        data => {
-          data.number++;
-          this.productsPaging = data;
-        }, err => {
-          console.log(err);
-          this.searchFailed = true;
-        }, () => {
-          this.searching = false;
-        }
-      );
+    if(this.onlyFavs) {
+      this.authService.id.subscribe(id => {
+        this.foodService.getFavProducts(this.translate.currentLang, this.productsPaging.number - 1,
+          this.productsPaging.size, id)
+          .subscribe(
+            data => {
+              data.number++;
+              this.productsPaging = data;
+            }, err => {
+              console.log(err);
+              this.searchFailed = true;
+            }, () => {
+              this.searching = false;
+            }
+          );
+      });
+    } else {
+      this.foodService.getProducts(this.name, this.translate.currentLang, this.productsPaging.number - 1,
+        this.productsPaging.size)
+        .subscribe(
+          data => {
+            data.number++;
+            this.productsPaging = data;
+          }, err => {
+            console.log(err);
+            this.searchFailed = true;
+          }, () => {
+            this.searching = false;
+          }
+        );
+    }
   }
 
   selectProduct(prod: Product) {

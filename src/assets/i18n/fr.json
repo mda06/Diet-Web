@@ -96,6 +96,9 @@
       "MACROS": "Macros",
       "MICROS": "Micros",
       "NO_IMG": "Pas d'image"
+    },
+    "FAV": {
+      "ONLY": "Seulement les favoris"
     }
   },
   "ADMIN": {

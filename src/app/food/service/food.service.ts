@@ -17,6 +17,7 @@ export class FoodService {
   private productBatchUrl = "api/product/batch/upload";
   private productFavAdd = "api/product/fav/add";
   private productFavRemove = "api/product/fav/remove";
+  private productFavList = "api/product/fav/";
 
   constructor(private http: HttpClient) { }
 
@@ -27,6 +28,18 @@ export class FoodService {
       .set('page', page.toString())
       .set('size', size.toString());
     return this.http.get<ProductsPaging>(this.productUrl, {
+      headers: httpOptions.headers,
+      params: params
+    });
+  }
+
+  getFavProducts(language: string, page: number, size: number, dietId: number): Observable<ProductsPaging> {
+    var params = new HttpParams()
+      .set('dietId', dietId.toString())
+      .set('lang', language)
+      .set('page', page.toString())
+      .set('size', size.toString());
+    return this.http.get<ProductsPaging>(this.productFavList, {
       headers: httpOptions.headers,
       params: params
     });
