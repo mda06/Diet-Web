@@ -48,6 +48,7 @@ export class AuthenticationService {
   }
 
   onLogout() {
+    this._id = null;
     localStorage.removeItem('token');
   }
 
