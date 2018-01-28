@@ -4,6 +4,8 @@ import { MenuComponent } from './menu.component';
 import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MenuRoutingModule} from "./menu-routing.module";
+import {MenuService} from "./service/menu.service";
+import { MainComponent } from './main/main.component';
 
 @NgModule({
   imports: [
@@ -12,6 +14,7 @@ import {MenuRoutingModule} from "./menu-routing.module";
     NgbModule,
     MenuRoutingModule
   ],
-  declarations: [MenuComponent]
+  declarations: [MenuComponent, MainComponent],
+  providers: [MenuService]
 })
 export class MenuModule { }

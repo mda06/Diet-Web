@@ -3,7 +3,6 @@ import { Token } from '../../model/token';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {Dietetist} from "../../model/dietetist";
 import {Patient} from "../../model/patient";
 import { of } from 'rxjs/observable/of';
 import { catchError} from 'rxjs/operators';
