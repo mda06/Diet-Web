@@ -15,7 +15,7 @@ import {NavbarModule} from "../../navbar/navbar.module";
     CommonModule,
     FormsModule,
     NgbModule,
-    //FoodRoutingModule,
+    FoodRoutingModule,
     SidebarModule.forRoot(),
     NavbarModule
   ],

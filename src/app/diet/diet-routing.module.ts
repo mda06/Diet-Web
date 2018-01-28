@@ -7,6 +7,7 @@ import { DietGuardServiceService } from "../guard/diet-guard-service.service";
 import {DetailPatientComponent} from "./detail-patient/detail-patient.component";
 import {DietComponent} from "./diet.component";
 import {SearchComponent} from "./food/search/search.component";
+import {FoodModule} from "./food/food.module";
 
 const dietRoutes: Routes = [
   {
@@ -20,7 +21,7 @@ const dietRoutes: Routes = [
       {path: 'detail-patient', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
       {path: 'detail-patient/:id', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
       {path: 'add-patient', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
-      {path: 'food', component: SearchComponent, canActivate: [DietGuardServiceService]}
+      {path: 'food', loadChildren: () => FoodModule}
     ]
   }
 ];

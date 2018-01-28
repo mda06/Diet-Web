@@ -6,7 +6,7 @@ import {SearchComponent} from "./search/search.component";
 
 const foodRoutes: Routes = [
   {
-    path: 'food',
+    path: '',
     component: FoodComponent,
     canActivate: [DietGuardServiceService],
     children: [
