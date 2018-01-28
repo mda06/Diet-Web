@@ -8,7 +8,7 @@ import {AdminGuardServiceService} from "../guard/admin-guard-service.service";
 import {AdminRoutingModule} from "./admin-routing.module";
 import { AdminComponent } from './admin.component';
 import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.component";
-import {FoodService} from "../food/service/food.service";
+import {FoodService} from "../diet/food/service/food.service";
 import {AdminService} from "./service/admin.service";
 import { FoodComponent } from './food/food.component';
 

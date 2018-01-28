@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {ProductsPaging} from "../../model/productspaging";
 import {Product} from "../../model/product";
-import {FoodService} from "../../food/service/food.service";
+import {FoodService} from "../../diet/food/service/food.service";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

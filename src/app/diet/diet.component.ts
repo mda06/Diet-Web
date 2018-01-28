@@ -19,7 +19,7 @@ import {AuthenticationService} from "../services/authentication.service";
 export class DietComponent implements OnInit {
   _opened: boolean = true;
   private foodItemItem: NavItem =
-    {img: "../../assets/img/food.ico", title: "NAV.FOOD_OVERVIEW", routerLink: "/food"};
+    {img: "../../assets/img/food.ico", title: "NAV.FOOD_OVERVIEW", routerLink: "/diet/food"};
   private aboutPatientItem: NavItem =
     {img: "../../assets/img/about.ico", title: "NAV.ABOUT_PATIENT", routerLink: "/diet/detail-patient"};
   private selectPatientItem: NavItem =
@@ -52,7 +52,7 @@ export class DietComponent implements OnInit {
             const index: number = this.navItems.indexOf(this.aboutPatientItem);
             if(index <= 0)
               this.navItems.push(this.aboutPatientItem);
-            //If we were subscribed to patients unscribe it now, we doesn't need it anymore
+            //If we were subscribed to patients unsubscribe it now, we doesn't need it anymore
             this.subscriptions.unsubscribe();
             this.selectedPatient = data;
             this.sharedService.setPatient(this.selectedPatient);

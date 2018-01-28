@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpRequest} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
-import {ProductsPaging} from "../../model/productspaging";
-import {Product} from "../../model/product";
+import {ProductsPaging} from "../../../model/productspaging";
+import {Product} from "../../../model/product";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

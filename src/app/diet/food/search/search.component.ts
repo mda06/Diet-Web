@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FoodService} from "../service/food.service";
-import {ProductsPaging} from "../../model/productspaging";
+import {ProductsPaging} from "../../../model/productspaging";
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-import {Product} from "../../model/product";
+import {Product} from "../../../model/product";
 import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
-import {AuthenticationService} from "../../services/authentication.service";
+import {AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
   selector: 'app-search',

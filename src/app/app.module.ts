@@ -17,7 +17,6 @@ import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-d
 import { LoginComponent } from './login/login.component';
 import {DateInterceptor} from "./share/DateInterceptor";
 import {DietModule} from "./diet/diet.module";
-import { FoodModule } from "./food/food.module";
 import {AdminModule} from "./admin/admin.module";
 
 @NgModule({
@@ -43,7 +42,6 @@ import {AdminModule} from "./admin/admin.module";
       whitelistedDomains: ['localhost:8080']
     }}),
     DietModule,
-    FoodModule,
     AdminModule,
     AppRoutingModule
   ],

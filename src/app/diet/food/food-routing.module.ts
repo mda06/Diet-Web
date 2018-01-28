@@ -1,7 +1,7 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {FoodComponent} from "./food.component";
-import {DietGuardServiceService} from "../guard/diet-guard-service.service";
+import {DietGuardServiceService} from "../../guard/diet-guard-service.service";
 import {SearchComponent} from "./search/search.component";
 
 const foodRoutes: Routes = [

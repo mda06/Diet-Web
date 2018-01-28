@@ -15,6 +15,8 @@ import {PatientFilterPipe} from "../share/PatientFilterPipe";
 import { DietComponent } from './diet.component';
 import { ChartsModule } from 'ng2-charts';
 import {NavbarModule} from "../navbar/navbar.module";
+import {FoodModule} from "./food/food.module";
+import {RouterModule} from "@angular/router";
 
 
 @NgModule({
@@ -22,10 +24,12 @@ import {NavbarModule} from "../navbar/navbar.module";
     CommonModule,
     FormsModule,
     NgbModule,
+    RouterModule,
     DietRoutingModule,
     SidebarModule.forRoot(),
     ChartsModule,
-    NavbarModule
+    NavbarModule,
+    FoodModule
   ],
   declarations: [
     DietDashboardComponent,

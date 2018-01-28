@@ -114,6 +114,7 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
 
   addParam() {
     this.param.date = now;
+    console.log(now);
     this.param.id = undefined;
     this.param.patientId = this.patient.id;
     this.patient.anthropometricParameters.push(this.param);
