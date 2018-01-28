@@ -19,7 +19,7 @@ import {AuthenticationService} from "../services/authentication.service";
 export class DietComponent implements OnInit {
   _opened: boolean = true;
   private foodItemItem: NavItem =
-    {img: "../../assets/img/food.ico", title: "NAV.FOOD_OVERVIEW", routerLink: "/diet/food"};
+    {img: "../../assets/img/food.ico", title: "NAV.FOOD_SEARCH", routerLink: "/diet/food"};
   private aboutPatientItem: NavItem =
     {img: "../../assets/img/about.ico", title: "NAV.ABOUT_PATIENT", routerLink: "/diet/detail-patient"};
   private selectPatientItem: NavItem =

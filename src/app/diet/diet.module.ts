@@ -16,8 +16,6 @@ import { DietComponent } from './diet.component';
 import { ChartsModule } from 'ng2-charts';
 import {NavbarModule} from "../navbar/navbar.module";
 import {FoodModule} from "./food/food.module";
-import {RouterModule} from "@angular/router";
-
 
 @NgModule({
   imports: [
