@@ -16,7 +16,9 @@
       "FOOD": "Products"
     },
     "MENU": {
-      "TITLE": "Menu"
+      "TITLE": "Menu",
+      "ADD": "Add",
+      "LIST": "List"
     },
     "FOOD_SEARCH": "Search food",
     "ABOUT_PATIENT": "About patient",

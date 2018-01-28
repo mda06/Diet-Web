@@ -10,9 +10,9 @@ import {Router} from "@angular/router";
 export class AdminComponent implements OnInit {
   _opened: boolean = true;
   private dashboard: NavItem = {img: "../../assets/img/dashboard.png", title: "NAV.ADMIN.DASHBOARD",
-    routerLink: "/admin/dashboard"};
+    routerLink: "/admin/dashboard", subMenus: []};
   private food: NavItem = {img: "../../assets/img/food.ico", title: "NAV.ADMIN.FOOD",
-    routerLink: "/admin/food"};
+    routerLink: "/admin/food", subMenus: []};
   navItems: Array<NavItem> = [];
 
   constructor(private router: Router) { }

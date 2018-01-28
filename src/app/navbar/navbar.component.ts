@@ -11,8 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class NavbarComponent implements OnInit {
 
-  @Input() navItems: Array<NavItem>
+  @Input() navItems: Array<NavItem>;
   @Output() navItemClicked = new EventEmitter<NavItem>();
+  selectedItem: NavItem;
 
   constructor(public translate: TranslateService,
               private authService: AuthenticationService,

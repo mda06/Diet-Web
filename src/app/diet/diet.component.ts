@@ -19,15 +19,18 @@ import {AuthenticationService} from "../services/authentication.service";
 export class DietComponent implements OnInit {
   _opened: boolean = true;
   private foodItemItem: NavItem =
-    {img: "../../assets/img/food.ico", title: "NAV.FOOD_SEARCH", routerLink: "/diet/food"};
+    {img: "../../assets/img/food.ico", title: "NAV.FOOD_SEARCH", routerLink: "/diet/food", subMenus: []};
   private aboutPatientItem: NavItem =
-    {img: "../../assets/img/about.ico", title: "NAV.ABOUT_PATIENT", routerLink: "/diet/detail-patient"};
+    {img: "../../assets/img/about.ico", title: "NAV.ABOUT_PATIENT", routerLink: "/diet/detail-patient", subMenus: []};
   private selectPatientItem: NavItem =
-    {img: "../../assets/img/select-patient.png", title: "NAV.SELECT_PATIENT", routerLink: "/diet/select-patient"};
+    {img: "../../assets/img/select-patient.png", title: "NAV.SELECT_PATIENT", routerLink: "/diet/select-patient", subMenus: []};
   private dashboardItem: NavItem =
-    {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/diet/dashboard"};
+    {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/diet/dashboard", subMenus: []};
   private menuItem: NavItem =
-    {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/diet/menu"};
+    {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/diet/menu", subMenus: [
+      {img: "", title: "NAV.MENU.LIST", routerLink: "/diet/menu/add", subMenus: []},
+      {img: "", title: "NAV.MENU.ADD", routerLink: "/diet/menu/add", subMenus: []}
+    ]};
   navItems: Array<NavItem> = [];
   private subscriptions = new Subscription();
   private selectedPatient: Patient;
