@@ -15,8 +15,10 @@
       "DASHBOARD": "Tableau de bord",
       "FOOD": "Produits"
     },
-    "FOOD_OVERVIEW": "Aperçu alimentaire",
-    "FOOD_SEARCH": "chercher",
+    "MENU": {
+      "TITLE": "Menu"
+    },
+    "FOOD_SEARCH": "Chercher des produits",
     "ABOUT_PATIENT": "À propos du patient",
     "SELECT_PATIENT": "Selectionner patient",
     "DASHBOARD": "Tableau de bord",

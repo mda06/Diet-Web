@@ -26,6 +26,8 @@ export class DietComponent implements OnInit {
     {img: "../../assets/img/select-patient.png", title: "NAV.SELECT_PATIENT", routerLink: "/diet/select-patient"};
   private dashboardItem: NavItem =
     {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/diet/dashboard"};
+  private menuItem: NavItem =
+    {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/diet/menu"};
   navItems: Array<NavItem> = [];
   private subscriptions = new Subscription();
   private selectedPatient: Patient;
@@ -95,6 +97,7 @@ export class DietComponent implements OnInit {
   initNavItems() {
     this.navItems.push(this.dashboardItem);
     this.navItems.push(this.foodItemItem);
+    this.navItems.push(this.menuItem);
     this.navItems.push(this.selectPatientItem);
   }
 

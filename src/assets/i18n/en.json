@@ -15,8 +15,10 @@
       "DASHBOARD": "Dashboard",
       "FOOD": "Products"
     },
-    "FOOD_OVERVIEW": "Food overview",
-    "FOOD_SEARCH": "Search",
+    "MENU": {
+      "TITLE": "Menu"
+    },
+    "FOOD_SEARCH": "Search food",
     "ABOUT_PATIENT": "About patient",
     "SELECT_PATIENT": "Select patient",
     "DASHBOARD": "Dashboard",

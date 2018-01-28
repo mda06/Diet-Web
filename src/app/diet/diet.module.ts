@@ -16,6 +16,7 @@ import { DietComponent } from './diet.component';
 import { ChartsModule } from 'ng2-charts';
 import {NavbarModule} from "../navbar/navbar.module";
 import {FoodModule} from "./food/food.module";
+import {MenuModule} from "./menu/menu.module";
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {FoodModule} from "./food/food.module";
     SidebarModule.forRoot(),
     ChartsModule,
     NavbarModule,
-    FoodModule
+    FoodModule,
+    MenuModule
   ],
   declarations: [
     DietDashboardComponent,
