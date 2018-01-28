@@ -9,8 +9,8 @@
         (mouseenter)="selectedItem = item" (mouseleave)="selectedItem = null">
       <!-- Look for rounded images -->
       <img src="{{item.img}}" alt="logo" class="mx-auto d-block" width="60px" height="60px" (click)="navigate(item)"
-           ngbTooltip="{{ (item.title) | translate}}" alt="{{ (item.title) | translate}}">
-      <div *ngIf="selectedItem == item">
+           ngbTooltip="{{ (item.title) | translate}}" alt="{{ (item.title) | translate}}" [class.active]="isActive(item)">
+      <div *ngIf="isActive(item)">
         <ul class="mt-2">
           <li *ngFor="let subItem of item.subMenus">
             {{subItem.title | translate}}

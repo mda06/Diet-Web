@@ -31,4 +31,14 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+  isActive(item: NavItem): boolean {
+    //Do we need to go to all the children ?
+    var isItemActive = this.router.url === item.routerLink;
+    item.subMenus.forEach(subItem => {
+      if(this.router.url === subItem.routerLink) {
+        isItemActive = true;
+      }
+    });
+    return this.selectedItem == item || isItemActive;
+  }
 }

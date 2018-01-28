@@ -3,9 +3,9 @@ nav {
   height: 100vh;
 }
 
-.menuItem:hover img {
-  width: 65px;
-  height: 65px;
+.menuItem:hover img, img.active {
+  width: 70px;
+  height: 70px;
 }
 
 #bottom {
