@@ -1,9 +1,4 @@
-#product-img {
-  width: auto;
-  height: 200px;
-}
-
-.patient-holder {
+.product-holder {
   height: 70px;
 }
 
@@ -14,7 +9,7 @@
 }*/
 
 /* styles for '...' */
-.patient-holder > p {
+.product-holder > p {
   /* hide text if it more than N lines  */
   overflow: hidden;
   /* for set '...' in absolute position */
@@ -30,7 +25,7 @@
   padding-right: 1em;
 }
 /* create the ... */
-.patient-holder > p:before {
+.product-holder > p:before {
   /* points in the end */
   content: '...';
   /* absolute position */
@@ -40,7 +35,7 @@
   bottom: 0;
 }
 /* hide ... if we have text, which is less than or equal to max lines */
-.patient-holder > p:after {
+.product-holder > p:after {
   /* points in the end */
   content: '';
   /* absolute position */
@@ -55,7 +50,7 @@
   background: white;
 }
 
-.patient-holder.active > p:after {
+.product-holder.active > p:after {
   background: #007bff;
 }
 

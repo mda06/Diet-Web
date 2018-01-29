@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {FoodService} from "../service/food.service";
 import {ProductsPaging} from "../../../model/productspaging";
 import 'rxjs/add/operator/debounceTime';
@@ -8,7 +8,7 @@ import {LangChangeEvent, TranslateService} from "@ngx-translate/core";
 import {AuthenticationService} from "../../../services/authentication.service";
 
 @Component({
-  selector: 'app-search',
+  selector: 'app-search-food',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
@@ -18,6 +18,7 @@ export class SearchComponent implements OnInit {
   name: string = "";
   productsPaging: ProductsPaging = new ProductsPaging(5);
   selectedProduct: Product;
+  @Output() onSelectedProduct = new EventEmitter<Product>();
 
   searching = false;
   searchFailed = false;
@@ -86,10 +87,12 @@ export class SearchComponent implements OnInit {
 
   selectProduct(prod: Product) {
     this.selectedProduct = prod;
+
     this.authService.id.subscribe(id => {
       this.foodService.getProduct(prod.id, this.translate.currentLang, id)
         .subscribe(data => {
           this.selectedProduct = data;
+          this.onSelectedProduct.emit(this.selectedProduct);
         }, err => {
           console.log("Cannot find product with id: " + prod.id);
         });
@@ -98,19 +101,6 @@ export class SearchComponent implements OnInit {
 
   pageChanged(event: number) {
     this.findProducts();
-  }
-
-  onFavChanged() {
-    this.selectedProduct.favorite = !this.selectedProduct.favorite;
-    this.authService.id.subscribe(id => {
-      console.log(id);
-      if(this.selectedProduct.favorite)
-        this.foodService.addProductToFav(id, this.selectedProduct.id).subscribe(data => console.log("Added to fav")
-          , err => {console.log("Err fav: ", err)});
-      else
-        this.foodService.removeProductToFav(id, this.selectedProduct.id).subscribe(data => console.log("Removed from fav")
-          , err => {console.log("Err fav: ", err)});
-    });
   }
 
   sizeChanged() {

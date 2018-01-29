@@ -9,6 +9,8 @@ import {DietGuardServiceService} from "../../guard/diet-guard-service.service";
 import {FoodService} from "./service/food.service";
 import {SearchComponent} from './search/search.component';
 import {NavbarModule} from "../../navbar/navbar.module";
+import { DetailComponent } from './detail/detail.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [
@@ -21,7 +23,9 @@ import {NavbarModule} from "../../navbar/navbar.module";
   ],
   declarations: [
     FoodComponent,
-    SearchComponent
+    SearchComponent,
+    DetailComponent,
+    HomeComponent
   ],
   exports: [
     FoodComponent,

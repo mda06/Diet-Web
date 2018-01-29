@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {FoodComponent} from "./food.component";
 import {DietGuardServiceService} from "../../guard/diet-guard-service.service";
 import {SearchComponent} from "./search/search.component";
+import {HomeComponent} from "./home/home.component";
 
 const foodRoutes: Routes = [
   {
@@ -10,7 +11,7 @@ const foodRoutes: Routes = [
     component: FoodComponent,
     canActivate: [DietGuardServiceService],
     children: [
-      {path: '', component: SearchComponent, canActivate: [DietGuardServiceService]},
+      {path: '', component: HomeComponent, canActivate: [DietGuardServiceService]},
       {path: 'search', component: SearchComponent, canActivate: [DietGuardServiceService]},
     ]
   }

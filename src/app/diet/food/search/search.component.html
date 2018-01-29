@@ -1,106 +1,55 @@
-<div class="container-fluid">
-<div class="row">
-    <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title" i18n>{{ 'FOOD.SEARCH.TITLE' | translate }}</h5>
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title" i18n>{{ 'FOOD.SEARCH.TITLE' | translate }}</h5>
 
-        <div class="form-inline">
-          <div class="form-inline mb-2">
-            <label for="fav">{{ 'FOOD.FAV.ONLY' | translate }}</label>
-            <input id="fav" type="checkbox" name="fav" class="form-control ml-2" [(ngModel)]="onlyFavs" (change)="findProducts()"/>
-          </div>
-          <div class="form-inline mb-2">
-            <label for="search">{{ 'FOOD.SEARCH.NAME' | translate }}</label>
-            <input #input="ngModel" id="search" type="text" name="search" class="form-control ml-2"
-                   [(ngModel)]="name" placeholder="{{ 'FOOD.SEARCH.NAME_PLACEHOLDER' | translate }}"
-                    [disabled]="onlyFavs"/>
-          </div>
-          <div class="form-inline mb-2">
-            <label for="size">{{ 'FOOD.SEARCH.SIZE' | translate }}</label>
-            <select class="form-control ml-2" id="size" name="size" [(ngModel)]="productsPaging.size" (change)="sizeChanged()">
-              <option>5</option>
-              <option>8</option>
-              <option>10</option>
-              <option>15</option>
-              <option>20</option>
-            </select>
-          </div>
-        </div>
+    <div class="form-inline">
+      <div class="form-inline mb-2">
+        <label for="fav">{{ 'FOOD.FAV.ONLY' | translate }}</label>
+        <input id="fav" type="checkbox" name="fav" class="form-control ml-2" [(ngModel)]="onlyFavs" (change)="findProducts()"/>
+      </div>
+      <div class="form-inline mb-2">
+        <label for="search">{{ 'FOOD.SEARCH.NAME' | translate }}</label>
+        <input #input="ngModel" id="search" type="text" name="search" class="form-control ml-2"
+               [(ngModel)]="name" placeholder="{{ 'FOOD.SEARCH.NAME_PLACEHOLDER' | translate }}"
+                [disabled]="onlyFavs"/>
+      </div>
+      <div class="form-inline mb-2">
+        <label for="size">{{ 'FOOD.SEARCH.SIZE' | translate }}</label>
+        <select class="form-control ml-2" id="size" name="size" [(ngModel)]="productsPaging.size" (change)="sizeChanged()">
+          <option>5</option>
+          <option>8</option>
+          <option>10</option>
+          <option>15</option>
+          <option>20</option>
+        </select>
+      </div>
+    </div>
 
-        <hr>
-        <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.PRODUCTS' | translate }}</h6>
-        <div *ngIf="searching && productsPaging && productsPaging.numberOfElements == 0">
-          <p class="card-text">{{ 'FOOD.SEARCH.SEARCHING' | translate }}</p>
+    <hr>
+    <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.PRODUCTS' | translate }}</h6>
+    <div *ngIf="searching && productsPaging && productsPaging.numberOfElements == 0">
+      <p class="card-text">{{ 'FOOD.SEARCH.SEARCHING' | translate }}</p>
+    </div>
+    <div *ngIf="searchFailed" class="bg-danger">
+      <p class="card-text">{{ 'FOOD.SEARCH.ERROR_SEARCHING' | translate }}</p>
+    </div>
+    <div *ngIf="productsPaging" class="card">
+      <div *ngIf="productsPaging.numberOfElements > 0">
+        <ul class="list-group list-group-flush" >
+          <li class="list-group-item product-holder " *ngFor="let product of productsPaging.content"
+              [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
+            <p class="card-text">{{product.name}}</p>
+          </li>
+        </ul>
+        <div class="card-footer">
+          <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
+                        [(page)]="productsPaging.number" (pageChange)="pageChanged($event)" [rotate]="true"
+                        aria-label="Default pagination" [maxSize]="5" [ellipses]="false"></ngb-pagination>
         </div>
-        <div *ngIf="searchFailed" class="bg-danger">
-          <p class="card-text">{{ 'FOOD.SEARCH.ERROR_SEARCHING' | translate }}</p>
-        </div>
-        <div *ngIf="productsPaging" class="card">
-          <div *ngIf="productsPaging.numberOfElements > 0">
-            <ul class="list-group list-group-flush" >
-              <li class="list-group-item patient-holder " *ngFor="let product of productsPaging.content"
-                  [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
-                <p class="card-text">{{product.name}}</p>
-              </li>
-            </ul>
-            <div class="card-footer">
-              <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
-                            [(page)]="productsPaging.number" (pageChange)="pageChanged($event)" [rotate]="true"
-                            aria-label="Default pagination" [maxSize]="5" [ellipses]="false"></ngb-pagination>
-            </div>
-          </div>
-          <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
-            <p class="card-text">{{ 'FOOD.SEARCH.EMPTY' | translate }}</p>
-          </div>
-        </div>
+      </div>
+      <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
+        <p class="card-text">{{ 'FOOD.SEARCH.EMPTY' | translate }}</p>
       </div>
     </div>
   </div>
-
-  <div class="col-md-8">
-    <div *ngIf="selectedProduct" class="card">
-      <div class="card-body">
-        <div class="container">
-          <div class="row">
-            <h5 class="card-title">
-              <i class="fa" aria-hidden="true" (click)="onFavChanged()"
-                 [class.fa-heart]="selectedProduct.favorite" [class.fa-heart-o]="!selectedProduct.favorite"></i>
-              {{selectedProduct.name}}</h5>
-          </div>
-          <div class="row">
-            <img src="{{selectedProduct.imgUrl}}" alt="{{ 'FOOD.SEARCH.NO_IMG' | translate }}" id="product-img" class="col-md-4">
-            <div *ngIf="selectedProduct.units" class="col-md-8">
-              <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.UNITS' | translate }}</h6>
-              <ul>
-                <li *ngFor="let nutriment of selectedProduct.units">
-                  <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <hr>
-          <div class="row">
-            <div *ngIf="selectedProduct.macros" class="col-md-6">
-              <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.MACROS' | translate }}</h6>
-              <ul>
-                <li *ngFor="let nutriment of selectedProduct.macros">
-                  <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
-                </li>
-              </ul>
-            </div>
-            <div *ngIf="selectedProduct.micros" class="col-md-6">
-              <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.MICROS' | translate }}</h6>
-              <ul>
-                <li *ngFor="let nutriment of selectedProduct.micros">
-                  <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 </div>
