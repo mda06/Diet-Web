@@ -136,7 +136,14 @@
         </div>
       </div>
       <div class="col-md-6">
-        <p class="text-center">Products</p>
+        <div class="card">
+          <div class="card-header text-center">
+            <h4>Products</h4>
+          </div>
+          <div class="card-body">
+            <app-search-food (onSelectedProduct)="onSelectedProduct($event)"></app-search-food>
+          </div>
+        </div>
       </div>
     </div>
   </div>

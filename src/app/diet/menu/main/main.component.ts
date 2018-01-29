@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MenuService} from "../service/menu.service";
 import {Menu} from "../../../model/menu";
+import {Product} from "../../../model/product";
 
 @Component({
   selector: 'app-main',
@@ -19,5 +20,9 @@ export class MainComponent implements OnInit {
 
   onDelete(tmpID: number) {
     console.log(tmpID);
+  }
+
+  onSelectedProduct(product: Product) {
+    console.log("Product selected: ", product.id);
   }
 }

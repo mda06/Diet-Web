@@ -6,13 +6,15 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {MenuRoutingModule} from "./menu-routing.module";
 import {MenuService} from "./service/menu.service";
 import { MainComponent } from './main/main.component';
+import {FoodModule} from "../food/food.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     NgbModule,
-    MenuRoutingModule
+    MenuRoutingModule,
+    FoodModule
   ],
   declarations: [MenuComponent, MainComponent],
   providers: [MenuService]

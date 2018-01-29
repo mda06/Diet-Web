@@ -37,6 +37,7 @@ import {MenuModule} from "./menu/menu.module";
     PatientFilterPipe,
     DietComponent
   ],
-  providers: [ DietService, DietGuardServiceService, SharedService ]
+  providers: [ DietService, DietGuardServiceService, SharedService ],
+  exports: []
 })
 export class DietModule {}
