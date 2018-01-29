@@ -1,0 +1,42 @@
+<div *ngIf="selectedProduct" class="card">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <h5 class="card-title">
+          <i class="fa" aria-hidden="true" (click)="onFavChanged()"
+             [class.fa-heart]="selectedProduct.favorite" [class.fa-heart-o]="!selectedProduct.favorite"></i>
+          {{selectedProduct.name}}</h5>
+      </div>
+      <div class="row">
+        <img src="{{selectedProduct.imgUrl}}" alt="{{ 'FOOD.SEARCH.NO_IMG' | translate }}" id="product-img" class="col-md-4">
+        <div *ngIf="selectedProduct.units" class="col-md-8">
+          <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.UNITS' | translate }}</h6>
+          <ul>
+            <li *ngFor="let nutriment of selectedProduct.units">
+              <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div *ngIf="selectedProduct.macros" class="col-md-6">
+          <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.MACROS' | translate }}</h6>
+          <ul>
+            <li *ngFor="let nutriment of selectedProduct.macros">
+              <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+            </li>
+          </ul>
+        </div>
+        <div *ngIf="selectedProduct.micros" class="col-md-6">
+          <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.MICROS' | translate }}</h6>
+          <ul>
+            <li *ngFor="let nutriment of selectedProduct.micros">
+              <p class="card-text">{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
