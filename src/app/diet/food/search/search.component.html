@@ -2,28 +2,32 @@
   <div class="card-body">
     <h5 class="card-title" i18n>{{ 'FOOD.SEARCH.TITLE' | translate }}</h5>
 
-    <div class="form-inline">
+    <form>
       <div class="form-inline mb-2">
         <label for="fav">{{ 'FOOD.FAV.ONLY' | translate }}</label>
         <input id="fav" type="checkbox" name="fav" class="form-control ml-2" [(ngModel)]="onlyFavs" (change)="findProducts()"/>
       </div>
-      <div class="form-inline mb-2">
-        <label for="search">{{ 'FOOD.SEARCH.NAME' | translate }}</label>
-        <input #input="ngModel" id="search" type="text" name="search" class="form-control ml-2"
-               [(ngModel)]="name" placeholder="{{ 'FOOD.SEARCH.NAME_PLACEHOLDER' | translate }}"
-                [disabled]="onlyFavs"/>
+      <div class="form-group row">
+        <label for="search" class="col-md-4 col-form-label">{{ 'FOOD.SEARCH.NAME' | translate }}</label>
+        <div class="col-md-8">
+          <input #input="ngModel" id="search" type="text" name="search" class="form-control"
+                 [(ngModel)]="name" placeholder="{{ 'FOOD.SEARCH.NAME_PLACEHOLDER' | translate }}"
+                 [disabled]="onlyFavs"/>
+        </div>
       </div>
-      <div class="form-inline mb-2">
-        <label for="size">{{ 'FOOD.SEARCH.SIZE' | translate }}</label>
-        <select class="form-control ml-2" id="size" name="size" [(ngModel)]="productsPaging.size" (change)="sizeChanged()">
-          <option>5</option>
-          <option>8</option>
-          <option>10</option>
-          <option>15</option>
-          <option>20</option>
-        </select>
+      <div class="form-group row">
+        <label for="size" class="col-md-4 col-form-label">{{ 'FOOD.SEARCH.SIZE' | translate }}</label>
+        <div class="col-md-8">
+          <select class="form-control" id="size" name="size" [(ngModel)]="productsPaging.size" (change)="sizeChanged()">
+            <option>5</option>
+            <option>8</option>
+            <option>10</option>
+            <option>15</option>
+            <option>20</option>
+          </select>
+        </div>
       </div>
-    </div>
+    </form>
 
     <hr>
     <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.PRODUCTS' | translate }}</h6>
