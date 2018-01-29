@@ -1,3 +1,84 @@
-<p>
-  main works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <h3>Menu of <span>20-02-2018</span></h3>
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
+              <img src="../../../../assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="btn-group ml-auto" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-secondary">Update date</button>
+      <button type="button" class="btn btn-primary">Change of menu</button>
+      <button type="button" class="btn btn-danger">Delete menu</button>
+    </div>
+
+  </div>
+  <div *ngIf="selectedMenu">
+    <div class="row">
+      <div class="col-md-6">
+        <p class="text-center">Meals</p>
+        <ngb-accordion [closeOthers]="true" activeIds="static-1">
+          <ngb-panel id="static-1" title="10h">
+            <ng-template ngbPanelContent>
+              <p>Score: 3 </p>
+              <p>Comment: I like chocolate at 10AM thx !</p>
+            </ng-template>
+          </ngb-panel>
+          <ngb-panel id="static-2">
+            <ng-template ngbPanelTitle>
+              <div class="container-fluid">
+                <div class="row">
+                  <p class="meal-title">Lunch</p>
+                  <button type="button" class="btn btn-danger ml-auto" (click)="onDelete(1)">
+                    <span class="fa fa-trash" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="container-fluid">
+                <div class="row form-inline">
+                  <label>Name of the meal: </label>
+                  <input type="text" value="Lunch" class="meal-name ml-2 mr-2">
+                  <button type="button" class="btn btn-success"><span class="fa fa-pencil" aria-hidden="true"></span></button>
+                </div>
+                <hr>
+                <div class="row">
+                  <div>
+                    <h4 class="text-center">Products in this meal</h4>
+                    <ul>
+                      <li>Coconut 500g</li>
+                      <li>Creme 200g</li>
+                      <li>Pasta 100g</li>
+                      <li>Oil 50g</li>
+                    </ul>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <p>Score: 2 </p>
+                  <p>Comment: It was not so good at all, i thought there was some fish but it's vegs !</p>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <div class="col-md-6">
+        <p class="text-center">Products</p>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!selectedMenu">
+    <p>Please select a menu here</p>
+  </div>
+</div>
