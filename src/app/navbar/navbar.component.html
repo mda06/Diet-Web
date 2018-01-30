@@ -1,23 +1,23 @@
 <nav class="p-1 bg-light">
   <h2 class="pb-4">
-    Diet Pro
+    Diet Pro.
   </h2>
 
 
   <ul *ngIf="navItems" id="menu">
-    <li *ngFor="let item of navItems" class="menuItem"
-        (mouseenter)="selectedItem = item" (mouseleave)="selectedItem = null">
-      <!-- Look for rounded images -->
-      <img src="{{item.img}}" alt="logo" class="mx-auto d-block" width="60px" height="60px" (click)="navigate(item)"
-           ngbTooltip="{{ (item.title) | translate}}" alt="{{ (item.title) | translate}}" [class.active]="isActive(item)">
-      <div *ngIf="isActive(item)">
+    <li *ngFor="let item of navItems" class="menuItem">
+      <img src="{{item.img}}" (click)="navigate(item)" placement="top" ngbTooltip="{{ (item.title) | translate}}"
+           alt="{{ (item.title) | translate}}" [class.active]="isActive(item)">
+      <div id="activeMenu" *ngIf="isActive(item)">
+
+      </div>
+      <!--<div *ngIf="isActive(item)">
         <ul class="mt-2">
           <li *ngFor="let subItem of item.subMenus">
             {{subItem.title | translate}}
           </li>
         </ul>
-      </div>
-      <hr width="75%">
+      </div>-->
     </li>
   </ul>
 
@@ -28,6 +28,8 @@
         <input ngbButton type="radio" [value]="lang" (change)="translate.use(lang)"> {{lang}}
       </label>
     </div>
-    <button type="button" class="btn btn-warning" id="logout" (click)="logout()">{{ 'NAV.LOG_OUT' | translate}}</button>
+    <button type="button" class="btn btn-warning" id="logout" (click)="logout()">
+      {{ 'NAV.LOG_OUT' | translate}} <span class="fa fa-sign-out" aria-hidden="true"></span>
+    </button>
   </div>
 </nav>

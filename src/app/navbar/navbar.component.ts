@@ -13,7 +13,6 @@ export class NavbarComponent implements OnInit {
 
   @Input() navItems: Array<NavItem>;
   @Output() navItemClicked = new EventEmitter<NavItem>();
-  selectedItem: NavItem;
 
   constructor(public translate: TranslateService,
               private authService: AuthenticationService,
@@ -39,6 +38,6 @@ export class NavbarComponent implements OnInit {
         isItemActive = true;
       }
     });
-    return this.selectedItem == item || isItemActive;
+    return isItemActive;
   }
 }

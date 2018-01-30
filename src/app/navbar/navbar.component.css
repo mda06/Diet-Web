@@ -1,19 +1,39 @@
 nav {
-  width: 200px;
+  width: 150px;
   height: 100vh;
 }
 
-.menuItem:hover img, img.active {
-  width: 70px;
-  height: 70px;
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+}
+
+.menuItem:hover {
+  background: lightblue;
+}
+
+.menuItem img {
+  flex: 0 0 auto;
+  width: 50%;
+  height: auto;
+  padding: 1em;
+}
+
+#activeMenu {
+  flex: 0 0 auto;
+  background-color: dodgerblue;
+  margin-top: auto;
+  margin-bottom: auto;
+  width: 5px;
+  height: 55px;
 }
 
 #bottom {
-  width: 200px;
+  width: 150px;
 }
 
 #logout, #lang {
-  width: 180px;
+  width: 130px;
   margin-left: 10px;
   margin-bottom: 10px;
 }
