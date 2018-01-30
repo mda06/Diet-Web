@@ -6,11 +6,11 @@
          placeholder="{{ 'DIET.SELECT.SEARCH_PLACEHOLDER' | translate }}" class="form-control"/>
 
   <hr class="my-4">
-
+<!--(patients.slice((this.currentPage-1) * this.patientsPerPage, this.currentPage * this.patientsPerPage))-->
   <div *ngIf="patients" >
     <ul class="list-group list-group-flush" >
         <li class="list-group-item patient-holder " *ngFor="let patient of
-        (patients.slice((this.currentPage-1) * this.patientsPerPage, this.currentPage * this.patientsPerPage))
+        patients
         | patientfilter:filter" (click)="switch(patient)"
             [class.active]="(selectedPatient ? selectedPatient.id : 0) === patient.id">
           {{patient.firstName + ' ' + patient.lastName}}
