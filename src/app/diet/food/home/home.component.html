@@ -1,9 +1,8 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4" style="padding-right:20px; border-right: 1px solid #ccc;">
       <app-search-food (onSelectedProduct)="onSelectedProduct($event)"></app-search-food>
     </div>
-    <hr>
     <div class="col-md-8">
       <app-detail-food [selectedProduct]="selectedProduct"></app-detail-food>
     </div>
