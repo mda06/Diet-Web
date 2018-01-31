@@ -1,10 +1,51 @@
-<div *ngIf="selectedProduct" class="card">
+<div *ngIf="selectedProduct" id="product">
+  <div class="container">
+    <div class="row">
+      <h5 class="mx-auto">
+        <span class="fa" aria-hidden="true" (click)="onFavChanged()"
+              [class.fa-heart]="selectedProduct.favorite" [class.fa-heart-o]="!selectedProduct.favorite"></span>
+        {{selectedProduct.name}}</h5>
+    </div>
+
+    <div class="row mt-2">
+
+      <div *ngIf="selectedProduct.micros" class="col-md-6">
+        <img src="{{selectedProduct.imgUrl}}" alt="{{ 'FOOD.SEARCH.NO_IMG' | translate }}" id="product-img">
+        <div *ngIf="selectedProduct.units">
+          <h6 class="mb-2 text-muted">{{ 'FOOD.SEARCH.UNITS' | translate }}</h6>
+          <ul>
+            <li *ngFor="let nutriment of selectedProduct.units">
+              <p>{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+            </li>
+          </ul>
+        </div>
+        <h6 class="mb-2 text-muted">{{ 'FOOD.SEARCH.MICROS' | translate }}</h6>
+        <ul>
+          <li *ngFor="let nutriment of selectedProduct.micros">
+            <p>{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+          </li>
+        </ul>
+      </div>
+
+      <div *ngIf="selectedProduct.macros" class="col-md-6">
+        <h6 class="mb-2 text-muted">{{ 'FOOD.SEARCH.MACROS' | translate }}</h6>
+        <ul>
+          <li *ngFor="let nutriment of selectedProduct.macros">
+            <p>{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!--<div *ngIf="selectedProduct" class="card">
   <div class="card-body">
     <div class="container">
       <div class="row">
         <h5 class="card-title">
-          <i class="fa" aria-hidden="true" (click)="onFavChanged()"
-             [class.fa-heart]="selectedProduct.favorite" [class.fa-heart-o]="!selectedProduct.favorite"></i>
+          <span class="fa" aria-hidden="true" (click)="onFavChanged()"
+                [class.fa-heart]="selectedProduct.favorite" [class.fa-heart-o]="!selectedProduct.favorite"></span>
           {{selectedProduct.name}}</h5>
       </div>
       <div class="row">
@@ -39,11 +80,10 @@
       </div>
     </div>
   </div>
-</div>
-<div *ngIf="!selectedProduct" class="card">
-  <div class="card-body">
-    <h5 class="card-title">
-      {{"FOOD.SEARCH.NOT_SELECTED" | translate}}
-    </h5>
-  </div>
+</div>-->
+
+<div *ngIf="!selectedProduct">
+  <h4 class="text-center">
+    {{"FOOD.SEARCH.NOT_SELECTED" | translate}}
+  </h4>
 </div>
