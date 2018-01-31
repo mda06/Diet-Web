@@ -34,19 +34,14 @@
           </div>
         </div>
         <div>
-          <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="static-2" (panelChange)="panelChange($event)">
-            <ngb-panel id="static-1" title="10h">
-              <ng-template ngbPanelContent>
-                <p>Score: 3 </p>
-                <p>Comment: I like chocolate at 10AM thx !</p>
-              </ng-template>
-            </ngb-panel>
-            <ngb-panel id="static-2">
+          <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0-header" (panelChange)="panelChange($event)">
+            <!--Change the id !-->
+            <ngb-panel *ngFor="let meal of selectedMenu.meals">
               <ng-template ngbPanelTitle>
                 <div class="container-fluid">
                   <div class="row">
-                    <p class="meal-title">Lunch</p>
-                    <button type="button" class="btn btn-danger ml-auto" (click)="onDelete(1)">
+                    <p class="meal-title">{{meal.name}}</p>
+                    <button type="button" class="btn btn-danger ml-auto" (click)="onDelete(meal)">
                       <span class="fa fa-trash" aria-hidden="true"></span>
                     </button>
                   </div>
@@ -59,39 +54,34 @@
                       <!--<h5 class="card-subtitle mb-2 text-muted">Meal information</h5>-->
                       <div class="form-group">
                         <label>Name: </label>
-                        <input type="text" value="Lunch" class="form-control" name="name">
+                        <input type="text" value="{{meal.name}}" class="form-control" name="name">
                       </div>
                       <div class="form-group">
                         <label>Description</label>
-                        <textarea class="form-control" name="extraInfo" cols="50" rows="3">Cook it with some oil</textarea>
+                        <textarea class="form-control" name="extraInfo" cols="50" rows="3">{{meal.extraInfo}}</textarea>
                       </div>
-                  </div>
+                    </div>
                   </div>
                   <hr>
                   <div class="row">
                     <div class="products">
                       <h5 class="mb-2 text-muted">Products</h5>
                       <ul class="list-group">
-                        <div class="product-holder">
+                        <div class="product-holder" *ngFor="let mp of meal.mealProducts">
                           <li class="list-group-item product-detail">
-                            <!--<h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
-                            <blockquote class="blockquote"
-                                        *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
-                              <footer class="blockquote-footer">
-                                <cite title="Source Title">
-                                  {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
-                                </cite>
-                              </footer>
-                            </blockquote>-->
-                            <div class="d-flex align-items-center">
-                              <h6>Coconut</h6>
-                              <input type="text" value="150" class="form-control ml-auto quantity" name="quantity">
+                            <div *ngIf="!mp.product">
+                              Loading products...
+                            </div>
+                            <div class="d-flex align-items-center" *ngIf="mp.product">
+                              <h6>{{mp.product.name.slice(0, mp.product.name.indexOf("-"))}}</h6>
+                              <input type="text" value="{{mp.quantity}}" class="form-control ml-auto quantity" name="quantity">
                               <span class="unit">g</span>
                             </div>
-                            <blockquote class="blockquote">
+                            <blockquote class="blockquote" *ngIf="mp.product &&
+                            mp.product.name.slice(mp.product.name.indexOf('-') + 1, mp.product.name.lastIndexOf('-'))">
                               <footer class="blockquote-footer">
                                 <cite title="Source Title">
-                                  Delhaize group
+                                  {{mp.product.name.slice(mp.product.name.indexOf("-") + 1, mp.product.name.lastIndexOf("-"))}}
                                 </cite>
                               </footer>
                             </blockquote>
@@ -100,62 +90,6 @@
                             <span class="fa fa-trash" aria-hidden="true"></span>
                           </button>
                         </div>
-                        <div class="product-holder">
-                          <li class="list-group-item product-detail">
-                            <div class="d-flex align-items-center">
-                              <h6>Pasta</h6>
-                              <input type="text" value="250" class="form-control ml-auto quantity" name="quantity">
-                              <span class="unit">g</span>
-                            </div>
-                            <blockquote class="blockquote">
-                              <footer class="blockquote-footer">
-                                <cite title="Source Title">
-                                  Delhaize group
-                                </cite>
-                              </footer>
-                            </blockquote>
-                          </li>
-                          <button type="button" class="btn btn-danger product-trash">
-                            <span class="fa fa-trash" aria-hidden="true"></span>
-                          </button>
-                        </div>
-                        <div class="product-holder">
-                          <li class="list-group-item product-detail">
-                            <div class="d-flex align-items-center">
-                              <h6>Oil</h6>
-                              <input type="text" value="50" class="form-control ml-auto quantity" name="quantity">
-                              <span class="unit">g</span>
-                            </div>
-                            <blockquote class="blockquote">
-                              <footer class="blockquote-footer">
-                                <cite title="Source Title">
-                                  Colruyt
-                                </cite>
-                              </footer>
-                            </blockquote>
-                          </li>
-                          <button type="button" class="btn btn-danger product-trash">
-                            <span class="fa fa-trash" aria-hidden="true"></span>
-                          </button>
-                        </div><div class="product-holder">
-                        <li class="list-group-item product-detail">
-                          <div class="d-flex align-items-center">
-                            <h6>Parmesan</h6>
-                            <input type="text" value="10" class="form-control ml-auto quantity" name="quantity">
-                            <span class="unit">g</span>
-                          </div>
-                          <blockquote class="blockquote">
-                            <footer class="blockquote-footer">
-                              <cite title="Source Title">
-                                Colruyt
-                              </cite>
-                            </footer>
-                          </blockquote>
-                        </li>
-                        <button type="button" class="btn btn-danger product-trash">
-                          <span class="fa fa-trash" aria-hidden="true"></span>
-                        </button>
-                      </div>
                       </ul>
                     </div>
                   </div>
@@ -179,11 +113,6 @@
                     </div>
                   </div>
                 </div>
-              </ng-template>
-            </ngb-panel>
-            <ngb-panel id="static-3" title="dinner">
-              <ng-template ngbPanelContent>
-                <p>Blah</p>
               </ng-template>
             </ngb-panel>
           </ngb-accordion>

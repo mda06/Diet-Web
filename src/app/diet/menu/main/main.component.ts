@@ -2,6 +2,8 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MenuService} from "../service/menu.service";
 import {Menu} from "../../../model/menu";
 import {Product} from "../../../model/product";
+import {FoodService} from "../../food/service/food.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-main',
@@ -14,13 +16,26 @@ export class MainComponent implements OnInit {
   selectedMenu: Menu;
   showProducts; boolean = false;
 
-  constructor(private service: MenuService) { }
+  constructor(private service: MenuService,
+              private foodService: FoodService,
+              public translate: TranslateService) { }
 
   ngOnInit() {
     this.selectedMenu = new Menu();
+    this.service.getMenu(8).subscribe(data => {
+      this.selectedMenu = data;
+      this.selectedMenu.meals.forEach(meal => {
+        meal.mealProducts.forEach(mp => {
+          this.foodService.getProduct(mp.productId, this.translate.currentLang).subscribe(data => {
+            mp.product = data;
+          });
+        });
+      });
+      }, err => console.log(err)
+    );
   }
 
-  onDelete(tmpID: number) {
+  onDelete(tmpID: any) {
     //Work's because: static-1 opens -> static-2 closes;
     //After the toggle: static-2 opens because of the click
     //But this won't work if we are static-1
@@ -28,7 +43,7 @@ export class MainComponent implements OnInit {
     console.log(tmpID);
   }
 
-  onEdit(tmpID: number) {
+  onEdit(tmpID: any) {
     console.log(tmpID);
   }
 
