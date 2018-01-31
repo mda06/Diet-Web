@@ -25,130 +25,204 @@
   <hr>
   <div *ngIf="selectedMenu">
     <div class="row">
-      <div class="col-md-6">
-        <div class="card">
-          <div class="card-header text-center">
-            <h4>Meals</h4>
+      <div class="col-md-6" id="meals">
+        <div class="mb-2 d-flex justify-content-between">
+          <h4 class="mt-auto mb-auto">Meals</h4>
+          <div>
+            <button type="button" class="btn btn-success">New <span class="fa fa-plus" aria-hidden="true"></span></button>
+            <button type="button" class="btn btn-success">Template <span class="fa fa-plus" aria-hidden="true"></span></button>
           </div>
-          <div class="card-body">
-            <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="static-2" (panelChange)="panelChange($event)">
-              <ngb-panel id="static-1" title="10h">
-                <ng-template ngbPanelContent>
-                  <p>Score: 3 </p>
-                  <p>Comment: I like chocolate at 10AM thx !</p>
-                </ng-template>
-              </ngb-panel>
-              <ngb-panel id="static-2">
-                <ng-template ngbPanelTitle>
-                  <div class="container-fluid">
-                    <div class="row">
-                      <p class="meal-title">Lunch</p>
-                      <button type="button" class="btn btn-success ml-auto mr-1" (click)="onEdit(1)">
-                      <span class="fa fa-pencil" aria-hidden="true"></span>
+        </div>
+        <div>
+          <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="static-2" (panelChange)="panelChange($event)">
+            <ngb-panel id="static-1" title="10h">
+              <ng-template ngbPanelContent>
+                <p>Score: 3 </p>
+                <p>Comment: I like chocolate at 10AM thx !</p>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel id="static-2">
+              <ng-template ngbPanelTitle>
+                <div class="container-fluid">
+                  <div class="row">
+                    <p class="meal-title">Lunch</p>
+                    <button type="button" class="btn btn-danger ml-auto" (click)="onDelete(1)">
+                      <span class="fa fa-trash" aria-hidden="true"></span>
                     </button>
-                      <button type="button" class="btn btn-danger" (click)="onDelete(1)">
-                        <span class="fa fa-trash" aria-hidden="true"></span>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template ngbPanelContent>
+                <div class="container-fluid">
+                  <div class="row">
+                    <div>
+                      <!--<h5 class="card-subtitle mb-2 text-muted">Meal information</h5>-->
+                      <div class="form-group">
+                        <label>Name: </label>
+                        <input type="text" value="Lunch" class="form-control" name="name">
+                      </div>
+                      <div class="form-group">
+                        <label>Description</label>
+                        <textarea class="form-control" name="extraInfo" cols="50" rows="3">Cook it with some oil</textarea>
+                      </div>
+                      <button type="button" class="btn btn-success form-control">
+                        Edit the meal
+                        <span class="fa fa-pencil" aria-hidden="true"></span>
                       </button>
-                    </div>
                   </div>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                  <div class="container-fluid">
-                    <div class="row">
-                      <div>
-                        <!--<h5 class="card-subtitle mb-2 text-muted">Meal information</h5>-->
-                        <div class="form-group">
-                          <label>Name of the meal: </label>
-                          <input type="text" value="Lunch" class="form-control" name="name">
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col col-md-12">
+                      <h5 class="mb-2 text-muted">Products</h5>
+                      <ul class="list-group">
+                        <div class="product-holder">
+                          <li class="list-group-item product-detail">
+                            <!--<h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+                            <blockquote class="blockquote"
+                                        *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
+                              <footer class="blockquote-footer">
+                                <cite title="Source Title">
+                                  {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
+                                </cite>
+                              </footer>
+                            </blockquote>-->
+                            <div class="d-flex align-items-center">
+                              <h6>Coconut</h6>
+                              <input type="text" value="150" class="form-control ml-auto quantity" name="quantity">
+                              <span class="unit">g</span>
+                            </div>
+                            <blockquote class="blockquote">
+                              <footer class="blockquote-footer">
+                                <cite title="Source Title">
+                                  Delhaize group
+                                </cite>
+                              </footer>
+                            </blockquote>
+                          </li>
+                          <button type="button" class="btn btn-danger product-trash">
+                            <span class="fa fa-trash" aria-hidden="true"></span>
+                          </button>
                         </div>
-                        <div class="form-group">
-                          <label>Extra information</label>
-                          <textarea class="form-control" name="extraInfo" cols="50" rows="3">Cook it with some oil</textarea>
+                        <div class="product-holder">
+                          <li class="list-group-item product-detail">
+                            <!--<h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+                            <blockquote class="blockquote"
+                                        *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
+                              <footer class="blockquote-footer">
+                                <cite title="Source Title">
+                                  {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
+                                </cite>
+                              </footer>
+                            </blockquote>-->
+                            <div class="d-flex align-items-center">
+                              <h6>Pasta</h6>
+                              <input type="text" value="250" class="form-control ml-auto quantity" name="quantity">
+                              <span class="unit">g</span>
+                            </div>
+                            <blockquote class="blockquote">
+                              <footer class="blockquote-footer">
+                                <cite title="Source Title">
+                                  Delhaize group
+                                </cite>
+                              </footer>
+                            </blockquote>
+                          </li>
+                          <button type="button" class="btn btn-danger product-trash">
+                            <span class="fa fa-trash" aria-hidden="true"></span>
+                          </button>
                         </div>
-                        <button type="button" class="btn btn-success form-control">
-                          Edit the meal
-                          <span class="fa fa-pencil" aria-hidden="true"></span>
+                        <div class="product-holder">
+                          <li class="list-group-item product-detail">
+                            <!--<h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+                            <blockquote class="blockquote"
+                                        *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
+                              <footer class="blockquote-footer">
+                                <cite title="Source Title">
+                                  {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
+                                </cite>
+                              </footer>
+                            </blockquote>-->
+                            <div class="d-flex align-items-center">
+                              <h6>Oil</h6>
+                              <input type="text" value="50" class="form-control ml-auto quantity" name="quantity">
+                              <span class="unit">g</span>
+                            </div>
+                            <blockquote class="blockquote">
+                              <footer class="blockquote-footer">
+                                <cite title="Source Title">
+                                  Colruyt
+                                </cite>
+                              </footer>
+                            </blockquote>
+                          </li>
+                          <button type="button" class="btn btn-danger product-trash">
+                            <span class="fa fa-trash" aria-hidden="true"></span>
+                          </button>
+                        </div><div class="product-holder">
+                        <li class="list-group-item product-detail">
+                          <!--<h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+                          <blockquote class="blockquote"
+                                      *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
+                            <footer class="blockquote-footer">
+                              <cite title="Source Title">
+                                {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
+                              </cite>
+                            </footer>
+                          </blockquote>-->
+                          <div class="d-flex align-items-center">
+                            <h6>Parmesan</h6>
+                            <input type="text" value="10" class="form-control ml-auto quantity" name="quantity">
+                            <span class="unit">g</span>
+                          </div>
+                          <blockquote class="blockquote">
+                            <footer class="blockquote-footer">
+                              <cite title="Source Title">
+                                Colruyt
+                              </cite>
+                            </footer>
+                          </blockquote>
+                        </li>
+                        <button type="button" class="btn btn-danger product-trash">
+                          <span class="fa fa-trash" aria-hidden="true"></span>
                         </button>
-                    </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div>
-                        <h5 class="card-subtitle mb-2 text-muted">Products in this meal</h5>
-                        <ul>
-                          <li>
-                            <div class="form-group row">
-                              <label class="col-md-7 col-form-label">Coconut from Delhaize is bullshit because of i dont know:Coconut from Delhaize is bullshit because of i dont know:
-                              </label>
-                              <input type="text" value="500" class="form-control col-md-2 ml-2 mr-2" max-height="82" name="quantity">g
-                            </div>
-                          </li>
-                          <li>
-                            <div class="form-group row">
-                              <label class="col-md-7 col-form-label">Cream: </label>
-                              <input type="text" value="200" class="form-control col-md-2 ml-2 mr-2" name="quantity">g
-                            </div>
-                          </li>
-                          <li>
-                            <div class="form-group row">
-                              <label class="col-md-7 col-form-label">Pasta: </label>
-                              <input type="text" value="150" class="form-control col-md-2 ml-2 mr-2" name="quantity">g
-                            </div>
-                          </li>
-                          <li>
-                            <div class="form-group row">
-                              <label class="col-md-7 col-form-label">Tomato: </label>
-                              <input type="text" value="60" class="form-control col-md-2 ml-2 mr-2" name="quantity">g
-                            </div>
-                          </li>
-                        </ul>
                       </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                      <div>
-                        <h5 class="card-subtitle mb-2 text-muted">Feedback of the patient</h5>
-                        <div class="stars">
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star"></span>
-                          <span class="fa fa-star-o"></span>
-                          <span class="fa fa-star-o"></span>
-                          <span class="fa fa-star-o"></span>
-                          <span class="fa fa-star-o"></span>
-                        </div>
-                        <blockquote class="blockquote">
-                          <p class="mb-0">It was not so good at all, i thought there was some fish but it's vegs.</p>
-                          <footer class="blockquote-footer">
-                            Comment of <cite title="Source Title">Mina Coppens</cite>
-                          </footer>
-                        </blockquote>
-                      </div>
+                      </ul>
                     </div>
                   </div>
-                </ng-template>
-              </ngb-panel>
-              <ngb-panel id="static-3" title="dinner">
-                <ng-template ngbPanelContent>
-                  <p>Blah</p>
-                </ng-template>
-              </ngb-panel>
-            </ngb-accordion>
-          </div>
-          <div class="card-footer">
-            <button type="button" class="btn btn-primary">Add a new meal</button>
-            <button type="button" class="btn btn-primary">Add a meal form your templates</button>
-          </div>
+                  <hr>
+                  <div class="row">
+                    <div>
+                      <h5 class="mb-2 text-muted">Feedback of the patient</h5>
+                      <div class="stars">
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star"></span>
+                        <span class="fa fa-star-o"></span>
+                        <span class="fa fa-star-o"></span>
+                      </div>
+                      <blockquote class="blockquote">
+                        <p class="mb-0">It was not so good at all, i thought there was some fish but it's vegs.</p>
+                        <footer class="blockquote-footer">
+                          Comment of <cite title="Source Title">Mina Coppens</cite>
+                        </footer>
+                      </blockquote>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </ngb-panel>
+            <ngb-panel id="static-3" title="dinner">
+              <ng-template ngbPanelContent>
+                <p>Blah</p>
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
         </div>
       </div>
       <div class="col-md-6">
-        <div *ngIf="showProducts" class="card">
-          <div class="card-header text-center">
-            <h4>Products</h4>
-          </div>
-          <div class="card-body">
+        <div *ngIf="showProducts">
+          <div>
             <app-search-food (onSelectedProduct)="onSelectedProduct($event)"></app-search-food>
           </div>
         </div>

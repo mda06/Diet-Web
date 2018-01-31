@@ -2,3 +2,38 @@
   margin-top: auto;
   margin-bottom: auto;
 }
+
+#meals {
+  padding-right: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.product-holder {
+  display: flex;
+}
+
+.product-detail {
+  flex: 1 0 auto;
+  height: 80px;
+  border-radius: 0;
+}
+
+.product-detail > h6 {
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space: nowrap;
+}
+
+input.quantity {
+  width: 70px;
+}
+
+span.unit {
+  margin-left: -15px;
+  color: lightslategray;
+}
+
+.product-trash {
+  border-radius: 0;
+  width: 50px;
+}
