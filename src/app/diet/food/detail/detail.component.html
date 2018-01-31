@@ -12,7 +12,7 @@
       <div *ngIf="selectedProduct.micros" class="col-md-6">
         <img src="{{selectedProduct.imgUrl}}" alt="{{ 'FOOD.SEARCH.NO_IMG' | translate }}" id="product-img">
         <div *ngIf="selectedProduct.units">
-          <h6 class="mb-2 text-muted">{{ 'FOOD.SEARCH.UNITS' | translate }}</h6>
+          <h6 class="mt-2 mb-2 text-muted">{{ 'FOOD.SEARCH.UNITS' | translate }}</h6>
           <ul>
             <li *ngFor="let nutriment of selectedProduct.units">
               <p>{{nutriment.name + ' ' + nutriment.value + ' ' + nutriment.unit}}</p>

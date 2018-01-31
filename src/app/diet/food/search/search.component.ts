@@ -99,6 +99,12 @@ export class SearchComponent implements OnInit {
     }, err => console.log("Error getting id"));
   }
 
+  onFavChanged() {
+    //Need to reset the page number else we cannot find every product
+    this.productsPaging.number = 1;
+    this.findProducts();
+  }
+
   pageChanged(event: number) {
     this.findProducts();
   }
