@@ -9,22 +9,18 @@ nav {
   padding-top: 1em;
   padding-bottom: 1em;
 }
-
-.menuItem.active {
-  justify-content: space-between;
-}
-
 .menuItem:hover {
-  background: lightblue;
+  background-color: lightblue;
 }
 
 .menuItem img {
-  flex: 0 0 65%;
+  flex: 0 0 70%;
 }
 
 #activeMenu {
   flex: 0 1 5px;
   background-color: dodgerblue;
+  margin-left: auto;
 }
 
 #bottom {
