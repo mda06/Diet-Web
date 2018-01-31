@@ -8,6 +8,10 @@
   border-right: 1px solid #ccc;
 }
 
+.products {
+  width: 100%;
+}
+
 .product-holder {
   display: flex;
 }
