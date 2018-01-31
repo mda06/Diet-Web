@@ -88,6 +88,7 @@
   },
   "FOOD": {
     "SEARCH": {
+      "NOT_SELECTED": "Selectionner un produit",
       "TITLE": "Chercher un produit",
       "NAME": "Nom: ",
       "NAME_PLACEHOLDER": "nom",

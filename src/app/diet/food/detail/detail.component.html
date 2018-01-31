@@ -40,3 +40,10 @@
     </div>
   </div>
 </div>
+<div *ngIf="!selectedProduct" class="card">
+  <div class="card-body">
+    <h5 class="card-title">
+      {{"FOOD.SEARCH.NOT_SELECTED" | translate}}
+    </h5>
+  </div>
+</div>
