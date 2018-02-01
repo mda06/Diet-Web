@@ -7,6 +7,7 @@ import {MenuRoutingModule} from "./menu-routing.module";
 import {MenuService} from "./service/menu.service";
 import { MainComponent } from './main/main.component';
 import {FoodModule} from "../food/food.module";
+import {TimesPipe} from "../../share/TimesPipe";
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import {FoodModule} from "../food/food.module";
     MenuRoutingModule,
     FoodModule
   ],
-  declarations: [MenuComponent, MainComponent],
+  declarations: [MenuComponent, MainComponent, TimesPipe],
   providers: [MenuService]
 })
 export class MenuModule { }

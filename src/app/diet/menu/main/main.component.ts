@@ -4,6 +4,7 @@ import {Menu} from "../../../model/menu";
 import {Product} from "../../../model/product";
 import {FoodService} from "../../food/service/food.service";
 import {TranslateService} from "@ngx-translate/core";
+import {DietService} from "../../service/diet.service";
 
 @Component({
   selector: 'app-main',
@@ -18,12 +19,14 @@ export class MainComponent implements OnInit {
 
   constructor(private service: MenuService,
               private foodService: FoodService,
+              private dietService: DietService,
               public translate: TranslateService) { }
 
   ngOnInit() {
     this.selectedMenu = new Menu();
     this.service.getMenu(8).subscribe(data => {
       this.selectedMenu = data;
+      this.dietService.getPatient(data.patientId).subscribe(data => this.selectedMenu.patient = data);
       this.selectedMenu.meals.forEach(meal => {
         meal.mealProducts.forEach(mp => {
           this.foodService.getProduct(mp.productId, this.translate.currentLang).subscribe(data => {

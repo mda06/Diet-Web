@@ -98,16 +98,15 @@
                     <div>
                       <h5 class="mb-2 text-muted">Feedback of the patient</h5>
                       <div class="stars">
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star"></span>
-                        <span class="fa fa-star-o"></span>
-                        <span class="fa fa-star-o"></span>
+                        <span class="fa fa-star" aria-hidden="true" *ngFor="let x of meal.score|times"></span><span class="fa fa-star-o" aria-hidden="true" *ngFor="let x of 5 - meal.score|times"></span>
                       </div>
                       <blockquote class="blockquote">
-                        <p class="mb-0">It was not so good at all, i thought there was some fish but it's vegs.</p>
-                        <footer class="blockquote-footer">
-                          Comment of <cite title="Source Title">Mina Coppens</cite>
+                        <p class="mb-0">{{meal.comment}}</p>
+                        <footer class="blockquote-footer" *ngIf="selectedMenu.patient">
+                          Comment of
+                          <cite title="Source Title">
+                            {{selectedMenu.patient.firstName + ' ' + selectedMenu.patient.lastName}}
+                          </cite>
                         </footer>
                       </blockquote>
                     </div>
