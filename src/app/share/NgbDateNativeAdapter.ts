@@ -1,5 +1,6 @@
 import {Component, Injectable} from '@angular/core';
 import {NgbDateAdapter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {isNullOrUndefined} from "util";
 
 //https://ng-bootstrap.github.io/#/components/datepicker/examples
 @Injectable()
@@ -10,6 +11,9 @@ export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
   }
 
   toModel(date: NgbDateStruct): Date {
-    return date ? new Date(date.year, date.month - 1, date.day) : null;
+    if(isNullOrUndefined(date)) return null;
+    var nativeDate = new Date();
+    nativeDate.setUTCFullYear(date.year, date.month - 1, date.day);
+    return nativeDate;
   }
 }

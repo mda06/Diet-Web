@@ -1,12 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <h3>Menu of <span *ngIf="selectedMenu">{{getFormattedDate(selectedMenu.date)}}</span></h3>
-    <form class="form-inline">
+    <h3>Menu of {{getFormattedDate(selectedMenu.date)}}</h3>
+    <form class="form-inline ml-2">
       <div class="form-group">
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd"
-                 name="date" ngbDatepicker #d="ngbDatepicker"  id="date"
-                 [(ngModel)]="selectedMenu.date" (navigate)="onDateNavigated($event)" (select)="onDateSelected()">
+          <input class="form-control" placeholder="yyyy-mm-dd" readonly type="text"
+                 name="date" ngbDatepicker #d="ngbDatepicker"  id="date" (select)="console.log('ert');" (change)="console.log('hgfd')"
+                 [(ngModel)]="selectedMenu.date" (navigate)="onDateNavigated($event)" (ngModelChange)="onDateChanged()">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
               <img src="../../../../assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
@@ -23,115 +23,113 @@
 
   </div>
   <hr>
-  <!--<div >-->
-    <div class="row" *ngIf="selectedMenu">
-      <div class="col-md-6" id="meals">
-        <div class="mb-2 d-flex justify-content-between">
-          <h4 class="mt-auto mb-auto">Meals</h4>
-          <div>
-            <button type="button" class="btn btn-success">New <span class="fa fa-plus" aria-hidden="true"></span></button>
-            <button type="button" class="btn btn-success">Template <span class="fa fa-plus" aria-hidden="true"></span></button>
-          </div>
-        </div>
-        <div *ngIf="selectedMenu.meals.length != 0">
-          <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0-header" (panelChange)="panelChange($event)">
-            <!--Change the id !-->
-            <ngb-panel *ngFor="let meal of selectedMenu.meals">
-              <ng-template ngbPanelTitle>
-                <div class="container-fluid">
-                  <div class="row">
-                    <p class="meal-title">{{meal.name}}</p>
-                    <button type="button" class="btn btn-danger ml-auto" (click)="onDeleteMeal(meal)">
-                      <span class="fa fa-trash" aria-hidden="true"></span>
-                    </button>
-                  </div>
-                </div>
-              </ng-template>
-              <ng-template ngbPanelContent>
-                <div class="container-fluid">
-                  <div class="row">
-                    <div>
-                      <!--<h5 class="card-subtitle mb-2 text-muted">Meal information</h5>-->
-                      <div class="form-group">
-                        <label>Name: </label>
-                        <input type="text" value="{{meal.name}}" class="form-control" name="name">
-                      </div>
-                      <div class="form-group">
-                        <label>Description</label>
-                        <textarea class="form-control" name="extraInfo" cols="50" rows="3">{{meal.extraInfo}}</textarea>
-                      </div>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div class="products">
-                      <h5 class="mb-2 text-muted">Products</h5>
-                      <ul class="list-group">
-                        <div class="product-holder" *ngFor="let mp of meal.mealProducts">
-                          <li class="list-group-item product-detail">
-                            <div *ngIf="!mp.product">
-                              Loading products...
-                            </div>
-                            <div class="d-flex align-items-center" *ngIf="mp.product">
-                              <h6>{{mp.product.name.slice(0, mp.product.name.indexOf("-"))}}</h6>
-                              <input type="text" value="{{mp.quantity}}" class="form-control ml-auto quantity" name="quantity">
-                              <span class="unit">g</span>
-                            </div>
-                            <blockquote class="blockquote" *ngIf="mp.product &&
-                            mp.product.name.slice(mp.product.name.indexOf('-') + 1, mp.product.name.lastIndexOf('-'))">
-                              <footer class="blockquote-footer">
-                                <cite title="Source Title">
-                                  {{mp.product.name.slice(mp.product.name.indexOf("-") + 1, mp.product.name.lastIndexOf("-"))}}
-                                </cite>
-                              </footer>
-                            </blockquote>
-                          </li>
-                          <button type="button" class="btn btn-danger product-trash">
-                            <span class="fa fa-trash" aria-hidden="true"></span>
-                          </button>
-                        </div>
-                      </ul>
-                    </div>
-                  </div>
-                  <hr>
-                  <div class="row">
-                    <div>
-                      <h5 class="mb-2 text-muted">Feedback of the patient</h5>
-                      <div class="stars">
-                        <span class="fa fa-star" aria-hidden="true" *ngFor="let x of meal.score|times"></span><span class="fa fa-star-o" aria-hidden="true" *ngFor="let x of 5 - meal.score|times"></span>
-                      </div>
-                      <blockquote class="blockquote">
-                        <p class="mb-0">{{meal.comment}}</p>
-                        <footer class="blockquote-footer" *ngIf="selectedMenu.patient">
-                          Comment of
-                          <cite title="Source Title">
-                            {{selectedMenu.patient.firstName + ' ' + selectedMenu.patient.lastName}}
-                          </cite>
-                        </footer>
-                      </blockquote>
-                    </div>
-                  </div>
-                </div>
-              </ng-template>
-            </ngb-panel>
-          </ngb-accordion>
-        </div>
-        <div *ngIf="selectedMenu.meals.length == 0">
-          They are no meals in this menu
+  <div class="row" *ngIf="selectedMenu">
+    <div class="col-md-6" id="meals">
+      <div class="mb-2 d-flex justify-content-between">
+        <h4 class="mt-auto mb-auto">Meals</h4>
+        <div>
+          <button type="button" class="btn btn-success">New <span class="fa fa-plus" aria-hidden="true"></span></button>
+          <button type="button" class="btn btn-success">Template <span class="fa fa-plus" aria-hidden="true"></span></button>
         </div>
       </div>
-      <div class="col-md-6">
-        <div *ngIf="showProducts">
-          <div>
-            <app-search-food (onSelectedProduct)="onSelectedProduct($event)"></app-search-food>
-          </div>
-        </div>
-        <div *ngIf="!showProducts">
-          <p>Please select a meal before</p>
-        </div>
+      <div *ngIf="selectedMenu.meals.length != 0">
+        <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0-header" (panelChange)="panelChange($event)">
+          <!--Change the id !-->
+          <ngb-panel *ngFor="let meal of selectedMenu.meals">
+            <ng-template ngbPanelTitle>
+              <div class="container-fluid">
+                <div class="row">
+                  <p class="meal-title">{{meal.name}}</p>
+                  <button type="button" class="btn btn-danger ml-auto" (click)="onDeleteMeal(meal)">
+                    <span class="fa fa-trash" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+            </ng-template>
+            <ng-template ngbPanelContent>
+              <div class="container-fluid">
+                <div class="row">
+                  <div>
+                    <!--<h5 class="card-subtitle mb-2 text-muted">Meal information</h5>-->
+                    <div class="form-group">
+                      <label>Name: </label>
+                      <input type="text" value="{{meal.name}}" class="form-control" name="name">
+                    </div>
+                    <div class="form-group">
+                      <label>Description</label>
+                      <textarea class="form-control" name="extraInfo" cols="50" rows="3">{{meal.extraInfo}}</textarea>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="products">
+                    <h5 class="mb-2 text-muted">Products</h5>
+                    <ul class="list-group">
+                      <div class="product-holder" *ngFor="let mp of meal.mealProducts">
+                        <li class="list-group-item product-detail">
+                          <div *ngIf="!mp.product">
+                            Loading products...
+                          </div>
+                          <div class="d-flex align-items-center" *ngIf="mp.product">
+                            <h6>{{mp.product.name.slice(0, mp.product.name.indexOf("-"))}}</h6>
+                            <input type="text" value="{{mp.quantity}}" class="form-control ml-auto quantity" name="quantity">
+                            <span class="unit">g</span>
+                          </div>
+                          <blockquote class="blockquote" *ngIf="mp.product &&
+                          mp.product.name.slice(mp.product.name.indexOf('-') + 1, mp.product.name.lastIndexOf('-'))">
+                            <footer class="blockquote-footer">
+                              <cite title="Source Title">
+                                {{mp.product.name.slice(mp.product.name.indexOf("-") + 1, mp.product.name.lastIndexOf("-"))}}
+                              </cite>
+                            </footer>
+                          </blockquote>
+                        </li>
+                        <button type="button" class="btn btn-danger product-trash">
+                          <span class="fa fa-trash" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                    </ul>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div>
+                    <h5 class="mb-2 text-muted">Feedback of the patient</h5>
+                    <div class="stars">
+                      <span class="fa fa-star" aria-hidden="true" *ngFor="let x of meal.score|times"></span><span class="fa fa-star-o" aria-hidden="true" *ngFor="let x of 5 - meal.score|times"></span>
+                    </div>
+                    <blockquote class="blockquote">
+                      <p class="mb-0">{{meal.comment}}</p>
+                      <footer class="blockquote-footer" *ngIf="selectedMenu.patient">
+                        Comment of
+                        <cite title="Source Title">
+                          {{selectedMenu.patient.firstName + ' ' + selectedMenu.patient.lastName}}
+                        </cite>
+                      </footer>
+                    </blockquote>
+                  </div>
+                </div>
+              </div>
+            </ng-template>
+          </ngb-panel>
+        </ngb-accordion>
+      </div>
+      <div *ngIf="selectedMenu.meals.length == 0">
+        They are no meals in this menu
       </div>
     </div>
-  <!--</div>-->
+    <div class="col-md-6">
+      <div *ngIf="showProducts">
+        <div>
+          <app-search-food (onSelectedProduct)="onSelectedProduct($event)"></app-search-food>
+        </div>
+      </div>
+      <div *ngIf="!showProducts">
+        <p>Please select a meal before</p>
+      </div>
+    </div>
+  </div>
   <div *ngIf="!selectedMenu">
     <p>Please select a menu here</p>
   </div>

@@ -62,11 +62,6 @@ export class MainComponent implements OnInit {
     console.log(event);
   }
 
-  onDateSelected() {
-    console.log("Selected");
-    console.log(this.selectedMenu.date);
-  }
-
   panelChange(evt: any) {
     console.log(evt);
     this.showProducts = evt.nextState;
@@ -74,5 +69,9 @@ export class MainComponent implements OnInit {
 
   getFormattedDate(date: Date): string {
     return moment(date).format("DD/MM/YYYY");
+  }
+
+  onDateChanged() {
+    console.log(this.selectedMenu.date);
   }
 }
