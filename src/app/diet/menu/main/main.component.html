@@ -1,11 +1,12 @@
 <div class="container-fluid">
   <div class="row">
-    <h3>Menu of <span>20-02-2018</span></h3>
+    <h3>Menu of <span *ngIf="selectedMenu">{{getFormattedDate(selectedMenu.date)}}</span></h3>
     <form class="form-inline">
       <div class="form-group">
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd"
-                 name="dp" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker">
+          <input class="form-control" placeholder="yyyy-mm-dd" type="text"
+                 name="date" ngbDatepicker #d="ngbDatepicker"  id="date"
+                 [(ngModel)]="selectedMenu.date" (navigate)="onDateNavigated($event)" (select)="onDateSelected()">
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
               <img src="../../../../assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
@@ -16,15 +17,14 @@
     </form>
 
     <div class="btn-group ml-auto" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-secondary">Update date</button>
-      <button type="button" class="btn btn-primary">Change of menu</button>
+      <button type="button" class="btn btn-secondary">Set a new date</button>
       <button type="button" class="btn btn-danger">Delete menu</button>
     </div>
 
   </div>
   <hr>
-  <div *ngIf="selectedMenu">
-    <div class="row">
+  <!--<div >-->
+    <div class="row" *ngIf="selectedMenu">
       <div class="col-md-6" id="meals">
         <div class="mb-2 d-flex justify-content-between">
           <h4 class="mt-auto mb-auto">Meals</h4>
@@ -33,7 +33,7 @@
             <button type="button" class="btn btn-success">Template <span class="fa fa-plus" aria-hidden="true"></span></button>
           </div>
         </div>
-        <div>
+        <div *ngIf="selectedMenu.meals.length != 0">
           <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0-header" (panelChange)="panelChange($event)">
             <!--Change the id !-->
             <ngb-panel *ngFor="let meal of selectedMenu.meals">
@@ -41,7 +41,7 @@
                 <div class="container-fluid">
                   <div class="row">
                     <p class="meal-title">{{meal.name}}</p>
-                    <button type="button" class="btn btn-danger ml-auto" (click)="onDelete(meal)">
+                    <button type="button" class="btn btn-danger ml-auto" (click)="onDeleteMeal(meal)">
                       <span class="fa fa-trash" aria-hidden="true"></span>
                     </button>
                   </div>
@@ -116,6 +116,9 @@
             </ngb-panel>
           </ngb-accordion>
         </div>
+        <div *ngIf="selectedMenu.meals.length == 0">
+          They are no meals in this menu
+        </div>
       </div>
       <div class="col-md-6">
         <div *ngIf="showProducts">
@@ -128,7 +131,7 @@
         </div>
       </div>
     </div>
-  </div>
+  <!--</div>-->
   <div *ngIf="!selectedMenu">
     <p>Please select a menu here</p>
   </div>

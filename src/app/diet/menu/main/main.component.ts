@@ -5,11 +5,16 @@ import {Product} from "../../../model/product";
 import {FoodService} from "../../food/service/food.service";
 import {TranslateService} from "@ngx-translate/core";
 import {DietService} from "../../service/diet.service";
+import * as moment from 'moment';
+import {NgbDateAdapter} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateNativeAdapter} from "../../../share/NgbDateNativeAdapter";
+import {Meal} from "../../../model/meal";
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.css'],
+  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
 })
 export class MainComponent implements OnInit {
 
@@ -38,7 +43,7 @@ export class MainComponent implements OnInit {
     );
   }
 
-  onDelete(tmpID: any) {
+  onDeleteMeal(tmpID: Meal) {
     //Work's because: static-1 opens -> static-2 closes;
     //After the toggle: static-2 opens because of the click
     //But this won't work if we are static-1
@@ -46,16 +51,26 @@ export class MainComponent implements OnInit {
     console.log(tmpID);
   }
 
-  onEdit(tmpID: any) {
-    console.log(tmpID);
-  }
-
   onSelectedProduct(product: Product) {
     console.log("Product selected: ", product.id);
+  }
+
+  onDateNavigated(event) {
+    console.log("Navigated");
+    console.log(event);
+  }
+
+  onDateSelected() {
+    console.log("Selected");
+    console.log(this.selectedMenu.date);
   }
 
   panelChange(evt: any) {
     console.log(evt);
     this.showProducts = evt.nextState;
+  }
+
+  getFormattedDate(date: Date): string {
+    return moment(date).format("DD/MM/YYYY");
   }
 }
