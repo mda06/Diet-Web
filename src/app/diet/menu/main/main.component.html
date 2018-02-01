@@ -4,7 +4,7 @@
     <form class="form-inline">
       <div class="form-group">
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" type="text"
+          <input class="form-control" placeholder="yyyy-mm-dd"
                  name="date" ngbDatepicker #d="ngbDatepicker"  id="date"
                  [(ngModel)]="selectedMenu.date" (navigate)="onDateNavigated($event)" (select)="onDateSelected()">
           <div class="input-group-append">

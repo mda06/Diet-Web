@@ -6,15 +6,17 @@ import {FoodService} from "../../food/service/food.service";
 import {TranslateService} from "@ngx-translate/core";
 import {DietService} from "../../service/diet.service";
 import * as moment from 'moment';
-import {NgbDateAdapter} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateAdapter, NgbDateParserFormatter} from "@ng-bootstrap/ng-bootstrap";
 import {NgbDateNativeAdapter} from "../../../share/NgbDateNativeAdapter";
 import {Meal} from "../../../model/meal";
+import {EuropeanNgbDateParserFormatter} from "../../../share/EuropeanNgbDateParserFormatter";
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
-  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter}]
+  providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
+    {provide: NgbDateParserFormatter, useClass: EuropeanNgbDateParserFormatter}]
 })
 export class MainComponent implements OnInit {
 
