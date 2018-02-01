@@ -7,7 +7,8 @@ import {isNullOrUndefined} from "util";
 export class NgbDateNativeAdapter extends NgbDateAdapter<Date> {
 
   fromModel(date: Date): NgbDateStruct {
-    return (date && date.getFullYear) ? {year: date.getFullYear(), month: date.getMonth() + 1, day: date.getDate()} : null;
+    return (date && date.getUTCFullYear) ?
+      {year: date.getUTCFullYear(), month: date.getUTCMonth() + 1, day: date.getUTCDate()} : null;
   }
 
   toModel(date: NgbDateStruct): Date {

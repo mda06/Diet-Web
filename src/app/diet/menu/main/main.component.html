@@ -4,9 +4,17 @@
     <form class="form-inline ml-2">
       <div class="form-group">
         <div class="input-group">
-          <input class="form-control" placeholder="yyyy-mm-dd" readonly type="text"
-                 name="date" ngbDatepicker #d="ngbDatepicker"  id="date" (select)="console.log('ert');" (change)="console.log('hgfd')"
+          <input class="form-control" placeholder="yyyy-mm-dd" readonly type="text" id="date" name="date"
+                 [dayTemplate]="customDay" ngbDatepicker #d="ngbDatepicker"
                  [(ngModel)]="selectedMenu.date" (navigate)="onDateNavigated($event)" (ngModelChange)="onDateChanged()">
+
+          <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+            <span class="custom-day" [class.contains-menu]="containsMenu(date)" [class.focused]="focused"
+                  [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+              {{ date.day }}
+            </span>
+          </ng-template>
+
           <div class="input-group-append">
             <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button">
               <img src="../../../../assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
