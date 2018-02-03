@@ -12,6 +12,7 @@ import {Meal} from "../../../model/meal";
 import {EuropeanNgbDateParserFormatter} from "../../../share/EuropeanNgbDateParserFormatter";
 import {NgbDatepickerNavigateEvent} from "@ng-bootstrap/ng-bootstrap/datepicker/datepicker";
 import {isNullOrUndefined} from "util";
+import {DeletePopupStrings} from "../../../model/deletepopupstrings";
 
 @Component({
   selector: 'app-main',
@@ -25,6 +26,7 @@ export class MainComponent implements OnInit {
   @ViewChild('accordion') accordion;
   selectedMenu: Menu;
   showProducts; boolean = false;
+  deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
   private menusOfTheMonth: Array<Menu> = [];
 
   constructor(private service: MenuService,
@@ -84,6 +86,7 @@ export class MainComponent implements OnInit {
   }
 
   onDeleteMenu(content) {
+    this.deletePopupStrings = {title:'Deleting', body: 'Deleting the menu', cancel:'Cancel', delete:'Delete'};
     this.modalService.open(content).result.then((result) => {
       if (result === 'Cancel') {
         console.log('Stay here');
@@ -138,21 +141,21 @@ export class MainComponent implements OnInit {
   }
 
   onDeleteMeal(meal: Meal, popupDelete) {
-    //Work's because: static-1 opens -> static-2 closes;
-    //After the toggle: static-2 opens because of the click
-    //But this won't work if we are static-1
     this.accordion.toggle("panel-" + meal.id);
-    console.log(meal);
+    this.deletePopupStrings = {title:'Deleting', body: 'Deleting the meal', cancel:'Cancel', delete:'Delete'};
 
     this.modalService.open(popupDelete).result.then((result) => {
       if (result === 'Cancel') {
         console.log('Stay here');
       } else if (result === 'Delete') {
         console.log('Delete meal');
-        /*if(this.selectedMenu.id !== 0)
-          this.service.deleteMenu(this.selectedMenu.id).subscribe(
-            data => console.log("Menu removed"), err => console.log("Error while removing men ", err));
-        this.createNewMenu();*/
+        if(meal.id !== 0)
+          this.service.deleteMeal(meal.id).subscribe(
+            data => {
+              console.log("Meal removed");
+              const index: number = this.selectedMenu.meals.indexOf(meal);
+              this.selectedMenu.meals.splice(index, 1);
+            }, err => console.log("Error while removing meal ", err));
       }
     });
   }
