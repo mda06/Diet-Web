@@ -11,6 +11,7 @@ import {NgbDateNativeAdapter} from "../../../share/NgbDateNativeAdapter";
 import {Meal} from "../../../model/meal";
 import {EuropeanNgbDateParserFormatter} from "../../../share/EuropeanNgbDateParserFormatter";
 import {NgbDatepickerNavigateEvent} from "@ng-bootstrap/ng-bootstrap/datepicker/datepicker";
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-main',
@@ -33,16 +34,22 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.selectedMenu = new Menu();
-    this.service.getMenu(8).subscribe(data => {
-      this.selectedMenu = data;
-      this.dietService.getPatient(data.patientId).subscribe(data => this.selectedMenu.patient = data);
-      this.selectedMenu.meals.forEach(meal => {
-        meal.mealProducts.forEach(mp => {
-          this.foodService.getProduct(mp.productId, this.translate.currentLang).subscribe(data => {
-            mp.product = data;
+    this.takeMenu(8);
+  }
+
+  private takeMenu(id: number) {
+    console.log("Taking ", id, "the menu");
+    this.service.getMenu(id).subscribe(data => {
+        this.selectedMenu = data;
+        console.log(data.id, " for the date of ", data.date);
+        this.dietService.getPatient(data.patientId).subscribe(data => this.selectedMenu.patient = data);
+        this.selectedMenu.meals.forEach(meal => {
+          meal.mealProducts.forEach(mp => {
+            this.foodService.getProduct(mp.productId, this.translate.currentLang).subscribe(data => {
+              mp.product = data;
+            });
           });
         });
-      });
       }, err => console.log(err)
     );
   }
@@ -63,10 +70,8 @@ export class MainComponent implements OnInit {
     this.menusOfTheMonth.length = 0;
     this.service.getMenuByDate(event.next.month, event.next.year, 8).subscribe(data => {
       data.forEach(menu => {
-        console.log(menu.date);
         this.menusOfTheMonth.push(menu);
       });
-      console.log("Size: ", this.menusOfTheMonth.length);
     });
   }
 
@@ -90,6 +95,14 @@ export class MainComponent implements OnInit {
   }
 
   onDateChanged() {
-    console.log(this.selectedMenu.date);
+    const menu = this.menusOfTheMonth.find(menu =>
+      menu.date.getUTCMonth() == this.selectedMenu.date.getUTCMonth()
+      && menu.date.getUTCDate() == this.selectedMenu.date.getUTCDate()
+      && menu.date.getUTCFullYear() == this.selectedMenu.date.getUTCFullYear()
+    );
+    if(!isNullOrUndefined(menu))
+      this.takeMenu(menu.id);
+    else
+      this.selectedMenu = new Menu(this.selectedMenu.date);
   }
 }
