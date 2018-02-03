@@ -38,6 +38,36 @@ export class MainComponent implements OnInit {
     //this.takeMenu(8);
   }
 
+  onDateNavigated(event: NgbDatepickerNavigateEvent) {
+    this.menusOfTheMonth.length = 0;
+    this.service.getMenuByDate(event.next.month, event.next.year, 8).subscribe(data => {
+      data.forEach(menu => {
+        this.menusOfTheMonth.push(menu);
+      });
+    });
+  }
+
+  panelChange(evt: any) {
+    console.log(evt);
+    this.showProducts = evt.nextState;
+  }
+
+  getFormattedDate(date: Date): string {
+    return moment(date).format("DD/MM/YYYY");
+  }
+
+  onDateChanged() {
+    const menu = this.menusOfTheMonth.find(menu =>
+      menu.date.getUTCMonth() == this.selectedMenu.date.getUTCMonth()
+      && menu.date.getUTCDate() == this.selectedMenu.date.getUTCDate()
+      && menu.date.getUTCFullYear() == this.selectedMenu.date.getUTCFullYear()
+    );
+    if(!isNullOrUndefined(menu))
+      this.takeMenu(menu.id);
+    else
+      this.createNewMenu(this.selectedMenu.date);
+  }
+
   private takeMenu(id: number) {
     this.service.getMenu(id).subscribe(data => {
         this.selectedMenu = data;
@@ -53,30 +83,17 @@ export class MainComponent implements OnInit {
     );
   }
 
-  onDeleteMeal(tmpID: Meal) {
-    //Work's because: static-1 opens -> static-2 closes;
-    //After the toggle: static-2 opens because of the click
-    //But this won't work if we are static-1
-    this.accordion.toggle("static-1");
-    console.log(tmpID);
-  }
-
-  onSelectedProduct(product: Product) {
-    console.log("Product selected: ", product.id);
-  }
-
-  onDateNavigated(event: NgbDatepickerNavigateEvent) {
-    this.menusOfTheMonth.length = 0;
-    this.service.getMenuByDate(event.next.month, event.next.year, 8).subscribe(data => {
-      data.forEach(menu => {
-        this.menusOfTheMonth.push(menu);
-      });
+  onDeleteMenu(content) {
+    this.modalService.open(content).result.then((result) => {
+      if (result === 'Cancel') {
+        console.log('Stay here');
+      } else if (result === 'Delete') {
+        if(this.selectedMenu.id !== 0)
+          this.service.deleteMenu(this.selectedMenu.id).subscribe(
+            data => console.log("Menu removed"), err => console.log("Error while removing men ", err));
+        this.createNewMenu();
+      }
     });
-  }
-
-  panelChange(evt: any) {
-    console.log(evt);
-    this.showProducts = evt.nextState;
   }
 
   containsMenu(date: NgbDateStruct) {
@@ -89,35 +106,10 @@ export class MainComponent implements OnInit {
     );
   }
 
-  getFormattedDate(date: Date): string {
-    return moment(date).format("DD/MM/YYYY");
-  }
 
-  onDateChanged() {
-    const menu = this.menusOfTheMonth.find(menu =>
-      menu.date.getUTCMonth() == this.selectedMenu.date.getUTCMonth()
-      && menu.date.getUTCDate() == this.selectedMenu.date.getUTCDate()
-      && menu.date.getUTCFullYear() == this.selectedMenu.date.getUTCFullYear()
-    );
-    console.log(menu);
-    console.log("For ", this.selectedMenu.date);
-    if(!isNullOrUndefined(menu))
-      this.takeMenu(menu.id);
-    else
-      this.createNewMenu(this.selectedMenu.date);
-  }
-
-  onDeleteMenu(content) {
-    this.modalService.open(content).result.then((result) => {
-      if (result === 'Cancel') {
-        console.log('Stay here');
-      } else if (result === 'Delete') {
-        if(this.selectedMenu.id !== 0)
-          this.service.deleteMenu(this.selectedMenu.id).subscribe(
-            data => console.log("Menu removed"), err => console.log("Error while removing men ", err));
-        this.createNewMenu();
-      }
-    });
+  private createNewMenu(date: Date = new Date()) {
+    this.selectedMenu = new Menu(date);
+    this.selectedMenu.patientId = 8;
   }
 
   onAddNewMeal() {
@@ -145,8 +137,27 @@ export class MainComponent implements OnInit {
     console.log("Adding a meal from ours template");
   }
 
-  private createNewMenu(date: Date = new Date()) {
-    this.selectedMenu = new Menu(date);
-    this.selectedMenu.patientId = 8;
+  onDeleteMeal(meal: Meal, popupDelete) {
+    //Work's because: static-1 opens -> static-2 closes;
+    //After the toggle: static-2 opens because of the click
+    //But this won't work if we are static-1
+    this.accordion.toggle("panel-" + meal.id);
+    console.log(meal);
+
+    this.modalService.open(popupDelete).result.then((result) => {
+      if (result === 'Cancel') {
+        console.log('Stay here');
+      } else if (result === 'Delete') {
+        console.log('Delete meal');
+        /*if(this.selectedMenu.id !== 0)
+          this.service.deleteMenu(this.selectedMenu.id).subscribe(
+            data => console.log("Menu removed"), err => console.log("Error while removing men ", err));
+        this.createNewMenu();*/
+      }
+    });
+  }
+
+  onSelectedProduct(product: Product) {
+    console.log("Product selected: ", product.id);
   }
 }

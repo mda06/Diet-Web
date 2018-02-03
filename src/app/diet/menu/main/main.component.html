@@ -51,12 +51,12 @@
       <div *ngIf="selectedMenu.meals.length != 0">
         <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0-header" (panelChange)="panelChange($event)">
           <!--Change the id !-->
-          <ngb-panel *ngFor="let meal of selectedMenu.meals">
+          <ngb-panel id="panel-{{meal.id}}" *ngFor="let meal of selectedMenu.meals">
             <ng-template ngbPanelTitle>
               <div class="container-fluid">
                 <div class="row">
                   <p class="meal-title">{{meal.name}}</p>
-                  <button type="button" class="btn btn-danger ml-auto" (click)="onDeleteMeal(meal)">
+                  <button type="button" class="btn btn-danger ml-auto" (click)="onDeleteMeal(meal, popupDelete)">
                     <span class="fa fa-trash" aria-hidden="true"></span>
                   </button>
                 </div>
