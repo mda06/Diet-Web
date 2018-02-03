@@ -6,7 +6,7 @@ import {FoodService} from "../../food/service/food.service";
 import {TranslateService} from "@ngx-translate/core";
 import {DietService} from "../../service/diet.service";
 import * as moment from 'moment';
-import {NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateAdapter, NgbDateParserFormatter, NgbDateStruct, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {NgbDateNativeAdapter} from "../../../share/NgbDateNativeAdapter";
 import {Meal} from "../../../model/meal";
 import {EuropeanNgbDateParserFormatter} from "../../../share/EuropeanNgbDateParserFormatter";
@@ -30,6 +30,7 @@ export class MainComponent implements OnInit {
   constructor(private service: MenuService,
               private foodService: FoodService,
               private dietService: DietService,
+              private modalService: NgbModal,
               public translate: TranslateService) { }
 
   ngOnInit() {
@@ -104,5 +105,18 @@ export class MainComponent implements OnInit {
       this.takeMenu(menu.id);
     else
       this.selectedMenu = new Menu(this.selectedMenu.date);
+  }
+
+  onDeleteMenu(content) {
+    this.modalService.open(content).result.then((result) => {
+      if (result === 'Cancel') {
+        console.log('Stay here');
+      } else if (result === 'Delete') {
+        if(this.selectedMenu.id !== 0)
+          this.service.deleteMenu(this.selectedMenu.id).subscribe(
+            data => console.log("Menu removed"), err => console.log("Error while removing men ", err));
+        this.selectedMenu = new Menu();
+      }
+    });
   }
 }

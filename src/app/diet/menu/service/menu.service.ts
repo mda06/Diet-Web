@@ -20,6 +20,10 @@ export class MenuService {
     return this.http.get<Menu>(this.menuUrl + id, httpOptions);
   }
 
+  deleteMenu(id: number): Observable<any> {
+    return this.http.delete<any>(this.menuUrl + id, httpOptions);
+  }
+
   getMenuByDate(month: number, year: number, patientId: number): Observable<Array<Menu>> {
     var params = new HttpParams()
       .set('month', month.toString())

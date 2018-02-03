@@ -11,7 +11,8 @@
                  [dayTemplate]="customDay" ngbDatepicker #d="ngbDatepicker"
                  [(ngModel)]="selectedMenu.date" (navigate)="onDateNavigated($event)" (ngModelChange)="onDateChanged()">
 
-          <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
+          <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected"
+                       let-disabled="disabled" let-focused="focused">
           <span class="custom-day" [class.contains-menu]="containsMenu(date)" [class.focused]="focused"
                 [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
             {{ date.day }}
@@ -29,7 +30,7 @@
 
     <div class="btn-group ml-auto" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-secondary">Set a new date</button>
-      <button type="button" class="btn btn-danger">Delete menu</button>
+      <button type="button" class="btn btn-danger" (click)="onDeleteMenu(popupDelete)">Delete menu</button>
     </div>
 
   </div>
@@ -145,3 +146,25 @@
     <p>Please select a menu here</p>
   </div>
 </div>
+
+
+<ng-template #popupDelete let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Deleting TMP_MENU</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>You are deleting the menu !</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Delete')">
+      Delete
+    </button>
+  </div>
+</ng-template>
+
