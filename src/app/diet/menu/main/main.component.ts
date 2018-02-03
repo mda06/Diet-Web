@@ -34,7 +34,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
     this.selectedMenu = new Menu();
-    this.takeMenu(8);
+    //this.takeMenu(8);
   }
 
   private takeMenu(id: number) {

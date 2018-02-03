@@ -1,6 +1,9 @@
 <div class="container-fluid">
   <div class="row">
-    <h3>Menu of {{getFormattedDate(selectedMenu.date)}}</h3>
+    <h3 *ngIf="selectedMenu">
+      Menu of {{getFormattedDate(selectedMenu.date)}}
+      <span *ngIf="selectedMenu.id === 0" class="badge badge-secondary">New</span>
+    </h3>
     <form class="form-inline ml-2">
       <div class="form-group">
         <div class="input-group">
@@ -9,10 +12,10 @@
                  [(ngModel)]="selectedMenu.date" (navigate)="onDateNavigated($event)" (ngModelChange)="onDateChanged()">
 
           <ng-template #customDay let-date="date" let-currentMonth="currentMonth" let-selected="selected" let-disabled="disabled" let-focused="focused">
-            <span class="custom-day" [class.contains-menu]="containsMenu(date)" [class.focused]="focused"
-                  [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
-              {{ date.day }}
-            </span>
+          <span class="custom-day" [class.contains-menu]="containsMenu(date)" [class.focused]="focused"
+                [class.bg-primary]="selected" [class.hidden]="date.month !== currentMonth" [class.text-muted]="disabled">
+            {{ date.day }}
+          </span>
           </ng-template>
 
           <div class="input-group-append">
