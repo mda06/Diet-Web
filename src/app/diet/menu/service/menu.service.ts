@@ -14,6 +14,7 @@ export class MenuService {
   private menuUrl = "api/menu/";
   private menuDateUrl = "api/menu/date";
   private mealUrl = "api/meal/";
+  private mealProductUrl = "api/meal/product/";
 
   constructor(private http: HttpClient) {
   }
@@ -47,5 +48,9 @@ export class MenuService {
 
   saveMeal(meal: Meal): Observable<Meal> {
     return this.http.post<Meal>(this.mealUrl, meal, httpOptions);
+  }
+
+  deleteMealProduct(id: number): Observable<any> {
+    return this.http.delete<any>(this.mealProductUrl + id, httpOptions);
   }
 }

@@ -13,6 +13,7 @@ import {EuropeanNgbDateParserFormatter} from "../../../share/EuropeanNgbDatePars
 import {NgbDatepickerNavigateEvent} from "@ng-bootstrap/ng-bootstrap/datepicker/datepicker";
 import {isNullOrUndefined} from "util";
 import {DeletePopupStrings} from "../../../model/deletepopupstrings";
+import {MealProduct} from "../../../model/mealProduct";
 
 @Component({
   selector: 'app-main',
@@ -170,5 +171,14 @@ export class MainComponent implements OnInit {
 
   onSelectedProduct(product: Product) {
     console.log("Product selected: ", product.id);
+  }
+
+  onDeleteProduct(meal:Meal, mp: MealProduct) {
+    this.service.deleteMealProduct(mp.id).subscribe(
+      data => {
+        console.log("MealProduct removed");
+        const index: number = meal.mealProducts.indexOf(mp);
+        meal.mealProducts.splice(index, 1);
+      }, err => console.log("Error while removing meal product", err));
   }
 }
