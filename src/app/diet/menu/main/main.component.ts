@@ -34,15 +34,13 @@ export class MainComponent implements OnInit {
               public translate: TranslateService) { }
 
   ngOnInit() {
-    this.selectedMenu = new Menu();
+    this.createNewMenu();
     //this.takeMenu(8);
   }
 
   private takeMenu(id: number) {
-    console.log("Taking ", id, "the menu");
     this.service.getMenu(id).subscribe(data => {
         this.selectedMenu = data;
-        console.log(data.id, " for the date of ", data.date);
         this.dietService.getPatient(data.patientId).subscribe(data => this.selectedMenu.patient = data);
         this.selectedMenu.meals.forEach(meal => {
           meal.mealProducts.forEach(mp => {
@@ -82,7 +80,7 @@ export class MainComponent implements OnInit {
   }
 
   containsMenu(date: NgbDateStruct) {
-    var nativeDate = new Date();
+    const nativeDate = new Date();
     nativeDate.setUTCFullYear(date.year, date.month - 1, date.day);
     return this.menusOfTheMonth.find(menu =>
       menu.date.getUTCMonth() == nativeDate.getUTCMonth()
@@ -101,10 +99,12 @@ export class MainComponent implements OnInit {
       && menu.date.getUTCDate() == this.selectedMenu.date.getUTCDate()
       && menu.date.getUTCFullYear() == this.selectedMenu.date.getUTCFullYear()
     );
+    console.log(menu);
+    console.log("For ", this.selectedMenu.date);
     if(!isNullOrUndefined(menu))
       this.takeMenu(menu.id);
     else
-      this.selectedMenu = new Menu(this.selectedMenu.date);
+      this.createNewMenu(this.selectedMenu.date);
   }
 
   onDeleteMenu(content) {
@@ -115,8 +115,38 @@ export class MainComponent implements OnInit {
         if(this.selectedMenu.id !== 0)
           this.service.deleteMenu(this.selectedMenu.id).subscribe(
             data => console.log("Menu removed"), err => console.log("Error while removing men ", err));
-        this.selectedMenu = new Menu();
+        this.createNewMenu();
       }
     });
+  }
+
+  onAddNewMeal() {
+    const meal = new Meal();
+    meal.name = "New meal";
+    this.selectedMenu.meals.push(meal);
+    if(this.selectedMenu.id == 0) {
+      //It's a new menu so save it
+      this.service.saveMenu(this.selectedMenu).subscribe(
+        data => {
+          this.selectedMenu = data;
+          console.log(data);
+        },err => console.log(err)
+      );
+    } else {
+      //It's not a new menu so set the id and save only the meal
+      meal.menuId = this.selectedMenu.id;
+      this.service.saveMeal(meal).subscribe(data => {
+        meal.id = data.id;
+      }, err => console.log(err));
+    }
+  }
+
+  onAddTemplateMeal() {
+    console.log("Adding a meal from ours template");
+  }
+
+  private createNewMenu(date: Date = new Date()) {
+    this.selectedMenu = new Menu(date);
+    this.selectedMenu.patientId = 8;
   }
 }

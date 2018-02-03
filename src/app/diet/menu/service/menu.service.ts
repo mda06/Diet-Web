@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {Menu} from "../../../model/menu";
+import {Meal} from "../../../model/meal";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -12,6 +13,7 @@ export class MenuService {
 
   private menuUrl = "api/menu/";
   private menuDateUrl = "api/menu/date";
+  private mealUrl = "api/meal/";
 
   constructor(private http: HttpClient) {
   }
@@ -22,6 +24,14 @@ export class MenuService {
 
   deleteMenu(id: number): Observable<any> {
     return this.http.delete<any>(this.menuUrl + id, httpOptions);
+  }
+
+  saveMenu(menu: Menu): Observable<Menu> {
+    return this.http.post<Menu>(this.menuUrl, menu, httpOptions);
+  }
+
+  saveMeal(meal: Meal): Observable<Meal> {
+    return this.http.post<Meal>(this.mealUrl, meal, httpOptions);
   }
 
   getMenuByDate(month: number, year: number, patientId: number): Observable<Array<Menu>> {

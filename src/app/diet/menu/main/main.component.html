@@ -40,8 +40,12 @@
       <div class="mb-2 d-flex justify-content-between">
         <h4 class="mt-auto mb-auto">Meals</h4>
         <div>
-          <button type="button" class="btn btn-success">New <span class="fa fa-plus" aria-hidden="true"></span></button>
-          <button type="button" class="btn btn-success">Template <span class="fa fa-plus" aria-hidden="true"></span></button>
+          <button type="button" class="btn btn-success" (click)="onAddNewMeal()">
+            New <span class="fa fa-plus" aria-hidden="true"></span>
+          </button>
+          <button type="button" class="btn btn-success" (click)="onAddTemplateMeal()">
+            Template <span class="fa fa-plus" aria-hidden="true"></span>
+          </button>
         </div>
       </div>
       <div *ngIf="selectedMenu.meals.length != 0">
