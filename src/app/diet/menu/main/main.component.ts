@@ -160,6 +160,14 @@ export class MainComponent implements OnInit {
     });
   }
 
+  onBlurName(meal: Meal) {
+    this.service.saveMeal(meal).subscribe(data => console.log(data), err => console.log(err));
+  }
+
+  onBlurExtraInfo(meal: Meal) {
+    this.service.saveMeal(meal).subscribe(data => console.log(data), err => console.log(err));
+  }
+
   onSelectedProduct(product: Product) {
     console.log("Product selected: ", product.id);
   }
