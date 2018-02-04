@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {FoodService} from "../service/food.service";
 import {ProductsPaging} from "../../../model/productspaging";
 import 'rxjs/add/operator/debounceTime';
@@ -19,6 +19,7 @@ export class SearchComponent implements OnInit {
   productsPaging: ProductsPaging = new ProductsPaging(5);
   selectedProduct: Product;
   @Output() onSelectedProduct = new EventEmitter<Product>();
+  @Input() enableDragDrop: boolean = false;
 
   searching = false;
   searchFailed = false;

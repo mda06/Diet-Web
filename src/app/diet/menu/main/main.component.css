@@ -61,15 +61,6 @@ span.unit {
   width: 50px;
 }
 
-div.scroll-list {
-  overflow: auto;
-  max-height: 70vh;
-}
-
-.drag-over {
-  border: #ff525b dashed 2px;
-}
-
 .drag-hint {
   border: #ffc100 dashed 2px;
 }
@@ -78,6 +69,3 @@ div.scroll-list {
   border: #00bfff dashed 2px;
 }
 
-.drag-target-border-green {
-  border: #3c763d dashed 2px;
-}

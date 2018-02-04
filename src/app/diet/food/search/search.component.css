@@ -11,3 +11,7 @@
 .gray-out {
   filter: blur(3px) grayscale(100%);
 }
+
+.drag-over {
+  border: #ffc100 dashed 2px;
+}

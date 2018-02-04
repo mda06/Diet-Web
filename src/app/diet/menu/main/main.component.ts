@@ -190,10 +190,6 @@ export class MainComponent implements OnInit {
     this.service.saveMeal(meal).subscribe(data => console.log(data), err => console.log(err));
   }
 
-  onSelectedProduct(product: Product) {
-    console.log("Product selected: ", product.id);
-  }
-
   onDeleteProduct(meal:Meal, mp: MealProduct) {
     this.service.deleteMealProduct(mp.id).subscribe(
       data => {

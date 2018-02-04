@@ -38,18 +38,35 @@
 <div *ngIf="productsPaging" class="card">
   <div *ngIf="productsPaging.numberOfElements > 0">
     <ul class="list-group list-group-flush" >
-      <li class="list-group-item product-holder " *ngFor="let product of productsPaging.content"
-          [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
-        <h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
-        <blockquote class="blockquote"
-                    *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
-          <footer class="blockquote-footer">
-            <cite title="Source Title">
-              {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
-            </cite>
-          </footer>
-        </blockquote>
-      </li>
+      <div *ngIf="enableDragDrop">
+        <li class="list-group-item list-group-item-action product-holder" [dragClass]="'drag-over'"
+            [draggable] *ngFor="let product of productsPaging.content" [dragData]="product">
+          <h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+          <blockquote class="blockquote"
+                      *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
+            <footer class="blockquote-footer">
+              <cite title="Source Title">
+                {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
+              </cite>
+            </footer>
+          </blockquote>
+        </li>
+      </div>
+
+      <div *ngIf="!enableDragDrop">
+        <li class="list-group-item product-holder " *ngFor="let product of productsPaging.content"
+            [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
+          <h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+          <blockquote class="blockquote"
+                      *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
+            <footer class="blockquote-footer">
+              <cite title="Source Title">
+                {{product.name.slice(product.name.indexOf("-") + 1, product.name.lastIndexOf("-"))}}
+              </cite>
+            </footer>
+          </blockquote>
+        </li>
+      </div>
     </ul>
     <div class="card-footer">
       <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
@@ -61,66 +78,3 @@
     <p class="">{{ 'FOOD.SEARCH.EMPTY' | translate }}</p>
   </div>
 </div>
-
-<!--
-<div class="card">
-  <div class="card-body">
-    <h5 class="card-title" i18n>{{ 'FOOD.SEARCH.TITLE' | translate }}</h5>
-
-    <form>
-      <div class="form-inline mb-2">
-        <label for="fav">{{ 'FOOD.FAV.ONLY' | translate }}</label>
-        <input id="fav" type="checkbox" name="fav" class="form-control ml-2" [(ngModel)]="onlyFavs" (change)="findProducts()"/>
-      </div>
-      <div class="form-group row">
-        <label for="search" class="col-md-4 col-form-label">{{ 'FOOD.SEARCH.NAME' | translate }}</label>
-        <div class="col-md-8">
-          <input #input="ngModel" id="search" type="text" name="search" class="form-control"
-                 [(ngModel)]="name" placeholder="{{ 'FOOD.SEARCH.NAME_PLACEHOLDER' | translate }}"
-                 [disabled]="onlyFavs"/>
-        </div>
-      </div>
-      <div class="form-group row">
-        <label for="size" class="col-md-4 col-form-label">{{ 'FOOD.SEARCH.SIZE' | translate }}</label>
-        <div class="col-md-8">
-          <select class="form-control" id="size" name="size" [(ngModel)]="productsPaging.size" (change)="sizeChanged()">
-            <option>5</option>
-            <option>8</option>
-            <option>10</option>
-            <option>15</option>
-            <option>20</option>
-          </select>
-        </div>
-      </div>
-    </form>
-
-    <hr>
-    <h6 class="card-subtitle mb-2 text-muted">{{ 'FOOD.SEARCH.PRODUCTS' | translate }}</h6>
-    <div *ngIf="searching && productsPaging && productsPaging.numberOfElements == 0">
-      <p class="card-text">{{ 'FOOD.SEARCH.SEARCHING' | translate }}</p>
-    </div>
-    <div *ngIf="searchFailed" class="bg-danger">
-      <p class="card-text">{{ 'FOOD.SEARCH.ERROR_SEARCHING' | translate }}</p>
-    </div>
-    <div *ngIf="productsPaging" class="card">
-      <div *ngIf="productsPaging.numberOfElements > 0">
-        <ul class="list-group list-group-flush" >
-          <li class="list-group-item product-holder " *ngFor="let product of productsPaging.content"
-              [class.active]="(selectedProduct ? selectedProduct.id : 0) === product.id" (click)="selectProduct(product)">
-            <p class="card-text">{{product.name}}</p>
-          </li>
-        </ul>
-        <div class="card-footer">
-          <ngb-pagination [pageSize]="productsPaging.size" [collectionSize]="productsPaging.totalElements"
-                        [(page)]="productsPaging.number" (pageChange)="pageChanged($event)" [rotate]="true"
-                        aria-label="Default pagination" [maxSize]="5" [ellipses]="false"></ngb-pagination>
-        </div>
-      </div>
-      <div *ngIf="productsPaging.numberOfElements === 0" class="card-body">
-        <p class="card-text">{{ 'FOOD.SEARCH.EMPTY' | translate }}</p>
-      </div>
-    </div>
-  </div>
-</div>
-
--->

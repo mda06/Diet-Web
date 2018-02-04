@@ -154,7 +154,7 @@
     <div class="col-md-6">
       <div *ngIf="showProducts">
         <div>
-          <app-search-food (onSelectedProduct)="onSelectedProduct($event)"></app-search-food>
+          <app-search-food [enableDragDrop]="true"></app-search-food>
         </div>
       </div>
       <div *ngIf="!showProducts">
@@ -167,17 +167,6 @@
   </div>
 </div>
 
-<h3>Transfer Data via Drag Drop</h3>
-<div class="row">
-  <div class="col-sm-3">
-    <ul class="list-group">
-      <li class="list-group-item list-group-item-action list-group-item-success" [dragClass]="'drag-over'"
-          [draggable] *ngFor="let item of items" [dragData]="item">
-      {{item.name}}
-    </li>
-    </ul>
-  </div>
-</div>
 <ng-template #popupDelete let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">{{deletePopupStrings.title}}</h4>

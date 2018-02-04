@@ -9,7 +9,6 @@ import { MainComponent } from './main/main.component';
 import {FoodModule} from "../food/food.module";
 import {TimesPipe} from "../../share/TimesPipe";
 import {NavbarModule} from "../../navbar/navbar.module";
-import {NgDragDropModule} from "ng-drag-drop";
 
 @NgModule({
   imports: [
@@ -18,7 +17,7 @@ import {NgDragDropModule} from "ng-drag-drop";
     NgbModule,
     MenuRoutingModule,
     FoodModule,
-    NgDragDropModule.forRoot()
+    NavbarModule
   ],
   declarations: [MenuComponent, MainComponent, TimesPipe],
   providers: [MenuService]
