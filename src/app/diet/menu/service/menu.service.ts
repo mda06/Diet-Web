@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";
 import {Menu} from "../../../model/menu";
 import {Meal} from "../../../model/meal";
+import {MealProduct} from "../../../model/mealProduct";
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -60,5 +61,9 @@ export class MenuService {
 
   deleteMealProduct(id: number): Observable<any> {
     return this.http.delete<any>(this.mealProductUrl + id, httpOptions);
+  }
+
+  saveMealProduct(mp: MealProduct): Observable<MealProduct> {
+    return this.http.post<MealProduct>(this.mealProductUrl, mp, httpOptions);
   }
 }

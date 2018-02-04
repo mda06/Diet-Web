@@ -87,13 +87,8 @@
                 <hr>
                 <div class="row">
                   <div class="products" droppable [dragOverClass]="'drag-target-border'" [dragHintClass]="'drag-hint'"
-                       (onDrop)="onItemDrop($event)">
+                       (onDrop)="onMealProductDrop(meal, $event)">
                     <h5 class="mb-2 text-muted">Products</h5>
-
-                    <div class="card-block scroll-list">
-                      <li *ngFor="let item of droppedItems" class="list-group-item">{{item.name}}</li>
-                    </div>
-
                     <ul class="list-group">
                       <div class="product-holder" *ngIf="meal.mealProducts.length == 0">
                         You don'y have any products in this meal

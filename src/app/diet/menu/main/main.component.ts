@@ -30,18 +30,6 @@ export class MainComponent implements OnInit {
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
   private menusOfTheMonth: Array<Menu> = [];
 
-  items = [
-    {name: "Apple", type: "fruit"},
-    {name: "Carrot", type: "vegetable"},
-    {name: "Orange", type: "fruit"}];
-
-  droppedItems = [];
-
-  onItemDrop(e: any) {
-    // Get the dropped data here
-    this.droppedItems.push(e.dragData);
-  }
-
   constructor(private service: MenuService,
               private foodService: FoodService,
               private dietService: DietService,
@@ -56,6 +44,18 @@ export class MainComponent implements OnInit {
     this.service.getMenuByFullDate(moment().format("YYYY-MM-DD"), 8).subscribe(
       data => {
         this.selectedMenu = data;
+        if(!isNullOrUndefined(data)) {
+          this.dietService.getPatient(data.patientId).subscribe(data => this.selectedMenu.patient = data);
+          this.selectedMenu.meals.forEach(meal => {
+            meal.mealProducts.forEach(mp => {
+              this.foodService.getProduct(mp.productId, this.translate.currentLang).subscribe(data => {
+                mp.product = data;
+              });
+            });
+          });
+        } else {
+          this.createNewMenu();
+        }
       }, err => {
         this.createNewMenu();
       }
@@ -188,6 +188,28 @@ export class MainComponent implements OnInit {
 
   onBlurExtraInfo(meal: Meal) {
     this.service.saveMeal(meal).subscribe(data => console.log(data), err => console.log(err));
+  }
+
+  onMealProductDrop(meal: Meal, evt: any) {
+    const product = evt.dragData;
+    var mp = meal.mealProducts.find(mp => mp.productId === product.id);
+    if(isNullOrUndefined(mp)) {
+      mp = new MealProduct();
+      mp.productId = product.id;
+      mp.product = product;
+      mp.mealId = meal.id;
+      mp.quantity = 50;
+      meal.mealProducts.push(mp);
+      this.service.saveMealProduct(mp).subscribe(data => {
+          console.log("Meal product saved");
+          console.log(data);
+          mp.id = data.id;
+        }, err => console.log(err)
+      );
+    } else {
+      mp.quantity += 50;
+      this.service.saveMealProduct(mp).subscribe(data => console.log("Meal product saved"), err => console.log(err));
+    }
   }
 
   onDeleteProduct(meal:Meal, mp: MealProduct) {
