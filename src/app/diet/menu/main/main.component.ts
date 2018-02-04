@@ -30,6 +30,18 @@ export class MainComponent implements OnInit {
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
   private menusOfTheMonth: Array<Menu> = [];
 
+  items = [
+    {name: "Apple", type: "fruit"},
+    {name: "Carrot", type: "vegetable"},
+    {name: "Orange", type: "fruit"}];
+
+  droppedItems = [];
+
+  onItemDrop(e: any) {
+    // Get the dropped data here
+    this.droppedItems.push(e.dragData);
+  }
+
   constructor(private service: MenuService,
               private foodService: FoodService,
               private dietService: DietService,
@@ -37,8 +49,17 @@ export class MainComponent implements OnInit {
               public translate: TranslateService) { }
 
   ngOnInit() {
-    this.createNewMenu();
-    //this.takeMenu(8);
+    this.initMenuOfTheDay();
+  }
+
+  private initMenuOfTheDay() {
+    this.service.getMenuByFullDate(moment().format("YYYY-MM-DD"), 8).subscribe(
+      data => {
+        this.selectedMenu = data;
+      }, err => {
+        this.createNewMenu();
+      }
+    );
   }
 
   onDateNavigated(event: NgbDatepickerNavigateEvent) {

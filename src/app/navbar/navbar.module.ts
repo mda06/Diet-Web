@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {NavbarComponent} from "./navbar.component";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {RouterModule} from "@angular/router";
+import { NgDragDropModule } from 'ng-drag-drop';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 
 @NgModule({
@@ -10,10 +11,11 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     CommonModule,
     RouterModule,
     NgbModule,
-    TranslateModule
+    TranslateModule,
+    NgDragDropModule.forRoot()
   ],
   providers: [TranslateService],
   declarations: [NavbarComponent],
-  exports: [NavbarComponent, TranslateModule]
+  exports: [NavbarComponent, TranslateModule, NgDragDropModule]
 })
 export class NavbarModule { }

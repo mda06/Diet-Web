@@ -12,7 +12,7 @@ const httpOptions = {
 export class MenuService {
 
   private menuUrl = "api/menu/";
-  private menuDateUrl = "api/menu/date";
+  private menuDateUrl = "api/menu/date/";
   private mealUrl = "api/meal/";
   private mealProductUrl = "api/meal/product/";
 
@@ -25,6 +25,14 @@ export class MenuService {
       .set('year', year.toString())
       .set('patientId', patientId.toString());
     return this.http.get<Array<Menu>>(this.menuDateUrl, {
+      headers: httpOptions.headers,
+      params: params
+    });
+  }
+
+  getMenuByFullDate(date: string, patientId: number): Observable<Menu> {
+    var params = new HttpParams().set('patientId', patientId.toString());
+    return this.http.get<Menu>(this.menuDateUrl + date, {
       headers: httpOptions.headers,
       params: params
     });

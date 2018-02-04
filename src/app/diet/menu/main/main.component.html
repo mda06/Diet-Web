@@ -1,6 +1,9 @@
-<div class="container-fluid">
+<div *ngIf="!selectedMenu">
+  Loading...
+</div>
+<div class="container-fluid" *ngIf="selectedMenu">
   <div class="row">
-    <h3 *ngIf="selectedMenu">
+    <h3>
       Menu of {{getFormattedDate(selectedMenu.date)}}
       <span *ngIf="selectedMenu.id === 0" class="badge badge-secondary">New</span>
     </h3>
@@ -83,8 +86,14 @@
                 </div>
                 <hr>
                 <div class="row">
-                  <div class="products">
+                  <div class="products" droppable [dragOverClass]="'drag-target-border'" [dragHintClass]="'drag-hint'"
+                       (onDrop)="onItemDrop($event)">
                     <h5 class="mb-2 text-muted">Products</h5>
+
+                    <div class="card-block scroll-list">
+                      <li *ngFor="let item of droppedItems" class="list-group-item">{{item.name}}</li>
+                    </div>
+
                     <ul class="list-group">
                       <div class="product-holder" *ngIf="meal.mealProducts.length == 0">
                         You don'y have any products in this meal
@@ -158,7 +167,17 @@
   </div>
 </div>
 
-
+<h3>Transfer Data via Drag Drop</h3>
+<div class="row">
+  <div class="col-sm-3">
+    <ul class="list-group">
+      <li class="list-group-item list-group-item-action list-group-item-success" [dragClass]="'drag-over'"
+          [draggable] *ngFor="let item of items" [dragData]="item">
+      {{item.name}}
+    </li>
+    </ul>
+  </div>
+</div>
 <ng-template #popupDelete let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">{{deletePopupStrings.title}}</h4>
@@ -178,4 +197,3 @@
     </button>
   </div>
 </ng-template>
-
