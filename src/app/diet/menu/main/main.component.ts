@@ -212,6 +212,11 @@ export class MainComponent implements OnInit {
     }
   }
 
+  onBlurMealProductQuantity(mp: MealProduct) {
+    if(mp.quantity != null)
+     this.service.saveMealProduct(mp).subscribe(data => console.log(data), err => console.log(err));
+  }
+
   onDeleteProduct(meal:Meal, mp: MealProduct) {
     this.service.deleteMealProduct(mp.id).subscribe(
       data => {

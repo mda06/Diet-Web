@@ -100,7 +100,8 @@
                           </div>
                           <div class="d-flex align-items-center" *ngIf="mp.product">
                             <h6>{{mp.product.name.slice(0, mp.product.name.indexOf("-"))}}</h6>
-                            <input type="text" value="{{mp.quantity}}" class="form-control ml-auto quantity" name="quantity">
+                            <input type="number" [(ngModel)]="mp.quantity" class="form-control ml-auto quantity"
+                                  (blur)="onBlurMealProductQuantity(mp)" name="quantity">
                             <span class="unit">g</span>
                           </div>
                           <blockquote class="blockquote" *ngIf="mp.product &&
