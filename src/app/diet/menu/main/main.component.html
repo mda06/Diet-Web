@@ -1,4 +1,7 @@
-<div *ngIf="!selectedMenu">
+<div *ngIf="!selectedPatient">
+  Please select a patient before...
+</div>
+<div *ngIf="!selectedMenu && selectedPatient">
   Loading...
 </div>
 <div class="container-fluid" *ngIf="selectedMenu">
@@ -129,10 +132,10 @@
                     </div>
                     <blockquote class="blockquote">
                       <p class="mb-0">{{meal.comment}}</p>
-                      <footer class="blockquote-footer" *ngIf="selectedMenu.patient">
+                      <footer class="blockquote-footer" *ngIf="selectedPatient">
                         Comment of
                         <cite title="Source Title">
-                          {{selectedMenu.patient.firstName + ' ' + selectedMenu.patient.lastName}}
+                          {{selectedPatient.firstName + ' ' + selectedPatient.lastName}}
                         </cite>
                       </footer>
                     </blockquote>

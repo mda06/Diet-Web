@@ -13,10 +13,10 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class SelectPatientComponent implements OnInit, OnDestroy {
 
-  patients: Array<Patient>
+  patients: Array<Patient>;
   private subscriptions = new Subscription();
   selectedPatient: Patient;
-  filter: String = new String();
+  filter: String = "";
   currentPage = 1;
   patientsPerPage = 5;
 

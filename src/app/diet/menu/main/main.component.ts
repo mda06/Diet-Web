@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MenuService} from "../service/menu.service";
 import {Menu} from "../../../model/menu";
 import {Product} from "../../../model/product";
@@ -14,6 +14,9 @@ import {NgbDatepickerNavigateEvent} from "@ng-bootstrap/ng-bootstrap/datepicker/
 import {isNullOrUndefined} from "util";
 import {DeletePopupStrings} from "../../../model/deletepopupstrings";
 import {MealProduct} from "../../../model/mealProduct";
+import {SharedService} from "../../service/shared.service";
+import {Patient} from "../../../model/patient";
+import {Subscription} from "rxjs/Subscription";
 
 @Component({
   selector: 'app-main',
@@ -29,19 +32,31 @@ export class MainComponent implements OnInit {
   showProducts; boolean = false;
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
   private menusOfTheMonth: Array<Menu> = [];
+  private subscriptions = new Subscription();
+  selectedPatient: Patient;
 
   constructor(private service: MenuService,
               private foodService: FoodService,
               private dietService: DietService,
               private modalService: NgbModal,
+              private sharedService: SharedService,
               public translate: TranslateService) { }
 
   ngOnInit() {
-    this.initMenuOfTheDay();
+    this.subscriptions.add(this.sharedService.patient$.subscribe(
+      data => {
+        this.selectedPatient = data;
+        this.initMenuOfTheDay();
+      })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   private initMenuOfTheDay() {
-    this.service.getMenuByFullDate(moment().format("YYYY-MM-DD"), 8).subscribe(
+    this.service.getMenuByFullDate(moment().format("YYYY-MM-DD"), this.selectedPatient.id).subscribe(
       data => {
         this.selectedMenu = data;
         if(!isNullOrUndefined(data)) {
@@ -64,7 +79,7 @@ export class MainComponent implements OnInit {
 
   onDateNavigated(event: NgbDatepickerNavigateEvent) {
     this.menusOfTheMonth.length = 0;
-    this.service.getMenuByDate(event.next.month, event.next.year, 8).subscribe(data => {
+    this.service.getMenuByDate(event.next.month, event.next.year, this.selectedPatient.id).subscribe(data => {
       data.forEach(menu => {
         this.menusOfTheMonth.push(menu);
       });
@@ -72,7 +87,6 @@ export class MainComponent implements OnInit {
   }
 
   panelChange(evt: any) {
-    console.log(evt);
     this.showProducts = evt.nextState;
   }
 
@@ -134,7 +148,7 @@ export class MainComponent implements OnInit {
 
   private createNewMenu(date: Date = new Date()) {
     this.selectedMenu = new Menu(date);
-    this.selectedMenu.patientId = 8;
+    this.selectedMenu.patientId = this.selectedPatient.id;
   }
 
   onAddNewMeal() {
