@@ -61,10 +61,6 @@ export class MainComponent implements OnInit {
     this.displayChangeDateOfMenu = !this.displayChangeDateOfMenu;
   }
 
-  onChangeDateOfMenu(evt) {
-    console.log(evt);
-  }
-
   private initMenuOfTheDay() {
     this.service.getMenuByFullDate(moment().format("YYYY-MM-DD"), this.selectedPatient.id).subscribe(
       data => {
@@ -98,11 +94,24 @@ export class MainComponent implements OnInit {
   }
 
   panelChange(evt: any) {
+    this.displayChangeDateOfMenu = false;
     this.showProducts = evt.nextState;
   }
 
   getFormattedDate(date: Date): string {
     return moment(date).format("DD/MM/YYYY");
+  }
+
+  onChangeDateOfMenu(evt) {
+    var newMenuForDate = new Menu();
+    newMenuForDate.id = this.selectedMenu.id;
+    newMenuForDate.date.setUTCFullYear(evt.year, evt.month - 1, evt.day);
+    newMenuForDate.patientId = this.selectedMenu.patientId;
+    this.service.saveMenu(newMenuForDate).subscribe(
+      data => {
+        this.selectedMenu.date = data.date;
+      },err => console.log(err)
+    );
   }
 
   onDateChanged() {
