@@ -1,7 +1,6 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MenuService} from "../service/menu.service";
 import {Menu} from "../../../model/menu";
-import {Product} from "../../../model/product";
 import {FoodService} from "../../food/service/food.service";
 import {TranslateService} from "@ngx-translate/core";
 import {DietService} from "../../service/diet.service";
@@ -34,6 +33,7 @@ export class MainComponent implements OnInit {
   private menusOfTheMonth: Array<Menu> = [];
   private subscriptions = new Subscription();
   selectedPatient: Patient;
+  displayDate: boolean = false;
 
   constructor(private service: MenuService,
               private foodService: FoodService,
@@ -45,14 +45,24 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.subscriptions.add(this.sharedService.patient$.subscribe(
       data => {
-        this.selectedPatient = data;
-        this.initMenuOfTheDay();
+        if(!isNullOrUndefined(data)) {
+          this.selectedPatient = data;
+          this.initMenuOfTheDay();
+        }
       })
     );
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
+  }
+
+  openChangeDate() {
+    //this.displayDate = !this.displayDate;
+  }
+
+  onDateSelected(evt) {
+    console.log(evt);
   }
 
   private initMenuOfTheDay() {

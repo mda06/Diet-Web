@@ -35,8 +35,9 @@
     </form>
 
     <div class="btn-group ml-auto" role="group" aria-label="Basic example">
-      <button type="button" class="btn btn-secondary">Set a new date</button>
-      <button type="button" class="btn btn-danger" (click)="onDeleteMenu(popupDelete)">Delete menu</button>
+      <ngb-datepicker id="dpChange" #dp *ngIf="displayDate" (select)="onDateSelected($event)"></ngb-datepicker>
+      <button [disabled]="selectedMenu.id === 0" type="button" class="btn btn-secondary" (click)="openChangeDate()">Set a new date</button>
+      <button [disabled]="selectedMenu.id === 0" type="button" class="btn btn-danger" (click)="onDeleteMenu(popupDelete)">Delete menu</button>
     </div>
 
   </div>
