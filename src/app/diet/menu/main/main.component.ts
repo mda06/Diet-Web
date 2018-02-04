@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
   private menusOfTheMonth: Array<Menu> = [];
   private subscriptions = new Subscription();
   selectedPatient: Patient;
-  displayDate: boolean = false;
+  displayChangeDateOfMenu: boolean = false;
 
   constructor(private service: MenuService,
               private foodService: FoodService,
@@ -58,10 +58,10 @@ export class MainComponent implements OnInit {
   }
 
   openChangeDate() {
-    //this.displayDate = !this.displayDate;
+    this.displayChangeDateOfMenu = !this.displayChangeDateOfMenu;
   }
 
-  onDateSelected(evt) {
+  onChangeDateOfMenu(evt) {
     console.log(evt);
   }
 
@@ -88,6 +88,7 @@ export class MainComponent implements OnInit {
   }
 
   onDateNavigated(event: NgbDatepickerNavigateEvent) {
+    this.displayChangeDateOfMenu = false;
     this.menusOfTheMonth.length = 0;
     this.service.getMenuByDate(event.next.month, event.next.year, this.selectedPatient.id).subscribe(data => {
       data.forEach(menu => {

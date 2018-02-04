@@ -2,6 +2,7 @@
   position: absolute;
   left: 0;
   top: 45px;
+  z-index: 1;
 }
 
 .custom-day {
