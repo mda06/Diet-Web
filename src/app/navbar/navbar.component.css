@@ -8,6 +8,7 @@ nav {
   justify-content: center;
   padding-top: 1em;
   padding-bottom: 1em;
+  border-right: transparent solid 2px;
 }
 .menuItem:hover {
   background-color: lightblue;
@@ -17,10 +18,8 @@ nav {
   flex: 0 0 70%;
 }
 
-#activeMenu {
-  flex: 0 1 5px;
-  background-color: dodgerblue;
-  margin-left: auto;
+.activeMenu {
+  border-right: dodgerblue solid 2px;
 }
 
 #bottom {

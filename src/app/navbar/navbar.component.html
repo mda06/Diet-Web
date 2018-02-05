@@ -5,13 +5,10 @@
 
 
   <ul *ngIf="navItems" id="menu">
-    <li *ngFor="let item of navItems" class="menuItem" [class.active]="isActive(item)"
+    <li *ngFor="let item of navItems" class="menuItem" [class.activeMenu]="isActive(item)"
         (click)="navigate(item)">
       <img src="{{item.img}}" placement="top" ngbTooltip="{{ (item.title) | translate}}"
            alt="{{ (item.title) | translate}}">
-      <div id="activeMenu" *ngIf="isActive(item)">
-
-      </div>
       <!--<div *ngIf="isActive(item)">
         <ul class="mt-2">
           <li *ngFor="let subItem of item.subMenus">
