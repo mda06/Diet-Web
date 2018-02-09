@@ -16,6 +16,7 @@ export class MenuService {
   private menuDateUrl = "api/menu/date/";
   private mealUrl = "api/meal/";
   private mealProductUrl = "api/meal/product/";
+  private mealDietUrl = "api/meal/diet/";
 
   constructor(private http: HttpClient) {
   }
@@ -49,6 +50,10 @@ export class MenuService {
 
   saveMenu(menu: Menu): Observable<Menu> {
     return this.http.post<Menu>(this.menuUrl, menu, httpOptions);
+  }
+
+  getMealByDietId(id: number): Observable<Array<Meal>> {
+    return this.http.get<Array<Meal>>(this.mealDietUrl + id, httpOptions);
   }
 
   deleteMeal(id: number): Observable<any> {

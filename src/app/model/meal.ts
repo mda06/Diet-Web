@@ -3,6 +3,7 @@ import {MealProduct} from "./mealProduct";
 export class Meal {
   id: number = 0;
   menuId: number = 0;
+  dietId: number = 0;
   name: string = "";
   extraInfo: string = "";
   comment: string = "";

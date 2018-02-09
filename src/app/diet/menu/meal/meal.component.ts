@@ -10,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {DeletePopupStrings} from '../../../model/deletepopupstrings';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {FoodService} from '../../food/service/food.service';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-meal',
@@ -21,6 +22,7 @@ export class MealComponent implements OnInit {
   @Input() selectedMenu: Menu;
   @Input() selectedPatient: Patient;
   @Input() meals: Array<Meal> = [];
+  templateMeals: Array<Meal> = [];
   showProducts; boolean = false;
   @ViewChild('accordion') accordion;
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
@@ -28,6 +30,7 @@ export class MealComponent implements OnInit {
   constructor(private service: MenuService,
               private modalService: NgbModal,
               private foodService: FoodService,
+              private authService: AuthenticationService,
               public translate: TranslateService) {}
 
   ngOnInit() {
@@ -65,15 +68,22 @@ export class MealComponent implements OnInit {
       //It's used in our templates
       //Don't set the menu Id
       //Instead set the diet Id
-      //meal.dietId = ...
-      this.service.saveMeal(meal).subscribe(data => {
-        meal.id = data.id;
-      }, err => console.log(err));
+      this.authService.id.subscribe(id => {
+        meal.dietId = id;
+        this.service.saveMeal(meal).subscribe(data => {
+          meal.id = data.id;
+        }, err => console.log(err));
+      });
     }
   }
 
   onAddTemplateMeal() {
     console.log("Adding a meal from ours template");
+    this.authService.id.subscribe(id => {
+      this.service.getMealByDietId(id).subscribe(data => {
+        this.templateMeals = data;
+      }, err => console.log(err));
+    });
   }
 
   onDeleteMeal(meal: Meal, popupDelete) {
