@@ -9,6 +9,7 @@ import { MainComponent } from './main/main.component';
 import {FoodModule} from "../food/food.module";
 import {TimesPipe} from "../../share/TimesPipe";
 import {NavbarModule} from "../../navbar/navbar.module";
+import {MealComponent} from './meal/meal.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,12 @@ import {NavbarModule} from "../../navbar/navbar.module";
     FoodModule,
     NavbarModule
   ],
-  declarations: [MenuComponent, MainComponent, TimesPipe],
+  declarations: [
+    MenuComponent,
+    MealComponent,
+    MainComponent,
+    TimesPipe
+  ],
   providers: [MenuService]
 })
 export class MenuModule { }

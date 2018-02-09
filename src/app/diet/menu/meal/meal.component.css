@@ -1,0 +1,51 @@
+.meal-title {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+#meals {
+  padding-right: 20px;
+  border-right: 1px solid #ccc;
+}
+
+.products {
+  width: 100%;
+}
+
+.product-holder {
+  display: flex;
+}
+
+.product-detail {
+  flex: 1 0 auto;
+  height: 80px;
+  border-radius: 0;
+}
+
+.product-detail > h6 {
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space: nowrap;
+}
+
+input.quantity {
+  width: 80px;
+}
+
+span.unit {
+  margin-left: -12px;
+  color: lightslategray;
+}
+
+.product-trash {
+  border-radius: 0;
+  width: 50px;
+}
+
+.drag-hint {
+  border: #ffc100 dashed 2px;
+}
+
+.drag-target-border {
+  border: #00bfff dashed 2px;
+}
