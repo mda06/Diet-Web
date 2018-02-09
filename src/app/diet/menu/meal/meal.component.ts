@@ -79,6 +79,12 @@ export class MealComponent implements OnInit {
 
   onAddFromTemplate(meal: Meal) {
     console.log(meal);
+    //Before we add the template
+    //Remove mealId, menuId, dietId, comment, score = keep name & comment
+    //Add the menuId of the selectedMenu
+    //Foreach MealProduct remove his id & mealId
+    //Once we get the id of our meal, add the products to it
+    //====> OR we could send all this meal directly ? It's working normally
   }
 
   onShowTemplateMeals(popupTemplates) {
