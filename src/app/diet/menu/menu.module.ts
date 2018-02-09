@@ -10,6 +10,7 @@ import {FoodModule} from "../food/food.module";
 import {TimesPipe} from "../../share/TimesPipe";
 import {NavbarModule} from "../../navbar/navbar.module";
 import {MealComponent} from './meal/meal.component';
+import { TemplateComponent } from './meal/template/template.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import {MealComponent} from './meal/meal.component';
     MenuComponent,
     MealComponent,
     MainComponent,
-    TimesPipe
+    TimesPipe,
+    TemplateComponent
   ],
   providers: [MenuService]
 })

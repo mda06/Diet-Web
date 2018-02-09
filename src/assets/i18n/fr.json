@@ -17,8 +17,7 @@
     },
     "MENU": {
       "TITLE": "Menu",
-      "ADD": "Ajouter",
-      "LIST": "List"
+      "Template": "List"
     },
     "FOOD_SEARCH": "Chercher des produits",
     "ABOUT_PATIENT": "À propos du patient",

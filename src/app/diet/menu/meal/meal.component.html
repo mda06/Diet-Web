@@ -11,9 +11,9 @@
         </button>
       </div>
     </div>
-    <div *ngIf="selectedMenu.meals.length != 0">
+    <div *ngIf="meals.length != 0">
       <ngb-accordion #accordion="ngbAccordion" [closeOthers]="true" activeIds="ngb-panel-0-header" (panelChange)="panelChange($event)">
-        <ngb-panel id="panel-{{meal.id}}" *ngFor="let meal of selectedMenu.meals">
+        <ngb-panel id="panel-{{meal.id}}" *ngFor="let meal of meals">
           <ng-template ngbPanelTitle>
             <div class="container-fluid">
               <div class="row">
@@ -101,9 +101,9 @@
         </ngb-panel>
       </ngb-accordion>
     </div>
-    <div *ngIf="selectedMenu.meals.length == 0">
-      They are no meals in this menu
-    </div>
+    <div *ngIf="meals.length == 0">
+      They are no meals
+  </div>
   </div>
   <div class="col-md-6">
     <div *ngIf="showProducts">

@@ -28,8 +28,7 @@ export class DietComponent implements OnInit {
     {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/diet/dashboard", subMenus: []};
   private menuItem: NavItem =
     {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/diet/menu", subMenus: [
-      {img: "", title: "NAV.MENU.LIST", routerLink: "/diet/menu/add", subMenus: []},
-      {img: "", title: "NAV.MENU.ADD", routerLink: "/diet/menu/add", subMenus: []}
+      {img: "", title: "NAV.MENU.TEMPLATE", routerLink: "/diet/menu/template", subMenus: []}
     ]};
   navItems: Array<NavItem> = [];
   private subscriptions = new Subscription();

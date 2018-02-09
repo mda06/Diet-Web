@@ -42,7 +42,9 @@
 
   </div>
   <hr>
-  <app-meal *ngIf="selectedMenu" [selectedMenu]="selectedMenu"></app-meal>
+  <app-meal *ngIf="selectedMenu"
+            [selectedMenu]="selectedMenu" [meals]="selectedMenu.meals" [selectedPatient]="selectedPatient">
+  </app-meal>
   <div *ngIf="!selectedMenu">
     <p>Please select a menu here</p>
   </div>

@@ -19,6 +19,8 @@ import {FoodService} from '../../food/service/food.service';
 export class MealComponent implements OnInit {
 
   @Input() selectedMenu: Menu;
+  @Input() selectedPatient: Patient;
+  @Input() meals: Array<Meal> = [];
   showProducts; boolean = false;
   @ViewChild('accordion') accordion;
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
@@ -35,21 +37,35 @@ export class MealComponent implements OnInit {
     //this.displayChangeDateOfMenu = false;
     this.showProducts = evt.nextState;
   }
+
   onAddNewMeal() {
     const meal = new Meal();
     meal.name = "New meal";
-    this.selectedMenu.meals.push(meal);
-    if(this.selectedMenu.id == 0) {
-      //It's a new menu so save it
-      this.service.saveMenu(this.selectedMenu).subscribe(
-        data => {
-          this.selectedMenu = data;
-          console.log(data);
-        },err => console.log(err)
-      );
-    } else {
-      //It's not a new menu so set the id and save only the meal
-      meal.menuId = this.selectedMenu.id;
+    this.meals.push(meal);
+
+    //It's used in the menu
+    if(!isNullOrUndefined(this.selectedMenu)) {
+      if(this.selectedMenu.id == 0) {
+        //It's a new menu so save it
+        this.service.saveMenu(this.selectedMenu).subscribe(
+          data => {
+            this.selectedMenu = data;
+            console.log(data);
+          },err => console.log(err)
+        );
+      } else {
+        //It's not a new menu so set the id and save only the meal
+        meal.menuId = this.selectedMenu.id;
+        this.service.saveMeal(meal).subscribe(data => {
+          meal.id = data.id;
+        }, err => console.log(err));
+      }
+    }
+    else {
+      //It's used in our templates
+      //Don't set the menu Id
+      //Instead set the diet Id
+      //meal.dietId = ...
       this.service.saveMeal(meal).subscribe(data => {
         meal.id = data.id;
       }, err => console.log(err));
@@ -73,8 +89,8 @@ export class MealComponent implements OnInit {
           this.service.deleteMeal(meal.id).subscribe(
             data => {
               console.log("Meal removed");
-              const index: number = this.selectedMenu.meals.indexOf(meal);
-              this.selectedMenu.meals.splice(index, 1);
+              const index: number = this.meals.indexOf(meal);
+              this.meals.splice(index, 1);
             }, err => console.log("Error while removing meal ", err));
       }
     });
