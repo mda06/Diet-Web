@@ -77,11 +77,21 @@ export class MealComponent implements OnInit {
     }
   }
 
-  onAddTemplateMeal() {
-    console.log("Adding a meal from ours template");
+  onAddFromTemplate(meal: Meal) {
+    console.log(meal);
+  }
+
+  onShowTemplateMeals(popupTemplates) {
     this.authService.id.subscribe(id => {
       this.service.getMealByDietId(id).subscribe(data => {
         this.templateMeals = data;
+        this.modalService.open(popupTemplates).result.then((result) => {
+          if (result === 'Cancel') {
+            console.log('Stay here');
+          } else if (result === 'Select') {
+            console.log('Select template');
+          }
+        });
       }, err => console.log(err));
     });
   }
