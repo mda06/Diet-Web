@@ -120,7 +120,7 @@
 <ng-template #popupDelete let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">{{deletePopupStrings.title}}</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
@@ -140,12 +140,13 @@
 <ng-template #popupTemplates let-c="close" let-d="dismiss">
   <div class="modal-header">
     <h4 class="modal-title">Select a meal from your templates</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross clicked')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="list-group">
+      <p>1 Click on the meal = 1 Meal added</p>
       <button type="button" class="list-group-item list-group-item-action" *ngFor="let meal of templateMeals"
           (click)="onAddFromTemplate(meal)">
         {{meal.name}}
@@ -155,9 +156,6 @@
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
       Cancel
-    </button>
-    <button type="button" class="btn btn-outline-dark" (click)="c('Select')">
-      Select
     </button>
   </div>
 </ng-template>
