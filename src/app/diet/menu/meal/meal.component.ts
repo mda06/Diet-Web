@@ -42,6 +42,16 @@ export class MealComponent implements OnInit {
     this.showProducts = evt.nextState;
   }
 
+  private checkMealProducts(meal: Meal) {
+    meal.mealProducts.forEach(mp => {
+      if(isNullOrUndefined(mp.product)) {
+        this.foodService.getProduct(mp.productId, this.translate.currentLang).subscribe(data => {
+          mp.product = data;
+        });
+      }
+    });
+  }
+
   private addMeal(meal: Meal) {
     this.meals.push(meal);
 
@@ -54,6 +64,7 @@ export class MealComponent implements OnInit {
             //Merge the data else MainComponent will lose his reference to this object
             this.selectedMenu = _.merge(this.selectedMenu, data);
             this.meals = this.selectedMenu.meals;
+            this.checkMealProducts(meal);
           },err => console.log(err)
         );
       } else {
@@ -61,6 +72,7 @@ export class MealComponent implements OnInit {
         meal.menuId = this.selectedMenu.id;
         this.service.saveMeal(meal).subscribe(data => {
           meal.id = data.id;
+          this.checkMealProducts(meal);
         }, err => console.log(err));
       }
     }
