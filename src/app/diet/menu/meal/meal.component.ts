@@ -90,9 +90,11 @@ export class MealComponent implements OnInit {
   }
 
   onAddNewMeal() {
-    const meal = new Meal();
-    meal.name = "New Meal";
-    this.addMeal(meal);
+    this.translate.get("MEALS.NEW_TITLE").subscribe(data => {
+      const meal = new Meal();
+      meal.name = data;
+      this.addMeal(meal);
+    });
   }
 
   onAddFromTemplate(template: Meal) {
@@ -127,7 +129,12 @@ export class MealComponent implements OnInit {
 
   onDeleteMeal(meal: Meal, popupDelete) {
     this.accordion.toggle("panel-" + meal.id);
-    this.deletePopupStrings = {title:'Deleting', body: 'Deleting the meal', cancel:'Cancel', delete:'Delete'};
+    this.deletePopupStrings = {
+      title:'MEALS.DELETE_POPUP.TITLE',
+      body: 'MEALS.DELETE_POPUP.BODY',
+      cancel:'MEALS.DELETE_POPUP.CANCEL',
+      delete:'MEALS.DELETE_POPUP.DELETE'
+    };
 
     this.modalService.open(popupDelete).result.then((result) => {
       if (result === 'Cancel') {

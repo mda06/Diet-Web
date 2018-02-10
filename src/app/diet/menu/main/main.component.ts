@@ -136,7 +136,13 @@ export class MainComponent implements OnInit {
   }
 
   onDeleteMenu(content) {
-    this.deletePopupStrings = {title:'Deleting', body: 'Deleting the menu', cancel:'Cancel', delete:'Delete'};
+    this.deletePopupStrings = {
+      title:'MENU.DELETE_POPUP.TITLE',
+      body: 'MENU.DELETE_POPUP.BODY',
+      cancel:'MENU.DELETE_POPUP.CANCEL',
+      delete:'MENU.DELETE_POPUP.DELETE'
+    };
+
     this.modalService.open(content).result.then((result) => {
       if (result === 'Cancel') {
         console.log('Stay here');

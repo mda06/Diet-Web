@@ -138,5 +138,53 @@
       "UPLOAD": "Upload new products to the database",
       "SAVE": "Save"
     }
+  },
+  "MENU": {
+    "PATIENT_BEFORE": "Please select a patient...",
+    "LOADING": "Loading...",
+    "OF": "Menu of ",
+    "NEW": "New",
+    "NEW_DATE": "Set a new date",
+    "DELETE": "Delete menu",
+    "DELETE_POPUP": {
+      "TITLE": "Deleting",
+      "BODY": "Deleting the menu",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete"
+    }
+  },
+  "MEALS": {
+    "TITLE": "Meals",
+    "NEW": "New",
+    "NEW_TITLE": "New Meal",
+    "ADD_TEMPLATE": "Template",
+    "NAME": "Name: ",
+    "DESC": "Description",
+    "EMPTY": "There are no meals",
+    "DELETE_POPUP": {
+      "TITLE": "Deleting",
+      "BODY": "Deleting the meal",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete"
+    },
+    "PRODUCTS": {
+      "TITLE": "Products",
+      "EMPTY": "You don't have any products in this meal",
+      "LOADING": "Loading products...",
+      "SELECT_MEAL_BEFORE": "Please select a meal"
+    },
+    "PATIENT": {
+      "TITLE": "Feedback of the patient",
+      "COMMENT_OF": "Comment of"
+    },
+    "TEMPLATE": {
+      "TITLE": "Templates",
+      "LOADING_MEALS": "Loading meals...",
+      "MODAL": {
+        "TITLE": "Select a meal from your templates",
+        "INFO": "1 Click = 1 Meal added",
+        "CANCEL": "Cancel"
+      }
+    }
   }
 }

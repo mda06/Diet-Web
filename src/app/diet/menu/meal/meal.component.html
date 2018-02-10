@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-md-6" id="meals">
     <div class="mb-2 d-flex justify-content-between">
-      <h4 class="mt-auto mb-auto">Meals</h4>
+      <h4 class="mt-auto mb-auto">{{"MEALS.TITLE" | translate}}</h4>
       <div>
         <button type="button" class="btn btn-success" (click)="onAddNewMeal()">
-          New <span class="fa fa-plus" aria-hidden="true"></span>
+          {{"MEALS.NEW" | translate}} <span class="fa fa-plus" aria-hidden="true"></span>
         </button>
         <button type="button" class="btn btn-success" (click)="onShowTemplateMeals(popupTemplates)" *ngIf="selectedMenu">
-          Template <span class="fa fa-plus" aria-hidden="true"></span>
+          {{"MEALS.ADD_TEMPLATE" | translate}} <span class="fa fa-plus" aria-hidden="true"></span>
         </button>
       </div>
     </div>
@@ -29,12 +29,12 @@
               <div class="row">
                 <div>
                   <div class="form-group">
-                    <label>Name: </label>
+                    <label>{{"MEALS.NAME" | translate}} </label>
                     <input type="text" [(ngModel)]="meal.name" class="form-control" name="name"
                            (blur)="onBlurName(meal)">
                   </div>
                   <div class="form-group">
-                    <label>Description</label>
+                    <label>{{"MEALS.DESC" | translate}}</label>
                     <textarea [(ngModel)]="meal.extraInfo" class="form-control" name="extraInfo" cols="50" rows="3"
                               (blur)="onBlurExtraInfo(meal)">
                           {{meal.extraInfo}}
@@ -46,15 +46,15 @@
               <div class="row">
                 <div class="products" droppable [dragOverClass]="'drag-target-border'" [dragHintClass]="'drag-hint'"
                      (onDrop)="onMealProductDrop(meal, $event)">
-                  <h5 class="mb-2 text-muted">Products</h5>
+                  <h5 class="mb-2 text-muted">{{"MEALS.PRODUCTS.TITLE" | translate}}</h5>
                   <ul class="list-group">
                     <div class="product-holder" *ngIf="meal.mealProducts.length == 0">
-                      You don'y have any products in this meal
+                      {{"MEALS.PRODUCTS.EMPTY" | translate}}
                     </div>
                     <div class="product-holder" *ngFor="let mp of meal.mealProducts">
                       <li class="list-group-item product-detail">
                         <div *ngIf="!mp.product">
-                          Loading products...
+                          {{"MEALS.PRODUCTS.LOADING" | translate}}
                         </div>
                         <div class="d-flex align-items-center" *ngIf="mp.product">
                           <h6>{{mp.product.name.slice(0, mp.product.name.indexOf("-"))}}</h6>
@@ -81,14 +81,14 @@
               <hr>
               <div class="row" *ngIf="selectedPatient">
                 <div>
-                  <h5 class="mb-2 text-muted">Feedback of the patient</h5>
+                  <h5 class="mb-2 text-muted">{{"MEALS.PATIENT.TITLE" | translate}}</h5>
                   <div class="stars">
                     <span class="fa fa-star" aria-hidden="true" *ngFor="let x of meal.score|times"></span><span class="fa fa-star-o" aria-hidden="true" *ngFor="let x of 5 - meal.score|times"></span>
                   </div>
                   <blockquote class="blockquote">
                     <p class="mb-0">{{meal.comment}}</p>
                     <footer class="blockquote-footer">
-                      Comment of
+                      {{"MEALS.PATIENT.COMMENT_OF" | translate}}
                       <cite title="Source Title">
                         {{selectedPatient.firstName + ' ' + selectedPatient.lastName}}
                       </cite>
@@ -102,7 +102,7 @@
       </ngb-accordion>
     </div>
     <div *ngIf="meals.length == 0">
-      They are no meals
+      {{"MEALS.EMPTY" | translate}}
   </div>
   </div>
   <div class="col-md-6">
@@ -112,41 +112,41 @@
       </div>
     </div>
     <div *ngIf="!showProducts">
-      <p>Please select a meal before</p>
+      <p>{{"MEALS.PRODUCTS.SELECT_MEAL_BEFORE" | translate}}</p>
     </div>
   </div>
 </div>
 
 <ng-template #popupDelete let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">{{deletePopupStrings.title}}</h4>
+    <h4 class="modal-title">{{deletePopupStrings.title | translate}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
-    <p>{{deletePopupStrings.body}}</p>
+    <p>{{deletePopupStrings.body | translate}}</p>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
-      {{deletePopupStrings.cancel}}
+      {{deletePopupStrings.cancel | translate}}
     </button>
     <button type="button" class="btn btn-outline-dark" (click)="c('Delete')">
-      {{deletePopupStrings.delete}}
+      {{deletePopupStrings.delete | translate}}
     </button>
   </div>
 </ng-template>
 
 <ng-template #popupTemplates let-c="close" let-d="dismiss">
   <div class="modal-header">
-    <h4 class="modal-title">Select a meal from your templates</h4>
+    <h4 class="modal-title">{{"MEALS.TEMPLATE.MODAL.TITLE" | translate}}</h4>
     <button type="button" class="close" aria-label="Close" (click)="c('Cross clicked')">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     <div class="list-group">
-      <p>1 Click on the meal = 1 Meal added</p>
+      <p>{{"MEALS.TEMPLATE.MODAL.INFO" | translate}}</p>
       <button type="button" class="list-group-item list-group-item-action" *ngFor="let meal of templateMeals"
           (click)="onAddFromTemplate(meal)">
         {{meal.name}}
@@ -155,7 +155,7 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
-      Cancel
+      {{"MEALS.TEMPLATE.MODAL.CANCEL" | translate}}
     </button>
   </div>
 </ng-template>

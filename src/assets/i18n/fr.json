@@ -138,5 +138,53 @@
       "UPLOAD": "Enregistrer d'autres produits",
       "SAVE": "Sauvegarder"
     }
+  },
+  "MENU": {
+    "PATIENT_BEFORE": "Veuillez selectionner un patient...",
+    "LOADING": "Chargement...",
+    "OF": "Menu du ",
+    "NEW": "Nouveau",
+    "NEW_DATE": "Appliquer une nouvelle date",
+    "DELETE": "Supprimer un menu",
+    "DELETE_POPUP": {
+      "TITLE": "Supression",
+      "BODY": "Supprimer un menu",
+      "CANCEL": "Annuler",
+      "DELETE": "Supprimer"
+    }
+  },
+  "MEALS": {
+    "TITLE": "Repas",
+    "NEW": "Nouveau",
+    "NEW_TITLE": "Nouveau repas",
+    "ADD_TEMPLATE": "Modèles",
+    "NAME": "Nom: ",
+    "DESC": "Description",
+    "EMPTY": "Il n'y a pas de repas",
+    "DELETE_POPUP": {
+      "TITLE": "Supression",
+      "BODY": "Supprimer un repas",
+      "CANCEL": "Annuler",
+      "DELETE": "Supprimer"
+    },
+    "PRODUCTS": {
+      "TITLE": "Produits",
+      "EMPTY": "Vous n'avez pas de produit dans ce repas",
+      "LOADING": "Chargement des produits...",
+      "SELECT_MEAL_BEFORE": "Selectionner un repas"
+    },
+    "PATIENT": {
+      "TITLE": "Réaction du patient",
+      "COMMENT_OF": "Commentaire de"
+    },
+    "TEMPLATE": {
+      "TITLE": "Modèles",
+      "LOADING_MEALS": "Chargement des repas...",
+      "MODAL": {
+        "TITLE": "Selectionner un repas de vos modèles",
+        "INFO": "1 Clique = 1 Repas ajouté",
+        "CANCEL": "Annuler"
+      }
+    }
   }
 }
