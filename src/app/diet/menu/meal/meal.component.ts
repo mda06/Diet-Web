@@ -5,6 +5,7 @@ import {MealProduct} from '../../../model/mealProduct';
 import {Product} from '../../../model/product';
 import {Meal} from '../../../model/meal';
 import {isNullOrUndefined} from "util";
+import * as _ from 'lodash';
 import {MenuService} from '../service/menu.service';
 import {TranslateService} from '@ngx-translate/core';
 import {DeletePopupStrings} from '../../../model/deletepopupstrings';
@@ -41,9 +42,7 @@ export class MealComponent implements OnInit {
     this.showProducts = evt.nextState;
   }
 
-  onAddNewMeal() {
-    const meal = new Meal();
-    meal.name = "New meal";
+  private addMeal(meal: Meal) {
     this.meals.push(meal);
 
     //It's used in the menu
@@ -52,8 +51,9 @@ export class MealComponent implements OnInit {
         //It's a new menu so save it
         this.service.saveMenu(this.selectedMenu).subscribe(
           data => {
-            this.selectedMenu = data;
-            console.log(data);
+            //Merge the data else MainComponent will lose his reference to this object
+            this.selectedMenu = _.merge(this.selectedMenu, data);
+            this.meals = this.selectedMenu.meals;
           },err => console.log(err)
         );
       } else {
@@ -66,8 +66,8 @@ export class MealComponent implements OnInit {
     }
     else {
       //It's used in our templates
-      //Don't set the menu Id
-      //Instead set the diet Id
+      //Don't set the menu Id, set the diet Id
+      //No need to add the meal products becausse it's only from template to menu
       this.authService.id.subscribe(id => {
         meal.dietId = id;
         this.service.saveMeal(meal).subscribe(data => {
@@ -77,14 +77,23 @@ export class MealComponent implements OnInit {
     }
   }
 
-  onAddFromTemplate(meal: Meal) {
-    console.log(meal);
-    //Before we add the template
-    //Remove mealId, menuId, dietId, comment, score = keep name & comment
-    //Add the menuId of the selectedMenu
-    //Foreach MealProduct remove his id & mealId
-    //Once we get the id of our meal, add the products to it
-    //====> OR we could send all this meal directly ? It's working normally
+  onAddNewMeal() {
+    const meal = new Meal();
+    meal.name = "New Meal";
+    this.addMeal(meal);
+  }
+
+  onAddFromTemplate(template: Meal) {
+    //Copy the meal
+    const meal = new Meal();
+    meal.name = template.name;
+    meal.extraInfo = template.extraInfo;
+    template.mealProducts.forEach(mp => {
+      const newMp = new MealProduct();
+      newMp.quantity = mp.quantity;
+      newMp.productId = mp.quantity;
+    });
+    this.addMeal(meal);
   }
 
   onShowTemplateMeals(popupTemplates) {

@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-success" (click)="onAddNewMeal()">
           New <span class="fa fa-plus" aria-hidden="true"></span>
         </button>
-        <button type="button" class="btn btn-success" (click)="onShowTemplateMeals(popupTemplates)">
+        <button type="button" class="btn btn-success" (click)="onShowTemplateMeals(popupTemplates)" *ngIf="selectedMenu">
           Template <span class="fa fa-plus" aria-hidden="true"></span>
         </button>
       </div>
