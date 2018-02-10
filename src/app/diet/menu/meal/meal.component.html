@@ -79,7 +79,7 @@
                 </div>
               </div>
               <hr>
-              <div class="row">
+              <div class="row" *ngIf="selectedPatient">
                 <div>
                   <h5 class="mb-2 text-muted">Feedback of the patient</h5>
                   <div class="stars">
@@ -87,7 +87,7 @@
                   </div>
                   <blockquote class="blockquote">
                     <p class="mb-0">{{meal.comment}}</p>
-                    <footer class="blockquote-footer" *ngIf="selectedPatient">
+                    <footer class="blockquote-footer">
                       Comment of
                       <cite title="Source Title">
                         {{selectedPatient.firstName + ' ' + selectedPatient.lastName}}
