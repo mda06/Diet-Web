@@ -91,8 +91,10 @@ export class MealComponent implements OnInit {
     template.mealProducts.forEach(mp => {
       const newMp = new MealProduct();
       newMp.quantity = mp.quantity;
-      newMp.productId = mp.quantity;
+      newMp.productId = mp.productId;
+      meal.mealProducts.push(newMp);
     });
+    console.log(meal);
     this.addMeal(meal);
   }
 
