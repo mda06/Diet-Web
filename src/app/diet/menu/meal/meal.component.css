@@ -17,15 +17,16 @@
 }
 
 .product-detail {
-  flex: 1 0 auto;
+  flex: 1 0;
   height: 80px;
   border-radius: 0;
 }
 
-.product-detail > h6 {
+.product-detail h6 {
   text-overflow:ellipsis;
   overflow:hidden;
   white-space: nowrap;
+  width: 24em;
 }
 
 input.quantity {

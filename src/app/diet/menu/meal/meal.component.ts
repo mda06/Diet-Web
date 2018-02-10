@@ -161,16 +161,16 @@ export class MealComponent implements OnInit {
       mp.productId = product.id;
       mp.product = product;
       mp.mealId = meal.id;
+      meal.mealProducts.push(mp);
       this.foodService.getProduct(product.id, this.translate.currentLang).subscribe(prod => {
         mp.product = prod;
         mp.quantity = this.getQuantityOfProduct(prod);
+        this.service.saveMealProduct(mp).subscribe(data => {
+            console.log("Meal product saved");
+            mp.id = data.id;
+          }, err => console.log(err)
+        );
       });
-      meal.mealProducts.push(mp);
-      this.service.saveMealProduct(mp).subscribe(data => {
-          console.log("Meal product saved");
-          mp.id = data.id;
-        }, err => console.log(err)
-      );
     } else {
       mp.quantity += this.getQuantityOfProduct(mp.product);
       this.service.saveMealProduct(mp).subscribe(data => console.log("Meal product saved"), err => console.log(err));
