@@ -14,12 +14,14 @@ export class NavbarComponent implements OnInit {
   @Input() navItems: Array<NavItem>;
   @Output() navItemClicked = new EventEmitter<NavItem>();
   displayType:string = "settings";
+  selectedLang = "en";
 
   constructor(public translate: TranslateService,
               private authService: AuthenticationService,
               private router: Router) { }
 
   ngOnInit() {
+    this.selectedLang = this.translate.currentLang;
   }
 
   onSettingsCogClick() {
@@ -32,6 +34,10 @@ export class NavbarComponent implements OnInit {
 
   onNavigate(navItem: NavItem) {
     this.navItemClicked.emit(navItem);
+  }
+
+  onChangeLang(lang: string) {
+    this.translate.use(lang);
   }
 
   onLogout() {

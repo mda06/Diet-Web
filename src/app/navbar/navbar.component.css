@@ -39,8 +39,8 @@ nav {
   width: 150px;
 }
 
-#logout, #lang {
-  width: 130px;
+#logout {
+  width: 150px;
   margin-left: 10px;
   margin-bottom: 10px;
 }

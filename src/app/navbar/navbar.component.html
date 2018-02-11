@@ -4,9 +4,19 @@
   </h2>
 
   <div *ngIf="displayType == 'settings'" id="settings">
-    <a (click)="onBackClick()"><i class="fa fa-arrow-left"></i> Back</a>
+    <button class="btn btn-secondary" (click)="onBackClick()">
+      <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
+    </button>
     <hr>
-    <p>Settings tab</p>
+    <h5>{{"NAV.SETTINGS.TITLE" | translate}}</h5>
+    <form class="form-inline">
+      <label for="lang">{{"NAV.SETTINGS.LANG" | translate}} </label>
+      <select [(ngModel)]="selectedLang" class="form-control ml-2" name="lang" id="lang" (ngModelChange)="onChangeLang($event)">
+        <option *ngFor="let lang of translate.getLangs()" [ngValue]="lang">
+          {{lang}}
+        </option>
+      </select>
+    </form>
   </div>
   <ul *ngIf="navItems && displayType == 'menu'" id="menu">
 
@@ -21,12 +31,6 @@
   </div>
 
   <div class="fixed-bottom" id="bottom">
-    <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" id="lang">
-      <label ngbButtonLabel class="btn btn-primary" *ngFor="let lang of translate.getLangs()">
-             <!--[class.active]="lang !== translate.currentLang"-->
-        <input ngbButton type="radio" [value]="lang" (change)="translate.use(lang)"> {{lang}}
-      </label>
-    </div>
     <button type="button" class="btn btn-warning" id="logout" (click)="onLogout()">
       {{ 'NAV.LOG_OUT' | translate}} <span class="fa fa-sign-out" aria-hidden="true"></span>
     </button>

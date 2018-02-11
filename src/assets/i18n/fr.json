@@ -23,7 +23,12 @@
     "ABOUT_PATIENT": "À propos du patient",
     "SELECT_PATIENT": "Selectionner patient",
     "DASHBOARD": "Tableau de bord",
-    "LOG_OUT": "Déconnection"
+    "LOG_OUT": "Déconnection",
+    "BACK": "Retour",
+    "SETTINGS": {
+      "TITLE": "Options",
+      "LANG": "Langage: "
+    }
   },
   "DIET": {
     "SELECT": {

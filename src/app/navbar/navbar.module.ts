@@ -5,11 +5,13 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {RouterModule} from "@angular/router";
 import { NgDragDropModule } from 'ng-drag-drop';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
     NgbModule,
     TranslateModule,
     NgDragDropModule.forRoot()

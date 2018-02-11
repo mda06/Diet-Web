@@ -23,7 +23,12 @@
     "ABOUT_PATIENT": "About patient",
     "SELECT_PATIENT": "Select patient",
     "DASHBOARD": "Dashboard",
-    "LOG_OUT": "Log out"
+    "LOG_OUT": "Log out",
+    "BACK": "Back",
+    "SETTINGS": {
+      "TITLE": "Settings",
+      "LANG": "Language: "
+    }
   },
   "DIET": {
     "SELECT": {
