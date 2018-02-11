@@ -1,7 +1,7 @@
 import {Gender} from "./gender";
 import {Address} from "./address";
 
-export class Customer {
+export abstract class Customer {
   authId: string = "";
   birthday: Date = new Date();
   created: Date = new Date();

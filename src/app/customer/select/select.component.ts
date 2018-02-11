@@ -1,60 +1,37 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import { Patient } from "../../model/patient";
-import {isNullOrUndefined} from "util";
-import {Router} from "@angular/router";
-import {Subscription} from "rxjs/Subscription";
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
-import {SharedService} from "../../diet/service/shared.service";
+import {Customer} from "../../model/customer";
 
 @Component({
   selector: 'app-select-customer',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.css']
 })
-export class SelectComponent implements OnInit, OnDestroy {
+export class SelectComponent<T extends Customer> implements OnInit {
 
-  patients: Array<Patient>;
-  private subscriptions = new Subscription();
-  selectedPatient: Patient;
+  @Input() customers: Array<T>;
+  @Input() selectedCustomer: T;
+  @Output() onSelectedCustomer = new EventEmitter<T>();
+  @Output() onAddCustomer = new EventEmitter();
   filter: String = "";
   currentPage = 1;
-  patientsPerPage = 5;
+  customersPerPage = 5;
 
-  constructor(public translate: TranslateService,
-              private sharedService: SharedService,
-              private router: Router) {
-  }
+  constructor(public translate: TranslateService) {}
 
-  ngOnInit() {
-    this.subscriptions.add(this.sharedService.dietetist$.subscribe(
-      data => {
-        if(!isNullOrUndefined(data)) {
-          this.patients = data.patients;
-        }
-      })
-    );
-
-    this.subscriptions.add(this.sharedService.patient$.subscribe(
-      data => {
-        this.selectedPatient = data;
-      })
-    );
-  }
+  ngOnInit() {}
 
   select() {
-    this.router.navigate(['diet', { patientId: this.selectedPatient.id}]);
+    this.onSelectedCustomer.emit(this.selectedCustomer);
   }
 
   newPatient() {
-    this.router.navigate(['diet/add-patient']);
+    this.onAddCustomer.emit();
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
 
-  switch(patient: Patient) {
-    this.selectedPatient = patient;
+  switch(customer: T) {
+    this.selectedCustomer = customer;
   }
 
 }

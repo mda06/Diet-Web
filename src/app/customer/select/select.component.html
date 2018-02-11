@@ -6,17 +6,17 @@
          placeholder="{{ 'DIET.SELECT.SEARCH_PLACEHOLDER' | translate }}" class="form-control"/>
 
   <hr class="my-4">
-  <div *ngIf="patients" >
+  <div *ngIf="customers" >
     <ul class="list-group list-group-flush" >
-      <li class="list-group-item patient-holder " *ngFor="let patient of
-        (patients | customerfilter:filter).slice((this.currentPage-1) * this.patientsPerPage, this.currentPage * this.patientsPerPage)" (click)="switch(patient)"
-          [class.active]="(selectedPatient ? selectedPatient.id : 0) === patient.id">
-        {{patient.firstName + ' ' + patient.lastName}}
+      <li class="list-group-item patient-holder " *ngFor="let customer of
+        (customers | customerfilter:filter).slice((this.currentPage-1) * this.customersPerPage, this.currentPage * this.customersPerPage)" (click)="switch(customer)"
+          [class.active]="(selectedCustomer ? selectedCustomer.id : 0) === customer.id">
+        {{customer.firstName + ' ' + customer.lastName}}
       </li>
     </ul>
 
     <div>{{ 'DIET.SELECT.PAGES' | translate }}</div>
-    <ngb-pagination [pageSize]="patientsPerPage" [collectionSize]="(patients | customerfilter:filter).length"
+    <ngb-pagination [pageSize]="customersPerPage" [collectionSize]="(customers | customerfilter:filter).length"
                     [(page)]="currentPage" aria-label="Default pagination"></ngb-pagination>
   </div>
 
@@ -25,5 +25,5 @@
     {{ 'DIET.SELECT.ADD' | translate }}
   </button>
   <button type="button" class="btn btn-primary float-right" (click)="select()"
-          [disabled]="!selectedPatient">{{ 'DIET.SELECT.SELECT' | translate }}</button>
+          [disabled]="!selectedCustomer">{{ 'DIET.SELECT.SELECT' | translate }}</button>
 </div>

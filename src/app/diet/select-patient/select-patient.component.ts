@@ -11,14 +11,11 @@ import {TranslateService} from "@ngx-translate/core";
   templateUrl: './select-patient.component.html',
   styleUrls: ['./select-patient.component.css']
 })
-export class SelectPatientComponent {
+export class SelectPatientComponent implements OnInit, OnDestroy {
 
-  /*patients: Array<Patient>;
-  private subscriptions = new Subscription();
+  patients: Array<Patient>;
   selectedPatient: Patient;
-  filter: String = "";
-  currentPage = 1;
-  patientsPerPage = 5;
+  private subscriptions = new Subscription();
 
   constructor(public translate: TranslateService,
               private sharedService: SharedService,
@@ -33,7 +30,6 @@ export class SelectPatientComponent {
         }
       })
     );
-
     this.subscriptions.add(this.sharedService.patient$.subscribe(
       data => {
         this.selectedPatient = data;
@@ -41,20 +37,15 @@ export class SelectPatientComponent {
     );
   }
 
-  select() {
-    this.router.navigate(['diet', { patientId: this.selectedPatient.id}]);
+  onSelectedCustomer(patient: Patient) {
+    this.router.navigate(['diet', { patientId: patient.id}]);
   }
 
-  newPatient() {
+  onAddCustomer() {
     this.router.navigate(['diet/add-patient']);
   }
 
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }
-
-  switch(patient: Patient) {
-    this.selectedPatient = patient;
-  }*/
-
 }
