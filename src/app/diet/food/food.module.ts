@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FoodComponent } from './food.component';
 import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {SidebarModule} from "ng-sidebar";
 import {FoodRoutingModule} from "./food-routing.module";
 import {DietGuardServiceService} from "../../guard/diet-guard-service.service";
 import {FoodService} from "./service/food.service";
@@ -18,7 +17,6 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     NgbModule,
     FoodRoutingModule,
-    SidebarModule.forRoot(),
     NavbarModule
   ],
   declarations: [

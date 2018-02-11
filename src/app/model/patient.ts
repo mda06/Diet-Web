@@ -1,20 +1,8 @@
-import {Gender} from "./gender";
 import {AnthropometricParameter} from "./anthropometricParameter";
-import {Address} from "./address";
+import {Customer} from "./customer";
 
-export class Patient {
-  authId: string = "";
-  birthday: Date = new Date();
-  created: Date = new Date();
-  email: string = "";
+export class Patient extends Customer {
   extraInfo: string = "";
-  firstName: string = "";
-  gender: Gender = Gender.OTHER;
-  id: number = 0;
-  lastName: string = "";
-  middleName: string = "";
-  phone: string = "";
-  anthropometricParameters: Array<AnthropometricParameter> = new Array();
-  address: Address = new Address();
+  anthropometricParameters: Array<AnthropometricParameter> = [];
   dietetistId: number = 0;
 }

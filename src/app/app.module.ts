@@ -18,6 +18,7 @@ import {DateInterceptor} from "./share/DateInterceptor";
 import {DietModule} from "./diet/diet.module";
 import {AdminModule} from "./admin/admin.module";
 import {LoginModule} from './login/login.module';
+import {CustomerModule} from "./customer/customer.module";
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import {LoginModule} from './login/login.module';
     LoginModule,
     DietModule,
     AdminModule,
+    CustomerModule,
     AppRoutingModule
   ],
   providers: [

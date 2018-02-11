@@ -11,12 +11,12 @@ import {DietDashboardComponent} from "./diet-dashboard/diet-dashboard.component"
 import {SelectPatientComponent} from "./select-patient/select-patient.component";
 import {DietGuardServiceService} from "../guard/diet-guard-service.service";
 import {DietRoutingModule} from "./diet-routing.module";
-import {PatientFilterPipe} from "../share/PatientFilterPipe";
 import { DietComponent } from './diet.component';
 import { ChartsModule } from 'ng2-charts';
 import {NavbarModule} from "../navbar/navbar.module";
 import {FoodModule} from "./food/food.module";
 import {MenuModule} from "./menu/menu.module";
+import {CustomerModule} from "../customer/customer.module";
 
 @NgModule({
   imports: [
@@ -28,13 +28,13 @@ import {MenuModule} from "./menu/menu.module";
     ChartsModule,
     NavbarModule,
     FoodModule,
-    MenuModule
+    MenuModule,
+    CustomerModule
   ],
   declarations: [
     DietDashboardComponent,
     DetailPatientComponent,
     SelectPatientComponent,
-    PatientFilterPipe,
     DietComponent
   ],
   providers: [ DietService, DietGuardServiceService, SharedService ],

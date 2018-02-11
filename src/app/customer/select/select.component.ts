@@ -2,18 +2,18 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Patient } from "../../model/patient";
 import {isNullOrUndefined} from "util";
 import {Router} from "@angular/router";
-import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
 import {TranslateService} from "@ngx-translate/core";
+import {SharedService} from "../../diet/service/shared.service";
 
 @Component({
-  selector: 'app-select-patient',
-  templateUrl: './select-patient.component.html',
-  styleUrls: ['./select-patient.component.css']
+  selector: 'app-select-customer',
+  templateUrl: './select.component.html',
+  styleUrls: ['./select.component.css']
 })
-export class SelectPatientComponent {
+export class SelectComponent implements OnInit, OnDestroy {
 
-  /*patients: Array<Patient>;
+  patients: Array<Patient>;
   private subscriptions = new Subscription();
   selectedPatient: Patient;
   filter: String = "";
@@ -55,6 +55,6 @@ export class SelectPatientComponent {
 
   switch(patient: Patient) {
     this.selectedPatient = patient;
-  }*/
+  }
 
 }

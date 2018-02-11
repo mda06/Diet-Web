@@ -1,0 +1,12 @@
+.jumbotron {
+  width: 50%;
+  margin: auto;
+  min-width: 450px;
+}
+
+@media (max-width: 768px) {
+  .jumbotron {
+    width: 100%;
+    min-width: 50%;
+  }
+}

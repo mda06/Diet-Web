@@ -1,6 +1,4 @@
-<app-select-customer></app-select-customer>
-
-<!--<div class="jumbotron">
+<div class="jumbotron">
   <h4 class="display-4">{{ 'DIET.SELECT.TITLE' | translate }}</h4>
 
   <label for="search">{{ 'DIET.SELECT.SEARCH' | translate }}</label>
@@ -10,15 +8,15 @@
   <hr class="my-4">
   <div *ngIf="patients" >
     <ul class="list-group list-group-flush" >
-        <li class="list-group-item patient-holder " *ngFor="let patient of
-        (patients | patientfilter:filter).slice((this.currentPage-1) * this.patientsPerPage, this.currentPage * this.patientsPerPage)" (click)="switch(patient)"
-            [class.active]="(selectedPatient ? selectedPatient.id : 0) === patient.id">
-          {{patient.firstName + ' ' + patient.lastName}}
-        </li>
+      <li class="list-group-item patient-holder " *ngFor="let patient of
+        (patients | customerfilter:filter).slice((this.currentPage-1) * this.patientsPerPage, this.currentPage * this.patientsPerPage)" (click)="switch(patient)"
+          [class.active]="(selectedPatient ? selectedPatient.id : 0) === patient.id">
+        {{patient.firstName + ' ' + patient.lastName}}
+      </li>
     </ul>
 
     <div>{{ 'DIET.SELECT.PAGES' | translate }}</div>
-    <ngb-pagination [pageSize]="patientsPerPage" [collectionSize]="(patients | patientfilter:filter).length"
+    <ngb-pagination [pageSize]="patientsPerPage" [collectionSize]="(patients | customerfilter:filter).length"
                     [(page)]="currentPage" aria-label="Default pagination"></ngb-pagination>
   </div>
 
@@ -28,4 +26,4 @@
   </button>
   <button type="button" class="btn btn-primary float-right" (click)="select()"
           [disabled]="!selectedPatient">{{ 'DIET.SELECT.SELECT' | translate }}</button>
-</div>-->
+</div>
