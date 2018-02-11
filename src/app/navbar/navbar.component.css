@@ -1,7 +1,17 @@
 nav {
-  width: 150px;
+  width: 170px;
   height: 100vh;
 }
+
+#settings-cog:hover {
+  -webkit-animation:spin 4s linear infinite;
+  -moz-animation:spin 4s linear infinite;
+  animation:spin 4s linear infinite;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 
 .menuItem {
   display: flex;
@@ -10,12 +20,15 @@ nav {
   padding-bottom: 1em;
   border-right: transparent solid 2px;
 }
+
 .menuItem:hover {
   background-color: lightblue;
 }
 
 .menuItem img {
-  flex: 0 0 70%;
+  /*flex: 0 0 70%;*/
+  width: auto;
+  height: 100px;
 }
 
 .activeMenu {

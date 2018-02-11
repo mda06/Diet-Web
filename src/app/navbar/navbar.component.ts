@@ -13,6 +13,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() navItems: Array<NavItem>;
   @Output() navItemClicked = new EventEmitter<NavItem>();
+  displayType:string = "settings";
 
   constructor(public translate: TranslateService,
               private authService: AuthenticationService,
@@ -21,11 +22,19 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  navigate(navItem: NavItem) {
+  onSettingsCogClick() {
+    this.displayType = 'settings';
+  }
+
+  onBackClick() {
+    this.displayType = 'menu';
+  }
+
+  onNavigate(navItem: NavItem) {
     this.navItemClicked.emit(navItem);
   }
 
-  logout() {
+  onLogout() {
     this.authService.onLogout();
     this.router.navigateByUrl('/login');
   }

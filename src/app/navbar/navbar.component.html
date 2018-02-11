@@ -1,23 +1,24 @@
 <nav class="p-1 bg-light">
   <h2 class="pb-4">
-    Diet Pro.
+    Diet Pro. <i class="fa fa-cog" id="settings-cog" (click)="onSettingsCogClick()"></i>
   </h2>
 
+  <div *ngIf="displayType == 'settings'" id="settings">
+    <a (click)="onBackClick()"><i class="fa fa-arrow-left"></i> Back</a>
+    <hr>
+    <p>Settings tab</p>
+  </div>
+  <ul *ngIf="navItems && displayType == 'menu'" id="menu">
 
-  <ul *ngIf="navItems" id="menu">
-    <li *ngFor="let item of navItems" class="menuItem" [class.activeMenu]="isActive(item)"
-        (click)="navigate(item)">
+    <li *ngFor="let item of navItems" class="menuItem"
+        [class.activeMenu]="isActive(item)" (click)="onNavigate(item)">
       <img src="{{item.img}}" placement="top" ngbTooltip="{{ (item.title) | translate}}"
            alt="{{ (item.title) | translate}}">
-      <!--<div *ngIf="isActive(item)">
-        <ul class="mt-2">
-          <li *ngFor="let subItem of item.subMenus">
-            {{subItem.title | translate}}
-          </li>
-        </ul>
-      </div>-->
     </li>
   </ul>
+  <div *ngIf="displayType == 'submenu'">
+    <p>Sub menu</p>
+  </div>
 
   <div class="fixed-bottom" id="bottom">
     <div class="btn-group btn-group-toggle" ngbRadioGroup name="radioBasic" id="lang">
@@ -26,7 +27,7 @@
         <input ngbButton type="radio" [value]="lang" (change)="translate.use(lang)"> {{lang}}
       </label>
     </div>
-    <button type="button" class="btn btn-warning" id="logout" (click)="logout()">
+    <button type="button" class="btn btn-warning" id="logout" (click)="onLogout()">
       {{ 'NAV.LOG_OUT' | translate}} <span class="fa fa-sign-out" aria-hidden="true"></span>
     </button>
   </div>
