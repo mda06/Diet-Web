@@ -11,6 +11,7 @@ export class SelectComponent<T extends Customer> implements OnInit {
 
   @Input() customers: Array<T>;
   @Input() selectedCustomer: T;
+  @Input() basei18n: string;
   @Output() onSelectedCustomer = new EventEmitter<T>();
   @Output() onAddCustomer = new EventEmitter();
   filter: String = "";
@@ -25,7 +26,7 @@ export class SelectComponent<T extends Customer> implements OnInit {
     this.onSelectedCustomer.emit(this.selectedCustomer);
   }
 
-  newPatient() {
+  newCustomer() {
     this.onAddCustomer.emit();
   }
 

@@ -1,9 +1,9 @@
 <div class="jumbotron">
-  <h4 class="display-4">{{ 'DIET.SELECT.TITLE' | translate }}</h4>
+  <h4 class="display-4">{{ basei18n + '.SELECT.TITLE' | translate }}</h4>
 
-  <label for="search">{{ 'DIET.SELECT.SEARCH' | translate }}</label>
+  <label for="search">{{ basei18n + '.SELECT.SEARCH' | translate }}</label>
   <input id="search" type="text" name="search" [(ngModel)]="filter"
-         placeholder="{{ 'DIET.SELECT.SEARCH_PLACEHOLDER' | translate }}" class="form-control"/>
+         placeholder="{{ basei18n + '.SELECT.SEARCH_PLACEHOLDER' | translate }}" class="form-control"/>
 
   <hr class="my-4">
   <div *ngIf="customers" >
@@ -15,15 +15,14 @@
       </li>
     </ul>
 
-    <div>{{ 'DIET.SELECT.PAGES' | translate }}</div>
     <ngb-pagination [pageSize]="customersPerPage" [collectionSize]="(customers | customerfilter:filter).length"
                     [(page)]="currentPage" aria-label="Default pagination"></ngb-pagination>
   </div>
 
   <hr class="my-4">
-  <button type="button" class="btn btn-secondary float-left" (click)="newPatient()">
-    {{ 'DIET.SELECT.ADD' | translate }}
+  <button type="button" class="btn btn-secondary float-left" (click)="newCustomer()">
+    {{ basei18n + '.SELECT.ADD' | translate }}
   </button>
   <button type="button" class="btn btn-primary float-right" (click)="select()"
-          [disabled]="!selectedCustomer">{{ 'DIET.SELECT.SELECT' | translate }}</button>
+          [disabled]="!selectedCustomer">{{ basei18n + '.SELECT.SELECT' | translate }}</button>
 </div>
