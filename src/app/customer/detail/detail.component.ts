@@ -5,8 +5,6 @@ import {isNullOrUndefined} from "util";
 import {TranslateService} from "@ngx-translate/core";
 import {Customer} from "../../model/customer";
 
-const now = new Date();
-
 @Component({
   selector: 'app-detail-customer',
   templateUrl: './detail.component.html',
