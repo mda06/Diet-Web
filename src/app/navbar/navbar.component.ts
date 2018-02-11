@@ -13,8 +13,10 @@ export class NavbarComponent implements OnInit {
 
   @Input() navItems: Array<NavItem>;
   @Output() navItemClicked = new EventEmitter<NavItem>();
-  displayType:string = "settings";
+  private oldDisplay = "";
+  displayType = "menu";
   selectedLang = "en";
+  activeNavItem: NavItem;
 
   constructor(public translate: TranslateService,
               private authService: AuthenticationService,
@@ -22,17 +24,37 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.selectedLang = this.translate.currentLang;
+    this.navItems.forEach(item => {
+      if(this.router.url === item.routerLink) {
+        this.activeNavItem = item;
+        if(this.activeNavItem.subMenus.length > 0)
+          this.displayType = 'submenu';
+      }
+    });
   }
 
   onSettingsCogClick() {
-    this.displayType = 'settings';
+    if (this.displayType != "settings") {
+      this.oldDisplay = this.displayType;
+      this.displayType = 'settings';
+    }
   }
 
   onBackClick() {
-    this.displayType = 'menu';
+    if(this.displayType == 'settings' && this.oldDisplay != "")
+      this.displayType = this.oldDisplay;
+    else
+      this.displayType = 'menu';
   }
 
   onNavigate(navItem: NavItem) {
+    this.activeNavItem = navItem;
+    if(this.activeNavItem.subMenus.length > 0)
+      this.displayType = 'submenu';
+    this.navItemClicked.emit(navItem);
+  }
+
+  onSubNavigate(navItem: NavItem) {
     this.navItemClicked.emit(navItem);
   }
 
@@ -46,13 +68,6 @@ export class NavbarComponent implements OnInit {
   }
 
   isActive(item: NavItem): boolean {
-    //Do we need to go to all the children ?
-    var isItemActive = this.router.url === item.routerLink;
-    item.subMenus.forEach(subItem => {
-      if(this.router.url === subItem.routerLink) {
-        isItemActive = true;
-      }
-    });
-    return isItemActive;
+    return this.activeNavItem == item;
   }
 }

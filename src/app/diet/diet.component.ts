@@ -20,16 +20,22 @@ export class DietComponent implements OnInit {
   _opened: boolean = true;
   private foodItemItem: NavItem =
     {img: "../../assets/img/food.ico", title: "NAV.FOOD_SEARCH", routerLink: "/diet/food", subMenus: []};
-  private aboutPatientItem: NavItem =
-    {img: "../../assets/img/about.ico", title: "NAV.ABOUT_PATIENT", routerLink: "/diet/detail-patient", subMenus: []};
-  private selectPatientItem: NavItem =
-    {img: "../../assets/img/select-patient.png", title: "NAV.SELECT_PATIENT", routerLink: "/diet/select-patient", subMenus: []};
   private dashboardItem: NavItem =
     {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/diet/dashboard", subMenus: []};
   private menuItem: NavItem =
     {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/diet/menu", subMenus: [
-      {img: "", title: "NAV.MENU.TEMPLATE", routerLink: "/diet/menu/template", subMenus: []}
+      {img: "../../assets/img/meal-template.png", title: "NAV.MENU.TEMPLATE", routerLink: "/diet/menu/template", subMenus: []}
     ]};
+
+  private aboutPatientItem: NavItem =
+    {img: "../../assets/img/about.ico", title: "NAV.PATIENT.ABOUT", routerLink: "/diet/detail-patient", subMenus: []};
+  private selectPatientItem: NavItem =
+    {img: "../../assets/img/select-patient.png", title: "NAV.PATIENT.SELECT", routerLink: "/diet/select-patient", subMenus: []};
+
+  private patientItem: NavItem =
+    {img: "../../assets/img/patient.png", title: "NAV.PATIENT.TITLE", routerLink: "/diet/select-patient", subMenus:
+      [this.selectPatientItem]};
+
   navItems: Array<NavItem> = [];
   private subscriptions = new Subscription();
   private selectedPatient: Patient;
@@ -53,12 +59,10 @@ export class DietComponent implements OnInit {
       if(id > 0) {
         this.dietService.getPatient(id).subscribe(data => {
           if(!isNullOrUndefined(data)) {
-            const index: number = this.navItems.indexOf(this.aboutPatientItem);
-            if(index <= 0)
-              this.navItems.push(this.aboutPatientItem);
             //If we were subscribed to patients unsubscribe it now, we doesn't need it anymore
             this.subscriptions.unsubscribe();
             this.selectedPatient = data;
+            this.addPatientNav();
             this.sharedService.setPatient(this.selectedPatient);
             console.log("Getting data: ", data);
           } else {
@@ -86,6 +90,13 @@ export class DietComponent implements OnInit {
     });
   }
 
+  private addPatientNav() {
+    const index: number = this.patientItem.subMenus.indexOf(this.aboutPatientItem);
+    if(index <= 0)
+      this.patientItem.subMenus.push(this.aboutPatientItem);
+    this.patientItem.routerLink = this.aboutPatientItem.routerLink;
+  }
+
   initDiet() {
     this.authService.getConnectedUser().subscribe(
       data => {
@@ -100,7 +111,7 @@ export class DietComponent implements OnInit {
     this.navItems.push(this.dashboardItem);
     this.navItems.push(this.foodItemItem);
     this.navItems.push(this.menuItem);
-    this.navItems.push(this.selectPatientItem);
+    this.navItems.push(this.patientItem);
   }
 
   _toggleSidebar() {

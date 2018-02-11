@@ -17,11 +17,14 @@
     },
     "MENU": {
       "TITLE": "Menu",
-      "Template": "List"
+      "TEMPLATE": "Modèles"
+    },
+    "PATIENT": {
+      "TITLE": "Patients",
+      "ABOUT": "À propos du patient",
+      "SELECT": "Selectionner un patient"
     },
     "FOOD_SEARCH": "Chercher des produits",
-    "ABOUT_PATIENT": "À propos du patient",
-    "SELECT_PATIENT": "Selectionner patient",
     "DASHBOARD": "Tableau de bord",
     "LOG_OUT": "Déconnection",
     "BACK": "Retour",

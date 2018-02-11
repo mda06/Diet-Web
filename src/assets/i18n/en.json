@@ -17,11 +17,14 @@
     },
     "MENU": {
       "TITLE": "Menu",
-      "Template": "Template"
+      "TEMPLATE": "Template"
+    },
+    "PATIENT": {
+      "TITLE": "Patients",
+      "ABOUT": "About",
+      "SELECT": "Select patient"
     },
     "FOOD_SEARCH": "Search food",
-    "ABOUT_PATIENT": "About patient",
-    "SELECT_PATIENT": "Select patient",
     "DASHBOARD": "Dashboard",
     "LOG_OUT": "Log out",
     "BACK": "Back",
