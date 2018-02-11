@@ -33,6 +33,31 @@
       "LANG": "Language: "
     }
   },
+  "CUSTOMER": {
+    "DETAIL": {
+      "META_DATA": "Meta data",
+      "FIRST_NAME": "First name",
+      "MIDDLE_NAME": "Middle name",
+      "LAST_NAME": "Last name",
+      "EMAIL": "Email",
+      "PHONE": "Phone",
+      "BIRTHDAY": "Birthday",
+      "GENDER": {
+        "TITLE": "Gender",
+        "OTHER": "Other",
+        "MALE": "Man",
+        "FEMALE": "Woman"
+      },
+      "ADDRESS": {
+        "STREET": "Street",
+        "NUMBER": "Number",
+        "POSTCODE": "Postcode",
+        "CITY": "City",
+        "COUNTRY": "Country",
+        "TOGGLE": "Toggle address"
+      }
+    }
+  },
   "DIET": {
     "SELECT": {
       "TITLE": "Select a patient",
@@ -49,19 +74,6 @@
     },
     "DETAIL": {
       "SELECT_FIRST": "Please select first a patient",
-      "META_DATA": "Meta data",
-      "FIRST_NAME": "First name",
-      "MIDDLE_NAME": "Middle name",
-      "LAST_NAME": "Last name",
-      "EMAIL": "Email",
-      "PHONE": "Phone",
-      "BIRTHDAY": "Birthday",
-      "GENDER": {
-        "TITLE": "Gender",
-        "OTHER": "Other",
-        "MALE": "Man",
-        "FEMALE": "Woman"
-      },
       "EXTRA_INFO": "Extra info",
       "SAVE": "Save",
       "RETURN": "Return",
@@ -69,14 +81,6 @@
       "PATIENT_MODIFIED": "Patient data has been modified without saving it",
       "CANCEL": "Cancel",
       "RETURN_WITHOUT_SAVING": "Return without saving",
-      "ADDRESS": {
-        "STREET": "Street",
-        "NUMBER": "Number",
-        "POSTCODE": "Postcode",
-        "CITY": "City",
-        "COUNTRY": "Country",
-        "TOGGLE": "Toggle address"
-      },
       "PARAMS": {
         "TITLE": "Anthropometric parameters",
         "LENGTH": "Length (cm)",

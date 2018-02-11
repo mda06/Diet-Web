@@ -9,73 +9,7 @@
 <div class="container-fluid" *ngIf="patient">
   <div class="row">
     <div class="col-md-4">
-      <div class="card">
-        <h4 class="card-header">{{ 'DIET.DETAIL.META_DATA' | translate }}</h4>
-        <div class="card-body">
-          <label for="firstName">{{ 'DIET.DETAIL.FIRST_NAME' | translate }}</label>
-          <input type="text" class="form-control" id="firstName"
-                 required
-                 [(ngModel)]="patient.firstName" name="firstName">
-          <label for="middleName">{{ 'DIET.DETAIL.MIDDLE_NAME' | translate }}</label>
-          <input type="text" class="form-control" id="middleName"
-                 [(ngModel)]="patient.middleName" name="middleName">
-          <label for="lastName">{{ 'DIET.DETAIL.LAST_NAME' | translate }}</label>
-          <input type="text" class="form-control" id="lastName"
-                 [(ngModel)]="patient.lastName" name="lastName">
-          <label for="email">{{ 'DIET.DETAIL.EMAIL' | translate }}</label>
-          <input type="text" class="form-control" id="email"
-                 [(ngModel)]="patient.email" name="email">
-          <label for="phone">{{ 'DIET.DETAIL.PHONE' | translate }}</label>
-          <input type="text" class="form-control" id="phone"
-                 [(ngModel)]="patient.phone" name="phone">
-          <label for="birthday">{{ 'DIET.DETAIL.BIRTHDAY' | translate }}</label>
-          <form class="form-inline">
-            <div class="form-group">
-              <div class="input-group">
-                <input class="form-control" placeholder="yyyy-mm-dd"
-                       name="birthday" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
-                       (ngModelChange)="birthdayChange()" id="birthday">
-                <button class="input-group-addon" (click)="d.toggle()" type="button">
-                  <img src="../../../assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
-                </button>
-              </div>
-            </div>
-          </form>
-          <div class="form-group">
-            <label for="gender">{{ 'DIET.DETAIL.GENDER.TITLE' | translate }}</label>
-            <select class="form-control" [(ngModel)]="patient.gender" name="gender" id="gender">
-              <option *ngFor="let g of genders" [value]="g.value">
-                {{ formatGender(g.value) | translate }}
-              </option>
-            </select>
-          </div>
-          <button type="button" class="btn btn-outline-primary" (click)="isAddressCollapsed = !isAddressCollapsed"
-                  [attr.aria-expanded]="!isAddressCollapsed" aria-controls="addressCollapse">
-            {{ 'DIET.DETAIL.ADDRESS.TOGGLE' | translate }}
-          </button>
-          <div id="addressCollapse" [ngbCollapse]="isAddressCollapsed">
-            <div class="card">
-              <div class="card-body">
-                <label for="street">{{ 'DIET.DETAIL.ADDRESS.STREET' | translate }}</label>
-                <input type="text" class="form-control" id="street"
-                       [(ngModel)]="patient.address.street" name="street">
-                <label for="number">{{ 'DIET.DETAIL.ADDRESS.NUMBER' | translate }}</label>
-                <input type="text" class="form-control" id="number"
-                       [(ngModel)]="patient.address.number" name="number">
-                <label for="postcode">{{ 'DIET.DETAIL.ADDRESS.POSTCODE' | translate }}</label>
-                <input type="number" class="form-control" id="postcode"
-                       [(ngModel)]="patient.address.postcode" name="postcode">
-                <label for="city">{{ 'DIET.DETAIL.ADDRESS.CITY' | translate }}</label>
-                <input type="text" class="form-control" id="city"
-                       [(ngModel)]="patient.address.city" name="city">
-                <label for="country">{{ 'DIET.DETAIL.ADDRESS.COUNTRY' | translate }}</label>
-                <input type="text" class="form-control" id="country"
-                       [(ngModel)]="patient.address.country" name="country">
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <app-detail-customer [customer]="patient"></app-detail-customer>
     </div>
     <div class="col-md-4">
       <div class="card">

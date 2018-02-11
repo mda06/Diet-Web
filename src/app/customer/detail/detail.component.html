@@ -1,3 +1,67 @@
-<p>
-  detail works!
-</p>
+<div class="card" *ngIf="customer">
+  <h4 class="card-header">{{ 'CUSTOMER.DETAIL.META_DATA' | translate }}</h4>
+  <div class="card-body">
+    <label for="firstName">{{ 'CUSTOMER.DETAIL.FIRST_NAME' | translate }}</label>
+    <input type="text" class="form-control" id="firstName"
+           required
+           [(ngModel)]="customer.firstName" name="firstName">
+    <label for="middleName">{{ 'CUSTOMER.DETAIL.MIDDLE_NAME' | translate }}</label>
+    <input type="text" class="form-control" id="middleName"
+           [(ngModel)]="customer.middleName" name="middleName">
+    <label for="lastName">{{ 'CUSTOMER.DETAIL.LAST_NAME' | translate }}</label>
+    <input type="text" class="form-control" id="lastName"
+           [(ngModel)]="customer.lastName" name="lastName">
+    <label for="email">{{ 'CUSTOMER.DETAIL.EMAIL' | translate }}</label>
+    <input type="text" class="form-control" id="email"
+           [(ngModel)]="customer.email" name="email">
+    <label for="phone">{{ 'CUSTOMER.DETAIL.PHONE' | translate }}</label>
+    <input type="text" class="form-control" id="phone"
+           [(ngModel)]="customer.phone" name="phone">
+    <label for="birthday">{{ 'CUSTOMER.DETAIL.BIRTHDAY' | translate }}</label>
+    <form class="form-inline">
+      <div class="form-group">
+        <div class="input-group">
+          <input class="form-control" placeholder="yyyy-mm-dd"
+                 name="birthday" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                 (ngModelChange)="birthdayChange()" id="birthday">
+          <button class="input-group-addon" (click)="d.toggle()" type="button">
+            <img src="../../../assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="form-group">
+      <label for="gender">{{ 'CUSTOMER.DETAIL.GENDER.TITLE' | translate }}</label>
+      <select class="form-control" [(ngModel)]="customer.gender" name="gender" id="gender">
+        <option *ngFor="let g of genders" [value]="g.value">
+          {{ formatGender(g.value) | translate }}
+        </option>
+      </select>
+    </div>
+    <button type="button" class="btn btn-outline-primary" (click)="isAddressCollapsed = !isAddressCollapsed"
+            [attr.aria-expanded]="!isAddressCollapsed" aria-controls="addressCollapse">
+      {{ 'CUSTOMER.DETAIL.ADDRESS.TOGGLE' | translate }}
+    </button>
+    <div id="addressCollapse" [ngbCollapse]="isAddressCollapsed">
+      <div class="card">
+        <div class="card-body">
+          <label for="street">{{ 'CUSTOMER.DETAIL.ADDRESS.STREET' | translate }}</label>
+          <input type="text" class="form-control" id="street"
+                 [(ngModel)]="customer.address.street" name="street">
+          <label for="number">{{ 'CUSTOMER.DETAIL.ADDRESS.NUMBER' | translate }}</label>
+          <input type="text" class="form-control" id="number"
+                 [(ngModel)]="customer.address.number" name="number">
+          <label for="postcode">{{ 'CUSTOMER.DETAIL.ADDRESS.POSTCODE' | translate }}</label>
+          <input type="number" class="form-control" id="postcode"
+                 [(ngModel)]="customer.address.postcode" name="postcode">
+          <label for="city">{{ 'CUSTOMER.DETAIL.ADDRESS.CITY' | translate }}</label>
+          <input type="text" class="form-control" id="city"
+                 [(ngModel)]="customer.address.city" name="city">
+          <label for="country">{{ 'CUSTOMER.DETAIL.ADDRESS.COUNTRY' | translate }}</label>
+          <input type="text" class="form-control" id="country"
+                 [(ngModel)]="customer.address.country" name="country">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

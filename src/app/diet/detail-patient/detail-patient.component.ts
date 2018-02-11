@@ -25,12 +25,9 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
 
   patient: Patient;
   private copyPatient: Patient;
-  private subscriptions = new Subscription();
   isAddPatient: boolean = false;
   param: AnthropometricParameter;
-  public isAddressCollapsed = true;
-  model: NgbDateStruct;
-  public genders = this.enumSelector(Gender);
+  private subscriptions = new Subscription();
   public alerts: Array<IAlert> = [];
   alertCounter: number = 0;
 
@@ -57,47 +54,22 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
   }
 
   initDetailPatient() {
-    const id = +this.route.snapshot.paramMap.get('id');
-    //If the request is by id
-    if(id != 0) {
-      this.subscriptions.add(this.dietService.getPatient(id).subscribe(
-        data => {
-          if(!isNullOrUndefined(data)) {
-            this.patient = data;
-            this.initDateModel();
-            this.initPatientBackup();
-          }
-        }
-      ));
-    } else {
-      //If the request is by shared context
-      this.subscriptions.add(this.sharedService.patient$.subscribe(
-        data => {
+    //If the request is by shared context
+    this.subscriptions.add(this.sharedService.patient$.subscribe(
+      data => {
+        if(!isNullOrUndefined(data)) {
           this.patient = data;
-        })
-      );
-    }
-
-    if(!isNullOrUndefined(this.patient)) {
-      this.param = new AnthropometricParameter();
-      this.initDateModel();
-      this.initPatientBackup();
-    }
-  }
-
-  initDateModel() {
-    this.model = { day: this.patient.birthday.getUTCDate(), month: this.patient.birthday.getUTCMonth() + 1,
-      year: this.patient.birthday.getUTCFullYear()};
+          this.param = new AnthropometricParameter();
+          //this.initDateModel();
+          this.initPatientBackup();
+        }
+      })
+    );
   }
 
   initPatientBackup() {
     //Copy patient for ui approvement (is patient modified)
     this.copyPatient = _.cloneDeep(this.patient);
-  }
-
-  enumSelector(definition) {
-    return Object.keys(definition)
-      .map(key => ({ value: definition[key], title: key }));
   }
 
   selectToday() {
@@ -119,10 +91,6 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
     this.param.patientId = this.patient.id;
     this.patient.anthropometricParameters.push(this.param);
     this.param = new AnthropometricParameter();
-  }
-
-  birthdayChange() {
-    this.patient.birthday.setUTCFullYear(this.model.year, this.model.month - 1, this.model.day);
   }
 
   goBack(content) {
@@ -191,10 +159,6 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
         },1500, this.alertCounter++);
       }
     );
-  }
-
-  public formatGender(gender: string): string {
-    return "DIET.DETAIL.GENDER." + gender;
   }
 
   ngOnDestroy() {
