@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   };
   ret: string = '';
   error: string = '';
+  loading: boolean = false;
 
   constructor(public translate: TranslateService,
               private authService: AuthenticationService,
@@ -31,8 +32,10 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin() {
+    this.loading = true;
     this.authService.onLogin(this.auth).subscribe(
       (role) => {
+        this.loading = false;
         if(this.ret === '/login') {
           switch(role) {
             case Role.PATIENT:
@@ -49,7 +52,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl(this.ret)
         }
       },
-      (err) => {this.error = 'LOGIN.CANNOT_CONNECT'; console.log(err);}
+      (err) => {this.loading = false; this.error = 'LOGIN.CANNOT_CONNECT'; console.log(err);}
     );
   }
 

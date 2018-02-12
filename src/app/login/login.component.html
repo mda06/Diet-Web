@@ -1,6 +1,7 @@
-<div class="container-fluid" id="form-holder">
-  <form action="/action_page.php">
-    <div class="container">
+<div class="container-fluid mt-3" id="form-holder">
+  <h1 class="text-center">Diet Pro.</h1>
+  <form>
+    <div class="container p-3">
       <label><b>{{ 'LOGIN.USERNAME' | translate }}</b></label>
       <input type="text" [(ngModel)]="auth.username" placeholder="{{ 'LOGIN.USERNAME_PLACEHOLDER' | translate }}"
              name="username" id="username" required>
@@ -9,13 +10,9 @@
       <input type="password" [(ngModel)]="auth.password" placeholder="{{ 'LOGIN.PASSWORD' | translate }}"
              name="password" id="password" required>
 
-      <button type="submit" (click)="onLogin()">{{ 'LOGIN.LOGIN' | translate }}</button>
-      <input type="checkbox" checked="checked"> {{ 'LOGIN.REMEMBER' | translate }}
-    </div>
-
-    <div class="container" style="background-color:#f1f1f1">
-      <button type="button" class="cancelbtn">{{ 'LOGIN.CANCEL' | translate }}</button>
-      <span class="psw">{{ 'LOGIN.FORGET_PASSWORD' | translate }}</span>
+      <button type="button" class="btn btn-success mt-2 w-100" (click)="onLogin()" [disabled]="loading">
+        {{ 'LOGIN.LOGIN' | translate }}
+      </button>
     </div>
 
     <div class="container">
