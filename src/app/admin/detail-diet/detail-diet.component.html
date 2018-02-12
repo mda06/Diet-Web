@@ -1,0 +1,56 @@
+<p *ngFor="let alert of alerts">
+  <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message | translate }} {{alert.subMessage}}</ngb-alert>
+</p>
+
+<div *ngIf="!diet">
+  {{ 'ADMIN.DETAIL.SELECT_FIRST' | translate }}
+</div>
+
+<div class="container-fluid" *ngIf="diet">
+  <div class="row">
+    <div class="col-md-4">
+      <app-detail-customer [customer]="diet"></app-detail-customer>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <h4 class="card-header">{{ 'ADMIN.DETAIL.TITLE' | translate }}</h4>
+        <div class="card-body">
+          <div class="form-group">
+            <label for="vat">{{ 'ADMIN.DETAIL.VAT' | translate }}</label>
+            <input type="text" class="form-control" id="vat" required
+                      [(ngModel)]="diet.vat" name="vat"/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <button type="button" class="btn btn-secondary" (click)="goBack(content)">
+      {{ 'ADMIN.DETAIL.RETURN' | translate }}
+    </button>
+    <button type="button" class="btn btn-success" (click)="save()">
+      {{ 'ADMIN.DETAIL.SAVE' | translate }}
+      <span class="badge badge-pill badge-danger" *ngIf="isDietModified()">*</span>
+    </button>
+  </div>
+</div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ 'ADMIN.DETAIL.ATTENTION' | translate }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ 'ADMIN.DETAIL.DIET_MODIFIED' | translate }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
+      {{ 'ADMIN.DETAIL.CANCEL' | translate }}
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Return')">
+      {{ 'ADMIN.DETAIL.RETURN_WITHOUT_SAVING' | translate }}
+    </button>
+  </div>
+</ng-template>

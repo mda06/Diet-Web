@@ -75,7 +75,7 @@
       "CREATED": "Crée le ",
       "YEARS_OLD": " ans"
     },
-    "DETAILS": {
+    "DETAIL": {
       "SELECT_FIRST": "Selectionner un patient avant",
       "EXTRA_INFO": "Info extra",
       "SAVE": "Sauvegarder",
@@ -126,6 +126,22 @@
       "SEARCH_PLACEHOLDER": "nom",
       "ADD": "Ajouter un diététicien",
       "SELECT": "Selectionner"
+    },
+    "DETAIL": {
+      "SELECT_FIRST": "Selectionner un diététicien avant",
+      "SAVE": "Sauvegarder",
+      "RETURN": "Retour",
+      "ATTENTION": "Attention",
+      "DIET_MODIFIED": "Le diététicien a été modifié sans être sauvegardé",
+      "CANCEL": "Annuler",
+      "RETURN_WITHOUT_SAVING": "Retour sans sauvegarder",
+      "TITLE": "Information spécifique au diététicien",
+      "VAT": "TVA",
+      "ALERT": {
+        "SAVING": "En train de sauvergarder ",
+        "SAVED": "Sauvegarder ",
+        "ERROR": "Erreur pas possible de sauvegarder "
+      }
     },
     "UPLOAD": {
       "DONE": "Enregistrement fait",

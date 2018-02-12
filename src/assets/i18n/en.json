@@ -131,6 +131,22 @@
       "DONE": "Uploaded done",
       "ERROR": "Error while uploading"
     },
+    "DETAIL": {
+      "SELECT_FIRST": "Please select first a diet",
+      "SAVE": "Save",
+      "RETURN": "Return",
+      "ATTENTION": "Attention",
+      "PATIENT_MODIFIED": "Diet data has been modified without saving it",
+      "CANCEL": "Cancel",
+      "RETURN_WITHOUT_SAVING": "Return without saving",
+      "TITLE": "Diet specific information",
+      "VAT": "VAT",
+      "ALERT": {
+        "SAVING": "Saving ",
+        "SAVED": "Saved ",
+        "ERROR": "Error cannot save "
+      }
+    },
     "DELETE" : {
       "WARNING": "Your deleting definitely a product",
       "ATTENTION": "Attention !",
