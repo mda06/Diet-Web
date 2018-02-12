@@ -7,6 +7,7 @@ import {FormsModule} from "@angular/forms";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CustomerFilterPipe} from "./pipes/CustomerFilterPipe";
 import {NavbarModule} from "../navbar/navbar.module";
+import { AccountComponent } from './account/account.component';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import {NavbarModule} from "../navbar/navbar.module";
     CustomerComponent,
     SelectComponent,
     DetailComponent,
-    CustomerFilterPipe
+    CustomerFilterPipe,
+    AccountComponent
   ],
   exports: [
     CustomerComponent,
