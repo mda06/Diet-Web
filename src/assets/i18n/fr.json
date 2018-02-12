@@ -24,6 +24,9 @@
       "ABOUT": "À propos du patient",
       "SELECT": "Selectionner un patient"
     },
+    "DIET": {
+      "SELECT": "Selectionner un diététicien"
+    },
     "FOOD_SEARCH": "Chercher des produits",
     "DASHBOARD": "Tableau de bord",
     "LOG_OUT": "Déconnection",
@@ -117,6 +120,13 @@
     }
   },
   "ADMIN": {
+    "SELECT": {
+      "TITLE": "Selectionner un diététicien",
+      "SEARCH": "Chercher un diététicien",
+      "SEARCH_PLACEHOLDER": "nom",
+      "ADD": "Ajouter un diététicien",
+      "SELECT": "Selectionner"
+    },
     "UPLOAD": {
       "DONE": "Enregistrement fait",
       "ERROR": "Erreur pendant l'enregistrement"

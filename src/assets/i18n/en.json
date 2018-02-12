@@ -24,6 +24,9 @@
       "ABOUT": "About",
       "SELECT": "Select patient"
     },
+    "DIET": {
+      "SELECT": "Select diet"
+    },
     "FOOD_SEARCH": "Search food",
     "DASHBOARD": "Dashboard",
     "LOG_OUT": "Log out",
@@ -117,6 +120,13 @@
     }
   },
   "ADMIN": {
+    "SELECT": {
+      "TITLE": "Select a diet",
+      "SEARCH": "Search for a diet",
+      "SEARCH_PLACEHOLDER": "name",
+      "ADD": "Add new diet",
+      "SELECT": "Select"
+    },
     "UPLOAD": {
       "DONE": "Uploaded done",
       "ERROR": "Error while uploading"

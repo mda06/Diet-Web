@@ -11,6 +11,8 @@ import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.compone
 import {FoodService} from "../diet/food/service/food.service";
 import {AdminService} from "./service/admin.service";
 import { FoodComponent } from './food/food.component';
+import { SelectDietComponent } from './select-diet/select-diet.component';
+import {CustomerModule} from "../customer/customer.module";
 
 @NgModule({
   imports: [
@@ -19,9 +21,10 @@ import { FoodComponent } from './food/food.component';
     NgbModule,
     AdminRoutingModule,
     SidebarModule.forRoot(),
-    NavbarModule
+    NavbarModule,
+    CustomerModule
   ],
-  declarations: [AdminComponent, AdminDashboardComponent, FoodComponent],
+  declarations: [AdminComponent, AdminDashboardComponent, FoodComponent, SelectDietComponent],
   providers: [ AdminGuardServiceService, FoodService, AdminService]
 })
 export class AdminModule { }

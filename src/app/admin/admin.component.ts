@@ -13,6 +13,11 @@ export class AdminComponent implements OnInit {
     routerLink: "/admin/dashboard", subMenus: []};
   private food: NavItem = {img: "../../assets/img/food.ico", title: "NAV.ADMIN.FOOD",
     routerLink: "/admin/food", subMenus: []};
+  /*private aboutPatientItem: NavItem =
+    {img: "../../assets/img/about.ico", title: "NAV.PATIENT.ABOUT", routerLink: "/diet/detail-patient", subMenus: []};*/
+  private selectDietItem: NavItem =
+    {img: "../../assets/img/diet.png", title: "NAV.DIET.SELECT", routerLink: "/admin/select-diet", subMenus: []};
+
   navItems: Array<NavItem> = [];
 
   constructor(private router: Router) { }
@@ -24,6 +29,7 @@ export class AdminComponent implements OnInit {
   initNavItems() {
     this.navItems.push(this.dashboard);
     this.navItems.push(this.food);
+    this.navItems.push(this.selectDietItem);
   }
 
   _toggleSidebar() {
