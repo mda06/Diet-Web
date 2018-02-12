@@ -13,6 +13,7 @@ import {AdminService} from "./service/admin.service";
 import { FoodComponent } from './food/food.component';
 import { SelectDietComponent } from './select-diet/select-diet.component';
 import {CustomerModule} from "../customer/customer.module";
+import { DetailDietComponent } from './detail-diet/detail-diet.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,7 @@ import {CustomerModule} from "../customer/customer.module";
     NavbarModule,
     CustomerModule
   ],
-  declarations: [AdminComponent, AdminDashboardComponent, FoodComponent, SelectDietComponent],
+  declarations: [AdminComponent, AdminDashboardComponent, FoodComponent, SelectDietComponent, DetailDietComponent],
   providers: [ AdminGuardServiceService, FoodService, AdminService]
 })
 export class AdminModule { }

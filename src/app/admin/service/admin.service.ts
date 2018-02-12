@@ -27,4 +27,8 @@ export class AdminService {
     return this.http.get<Dietetist>(this.dietUrl + id, httpOptions);
   }
 
+  saveDietetist(diet: Dietetist): Observable<Dietetist> {
+    return this.http.post<Dietetist>(this.dietUrl, diet, httpOptions);
+  }
+
 }

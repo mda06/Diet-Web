@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {TranslateService} from "@ngx-translate/core";
-import {Subscription} from "rxjs/Subscription";
 import {Dietetist} from "../../model/dietetist";
 import {AdminService} from "../service/admin.service";
 
@@ -10,10 +9,9 @@ import {AdminService} from "../service/admin.service";
   templateUrl: './select-diet.component.html',
   styleUrls: ['./select-diet.component.css']
 })
-export class SelectDietComponent  implements OnInit, OnDestroy {
+export class SelectDietComponent  implements OnInit {
 
   diets: Array<Dietetist>;
-  private subscriptions = new Subscription();
 
   constructor(private service: AdminService,
               private router: Router,
@@ -21,26 +19,17 @@ export class SelectDietComponent  implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subscriptions.add(this.service.getDietetists().subscribe(data => {
+    this.service.getDietetists().subscribe(data => {
       this.diets = data;
-      console.log(data);
-    }, err => console.log(err)));
+    }, err => console.log(err));
   }
 
   onSelectedCustomer(diet: Dietetist) {
-    console.log("Details diet");
-    this.subscriptions.add(this.service.getDietetist(diet.id).subscribe(data => {
-      console.log(data);
-    }, err => console.log(err)));
-    //this.router.navigate(['diet', { patientId: patient.id}]);
+    this.router.navigate(['/admin/detail-diet', diet.id]);
   }
 
   onAddCustomer() {
-    console.log("Add Diet");
-    //this.router.navigate(['diet/add-patient']);
+    this.router.navigate(['/admin/add-diet']);
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
 }

@@ -1,18 +1,16 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { Location } from '@angular/common';
-import {NgbDateStruct, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import {Patient} from "../../model/patient";
 import {AnthropometricParameter} from "../../model/anthropometricParameter";
-import {Gender} from "../../model/gender";
 import {DietService} from "../service/diet.service";
 import {IAlert} from "../../model/i-alert";
-import {ActivatedRoute} from "@angular/router";
 import {isNullOrUndefined} from "util";
 import * as _ from 'lodash';
 import * as moment from 'moment';
 import {SharedService} from "../service/shared.service";
 import {Subscription} from "rxjs/Subscription";
 import {TranslateService} from "@ngx-translate/core";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 const now = new Date();
 
@@ -35,7 +33,6 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
     public translate: TranslateService,
     private dietService: DietService,
     private sharedService: SharedService,
-    private route: ActivatedRoute,
     private location: Location,
     private modalService: NgbModal) { }
 
@@ -60,7 +57,6 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
         if(!isNullOrUndefined(data)) {
           this.patient = data;
           this.param = new AnthropometricParameter();
-          //this.initDateModel();
           this.initPatientBackup();
         }
       })

@@ -5,6 +5,7 @@ import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.compone
 import {AdminComponent} from "./admin.component";
 import {FoodComponent} from "./food/food.component";
 import {SelectDietComponent} from "./select-diet/select-diet.component";
+import {DetailDietComponent} from "./detail-diet/detail-diet.component";
 
 const foodRoutes: Routes = [
   {
@@ -15,8 +16,8 @@ const foodRoutes: Routes = [
       {path: '', component: AdminDashboardComponent, canActivate: [AdminGuardServiceService]},
       {path: 'dashboard', component: AdminDashboardComponent, canActivate: [AdminGuardServiceService]},
       {path: 'select-diet', component: SelectDietComponent, canActivate: [AdminGuardServiceService]},
-      /*{path: 'detail-diet', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
-      {path: 'add-diet', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},*/
+      {path: 'detail-diet/:id', component: DetailDietComponent, canActivate: [AdminGuardServiceService]},
+      {path: 'add-diet', component: DetailDietComponent, canActivate: [AdminGuardServiceService]},
       {path: 'food', component: FoodComponent, canActivate: [AdminGuardServiceService]},
     ]
   }
