@@ -54,7 +54,11 @@ export class DateInterceptor implements HttpInterceptor {
         const milliseconds = Date.parse(match[0]);
         //Address number are strings and can be 4 digits long
         //So if this is a number don't set it to a date
-        if (!isNaN(milliseconds) && key !== 'number') {
+        //Idem for vat
+        //Check for a better solution !
+        if (!isNaN(milliseconds) &&
+          key !== 'number' &&
+          key !== 'vat') {
           input[key] = new Date(milliseconds);
         }
       } else if (typeof value === "object") {
