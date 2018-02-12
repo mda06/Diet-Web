@@ -9,7 +9,7 @@ import {SignupAsk} from "../../model/signupAsk";
 export class AccountComponent implements OnInit {
 
   @Input() customerId: number = 0;
-  signup: SignupAsk = {customerId:this.customerId, email:"anthony-uniqueID@patient.com", password:""};
+  signup: SignupAsk = {customerId:0, email:"anthony-uniqueID@patient.com", password:""};
 
   constructor() { }
 
@@ -18,6 +18,7 @@ export class AccountComponent implements OnInit {
   }
 
   onCreateAccount() {
+    this.signup.customerId = this.customerId;
     console.log(this.signup);
   }
 

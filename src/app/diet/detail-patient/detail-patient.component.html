@@ -62,11 +62,12 @@
         <div class="card-body">
           <div class="form-group">
             <label for="extraInfo">{{ 'DIET.DETAIL.EXTRA_INFO' | translate }}</label>
-            <textarea type="text" class="form-control" id="extraInfo" rows="15"
+            <textarea type="text" class="form-control" id="extraInfo" rows="8"
                       [(ngModel)]="patient.extraInfo" name="extraInfo"></textarea>
           </div>
         </div>
       </div>
+      <app-account [customerId]="patient.id"></app-account>
     </div>
   </div>
   <div class="row">

@@ -1,17 +1,14 @@
-<div class="card" *ngIf="customer">
+<div class="card mt-3" *ngIf="customerId !== 0">
   <h4 class="card-header">Account</h4>
   <div class="card-body">
-    <div *ngIf="signup.customerId !== 0">
+    <div>
       <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" required readonly
-             [(ngModel)]="signup.email" name="username">
+      <input type="text" class="form-control" id="username" required [(ngModel)]="signup.email" name="username">
       <label for="password">Password</label>
-      <input type="text" class="form-control" id="password" required
-             [(ngModel)]="signup.email" name="password">
-      <button type="button" class="btn btn-primary" (click)="onCreateAccount()">Create account</button>
-    </div>
-    <div *ngIf="signup.customerId === 0">
-      <p>No customer selected</p>
+      <input type="password" class="form-control" id="password" required [(ngModel)]="signup.password" name="password">
+      <button [disabled]="!signup.password" type="button" class="btn btn-primary mt-2" (click)="onCreateAccount()">
+        Create account
+      </button>
     </div>
   </div>
 </div>

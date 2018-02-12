@@ -26,7 +26,8 @@ import { AccountComponent } from './account/account.component';
   exports: [
     CustomerComponent,
     SelectComponent,
-    DetailComponent
+    DetailComponent,
+    AccountComponent
   ]
 })
 export class CustomerModule { }
