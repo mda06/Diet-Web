@@ -2,8 +2,9 @@
   <h4 class="card-header">{{ "CUSTOMER.ACCOUNT.TITLE" | translate}}</h4>
   <div class="card-body">
     <div>
+      <label *ngIf="usernameAlreadyTaken">{{ "CUSTOMER.ACCOUNT.USERNAME_TAKEN" | translate}}</label>
       <label for="username">{{ "CUSTOMER.ACCOUNT.USERNAME" | translate}}</label>
-      <div class="input-group">
+      <div class="input-group" [class.username-taken]="usernameAlreadyTaken">
         <input type="text" class="form-control" placeholder="{{ 'CUSTOMER.ACCOUNT.USERNAME' | translate}}" id="username" required
                [(ngModel)]="signup.email" name="username" aria-describedby="suffix">
         <span class="input-group-addon" id="suffix">@patient.com</span>

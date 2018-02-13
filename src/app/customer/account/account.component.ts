@@ -3,6 +3,7 @@ import {SignupAsk} from "../../model/signupAsk";
 import {Customer} from "../../model/customer";
 import {AuthenticationService} from '../../services/authentication.service';
 import {TranslateService} from '@ngx-translate/core';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-account',
@@ -14,6 +15,7 @@ export class AccountComponent<T extends Customer> implements OnInit {
   @Input() customer: T;
   @Input() suffix: string;
   signup: SignupAsk = {customerId:0, email:"", password:""};
+  usernameAlreadyTaken: boolean = false;
 
   constructor(private service: AuthenticationService,
               public translate: TranslateService) { }
@@ -27,7 +29,16 @@ export class AccountComponent<T extends Customer> implements OnInit {
     this.service.onSignup(copySignup).subscribe(data => {
       console.log(data);
       this.customer.authId = "auth0|" + data._id;
-    }, err => console.log(err));
+      this.usernameAlreadyTaken = false;
+    }, err => {
+      console.log(err);
+      if(!isNullOrUndefined(err.error.errors)) {
+       if(err.error.errors.length > 0) {
+         if(err.error.errors[0] == "USERNAME_ALREADY_EXISTS")
+           this.usernameAlreadyTaken = true;
+       }
+      }
+    });
     console.log(copySignup);
   }
 

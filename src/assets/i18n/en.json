@@ -63,6 +63,7 @@
     "ACCOUNT": {
       "TITLE": "Account",
       "USERNAME": "Username",
+      "USERNAME_TAKEN": "Username already taken",
       "PASSWORD": "Password",
       "CREATE": "Create account",
       "UPDATE": "Update account"

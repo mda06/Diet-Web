@@ -63,6 +63,7 @@
     "ACCOUNT": {
       "TITLE": "Compte",
       "USERNAME": "Nom de compte",
+      "USERNAME_TAKEN": "Nom de compte déjà pris",
       "PASSWORD": "Mot de passe",
       "CREATE": "Créer le compte",
       "UPDATE": "Mettre à jour le compte"
