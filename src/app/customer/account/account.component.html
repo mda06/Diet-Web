@@ -12,11 +12,13 @@
 
       <label for="password">{{ "CUSTOMER.ACCOUNT.PASSWORD" | translate}}</label>
       <input type="password" class="form-control" id="password" required [(ngModel)]="signup.password" name="password">
+      <label for="pwdCheck">{{ "CUSTOMER.ACCOUNT.PASSWORD_CHECK" | translate}}</label>
+      <input type="password" class="form-control" id="pwdCheck" required [(ngModel)]="pwdCheck" name="password">
       <button *ngIf="!customer.authId"
-        [disabled]="!signup.password || !signup.email" type="button" class="btn btn-primary mt-2" (click)="onCreateAccount()">
+        [disabled]="!signup.password || !signup.email || (signup.password != pwdCheck)" type="button" class="btn btn-primary mt-2" (click)="onCreateAccount()">
         {{ "CUSTOMER.ACCOUNT.CREATE" | translate}}
       </button>
-      <button *ngIf="customer.authId" [disabled]="!signup.password || !signup.email"
+      <button *ngIf="customer.authId" [disabled]="!signup.password || !signup.email || (signup.password != pwdCheck)"
               type="button" class="btn btn-primary mt-2" (click)="onUpdateAccount()">
         {{ "CUSTOMER.ACCOUNT.UPDATE" | translate}}
       </button>

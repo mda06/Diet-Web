@@ -16,6 +16,7 @@ export class AccountComponent<T extends Customer> implements OnInit {
   @Input() suffix: string;
   signup: SignupAsk = {customerId:0, email:"", password:""};
   usernameAlreadyTaken: boolean = false;
+  pwdCheck: string = "";
 
   constructor(private service: AuthenticationService,
               public translate: TranslateService) { }

@@ -65,6 +65,7 @@
       "USERNAME": "Username",
       "USERNAME_TAKEN": "Username already taken",
       "PASSWORD": "Password",
+      "PASSWORD_CHECK": "Repeat password",
       "CREATE": "Create account",
       "UPDATE": "Update account"
     }

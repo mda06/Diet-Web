@@ -65,6 +65,7 @@
       "USERNAME": "Nom de compte",
       "USERNAME_TAKEN": "Nom de compte déjà pris",
       "PASSWORD": "Mot de passe",
+      "PASSWORD_CHECK": "Répétez le mot de passe",
       "CREATE": "Créer le compte",
       "UPDATE": "Mettre à jour le compte"
     }
