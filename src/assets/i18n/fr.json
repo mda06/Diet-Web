@@ -59,6 +59,13 @@
         "COUNTRY": "Pays",
         "TOGGLE": "Ouvrire/Fermer addresse"
       }
+    },
+    "ACCOUNT": {
+      "TITLE": "Compte",
+      "USERNAME": "Nom de compte",
+      "PASSWORD": "Mot de passe",
+      "CREATE": "Créer le compte",
+      "UPDATE": "Mettre à jour le compte"
     }
   },
   "DIET": {

@@ -1,18 +1,23 @@
 <div class="card mt-3" *ngIf="customer.id !== 0">
-  <h4 class="card-header">Account</h4>
+  <h4 class="card-header">{{ "CUSTOMER.ACCOUNT.TITLE" | translate}}</h4>
   <div class="card-body">
     <div>
-      <label for="username">Username</label>
-      <input type="text" class="form-control" id="username" required [(ngModel)]="signup.email" name="username">
-      <label for="password">Password</label>
+      <label for="username">{{ "CUSTOMER.ACCOUNT.USERNAME" | translate}}</label>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="{{ 'CUSTOMER.ACCOUNT.USERNAME' | translate}}" id="username" required
+               [(ngModel)]="signup.email" name="username" aria-describedby="suffix">
+        <span class="input-group-addon" id="suffix">@patient.com</span>
+      </div>
+
+      <label for="password">{{ "CUSTOMER.ACCOUNT.PASSWORD" | translate}}</label>
       <input type="password" class="form-control" id="password" required [(ngModel)]="signup.password" name="password">
       <button *ngIf="!customer.authId"
-        [disabled]="!signup.password" type="button" class="btn btn-primary mt-2" (click)="onCreateAccount()">
-        Create account
+        [disabled]="!signup.password || !signup.email" type="button" class="btn btn-primary mt-2" (click)="onCreateAccount()">
+        {{ "CUSTOMER.ACCOUNT.CREATE" | translate}}
       </button>
-      <button *ngIf="customer.authId"
-              [disabled]="!signup.password" type="button" class="btn btn-primary mt-2" (click)="onUpdateAccount()">
-        Update account
+      <button *ngIf="customer.authId" [disabled]="!signup.password || !signup.email"
+              type="button" class="btn btn-primary mt-2" (click)="onUpdateAccount()">
+        {{ "CUSTOMER.ACCOUNT.UPDATE" | translate}}
       </button>
     </div>
   </div>

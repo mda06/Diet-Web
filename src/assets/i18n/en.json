@@ -59,6 +59,13 @@
         "COUNTRY": "Country",
         "TOGGLE": "Toggle address"
       }
+    },
+    "ACCOUNT": {
+      "TITLE": "Account",
+      "USERNAME": "Username",
+      "PASSWORD": "Password",
+      "CREATE": "Create account",
+      "UPDATE": "Update account"
     }
   },
   "DIET": {

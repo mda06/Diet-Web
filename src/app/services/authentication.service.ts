@@ -6,6 +6,8 @@ import { Observable } from "rxjs/Observable";
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Role} from "../model/role.enum";
 import {isNullOrUndefined} from "util";
+import {SignupAsk} from '../model/signupAsk';
+import {SignupReturn} from '../model/signupReturn';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,6 +18,7 @@ export class AuthenticationService {
 
   private idUrl = "api/auth/id";
   private loginUrl = "api/auth/login";
+  private signupUrl = "api/auth/signup";
   private connectedUserUrl = "api/auth/connecteduser";
   private roleUrl = "api/auth/role";
   private _token: Token;
@@ -24,6 +27,10 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
     this._token = JSON.parse(localStorage.getItem("token"));
+  }
+
+  onSignup(ask: SignupAsk): Observable<SignupReturn> {
+    return this.http.post<SignupReturn>(this.signupUrl, ask, httpOptions);
   }
 
   onLogin(auth: Authentication): Observable<Role> {
