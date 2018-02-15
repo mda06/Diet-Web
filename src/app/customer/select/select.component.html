@@ -8,10 +8,13 @@
   <hr class="my-4">
   <div *ngIf="customers" >
     <ul class="list-group list-group-flush" >
-      <li class="list-group-item patient-holder " *ngFor="let customer of
+      <li class="list-group-item patient-holder d-flex justify-content-between align-items-center" *ngFor="let customer of
         (customers | customerfilter:filter).slice((this.currentPage-1) * this.customersPerPage, this.currentPage * this.customersPerPage)" (click)="switch(customer)"
           [class.active]="(selectedCustomer ? selectedCustomer.id : 0) === customer.id">
         {{customer.firstName + ' ' + customer.lastName}}
+        <button type="button" class="btn btn-danger" (click)="onDeleteCustomer(customer)">
+          <span class="fa fa-trash" aria-hidden="true"></span>
+        </button>
       </li>
     </ul>
 

@@ -30,6 +30,9 @@ export class SelectComponent<T extends Customer> implements OnInit {
     this.onAddCustomer.emit();
   }
 
+  onDeleteCustomer(customer: Customer) {
+    console.log(customer.id);
+  }
 
   switch(customer: T) {
     this.selectedCustomer = customer;
