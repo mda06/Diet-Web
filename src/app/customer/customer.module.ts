@@ -8,6 +8,7 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {CustomerFilterPipe} from "./pipes/CustomerFilterPipe";
 import {NavbarModule} from "../navbar/navbar.module";
 import { AccountComponent } from './account/account.component';
+import {CustomerService} from './service/customer.service';
 
 @NgModule({
   imports: [
@@ -28,6 +29,9 @@ import { AccountComponent } from './account/account.component';
     SelectComponent,
     DetailComponent,
     AccountComponent
+  ],
+  providers: [
+    CustomerService
   ]
 })
 export class CustomerModule { }

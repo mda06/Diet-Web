@@ -8,6 +8,7 @@ import {Role} from "../model/role.enum";
 import {isNullOrUndefined} from "util";
 import {SignupAsk} from '../model/signupAsk';
 import {SignupReturn} from '../model/signupReturn';
+import {Patient} from '../model/patient';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {Customer} from "../../model/customer";
+import {CustomerService} from '../service/customer.service';
 
 @Component({
   selector: 'app-select-customer',
@@ -18,7 +19,8 @@ export class SelectComponent<T extends Customer> implements OnInit {
   currentPage = 1;
   customersPerPage = 5;
 
-  constructor(public translate: TranslateService) {}
+  constructor(public translate: TranslateService,
+              private service: CustomerService) {}
 
   ngOnInit() {}
 
@@ -30,8 +32,11 @@ export class SelectComponent<T extends Customer> implements OnInit {
     this.onAddCustomer.emit();
   }
 
-  onDeleteCustomer(customer: Customer) {
-    console.log(customer.id);
+  onDeleteCustomer(customer: T) {
+    this.service.deleteCustomer(customer).subscribe(data => {
+      const index: number = this.customers.indexOf(customer);
+      this.customers.splice(index, 1);
+    }, err => console.log(err));
   }
 
   switch(customer: T) {
