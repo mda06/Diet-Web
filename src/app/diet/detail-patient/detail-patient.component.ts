@@ -157,6 +157,11 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
     );
   }
 
+  onDeleteParam(param: AnthropometricParameter) {
+    const index: number = this.patient.anthropometricParameters.indexOf(param);
+    this.patient.anthropometricParameters.splice(index, 1);
+  }
+
   ngOnDestroy() {
     this.subscriptions.unsubscribe();
   }

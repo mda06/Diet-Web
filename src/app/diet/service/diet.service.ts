@@ -6,6 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import {Patient} from "../../model/patient";
 import { of } from 'rxjs/observable/of';
 import { catchError} from 'rxjs/operators';
+import {AnthropometricParameter} from '../../model/anthropometricParameter';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,6 +17,7 @@ export class DietService {
 
   private patientUrl = "api/patient/";
   private patientByDietUrl = "api/patient/dietetist/";
+  private paramUrl = "api/param/";
   private _token: Token;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
@@ -37,6 +39,10 @@ export class DietService {
 
   savePatient(patient: Patient): Observable<Patient> {
     return this.http.post<Patient>(this.patientUrl, patient, httpOptions);
+  }
+
+  deleteParam(param: AnthropometricParameter): Observable<any> {
+    return this.http.delete<any>(this.paramUrl + param.id, httpOptions);
   }
 
   get token(): Token {

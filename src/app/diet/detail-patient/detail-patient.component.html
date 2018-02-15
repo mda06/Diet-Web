@@ -31,7 +31,12 @@
                     <label for="waistCircumference">{{ 'DIET.DETAIL.PARAMS.WAIST' | translate }}</label>
                     <input type="number" step="any" class="form-control" id="waistCircumference"
                            [(ngModel)]="param.waistCircumference" name="waistCircumference">
-                    <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) | number:'1.0-0' }}</label>
+                    <div class="d-flex justify-content-between pt-2">
+                      <label>BMI: {{ param.weight / (param.length / 100.0 * param.length / 100.0) | number:'1.0-0' }}</label>
+                      <button type="button" class="btn btn-danger" (click)="onDeleteParam(param)">
+                        <span class="fa fa-trash" aria-hidden="true"></span>
+                      </button>
+                    </div>
                   </ng-template>
                 </ngb-panel>
               </div>
@@ -49,7 +54,7 @@
                   <label for="nWaistCircumference">{{ 'DIET.DETAIL.PARAMS.WAIST' | translate }}</label>
                   <input type="number" step="any" class="form-control" id="nWaistCircumference"
                          [(ngModel)]="param.waistCircumference" name="nWaistCircumference">
-                  <button class="btn btn-outline-primary" (click)="addParam()">{{ 'DIET.DETAIL.PARAMS.ADD' | translate }}</button>
+                  <button class="btn btn-outline-primary mt-2" (click)="addParam()">{{ 'DIET.DETAIL.PARAMS.ADD' | translate }}</button>
                 </ng-template>
               </ngb-panel>
             </ngb-accordion>
