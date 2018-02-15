@@ -4,11 +4,11 @@
     <div class="container p-3">
       <label><b>{{ 'LOGIN.USERNAME' | translate }}</b></label>
       <input type="text" [(ngModel)]="auth.username" placeholder="{{ 'LOGIN.USERNAME_PLACEHOLDER' | translate }}"
-             name="username" id="username" required>
+             name="username" id="username" required (keyup.enter)="onLogin()">
 
       <label><b>{{ 'LOGIN.PASSWORD' | translate }}</b></label>
       <input type="password" [(ngModel)]="auth.password" placeholder="{{ 'LOGIN.PASSWORD' | translate }}"
-             name="password" id="password" required>
+             name="password" id="password" required (keyup.enter)="onLogin()">
 
       <button type="button" class="btn btn-success mt-2 w-100" (click)="onLogin()" [disabled]="loading">
         {{ 'LOGIN.LOGIN' | translate }}

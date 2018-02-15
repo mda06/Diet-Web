@@ -145,7 +145,7 @@
       "SAVE": "Save",
       "RETURN": "Return",
       "ATTENTION": "Attention",
-      "PATIENT_MODIFIED": "Diet data has been modified without saving it",
+      "DIET_MODIFIED": "Diet data has been modified without saving it",
       "CANCEL": "Cancel",
       "RETURN_WITHOUT_SAVING": "Return without saving",
       "TITLE": "Diet specific information",
