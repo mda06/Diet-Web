@@ -6,6 +6,7 @@ import {Subscription} from "rxjs/Subscription";
 import * as moment from 'moment';
 import {isNullOrUndefined} from "util";
 import {TranslateService} from "@ngx-translate/core";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -32,6 +33,7 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
   ];
 
   constructor(public translate: TranslateService,
+              private router: Router,
               private sharedService: SharedService) { }
 
   ngOnInit() {
@@ -65,6 +67,11 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
         }
       })
     );
+  }
+
+  onPatientDeselect() {
+    this.sharedService.setPatient(null);
+    this.selectedPatient = null;
   }
 
   ngOnDestroy() {

@@ -87,6 +87,8 @@
     "DASHBOARD": {
       "TITLE": "Dashboard of ",
       "SELECTED": "Patient selected: ",
+      "DESELECT_PATIENT": "Deselect patient",
+      "NO_PATIENT": "Please select a patient",
       "CREATED": "Created at ",
       "YEARS_OLD": " years old"
     },

@@ -87,6 +87,8 @@
     "DASHBOARD": {
       "TITLE": "Tableau de bord de ",
       "SELECTED": "Patient selectionner: ",
+      "NO_PATIENT": "Veuillez selectionner un patient",
+      "DESELECT_PATIENT": "Déselectionner le patient",
       "CREATED": "Crée le ",
       "YEARS_OLD": " ans"
     },
