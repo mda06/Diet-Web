@@ -12,7 +12,7 @@
         (customers | customerfilter:filter).slice((this.currentPage-1) * this.customersPerPage, this.currentPage * this.customersPerPage)" (click)="switch(customer)"
           [class.active]="(selectedCustomer ? selectedCustomer.id : 0) === customer.id">
         {{customer.firstName + ' ' + customer.lastName}}
-        <button type="button" class="btn btn-danger" (click)="onDeleteCustomer(customer)">
+        <button type="button" class="btn btn-danger" (click)="onDeleteCustomer(customer, content)">
           <span class="fa fa-trash" aria-hidden="true"></span>
         </button>
       </li>
@@ -29,3 +29,23 @@
   <button type="button" class="btn btn-primary float-right" (click)="select()"
           [disabled]="!selectedCustomer">{{ basei18n + '.SELECT.SELECT' | translate }}</button>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{ basei18n + '.DELETE.TITLE' | translate }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>{{ basei18n + '.DELETE.BODY' | translate }}</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="c('Cancel')">
+      {{ basei18n + '.DELETE.CANCEL' | translate }}
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Delete')">
+      {{ basei18n + '.DELETE.DELETE' | translate }}
+    </button>
+  </div>
+</ng-template>

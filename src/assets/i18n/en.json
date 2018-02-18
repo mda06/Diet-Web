@@ -71,6 +71,12 @@
     }
   },
   "DIET": {
+    "DELETE": {
+      "TITLE": "You're trying to delete a patient !",
+      "BODY": "Are you sure you want to delete this patient ?",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete"
+    },
     "SELECT": {
       "TITLE": "Select a patient",
       "SEARCH": "Search for a patient",
@@ -129,6 +135,12 @@
     }
   },
   "ADMIN": {
+    "DELETE": {
+      "TITLE": "You're trying to delete a dietetist !",
+      "BODY": "Are you sure you want to delete this dietetist ?",
+      "CANCEL": "Cancel",
+      "DELETE": "Delete"
+    },
     "SELECT": {
       "TITLE": "Select a diet",
       "SEARCH": "Search for a diet",
@@ -156,12 +168,6 @@
         "ERROR": "Error cannot save "
       }
     },
-    "DELETE" : {
-      "WARNING": "Your deleting definitely a product",
-      "ATTENTION": "Attention !",
-      "CANCEL": "Cancel",
-      "CONFIRM": "Delete anyway"
-    },
     "PURGE" : {
       "CHECK": "I want to purge the products database",
       "TITLE": "Danger !",
@@ -173,11 +179,17 @@
       "ERROR_DELETE": "Error while purging product"
     },
     "PRODUCT": {
+      "DELETE" : {
+        "WARNING": "Your deleting definitely a product",
+        "ATTENTION": "Attention !",
+        "CANCEL": "Cancel",
+        "CONFIRM": "Delete anyway"
+      },
       "SEARCHING": "Searching product...",
       "NOT_FOUND": "Product not found !",
       "DEL_ID": "ID of product to remove: ",
       "ERROR_DELETE": "Error while deleting product",
-      "DELETE": "Delete",
+      "DEL": "Delete",
       "DELETED": "Product has been deleted",
       "PURGE": "Purge the database of products",
       "SIZE": "Actually number of product in the database: {{size}}",

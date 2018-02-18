@@ -71,6 +71,12 @@
     }
   },
   "DIET": {
+    "DELETE": {
+      "TITLE": "Vous êtes sur le point de supprimer un patient !",
+      "BODY": "Êtes-vous sûr de vouloir supprimer ce patient ?",
+      "CANCEL": "Annuler",
+      "DELETE": "Supprimer"
+    },
     "SELECT": {
       "TITLE": "Selectionner un patient",
       "SEARCH": "Chercher un patient",
@@ -129,6 +135,12 @@
     }
   },
   "ADMIN": {
+    "DELETE": {
+      "TITLE": "Vous êtes sur le point de supprimer un diététicien !",
+      "BODY": "Êtes-vous sûr de vouloir supprimer ce diététicien ?",
+      "CANCEL": "Annuler",
+      "DELETE": "Supprimer"
+    },
     "SELECT": {
       "TITLE": "Selectionner un diététicien",
       "SEARCH": "Chercher un diététicien",
@@ -156,12 +168,6 @@
       "DONE": "Enregistrement fait",
       "ERROR": "Erreur pendant l'enregistrement"
     },
-    "DELETE" : {
-      "WARNING": "Vous êtes sur le point de supprimer un produit définitivement",
-      "ATTENTION": "Attention !",
-      "CANCEL": "Annuler",
-      "CONFIRM": "Supprimer quand même"
-    },
     "PURGE" : {
       "CHECK": "Je veux purger la base de données des produits",
       "TITLE": "Danger !",
@@ -173,11 +179,17 @@
       "ERROR_DELETE": "Erreur pendant la purge des produits"
     },
     "PRODUCT": {
+      "DELETE" : {
+        "WARNING": "Vous êtes sur le point de supprimer un produit définitivement",
+        "ATTENTION": "Attention !",
+        "CANCEL": "Annuler",
+        "CONFIRM": "Supprimer quand même"
+      },
       "SEARCHING": "En train de chercher le produit...",
       "NOT_FOUND": "Produit non trouvé !",
       "DEL_ID": "ID du produit à supprimer: ",
       "ERROR_DELETE": "Erreur pendant la suppression du produit",
-      "DELETE": "Supprimer",
+      "DEL": "Supprimer",
       "DELETED": "Produit a éte supprimé",
       "PURGE": "Purger la base de données des produits",
       "SIZE": "Il y a {{size}} produits dans la base de données actuellement",
