@@ -1,7 +1,7 @@
 <div class="card" *ngIf="customer.id !== 0">
   <h4 class="card-header">{{ "CUSTOMER.ACCOUNT.TITLE" | translate}}</h4>
   <div class="card-body">
-    <div>
+    <div *ngIf="!customer.authId">
       <label *ngIf="usernameAlreadyTaken">{{ "CUSTOMER.ACCOUNT.USERNAME_TAKEN" | translate}}</label>
       <label for="username">{{ "CUSTOMER.ACCOUNT.USERNAME" | translate}}</label>
       <div class="input-group" [class.username-taken]="usernameAlreadyTaken">
@@ -18,10 +18,13 @@
         [disabled]="!signup.password || !signup.email || (signup.password != pwdCheck)" type="button" class="btn btn-primary mt-2" (click)="onCreateAccount()">
         {{ "CUSTOMER.ACCOUNT.CREATE" | translate}}
       </button>
-      <button *ngIf="customer.authId" [disabled]="!signup.password || !signup.email || (signup.password != pwdCheck)"
+      <button *ngIf="customer.authId" [disabled]="'true'"
               type="button" class="btn btn-primary mt-2" (click)="onUpdateAccount()">
         {{ "CUSTOMER.ACCOUNT.UPDATE" | translate}}
       </button>
+    </div>
+    <div *ngIf="customer.authId">
+      Update account is not implemented yet
     </div>
   </div>
 </div>
