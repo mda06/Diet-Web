@@ -77,6 +77,8 @@ export class DetailPatientComponent implements OnInit, OnDestroy {
   }
 
   isPatientModified() {
+    if(!isNullOrUndefined(this.copyPatient) && !isNullOrUndefined(this.patient))
+      this.copyPatient.authId = this.patient.authId;
     return !_.isEqual(this.copyPatient, this.patient);
   }
 
