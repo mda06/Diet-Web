@@ -3,6 +3,7 @@ import {AuthenticationService} from "../services/authentication.service";
 import {Router} from "@angular/router";
 import {NavItem} from "../model/nav-item";
 import { TranslateService } from '@ngx-translate/core';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-navbar',
@@ -69,5 +70,11 @@ export class NavbarComponent implements OnInit {
 
   isActive(item: NavItem): boolean {
     return this.activeNavItem == item;
+  }
+
+  hasActiveMenuSubMenus(): boolean {
+    if(isNullOrUndefined(this.activeNavItem)) return false;
+    return this.activeNavItem.subMenus.length != 0;
+    //return !isNullOrUndefined(this.activeNavItem.subMenus);
   }
 }

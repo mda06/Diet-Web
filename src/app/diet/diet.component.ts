@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/switchMap';
 import {ActivatedRoute, Router} from "@angular/router";
 import {NavItem} from "../model/nav-item";
@@ -40,6 +40,8 @@ export class DietComponent implements OnInit {
   private subscriptions = new Subscription();
   private selectedPatient: Patient;
   private diet: Dietetist;
+
+  @ViewChild('sidebar') sidebar;
 
   constructor(private dietService: DietService,
               private sharedService: SharedService,
@@ -120,6 +122,7 @@ export class DietComponent implements OnInit {
 
   navItemClicked(item: NavItem) {
     console.log("Navigate to %s", item.routerLink);
+    this.sidebar.triggerRerender();
     this.router.navigate([item.routerLink]);
   }
 }

@@ -1,40 +1,60 @@
-<nav class="p-1 bg-light">
-  <h2 class="pb-4">
-    Diet Pro. <i class="fa fa-cog" id="settings-cog" (click)="onSettingsCogClick()"></i>
-  </h2>
+<aside class="d-flex">
+  <nav class="p-1 bg-light">
+    <h2 class="pb-4">
+      Diet Pro. <i class="fa fa-cog" id="settings-cog" (click)="onSettingsCogClick()"></i>
+    </h2>
 
-  <div *ngIf="displayType == 'settings'" id="settings">
-    <button class="btn btn-secondary" (click)="onBackClick()">
-      <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
-    </button>
-    <hr>
-    <h4 class="text-center">{{"NAV.SETTINGS.TITLE" | translate}}</h4>
-    <form class="form-inline">
-      <label for="lang">{{"NAV.SETTINGS.LANG" | translate}} </label>
-      <select [(ngModel)]="selectedLang" class="form-control ml-2" name="lang" id="lang" (ngModelChange)="onChangeLang($event)">
-        <option *ngFor="let lang of translate.getLangs()" [ngValue]="lang">
-          {{lang}}
-        </option>
-      </select>
-    </form>
-  </div>
-  <ul *ngIf="navItems && displayType == 'menu'" id="menu">
-    <li *ngFor="let item of navItems" class="menuItem"
-        [class.activeMenu]="isActive(item)" (click)="onNavigate(item)">
-      <img src="{{item.img}}" placement="top" ngbTooltip="{{ (item.title) | translate}}"
-           alt="{{ (item.title) | translate}}">
-    </li>
-  </ul>
-  <div *ngIf="displayType == 'submenu'" id="submenu">
-    <button class="btn btn-secondary" (click)="onBackClick()">
-    <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
-    </button>
-    <hr>
-    <div (click)="onNavigate(activeNavItem)" id="activeMenu" class="pb-1">
-      <h4 class="text-center">{{activeNavItem.title | translate}}</h4>
-      <img src="{{activeNavItem.img}}" alt="{{ (activeNavItem.title) | translate}}">
+    <div *ngIf="displayType == 'settings'" id="settings">
+      <button class="btn btn-secondary" (click)="onBackClick()">
+        <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
+      </button>
+      <hr>
+      <h4 class="text-center">{{"NAV.SETTINGS.TITLE" | translate}}</h4>
+      <form class="form-inline">
+        <label for="lang">{{"NAV.SETTINGS.LANG" | translate}} </label>
+        <select [(ngModel)]="selectedLang" class="form-control ml-2" name="lang" id="lang" (ngModelChange)="onChangeLang($event)">
+          <option *ngFor="let lang of translate.getLangs()" [ngValue]="lang">
+            {{lang}}
+          </option>
+        </select>
+      </form>
     </div>
-    <h6>Submenus</h6>
+    <ul *ngIf="navItems && displayType != 'settings'" id="menu">
+      <li *ngFor="let item of navItems" class="menuItem"
+          [class.activeMenu]="isActive(item)" (click)="onNavigate(item)">
+        <img src="{{item.img}}" placement="top" ngbTooltip="{{ (item.title) | translate}}"
+             alt="{{ (item.title) | translate}}">
+      </li>
+    </ul>
+
+    <!--<div *ngIf="displayType == 'submenu'" id="submenu">
+      <button class="btn btn-secondary" (click)="onBackClick()">
+      <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
+      </button>
+      <hr>
+      <div (click)="onNavigate(activeNavItem)" id="activeMenu" class="pb-1">
+        <h4 class="text-center">{{activeNavItem.title | translate}}</h4>
+        <img src="{{activeNavItem.img}}" alt="{{ (activeNavItem.title) | translate}}">
+      </div>
+      <h6>Submenus</h6>
+      <ul>
+        <li *ngFor="let subItem of activeNavItem.subMenus" (click)="onSubNavigate(subItem)">
+          <img alt="{{ (subItem.title) | translate}}"
+               src="{{subItem.img}}"
+               placement="top" ngbTooltip="{{ (subItem.title) | translate}}"/>
+        </li>
+      </ul>
+    </div>-->
+
+    <div class="fixed-bottom" id="bottom">
+      <button type="button" class="btn btn-warning" id="logout" (click)="onLogout()">
+        {{ 'NAV.LOG_OUT' | translate}} <span class="fa fa-sign-out" aria-hidden="true"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div *ngIf="hasActiveMenuSubMenus()" id="submenu" class="d-flex flex-column justify-content-center">
+    <p>Submenus</p>
     <ul>
       <li *ngFor="let subItem of activeNavItem.subMenus" (click)="onSubNavigate(subItem)">
         <img alt="{{ (subItem.title) | translate}}"
@@ -44,9 +64,4 @@
     </ul>
   </div>
 
-  <div class="fixed-bottom" id="bottom">
-    <button type="button" class="btn btn-warning" id="logout" (click)="onLogout()">
-      {{ 'NAV.LOG_OUT' | translate}} <span class="fa fa-sign-out" aria-hidden="true"></span>
-    </button>
-  </div>
-</nav>
+</aside>
