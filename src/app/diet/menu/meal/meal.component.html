@@ -108,7 +108,7 @@
   <div class="col-md-6">
     <div *ngIf="showProducts">
       <div>
-        <app-search-food [enableDragDrop]="true"></app-search-food>
+        <app-search-food [enableDragDrop]="true" (onSelectedProduct)="onSelectedProduct($event, popupProduct)"></app-search-food>
       </div>
     </div>
     <div *ngIf="!showProducts">
@@ -116,6 +116,26 @@
     </div>
   </div>
 </div>
+
+<ng-template #popupProduct let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{displayProduct.name.slice(0, displayProduct.name.indexOf("-"))}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="c('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img src="{{displayProduct.imgUrl}}" alt="product image" class="img-fluid" id="product-img">
+    <blockquote class="blockquote"
+                *ngIf="displayProduct.name.slice(displayProduct.name.indexOf('-') + 1, displayProduct.name.lastIndexOf('-'))">
+      <footer class="blockquote-footer">
+        <cite title="Source Title">
+          {{displayProduct.name.slice(displayProduct.name.indexOf("-") + 1, displayProduct.name.lastIndexOf("-"))}}
+        </cite>
+      </footer>
+    </blockquote>
+  </div>
+</ng-template>
 
 <ng-template #popupDelete let-c="close" let-d="dismiss">
   <div class="modal-header">

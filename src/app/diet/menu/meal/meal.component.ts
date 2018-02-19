@@ -27,6 +27,7 @@ export class MealComponent implements OnInit {
   showProducts; boolean = false;
   @ViewChild('accordion') accordion;
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
+  displayProduct: Product;
 
   constructor(private service: MenuService,
               private modalService: NgbModal,
@@ -204,5 +205,25 @@ export class MealComponent implements OnInit {
         const index: number = meal.mealProducts.indexOf(mp);
         meal.mealProducts.splice(index, 1);
       }, err => console.log("Error while removing meal product", err));
+  }
+
+  onSelectedProduct(prod: Product, popupProduct) {
+    this.displayProduct = prod;
+    this.modalService.open(popupProduct).result.then((result) => {
+      /*if (result === 'Cancel') {
+        console.log('Stay here');
+      } else if (result === 'Delete') {
+        console.log('Delete meal');
+        if(meal.id !== 0)
+          this.service.deleteMeal(meal.id).subscribe(
+            data => {
+              console.log("Meal removed");
+              const index: number = this.meals.indexOf(meal);
+              this.meals.splice(index, 1);
+            }, err => console.log("Error while removing meal ", err));
+      }*/
+    });
+    console.log("It's a product");
+    console.log(this.displayProduct);
   }
 }

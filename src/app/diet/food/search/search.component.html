@@ -39,9 +39,14 @@
   <div *ngIf="productsPaging.numberOfElements > 0">
     <ul class="list-group list-group-flush" >
       <div *ngIf="enableDragDrop">
-        <li class="list-group-item list-group-item-action product-holder" [dragClass]="'drag-over'"
+        <li class="list-group-item list-group-item-action product-holder product-holder-drag-drop" [dragClass]="'drag-over'"
             [draggable] *ngFor="let product of productsPaging.content" [dragData]="product">
-          <h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+          <div class="d-flex justify-content-between">
+            <h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
+            <button class="btn btn-primary" (click)="selectProduct(product)">
+              <span class="fa fa-search"></span>
+            </button>
+          </div>
           <blockquote class="blockquote"
                       *ngIf="product.name.slice(product.name.indexOf('-') + 1, product.name.lastIndexOf('-'))">
             <footer class="blockquote-footer">
