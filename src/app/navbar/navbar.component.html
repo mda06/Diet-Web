@@ -4,7 +4,7 @@
       Diet Pro. <i class="fa fa-cog" id="settings-cog" (click)="onSettingsCogClick()"></i>
     </h2>
 
-    <div *ngIf="displayType == 'settings'" id="settings">
+    <div *ngIf="displaySettings" id="settings">
       <button class="btn btn-secondary" (click)="onBackClick()">
         <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
       </button>
@@ -19,32 +19,13 @@
         </select>
       </form>
     </div>
-    <ul *ngIf="navItems && displayType != 'settings'" id="menu">
+    <ul *ngIf="navItems && !displaySettings" id="menu">
       <li *ngFor="let item of navItems" class="menuItem"
           [class.activeMenu]="isActive(item)" (click)="onNavigate(item)">
         <img src="{{item.img}}" placement="top" ngbTooltip="{{ (item.title) | translate}}"
              alt="{{ (item.title) | translate}}">
       </li>
     </ul>
-
-    <!--<div *ngIf="displayType == 'submenu'" id="submenu">
-      <button class="btn btn-secondary" (click)="onBackClick()">
-      <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
-      </button>
-      <hr>
-      <div (click)="onNavigate(activeNavItem)" id="activeMenu" class="pb-1">
-        <h4 class="text-center">{{activeNavItem.title | translate}}</h4>
-        <img src="{{activeNavItem.img}}" alt="{{ (activeNavItem.title) | translate}}">
-      </div>
-      <h6>Submenus</h6>
-      <ul>
-        <li *ngFor="let subItem of activeNavItem.subMenus" (click)="onSubNavigate(subItem)">
-          <img alt="{{ (subItem.title) | translate}}"
-               src="{{subItem.img}}"
-               placement="top" ngbTooltip="{{ (subItem.title) | translate}}"/>
-        </li>
-      </ul>
-    </div>-->
 
     <div class="fixed-bottom" id="bottom">
       <button type="button" class="btn btn-warning" id="logout" (click)="onLogout()">
@@ -53,7 +34,7 @@
     </div>
   </nav>
 
-  <div *ngIf="hasActiveMenuSubMenus()" id="submenu" class="d-flex flex-column justify-content-center">
+  <div *ngIf="hasActiveMenuSubMenus() && !displaySettings" id="submenu" class="d-flex flex-column justify-content-center">
     <p>Submenus</p>
     <ul>
       <li *ngFor="let subItem of activeNavItem.subMenus" (click)="onSubNavigate(subItem)">

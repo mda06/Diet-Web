@@ -14,8 +14,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() navItems: Array<NavItem>;
   @Output() navItemClicked = new EventEmitter<NavItem>();
-  private oldDisplay = "";
-  displayType = "menu";
+  displaySettings: boolean = false;
   selectedLang = "en";
   activeNavItem: NavItem;
 
@@ -28,30 +27,20 @@ export class NavbarComponent implements OnInit {
     this.navItems.forEach(item => {
       if(this.router.url === item.routerLink) {
         this.activeNavItem = item;
-        if(this.activeNavItem.subMenus.length > 0)
-          this.displayType = 'submenu';
       }
     });
   }
 
   onSettingsCogClick() {
-    if (this.displayType != "settings") {
-      this.oldDisplay = this.displayType;
-      this.displayType = 'settings';
-    }
+    this.displaySettings = !this.displaySettings;
   }
 
   onBackClick() {
-    if(this.displayType == 'settings' && this.oldDisplay != "")
-      this.displayType = this.oldDisplay;
-    else
-      this.displayType = 'menu';
+    this.displaySettings = false;
   }
 
   onNavigate(navItem: NavItem) {
     this.activeNavItem = navItem;
-    if(this.activeNavItem.subMenus.length > 0)
-      this.displayType = 'submenu';
     this.navItemClicked.emit(navItem);
   }
 
@@ -75,6 +64,5 @@ export class NavbarComponent implements OnInit {
   hasActiveMenuSubMenus(): boolean {
     if(isNullOrUndefined(this.activeNavItem)) return false;
     return this.activeNavItem.subMenus.length != 0;
-    //return !isNullOrUndefined(this.activeNavItem.subMenus);
   }
 }
