@@ -209,21 +209,6 @@ export class MealComponent implements OnInit {
 
   onSelectedProduct(prod: Product, popupProduct) {
     this.displayProduct = prod;
-    this.modalService.open(popupProduct).result.then((result) => {
-      /*if (result === 'Cancel') {
-        console.log('Stay here');
-      } else if (result === 'Delete') {
-        console.log('Delete meal');
-        if(meal.id !== 0)
-          this.service.deleteMeal(meal.id).subscribe(
-            data => {
-              console.log("Meal removed");
-              const index: number = this.meals.indexOf(meal);
-              this.meals.splice(index, 1);
-            }, err => console.log("Error while removing meal ", err));
-      }*/
-    });
-    console.log("It's a product");
-    console.log(this.displayProduct);
+    this.modalService.open(popupProduct);
   }
 }

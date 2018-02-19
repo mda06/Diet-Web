@@ -48,10 +48,46 @@
                      (onDrop)="onMealProductDrop(meal, $event)">
                   <h5 class="mb-2 text-muted">{{"MEALS.PRODUCTS.TITLE" | translate}}</h5>
                   <ul class="list-group">
-                    <div class="product-holder" *ngIf="meal.mealProducts.length == 0">
+                    <li class="product-holder" *ngIf="meal.mealProducts.length == 0">
                       {{"MEALS.PRODUCTS.EMPTY" | translate}}
-                    </div>
-                    <div class="product-holder" *ngFor="let mp of meal.mealProducts">
+                    </li>
+                    <li class="list-group-item " *ngFor="let mp of meal.mealProducts">
+                      <div *ngIf="!mp.product">
+                        {{"MEALS.PRODUCTS.LOADING" | translate}}
+                      </div>
+
+                      <div class="" *ngIf="mp.product">
+                        <h6>{{mp.product.name.slice(0, mp.product.name.indexOf("-"))}}</h6>
+                      </div>
+
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <label for="quantity">Quantity: </label>
+                          <input type="number" [(ngModel)]="mp.quantity" class="form-control quantity d-inline-block"
+                                 (blur)="onBlurMealProductQuantity(mp)" name="quantity" id="quantity">
+                          <span class="unit">g</span>
+                        </div>
+                        <div>
+                          <button class="btn btn-primary ml-auto" (click)="onSelectedProduct(mp.product, popupProduct)">
+                            <span class="fa fa-search"></span>
+                          </button>
+                          <button type="button" class="btn btn-danger" (click)="onDeleteProduct(meal, mp)">
+                            <span class="fa fa-trash" aria-hidden="true"></span>
+                          </button>
+                        </div>
+                      </div>
+
+                      <blockquote class="blockquote" *ngIf="mp.product &&
+                            mp.product.name.slice(mp.product.name.indexOf('-') + 1, mp.product.name.lastIndexOf('-'))">
+                        <footer class="blockquote-footer">
+                          <cite title="Source Title">
+                            {{mp.product.name.slice(mp.product.name.indexOf("-") + 1, mp.product.name.lastIndexOf("-"))}}
+                          </cite>
+                        </footer>
+                      </blockquote>
+                    </li>
+
+                    <!--<div class="product-holder" *ngFor="let mp of meal.mealProducts">
                       <li class="list-group-item product-detail">
                         <div *ngIf="!mp.product">
                           {{"MEALS.PRODUCTS.LOADING" | translate}}
@@ -74,7 +110,7 @@
                       <button type="button" class="btn btn-danger product-trash" (click)="onDeleteProduct(meal, mp)">
                         <span class="fa fa-trash" aria-hidden="true"></span>
                       </button>
-                    </div>
+                    </div>-->
                   </ul>
                 </div>
               </div>

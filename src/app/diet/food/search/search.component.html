@@ -41,7 +41,7 @@
       <div *ngIf="enableDragDrop">
         <li class="list-group-item list-group-item-action product-holder product-holder-drag-drop" [dragClass]="'drag-over'"
             [draggable] *ngFor="let product of productsPaging.content" [dragData]="product">
-          <div class="d-flex justify-content-between">
+          <div class="d-flex justify-content-between align-items-center ">
             <h6>{{product.name.slice(0, product.name.indexOf("-"))}}</h6>
             <button class="btn btn-primary" (click)="selectProduct(product)">
               <span class="fa fa-search"></span>

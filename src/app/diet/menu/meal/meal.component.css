@@ -34,7 +34,7 @@ input.quantity {
 }
 
 span.unit {
-  margin-left: -12px;
+  /*margin-left: -12px;*/
   color: lightslategray;
 }
 
