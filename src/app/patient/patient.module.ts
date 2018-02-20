@@ -9,6 +9,7 @@ import {NavbarModule} from "../navbar/navbar.module";
 import {PatientGuardServiceService} from "../guard/patient-guard-service.service";
 import {PatientDashboardComponent} from "./patient-dashboard/patient-dashboard.component";
 import { MenuComponent } from './menu/menu.component';
+import {MenuModule} from '../diet/menu/menu.module';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { MenuComponent } from './menu/menu.component';
     NgbModule,
     PatientRoutingModule,
     SidebarModule.forRoot(),
-    NavbarModule
+    NavbarModule,
+    MenuModule
   ],
   declarations: [PatientComponent, PatientDashboardComponent, MenuComponent],
   providers: [PatientGuardServiceService]

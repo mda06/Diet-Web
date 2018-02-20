@@ -28,6 +28,7 @@ import { TemplateComponent } from './meal/template/template.component';
     TimesPipe,
     TemplateComponent
   ],
-  providers: [MenuService]
+  providers: [MenuService],
+  exports: [MainComponent]
 })
 export class MenuModule { }

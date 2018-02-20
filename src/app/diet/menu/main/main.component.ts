@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {MenuService} from "../service/menu.service";
 import {Menu} from "../../../model/menu";
 import {FoodService} from "../../food/service/food.service";
@@ -19,7 +19,7 @@ import {Subscription} from "rxjs/Subscription";
 import {Product} from '../../../model/product';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-menu-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css'],
   providers: [{provide: NgbDateAdapter, useClass: NgbDateNativeAdapter},
@@ -27,12 +27,13 @@ import {Product} from '../../../model/product';
 })
 export class MainComponent implements OnInit {
 
+  @Input() isPatientView: boolean = false;
   selectedMenu: Menu;
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
   private menusOfTheMonth: Array<Menu> = [];
   private subscriptions = new Subscription();
   displayChangeDateOfMenu: boolean = false;
-  selectedPatient: Patient;
+  @Input() selectedPatient: Patient;
 
   constructor(private service: MenuService,
               private foodService: FoodService,
@@ -42,14 +43,18 @@ export class MainComponent implements OnInit {
               public translate: TranslateService) { }
 
   ngOnInit() {
-    this.subscriptions.add(this.sharedService.patient$.subscribe(
-      data => {
-        if(!isNullOrUndefined(data)) {
-          this.selectedPatient = data;
-          this.initMenuOfTheDay();
-        }
-      })
-    );
+    if(!this.isPatientView) {
+      this.subscriptions.add(this.sharedService.patient$.subscribe(
+        data => {
+          if (!isNullOrUndefined(data)) {
+            this.selectedPatient = data;
+            this.initMenuOfTheDay();
+          }
+        })
+      );
+    } else {
+      this.initMenuOfTheDay();
+    }
   }
 
   ngOnDestroy() {

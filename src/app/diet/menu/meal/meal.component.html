@@ -2,7 +2,7 @@
   <div class="col-md-6" id="meals">
     <div class="mb-2 d-flex justify-content-between">
       <h4 class="mt-auto mb-auto">{{"MEALS.TITLE" | translate}}</h4>
-      <div>
+      <div *ngIf="!isPatientView">
         <button type="button" class="btn btn-success" (click)="onAddNewMeal()">
           {{"MEALS.NEW" | translate}} <span class="fa fa-plus" aria-hidden="true"></span>
         </button>
@@ -18,7 +18,7 @@
             <div class="container-fluid">
               <div class="row">
                 <p class="meal-title">{{meal.name}}</p>
-                <button type="button" class="btn btn-danger ml-auto" (click)="onDeleteMeal(meal, popupDelete)">
+                <button *ngIf="!isPatientView" type="button" class="btn btn-danger ml-auto" (click)="onDeleteMeal(meal, popupDelete)">
                   <span class="fa fa-trash" aria-hidden="true"></span>
                 </button>
               </div>
@@ -30,12 +30,12 @@
                 <div>
                   <div class="form-group">
                     <label>{{"MEALS.NAME" | translate}} </label>
-                    <input type="text" [(ngModel)]="meal.name" class="form-control" name="name"
+                    <input type="text" [(ngModel)]="meal.name" class="form-control" name="name" [readonly]="isPatientView"
                            (blur)="onBlurName(meal)">
                   </div>
                   <div class="form-group">
                     <label>{{"MEALS.DESC" | translate}}</label>
-                    <textarea [(ngModel)]="meal.extraInfo" class="form-control" name="extraInfo" cols="50" rows="3"
+                    <textarea [(ngModel)]="meal.extraInfo" class="form-control" name="extraInfo" cols="50" rows="3" [readonly]="isPatientView"
                               (blur)="onBlurExtraInfo(meal)">
                           {{meal.extraInfo}}
                         </textarea>
@@ -63,7 +63,7 @@
                       <div class="d-flex justify-content-between">
                         <div>
                           <label for="quantity">Quantity: </label>
-                          <input type="number" [(ngModel)]="mp.quantity" class="form-control quantity d-inline-block"
+                          <input type="number" [(ngModel)]="mp.quantity" class="form-control quantity d-inline-block" [readonly]="isPatientView"
                                  (blur)="onBlurMealProductQuantity(mp)" name="quantity" id="quantity">
                           <span class="unit">g</span>
                         </div>
@@ -71,7 +71,7 @@
                           <button class="btn btn-secondary ml-auto" (click)="onSelectedProduct(mp.product, popupProduct)">
                             <span class="fa fa-search"></span>
                           </button>
-                          <button type="button" class="btn btn-danger" (click)="onDeleteProduct(meal, mp)">
+                          <button type="button" class="btn btn-danger" (click)="onDeleteProduct(meal, mp)" *ngIf="!isPatientView">
                             <span class="fa fa-trash" aria-hidden="true"></span>
                           </button>
                         </div>
@@ -122,7 +122,7 @@
                     <span class="fa fa-star" aria-hidden="true" *ngFor="let x of meal.score|times"></span><span class="fa fa-star-o" aria-hidden="true" *ngFor="let x of 5 - meal.score|times"></span>
                   </div>
                   <blockquote class="blockquote">
-                    <textarea readonly [(ngModel)]="meal.comment" class="form-control" name="comment" cols="50" rows="2">
+                    <textarea [readonly]="!isPatientView" [(ngModel)]="meal.comment" class="form-control" name="comment" cols="50" rows="2">
                           {{meal.comment}}
                         </textarea>
                     <footer class="blockquote-footer">
@@ -143,7 +143,7 @@
       {{"MEALS.EMPTY" | translate}}
   </div>
   </div>
-  <div class="col-md-6">
+  <div class="col-md-6" *ngIf="!isPatientView">
     <div *ngIf="showProducts">
       <div>
         <app-search-food [enableDragDrop]="true" (onSelectedProduct)="onSelectedProduct($event, popupProduct)"></app-search-food>

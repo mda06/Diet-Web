@@ -20,6 +20,7 @@ import {AuthenticationService} from '../../../services/authentication.service';
 })
 export class MealComponent implements OnInit {
 
+  @Input() isPatientView: boolean = false;
   @Input() selectedMenu: Menu;
   @Input() selectedPatient: Patient;
   @Input() meals: Array<Meal> = [];
