@@ -18,7 +18,7 @@ export class SelectComponent<T extends Customer> implements OnInit {
   @Output() onAddCustomer = new EventEmitter();
   filter: String = "";
   currentPage = 1;
-  customersPerPage = 5;
+  customersPerPage = 4;
 
   constructor(public translate: TranslateService,
               private modalService: NgbModal,
