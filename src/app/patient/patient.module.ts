@@ -8,6 +8,7 @@ import {SidebarModule} from "ng-sidebar";
 import {NavbarModule} from "../navbar/navbar.module";
 import {PatientGuardServiceService} from "../guard/patient-guard-service.service";
 import {PatientDashboardComponent} from "./patient-dashboard/patient-dashboard.component";
+import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import {PatientDashboardComponent} from "./patient-dashboard/patient-dashboard.c
     SidebarModule.forRoot(),
     NavbarModule
   ],
-  declarations: [PatientComponent, PatientDashboardComponent],
+  declarations: [PatientComponent, PatientDashboardComponent, MenuComponent],
   providers: [PatientGuardServiceService]
 })
 export class PatientModule { }
