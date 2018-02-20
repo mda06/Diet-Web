@@ -122,7 +122,8 @@
                     <span class="fa fa-star" aria-hidden="true" *ngFor="let x of meal.score|times"></span><span class="fa fa-star-o" aria-hidden="true" *ngFor="let x of 5 - meal.score|times"></span>
                   </div>
                   <blockquote class="blockquote">
-                    <textarea [readonly]="!isPatientView" [(ngModel)]="meal.comment" class="form-control" name="comment" cols="50" rows="2">
+                    <textarea [readonly]="!isPatientView" [(ngModel)]="meal.comment" class="form-control" name="comment" cols="50" rows="2"
+                              (blur)="onBlurComment(meal)">
                           {{meal.comment}}
                         </textarea>
                     <footer class="blockquote-footer">

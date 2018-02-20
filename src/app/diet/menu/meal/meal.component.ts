@@ -199,6 +199,10 @@ export class MealComponent implements OnInit {
       this.service.saveMealProduct(mp).subscribe(data => console.log(data), err => console.log(err));
   }
 
+  onBlurComment(meal: Meal) {
+    this.service.updatePatientComment(meal).subscribe(data => console.log(data), err => console.log(err));
+  }
+
   onDeleteProduct(meal:Meal, mp: MealProduct) {
     this.service.deleteMealProduct(mp.id).subscribe(
       data => {

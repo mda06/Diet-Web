@@ -17,6 +17,7 @@ export class MenuService {
   private mealUrl = "api/meal/";
   private mealProductUrl = "api/meal/product/";
   private mealDietUrl = "api/meal/diet/";
+  private mealPatientUrl = "api/meal/patient";
 
   constructor(private http: HttpClient) {
   }
@@ -70,5 +71,9 @@ export class MenuService {
 
   saveMealProduct(mp: MealProduct): Observable<MealProduct> {
     return this.http.post<MealProduct>(this.mealProductUrl, mp, httpOptions);
+  }
+
+  updatePatientComment(meal: Meal): Observable<Meal> {
+    return this.http.post<Meal>(this.mealPatientUrl, meal, httpOptions);
   }
 }
