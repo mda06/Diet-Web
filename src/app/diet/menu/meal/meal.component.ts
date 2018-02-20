@@ -29,6 +29,7 @@ export class MealComponent implements OnInit {
   @ViewChild('accordion') accordion;
   deletePopupStrings: DeletePopupStrings = new DeletePopupStrings();
   displayProduct: Product;
+  scoreForStars: number = 0;
 
   constructor(private service: MenuService,
               private modalService: NgbModal,
@@ -201,6 +202,26 @@ export class MealComponent implements OnInit {
 
   onBlurComment(meal: Meal) {
     this.service.updatePatientComment(meal).subscribe(data => console.log(data), err => console.log(err));
+  }
+
+  onScoreClick(meal: Meal, score: number) {
+    if(this.isPatientView) {
+      this.scoreForStars = score;
+      this.service.updatePatientComment(meal).subscribe(data => console.log(data), err => console.log(err));
+    }
+  }
+
+  onScoreLeave(meal: Meal) {
+    if(this.isPatientView) {
+      meal.score = this.scoreForStars;
+    }
+  }
+
+  onScoreEnter(meal: Meal, score: number) {
+    if(this.isPatientView) {
+      this.scoreForStars = meal.score;
+      meal.score = score;
+    }
   }
 
   onDeleteProduct(meal:Meal, mp: MealProduct) {
