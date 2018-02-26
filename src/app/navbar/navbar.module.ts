@@ -6,6 +6,8 @@ import {RouterModule} from "@angular/router";
 import { NgDragDropModule } from 'ng-drag-drop';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from "@angular/forms";
+import {DashboardModule} from '../dashboard/dashboard.module';
+import {DashboardComponent} from '../dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -14,10 +16,11 @@ import {FormsModule} from "@angular/forms";
     FormsModule,
     NgbModule,
     TranslateModule,
+    DashboardModule,
     NgDragDropModule.forRoot()
   ],
   providers: [TranslateService],
   declarations: [NavbarComponent],
-  exports: [NavbarComponent, TranslateModule, NgDragDropModule]
+  exports: [NavbarComponent, TranslateModule, NgDragDropModule, DashboardComponent]
 })
 export class NavbarModule { }
