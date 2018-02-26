@@ -17,6 +17,7 @@ import {NavbarModule} from "../navbar/navbar.module";
 import {FoodModule} from "./food/food.module";
 import {MenuModule} from "./menu/menu.module";
 import {CustomerModule} from "../customer/customer.module";
+import {DashboardItemComponent} from '../dashboard/dashboard-item/dashboard-item.component';
 
 @NgModule({
   imports: [

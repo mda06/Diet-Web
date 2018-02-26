@@ -1,2 +1,9 @@
-#dashboard {
+.no-padding {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+.no-margin {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
 }

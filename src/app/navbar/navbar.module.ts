@@ -8,6 +8,7 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
 import {FormsModule} from "@angular/forms";
 import {DashboardModule} from '../dashboard/dashboard.module';
 import {DashboardComponent} from '../dashboard/dashboard.component';
+import {DashboardItemComponent} from '../dashboard/dashboard-item/dashboard-item.component';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
   ],
   providers: [TranslateService],
   declarations: [NavbarComponent],
-  exports: [NavbarComponent, TranslateModule, NgDragDropModule, DashboardComponent]
+  exports: [NavbarComponent, TranslateModule, NgDragDropModule, DashboardComponent, DashboardItemComponent]
 })
 export class NavbarModule { }

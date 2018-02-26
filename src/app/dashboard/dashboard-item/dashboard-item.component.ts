@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-item',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard-item.component.css']
 })
 export class DashboardItemComponent implements OnInit {
+
+  @Input() row: string = "";
+  @Input() col: string = "";
 
   constructor() { }
 

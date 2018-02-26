@@ -8,6 +8,6 @@ import { DashboardItemComponent } from './dashboard-item/dashboard-item.componen
     CommonModule
   ],
   declarations: [DashboardComponent, DashboardItemComponent],
-  exports: [DashboardComponent],
+  exports: [DashboardComponent, DashboardItemComponent],
 })
 export class DashboardModule { }
