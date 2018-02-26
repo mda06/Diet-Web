@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, HostBinding, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-dashboard-item',
@@ -7,8 +7,10 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class DashboardItemComponent implements OnInit {
 
-  @Input() row: string = "";
-  @Input() col: string = "";
+  @HostBinding('style.grid-column')
+  /*@Input()*/ row: string = "2 / 4";
+  @HostBinding('style.grid-row')
+  /*@Input()*/ col: string = "1 / 3";
 
   constructor() { }
 
