@@ -7,10 +7,10 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 })
 export class DashboardItemComponent implements OnInit {
 
-  @HostBinding('style.grid-column')
-  /*@Input()*/ row: string = "2 / 4";
-  @HostBinding('style.grid-row')
-  /*@Input()*/ col: string = "1 / 3";
+  @HostBinding('style.grid-row-start') @Input() rowStart: number = 1;
+  @HostBinding('style.grid-row-end') @Input() rowEnd: number = 3;
+  @HostBinding('style.grid-column-start') @Input() colStart: number = 2;
+  @HostBinding('style.grid-column-end') @Input() colEnd: number = 4;
 
   constructor() { }
 
