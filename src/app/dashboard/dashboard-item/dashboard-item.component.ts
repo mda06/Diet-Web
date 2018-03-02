@@ -11,6 +11,7 @@ export class DashboardItemComponent implements OnInit {
   @HostBinding('style.grid-row-end') @Input() rowEnd: number = 3;
   @HostBinding('style.grid-column-start') @Input() colStart: number = 2;
   @HostBinding('style.grid-column-end') @Input() colEnd: number = 4;
+  @Input() title: string = "Not set";
 
   constructor() { }
 
