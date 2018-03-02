@@ -1,4 +1,5 @@
 import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {IDashboardItem} from '../../model/dashboardItem';
 
 @Component({
   selector: 'app-dashboard-item',
@@ -7,15 +8,21 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 })
 export class DashboardItemComponent implements OnInit {
 
-  @HostBinding('style.grid-row-start') @Input() rowStart: number = 1;
-  @HostBinding('style.grid-row-end') @Input() rowEnd: number = 3;
-  @HostBinding('style.grid-column-start') @Input() colStart: number = 2;
-  @HostBinding('style.grid-column-end') @Input() colEnd: number = 4;
-  @Input() title: string = "Not set";
+  @Input() model: IDashboardItem;
+  @HostBinding('style.grid-row-start') rowStart: number = 1;
+  @HostBinding('style.grid-row-end') rowEnd: number = 3;
+  @HostBinding('style.grid-column-start') colStart: number = 2;
+  @HostBinding('style.grid-column-end') colEnd: number = 4;
+  title: string = "Not set";
 
   constructor() { }
 
   ngOnInit() {
+    this.rowStart = this.model.rowStart;
+    this.rowEnd = this.model.rowEnd;
+    this.colStart = this.model.colStart;
+    this.colEnd = this.model.colEnd;
+    this.title = this.model.title;
   }
 
 }

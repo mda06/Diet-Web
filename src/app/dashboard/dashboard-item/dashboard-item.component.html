@@ -1,4 +1,5 @@
 <article>
-  <h5>{{ title }}</h5>
-  <p>Content of this dashboard</p>
+  <ng-content select="[header]"></ng-content>
+  <p>Testing</p>
+  <ng-content select="[body]"></ng-content>
 </article>

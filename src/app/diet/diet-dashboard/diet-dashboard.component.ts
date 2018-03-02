@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import {isNullOrUndefined} from "util";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
+import {IDashboardItem} from '../../model/dashboardItem';
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -14,6 +15,9 @@ import {Router} from "@angular/router";
   styleUrls: ['./diet-dashboard.component.css']
 })
 export class DietDashboardComponent implements OnInit, OnDestroy {
+
+  foodItem: IDashboardItem = {rowStart: 1, colStart: 1, rowEnd: 4, colEnd: 5, title: "Food Info"};
+  patientItem: IDashboardItem = {rowStart: 1, colStart: 5, rowEnd: 3, colEnd: 10, title: "Patient Info"};
 
   diet: Dietetist;
   selectedPatient: Patient;

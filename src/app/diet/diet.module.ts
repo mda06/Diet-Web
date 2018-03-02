@@ -18,6 +18,8 @@ import {FoodModule} from "./food/food.module";
 import {MenuModule} from "./menu/menu.module";
 import {CustomerModule} from "../customer/customer.module";
 import {DashboardItemComponent} from '../dashboard/dashboard-item/dashboard-item.component';
+import { PatientInfoComponent } from './dashboards/patient-info/patient-info.component';
+import { FoodInfoComponent } from './dashboards/food-info/food-info.component';
 
 @NgModule({
   imports: [
@@ -36,7 +38,9 @@ import {DashboardItemComponent} from '../dashboard/dashboard-item/dashboard-item
     DietDashboardComponent,
     DetailPatientComponent,
     SelectPatientComponent,
-    DietComponent
+    DietComponent,
+    PatientInfoComponent,
+    FoodInfoComponent
   ],
   providers: [ DietService, DietGuardServiceService, SharedService ],
   exports: []

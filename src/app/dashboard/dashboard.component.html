@@ -1,6 +1,5 @@
-<h3>Dashboard </h3>
+<h3>Dashboard of Diet?</h3>
 
 <section class="wrapper">
-  <app-dashboard-item *ngFor="let item of items" [colEnd]="item.colEnd" [colStart]="item.colStart"
-                      [rowEnd]="item.rowEnd" [rowStart]="item.rowStart" [title]="item.title"></app-dashboard-item>
+  <ng-content></ng-content>
 </section>
