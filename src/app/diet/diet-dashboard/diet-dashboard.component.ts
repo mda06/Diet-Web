@@ -18,6 +18,7 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
 
   foodItem: IDashboardItem = {rowStart: 1, colStart: 1, rowEnd: 4, colEnd: 5, title: "Food Info"};
   patientItem: IDashboardItem = {rowStart: 1, colStart: 5, rowEnd: 3, colEnd: 10, title: "Patient Info"};
+  foodSlider: IDashboardItem = {rowStart: 3, colStart: 5, rowEnd: 4, colEnd: 10, title: "Food slider"};
 
   diet: Dietetist;
   selectedPatient: Patient;

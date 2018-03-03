@@ -32,12 +32,14 @@
 -->
 <app-dashboard>
   <app-dashboard-item [model]="foodItem">
-    <p body>Yepa</p>
-    <h2 header> Ow yeah</h2>
+    <app-food-info></app-food-info>
   </app-dashboard-item>
 
   <app-dashboard-item [model]="patientItem">
     <app-patient-info></app-patient-info>
   </app-dashboard-item>
 
+  <app-dashboard-item [model]="foodSlider">
+    <app-food-slider></app-food-slider>
+  </app-dashboard-item>
 </app-dashboard>
