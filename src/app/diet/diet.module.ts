@@ -17,14 +17,9 @@ import {NavbarModule} from "../navbar/navbar.module";
 import {FoodModule} from "./food/food.module";
 import {MenuModule} from "./menu/menu.module";
 import {CustomerModule} from "../customer/customer.module";
-import {DashboardItemComponent} from '../dashboard/dashboard-item/dashboard-item.component';
 import { PatientInfoComponent } from './dashboards/patient-info/patient-info.component';
 import { FoodInfoComponent } from './dashboards/food-info/food-info.component';
 import { FoodSliderComponent } from './dashboards/food-slider/food-slider.component';
-import {
-  DynamicContentComponent, DynamicSample1Component,
-  DynamicSample2Component, UnknownDynamicComponent
-} from "./dashboards/DynamicContentComponent";
 
 @NgModule({
   imports: [
@@ -47,15 +42,11 @@ import {
     PatientInfoComponent,
     FoodInfoComponent,
     FoodSliderComponent,
-    DynamicContentComponent,
-    DynamicSample1Component,
-    DynamicSample2Component,
-    UnknownDynamicComponent
   ],
   entryComponents: [
-    DynamicSample1Component,
-    DynamicSample2Component,
-    UnknownDynamicComponent
+    PatientInfoComponent,
+    FoodInfoComponent,
+    FoodSliderComponent,
   ],
   providers: [ DietService, DietGuardServiceService, SharedService ],
   exports: []

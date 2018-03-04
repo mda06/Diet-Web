@@ -44,7 +44,6 @@
   </app-dashboard-item>
 </app-dashboard>
 -->
-
-<button (click)="addMore()">Add one more</button>
-
-<dynamic-content *ngFor="let content of contents" [type]="content"></dynamic-content>
+<app-dashboard>
+  <app-dashboard-item *ngFor="let item of items" [model]="item"></app-dashboard-item>
+</app-dashboard>

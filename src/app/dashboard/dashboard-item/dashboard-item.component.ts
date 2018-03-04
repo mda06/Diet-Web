@@ -1,5 +1,11 @@
-import {Component, HostBinding, Input, OnInit} from '@angular/core';
+import {
+  Component, ComponentFactoryResolver, ComponentRef, HostBinding, Input, OnInit, ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {IDashboardItem} from '../../model/dashboardItem';
+import {FoodInfoComponent} from "../../diet/dashboards/food-info/food-info.component";
+import {PatientInfoComponent} from "../../diet/dashboards/patient-info/patient-info.component";
+import {FoodSliderComponent} from "../../diet/dashboards/food-slider/food-slider.component";
 
 @Component({
   selector: 'app-dashboard-item',
@@ -15,14 +21,43 @@ export class DashboardItemComponent implements OnInit {
   @HostBinding('style.grid-column-end') colEnd: number = 4;
   title: string = "Not set";
 
-  constructor() { }
+  @ViewChild('container', { read: ViewContainerRef })
+  container: ViewContainerRef;
 
-  ngOnInit() {
-    this.rowStart = this.model.rowStart;
-    this.rowEnd = this.model.rowEnd;
-    this.colStart = this.model.colStart;
-    this.colEnd = this.model.colEnd;
-    this.title = this.model.title;
+  private componentRef: ComponentRef<{}>;
+
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver) {
   }
 
+  ngOnInit() {
+    if (this.model) {
+      this.rowStart = this.model.rowStart;
+      this.rowEnd = this.model.rowEnd;
+      this.colStart = this.model.colStart;
+      this.colEnd = this.model.colEnd;
+      this.title = this.model.title;
+      let componentType = this.getComponentType(this.model.id);
+      let factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
+      this.componentRef = this.container.createComponent(factory);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.componentRef) {
+      this.componentRef.destroy();
+      this.componentRef = null;
+    }
+  }
+
+  private mappings = {
+    1: FoodInfoComponent,
+    2: PatientInfoComponent,
+    3: FoodSliderComponent
+  };
+
+  getComponentType(id: number) {
+    let type = this.mappings[id];
+    return type;
+  }
 }
