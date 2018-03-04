@@ -37,7 +37,7 @@ export class DashboardItemComponent implements OnInit {
       this.colStart = this.model.colStart;
       this.colEnd = this.model.colEnd;
       this.title = this.model.title;
-      let componentType = this.getComponentType(this.model.id);
+      let componentType = this.model.component;
       let factory = this.componentFactoryResolver.resolveComponentFactory(componentType);
       this.componentRef = this.container.createComponent(factory);
     }
