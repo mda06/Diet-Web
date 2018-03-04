@@ -8,6 +8,10 @@ import {isNullOrUndefined} from "util";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
 import {IDashboardItem} from '../../model/dashboardItem';
+import {
+  DynamicSample1Component, DynamicSample2Component,
+  UnknownDynamicComponent
+} from "../dashboards/DynamicContentComponent";
 
 @Component({
   selector: 'app-diet-dashboard',
@@ -36,6 +40,12 @@ export class DietDashboardComponent implements OnInit, OnDestroy {
     {data: [180, 95], label: '12 Nov 2017'},
     {data: [181, 90], label: '12 Dec 2017'}
   ];
+
+  contents = ["sample1", "sample2", "sample3"];
+
+  addMore() {
+    this.contents.push("sample1");
+  }
 
   constructor(public translate: TranslateService,
               private router: Router,

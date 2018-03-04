@@ -21,6 +21,10 @@ import {DashboardItemComponent} from '../dashboard/dashboard-item/dashboard-item
 import { PatientInfoComponent } from './dashboards/patient-info/patient-info.component';
 import { FoodInfoComponent } from './dashboards/food-info/food-info.component';
 import { FoodSliderComponent } from './dashboards/food-slider/food-slider.component';
+import {
+  DynamicContentComponent, DynamicSample1Component,
+  DynamicSample2Component, UnknownDynamicComponent
+} from "./dashboards/DynamicContentComponent";
 
 @NgModule({
   imports: [
@@ -42,7 +46,16 @@ import { FoodSliderComponent } from './dashboards/food-slider/food-slider.compon
     DietComponent,
     PatientInfoComponent,
     FoodInfoComponent,
-    FoodSliderComponent
+    FoodSliderComponent,
+    DynamicContentComponent,
+    DynamicSample1Component,
+    DynamicSample2Component,
+    UnknownDynamicComponent
+  ],
+  entryComponents: [
+    DynamicSample1Component,
+    DynamicSample2Component,
+    UnknownDynamicComponent
   ],
   providers: [ DietService, DietGuardServiceService, SharedService ],
   exports: []
