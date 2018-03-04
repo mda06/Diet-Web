@@ -27,6 +27,9 @@
     "DIET": {
       "SELECT": "Selectionner un diététicien"
     },
+    "REPORTS": {
+      "TITLE": "Rapports"
+    },
     "FOOD_SEARCH": "Chercher des produits",
     "DASHBOARD": "Tableau de bord",
     "LOG_OUT": "Déconnection",

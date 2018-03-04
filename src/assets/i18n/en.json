@@ -27,6 +27,9 @@
     "DIET": {
       "SELECT": "Select diet"
     },
+    "REPORTS": {
+      "TITLE": "Reports"
+    },
     "FOOD_SEARCH": "Search food",
     "DASHBOARD": "Dashboard",
     "LOG_OUT": "Log out",

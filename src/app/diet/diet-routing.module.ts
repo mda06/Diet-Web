@@ -8,6 +8,7 @@ import {DietComponent} from "./diet.component";
 import {FoodModule} from "./food/food.module";
 import {MenuModule} from "./menu/menu.module";
 import {DashboardHomeComponent} from "./dashboards/home/dashboard-home.component";
+import {ReportsModule} from "./reports/reports.module";
 
 export function getFoodModule() {
   return FoodModule;
@@ -15,6 +16,10 @@ export function getFoodModule() {
 
 export function getMenuModule() {
   return MenuModule;
+}
+
+export function getReportsModule() {
+  return ReportsModule;
 }
 
 const dietRoutes: Routes = [
@@ -29,7 +34,8 @@ const dietRoutes: Routes = [
       {path: 'detail-patient', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
       {path: 'add-patient', component: DetailPatientComponent, canActivate: [DietGuardServiceService]},
       {path: 'food', loadChildren: getFoodModule},
-      {path: 'menu', loadChildren: getMenuModule}
+      {path: 'menu', loadChildren: getMenuModule},
+      {path: 'reports', loadChildren: getReportsModule}
     ]
   }
 ];
