@@ -3,7 +3,6 @@ aside {
 }
 
 nav {
-  /*width: 170px;*/
   height: 100vh;
   border-right: 2px solid darkgray;
 }
@@ -31,9 +30,8 @@ nav {
 }
 
 .menuItem img {
-  /*flex: 0 0 70%;*/
   width: auto;
-  height: 100px;
+  height: 90px;
 }
 
 .activeMenu {
