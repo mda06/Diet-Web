@@ -1,1 +1,28 @@
 <div>My patient plz</div>
+<div class="container" *ngIf="selectedPatient">
+  <div class="row">
+    <div>
+      <p>{{ 'DIET.DASHBOARD.SELECTED' | translate }}{{selectedPatient.firstName}}</p>
+      <p>{{ 'DIET.DASHBOARD.CREATED' | translate }} {{selectedPatient.created | date:"dd/MM/yyyy" }}</p>
+      <p>{{getAge()}} {{ 'DIET.DASHBOARD.YEARS_OLD' | translate }}</p>
+    </div>
+    <div class="ml-auto">
+      <button type="button" class="btn btn-secondary" (click)="onPatientDeselect()">
+        {{ 'DIET.DASHBOARD.DESELECT_PATIENT' | translate }}
+      </button>
+    </div>
+  </div>
+  <div id="paramChart" class="row" *ngIf="selectedPatient.anthropometricParameters.length > 0">
+    <div>
+      <canvas baseChart
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [options]="barChartOptions"
+              [legend]="barChartLegend"
+              [chartType]="barChartType"></canvas>
+    </div>
+  </div>
+</div>
+<div *ngIf="!selectedPatient">
+  Please select a patient
+</div>
