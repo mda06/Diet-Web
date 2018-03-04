@@ -7,7 +7,6 @@ import {SidebarModule} from "ng-sidebar";
 import {DietService} from "./service/diet.service";
 import {SharedService} from "./service/shared.service";
 import {DetailPatientComponent} from "./detail-patient/detail-patient.component";
-import {DietDashboardComponent} from "./diet-dashboard/diet-dashboard.component";
 import {SelectPatientComponent} from "./select-patient/select-patient.component";
 import {DietGuardServiceService} from "../guard/diet-guard-service.service";
 import {DietRoutingModule} from "./diet-routing.module";
@@ -20,6 +19,7 @@ import {CustomerModule} from "../customer/customer.module";
 import { PatientInfoComponent } from './dashboards/patient-info/patient-info.component';
 import { FoodInfoComponent } from './dashboards/food-info/food-info.component';
 import { FoodSliderComponent } from './dashboards/food-slider/food-slider.component';
+import {DashboardHomeComponent} from "./dashboards/home/dashboard-home.component";
 
 @NgModule({
   imports: [
@@ -35,13 +35,13 @@ import { FoodSliderComponent } from './dashboards/food-slider/food-slider.compon
     CustomerModule
   ],
   declarations: [
-    DietDashboardComponent,
     DetailPatientComponent,
     SelectPatientComponent,
     DietComponent,
     PatientInfoComponent,
     FoodInfoComponent,
     FoodSliderComponent,
+    DashboardHomeComponent,
   ],
   entryComponents: [
     PatientInfoComponent,

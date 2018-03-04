@@ -1,6 +1,5 @@
-<div>My patient plz</div>
 <div class="container" *ngIf="selectedPatient">
-  <div class="row">
+  <div class="row p-1">
     <div>
       <p>{{ 'DIET.DASHBOARD.SELECTED' | translate }}{{selectedPatient.firstName}}</p>
       <p>{{ 'DIET.DASHBOARD.CREATED' | translate }} {{selectedPatient.created | date:"dd/MM/yyyy" }}</p>
@@ -12,6 +11,7 @@
       </button>
     </div>
   </div>
+  <hr>
   <div id="paramChart" class="row" *ngIf="selectedPatient.anthropometricParameters.length > 0">
     <div>
       <canvas baseChart
@@ -23,6 +23,6 @@
     </div>
   </div>
 </div>
-<div *ngIf="!selectedPatient">
-  Please select a patient
+<div *ngIf="!selectedPatient" class="p-1">
+  {{ 'DIET.DASHBOARD.NO_PATIENT' | translate }}
 </div>
