@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import 'rxjs/add/operator/switchMap';
 import {ActivatedRoute, Router} from "@angular/router";
 import {NavItem} from "../model/nav-item";
@@ -18,6 +18,7 @@ import {AuthenticationService} from "../services/authentication.service";
 })
 export class DietComponent implements OnInit {
   _opened: boolean = true;
+  displayCollapsedNav = false;
   private foodItemItem: NavItem =
     {img: "../../assets/img/food.ico", title: "NAV.FOOD_SEARCH", routerLink: "/diet/food", subMenus: []};
   private dashboardItem: NavItem =
@@ -44,6 +45,12 @@ export class DietComponent implements OnInit {
   private diet: Dietetist;
 
   @ViewChild('sidebar') sidebar;
+
+
+  @HostListener('window:resize') onResize() {
+    const winWidth: number = window.innerWidth;
+    this.displayCollapsedNav = winWidth <= 500;
+  }
 
   constructor(private dietService: DietService,
               private sharedService: SharedService,
