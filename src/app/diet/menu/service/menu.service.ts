@@ -14,6 +14,7 @@ export class MenuService {
 
   private menuUrl = "api/menu/";
   private menuDateUrl = "api/menu/date/";
+  private menuPatientUrl = "api/menu/patient/";
   private mealUrl = "api/meal/";
   private mealProductUrl = "api/meal/product/";
   private mealDietUrl = "api/meal/diet/";
@@ -43,6 +44,10 @@ export class MenuService {
 
   getMenu(id: number): Observable<Menu> {
     return this.http.get<Menu>(this.menuUrl + id, httpOptions);
+  }
+
+  getMenusByPatientId(patientId: number): Observable<Array<Menu>> {
+    return this.http.get<Array<Menu>>(this.menuPatientUrl + patientId, httpOptions);
   }
 
   deleteMenu(id: number): Observable<any> {

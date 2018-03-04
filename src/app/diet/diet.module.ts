@@ -20,6 +20,7 @@ import { PatientInfoComponent } from './dashboards/patient-info/patient-info.com
 import { FoodInfoComponent } from './dashboards/food-info/food-info.component';
 import { FoodSliderComponent } from './dashboards/food-slider/food-slider.component';
 import {DashboardHomeComponent} from "./dashboards/home/dashboard-home.component";
+import {ReportService} from "./service/report.service";
 
 @NgModule({
   imports: [
@@ -48,7 +49,7 @@ import {DashboardHomeComponent} from "./dashboards/home/dashboard-home.component
     FoodInfoComponent,
     FoodSliderComponent,
   ],
-  providers: [ DietService, DietGuardServiceService, SharedService ],
+  providers: [ DietService, DietGuardServiceService, SharedService, ReportService ],
   exports: []
 })
 export class DietModule {}

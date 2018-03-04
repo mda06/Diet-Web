@@ -1,3 +1,18 @@
-<div class="p-1">
-  An apple a day, keeps the docter away =D
+<div *ngIf="selectedPatient" class="container">
+  <div class="row">
+    <div *ngFor="let menu of menusReport" class="col-md-6">
+      <h4>{{getFormattedDate(menu.date)}}</h4>
+      <p>Macros</p>
+      <ul>
+        <li *ngFor="let nutriment of menu.macros">{{nutriment.name + ' ' + (nutriment.value | number) + ' ' + nutriment.unit}}</li>
+      </ul>
+      <p>Micros</p>
+      <ul>
+        <li *ngFor="let nutriment of menu.micros">{{nutriment.name + ' ' + (nutriment.value | number) + ' ' + nutriment.unit}}</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div *ngIf="!selectedPatient" class="p-1">
+  {{ 'DIET.DASHBOARD.NO_PATIENT' | translate }}
 </div>
