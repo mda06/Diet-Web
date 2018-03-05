@@ -16,6 +16,7 @@ import { DetailDietComponent } from './detail-diet/detail-diet.component';
 import { HomeComponent } from './dashboards/home/home.component';
 import { ProductsInfoComponent } from './dashboards/products-info/products-info.component';
 import { LoginsInfoComponent } from './dashboards/logins-info/logins-info.component';
+import { LoginInfoComponent } from './dashboards/logins-info/login-info/login-info.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { LoginsInfoComponent } from './dashboards/logins-info/logins-info.compon
     DetailDietComponent,
     HomeComponent,
     ProductsInfoComponent,
-    LoginsInfoComponent
+    LoginsInfoComponent,
+    LoginInfoComponent
   ],
   providers: [ AdminGuardServiceService, FoodService, AdminService]
 })

@@ -1,15 +1,1 @@
-<div *ngFor="let login of logins">
-  <div>
-    <h4 class="text-center">{{login.authId}}</h4>
-    <img src="../../../../assets/img/blacklisted.png" alt="blacklised" *ngIf="login.isBlacklisted">
-  </div>
-  <div *ngIf="login.logOutTime">
-    The person is log out sinds {{login.logOutTime | date:'short'}}
-  </div>
-  <div *ngIf="!login.logOutTime">
-    <p>The person is logged in sinds {{login.loginTime | date:'short'}}</p>
-    <p>With an expiration time of {{login.expirationTime | date:'short'}}</p>
-    <p>Last activity was on {{login.lastActivityTime | date:'short'}}</p>
-  </div>
-  <hr>
-</div>
+<app-login-info *ngFor="let login of logins" [login]="login"></app-login-info>

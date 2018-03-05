@@ -1,0 +1,16 @@
+<div *ngIf="login" [ngStyle]="{'background-color': 'rgba(' + (inactivityTime / 100 * 255) + ', ' + (255 - (inactivityTime / 100 * 255))  + ', 0, 0.5)'}">
+  <div>
+    <h4 class="text-center">{{login.authId}}</h4>
+    <img src="../../../../assets/img/blacklisted.png" alt="blacklised" *ngIf="login.isBlacklisted">
+  </div>
+  <div *ngIf="login.logOutTime">
+    The person is logout sins {{login.logOutTime | date:'short'}}
+  </div>
+  <div *ngIf="!login.logOutTime">
+    <p>The person is logged in sins {{login.loginTime | date:'short'}}</p>
+    <p>With an expiration time of {{login.expirationTime | date:'short'}}</p>
+    <p>Last activity was on {{login.lastActivityTime | date:'short'}}</p>
+    <p>Inactivity {{inactivityTime}} seconds</p>
+  </div>
+  <hr>
+</div>

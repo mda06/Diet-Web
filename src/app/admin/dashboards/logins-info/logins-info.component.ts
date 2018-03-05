@@ -18,5 +18,4 @@ export class LoginsInfoComponent implements OnInit {
       this.logins = data;
     });
   }
-
 }
