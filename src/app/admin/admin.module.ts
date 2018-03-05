@@ -15,6 +15,7 @@ import {CustomerModule} from "../customer/customer.module";
 import { DetailDietComponent } from './detail-diet/detail-diet.component';
 import { HomeComponent } from './dashboards/home/home.component';
 import { ProductsInfoComponent } from './dashboards/products-info/products-info.component';
+import { LoginsInfoComponent } from './dashboards/logins-info/logins-info.component';
 
 @NgModule({
   imports: [
@@ -26,8 +27,16 @@ import { ProductsInfoComponent } from './dashboards/products-info/products-info.
     NavbarModule,
     CustomerModule
   ],
-  entryComponents: [ProductsInfoComponent],
-  declarations: [AdminComponent, FoodComponent, SelectDietComponent, DetailDietComponent, HomeComponent, ProductsInfoComponent],
+  entryComponents: [ProductsInfoComponent, LoginsInfoComponent],
+  declarations: [
+    AdminComponent,
+    FoodComponent,
+    SelectDietComponent,
+    DetailDietComponent,
+    HomeComponent,
+    ProductsInfoComponent,
+    LoginsInfoComponent
+  ],
   providers: [ AdminGuardServiceService, FoodService, AdminService]
 })
 export class AdminModule { }

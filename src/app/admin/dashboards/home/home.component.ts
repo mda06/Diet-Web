@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IDashboardItem} from '../../../model/dashboardItem';
 import {TranslateService} from '@ngx-translate/core';
 import {ProductsInfoComponent} from '../products-info/products-info.component';
+import {LoginsInfoComponent} from '../logins-info/logins-info.component';
 
 @Component({
   selector: 'app-home',
@@ -10,10 +11,11 @@ import {ProductsInfoComponent} from '../products-info/products-info.component';
 })
 export class HomeComponent  implements OnInit {
 
-  productInfo: IDashboardItem = {component: ProductsInfoComponent, rowStart: 1, colStart: 1, rowEnd: 2, colEnd: 4, title: "Product Info"};
-  items = [this.productInfo];
+  productInfo: IDashboardItem = {component: ProductsInfoComponent, rowStart: 1, colStart: 4, rowEnd: 2, colEnd: 7, title: "Product Info"};
+  loginsInfo: IDashboardItem = {component: LoginsInfoComponent, rowStart: 1, colStart: 1, rowEnd: 4, colEnd: 4, title: "Logins Info"};
+  items = [this.productInfo, this.loginsInfo];
 
-  constructor(public translate: TranslateService) { }
+  constructor() { }
 
   ngOnInit() {
 
