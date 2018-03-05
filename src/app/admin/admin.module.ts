@@ -7,13 +7,14 @@ import {NavbarModule} from "../navbar/navbar.module";
 import {AdminGuardServiceService} from "../guard/admin-guard-service.service";
 import {AdminRoutingModule} from "./admin-routing.module";
 import { AdminComponent } from './admin.component';
-import {AdminDashboardComponent} from "./admin-dashboard/admin-dashboard.component";
 import {FoodService} from "../diet/food/service/food.service";
 import {AdminService} from "./service/admin.service";
 import { FoodComponent } from './food/food.component';
 import { SelectDietComponent } from './select-diet/select-diet.component';
 import {CustomerModule} from "../customer/customer.module";
 import { DetailDietComponent } from './detail-diet/detail-diet.component';
+import { HomeComponent } from './dashboards/home/home.component';
+import { ProductsInfoComponent } from './dashboards/products-info/products-info.component';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { DetailDietComponent } from './detail-diet/detail-diet.component';
     NavbarModule,
     CustomerModule
   ],
-  declarations: [AdminComponent, AdminDashboardComponent, FoodComponent, SelectDietComponent, DetailDietComponent],
+  entryComponents: [ProductsInfoComponent],
+  declarations: [AdminComponent, FoodComponent, SelectDietComponent, DetailDietComponent, HomeComponent, ProductsInfoComponent],
   providers: [ AdminGuardServiceService, FoodService, AdminService]
 })
 export class AdminModule { }
