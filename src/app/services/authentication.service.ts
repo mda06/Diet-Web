@@ -19,6 +19,7 @@ export class AuthenticationService {
 
   private idUrl = "api/auth/id";
   private loginUrl = "api/auth/login";
+  private logoutUrl = "api/auth/logout";
   private signupUrl = "api/auth/signup";
   private connectedUserUrl = "api/auth/connecteduser";
   private roleUrl = "api/auth/role";
@@ -56,8 +57,12 @@ export class AuthenticationService {
   }
 
   onLogout() {
-    this._id = null;
-    localStorage.removeItem('token');
+    this.http.post<any>(this.logoutUrl, httpOptions).subscribe(() => {
+      console.log("Logout successfully");
+      this._id = null;
+      localStorage.removeItem('token');
+    });
+
   }
 
   isAuthenticated(): boolean {
