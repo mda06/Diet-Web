@@ -20,6 +20,9 @@ export class DateInterceptor implements HttpInterceptor {
     if(this.authService.isAuthenticated()) {
       const authHeader = this.authService.getAuthorizationHeader();
       const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
+      console.log("User is " + (this.authService.isAuthenticated() ? "" : " not ") +  " authenticated for " + authReq.url + " with " + authReq.headers.get("Authorization"));
+      console.log("Are the headers equals: " + (authHeader == authReq.headers.get("Authorization")));
+      console.log(authReq);
       return this.logAndConvertDate(authReq, next);
     } else {
       return this.logAndConvertDate(req, next);
