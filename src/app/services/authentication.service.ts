@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Authentication } from '../model/authentication';
 import { Token } from '../model/token';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from "rxjs/Observable";
+//import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Rx';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import {Role} from "../model/role.enum";
 import {isNullOrUndefined} from "util";
@@ -40,18 +41,22 @@ export class AuthenticationService {
       this.http.post<Token>(this.loginUrl, auth, httpOptions).subscribe((data) => {
           console.log("AuthService: user is logged on %s", data.access_token);
           this._token = data;
-          localStorage.setItem("token", JSON.stringify(this._token));
-          this.initRole().subscribe(role => {
-            this._role = role;
-            observer.next(this._role);
-            observer.complete();
-          }, err => {
-            observer.error(err);
-          });
+          localStorage.setItem("token", JSON.stringify(data));
           },
         (err) => {
           console.log("AuthService error in logging on - code:%s  msg:%s", err.status, err.message);
           observer.error(err);
+        },() => {
+          setTimeout(() => {
+            this.initRole().subscribe(role => {
+              this._role = role;
+              observer.next(this._role);
+              observer.complete();
+            }, err => {
+              console.log(err);
+              observer.error(err);
+            });
+          }, 1000);
         });
     });
   }
