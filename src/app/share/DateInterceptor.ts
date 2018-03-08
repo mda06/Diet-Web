@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {
-  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse
+  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest, HttpResponse, HttpErrorResponse
 } from '@angular/common/http';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/do';
@@ -17,6 +17,24 @@ export class DateInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthenticationService);
+
+    return next.handle(req)
+      .do(event => {
+        return this.handleHeaders(req, next);
+      })
+      .catch(err => {
+        if (err instanceof HttpErrorResponse) {
+          let httpError = err as HttpErrorResponse;
+          //Redirect to login or maintenance page
+          if(httpError.error.message == 'API is in maintenance for: Testing purposse..') {
+            console.log("It's in maintenance...");
+          }
+        }
+        return Observable.throw(err);
+      });
+  }
+
+  private handleHeaders(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if(this.authService.isAuthenticated()) {
       const authHeader = this.authService.getAuthorizationHeader();
       const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
