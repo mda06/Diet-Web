@@ -1,0 +1,6 @@
+<pre *ngIf="maintenance">
+  {{ maintenance | json }}
+</pre>
+
+<button (click)="onPutInMaintenance()">Put in maintance</button>
+<button (click)="onRemoveMaintenance()">Remove the maintenance</button>

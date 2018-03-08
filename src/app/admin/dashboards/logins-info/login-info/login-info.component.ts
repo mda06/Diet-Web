@@ -35,9 +35,16 @@ export class LoginInfoComponent implements OnInit, OnDestroy {
     if(r > 255) r = 255;
     let g = 255 - Math.round((this.inactivityTime / 100 * 255));
     if(g < 0) g = 0;
-    console.log(r, " - ", g);
+    let b = 0;
+    let a = 0.6;
+    if(this.login.logOutTime) {
+      r = 255;
+      g = 100;
+      b = 0;
+    }
+
     this.style = {
-      'background-color': 'rgba(' +  r + ', ' + g + ', 0, 0.6)'
+      'background-color': 'rgba(' +  r + ', ' + g + ', ' + b + ', 0.6)'
     };
   }
 

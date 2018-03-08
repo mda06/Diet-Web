@@ -47,6 +47,7 @@ export class AuthenticationService {
           console.log("AuthService error in logging on - code:%s  msg:%s", err.status, err.message);
           observer.error(err);
         },() => {
+          console.log("Login completed");
           setTimeout(() => {
             this.initRole().subscribe(role => {
               this._role = role;
@@ -56,7 +57,7 @@ export class AuthenticationService {
               console.log(err);
               observer.error(err);
             });
-          }, 1000);
+          }, 0);
         });
     });
   }

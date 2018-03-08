@@ -17,6 +17,7 @@ import { HomeComponent } from './dashboards/home/home.component';
 import { ProductsInfoComponent } from './dashboards/products-info/products-info.component';
 import { LoginsInfoComponent } from './dashboards/logins-info/logins-info.component';
 import { LoginInfoComponent } from './dashboards/logins-info/login-info/login-info.component';
+import { MaintenanceComponent } from './dashboards/maintenance/maintenance.component';
 
 @NgModule({
   imports: [
@@ -28,7 +29,7 @@ import { LoginInfoComponent } from './dashboards/logins-info/login-info/login-in
     NavbarModule,
     CustomerModule
   ],
-  entryComponents: [ProductsInfoComponent, LoginsInfoComponent],
+  entryComponents: [ProductsInfoComponent, LoginsInfoComponent, MaintenanceComponent],
   declarations: [
     AdminComponent,
     FoodComponent,
@@ -37,7 +38,8 @@ import { LoginInfoComponent } from './dashboards/logins-info/login-info/login-in
     HomeComponent,
     ProductsInfoComponent,
     LoginsInfoComponent,
-    LoginInfoComponent
+    LoginInfoComponent,
+    MaintenanceComponent
   ],
   providers: [ AdminGuardServiceService, FoodService, AdminService]
 })

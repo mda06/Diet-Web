@@ -4,6 +4,8 @@ import {Observable} from "rxjs/Observable";
 import {FoodService} from "../../diet/food/service/food.service";
 import {Dietetist} from "../../model/dietetist";
 import {LoginAccess} from '../../model/loginAccess';
+import {Maintenance} from '../../model/maintenance';
+import {SignupReturn} from '../../model/signupReturn';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -14,6 +16,9 @@ export class AdminService {
 
   private dietUrl = "api/dietetist/";
   private loginsUrl = "api/login-access";
+  private maintenanceStatusUrl = "api/maintenance/status";
+  private maintenanceEnableUrl = "api/maintenance/enable";
+  private maintenanceDisableUrl = "api/maintenance/disable";
 
   constructor(private http: HttpClient, private _food: FoodService) { }
 
@@ -35,6 +40,18 @@ export class AdminService {
 
   saveDietetist(diet: Dietetist): Observable<Dietetist> {
     return this.http.post<Dietetist>(this.dietUrl, diet, httpOptions);
+  }
+
+  getMaintenanceStatus(): Observable<Maintenance> {
+    return this.http.get<Maintenance>(this.maintenanceStatusUrl, httpOptions);
+  }
+
+  putInMaintenance(reason: string): Observable<Maintenance> {
+    return this.http.post<Maintenance>(this.maintenanceEnableUrl, {'reason': reason}, httpOptions);
+  }
+
+  removeMaintenance() : Observable<Maintenance> {
+    return this.http.delete<Maintenance>(this.maintenanceDisableUrl, httpOptions);
   }
 
 }
