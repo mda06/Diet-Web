@@ -20,10 +20,12 @@ import {AdminModule} from "./admin/admin.module";
 import {LoginModule} from './login/login.module';
 import {CustomerModule} from "./customer/customer.module";
 import {PatientModule} from "./patient/patient.module";
+import { MaintenanceComponent } from './maintenance/maintenance.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MaintenanceComponent
   ],
   imports: [
     BrowserModule,

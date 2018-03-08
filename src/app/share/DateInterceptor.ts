@@ -13,38 +13,39 @@ export class DateInterceptor implements HttpInterceptor {
   private regexIso8601 = /^(\d{4}|\+\d{6})(?:-(\d{2})(?:-(\d{2})(?:T(\d{2}):(\d{2}):(\d{2})\.(\d{1,})(Z|([\-+])(\d{2}):(\d{2}))?)?)?)?$/;
   private authService: AuthenticationService;
 
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, private router: Router) {}
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     this.authService = this.injector.get(AuthenticationService);
 
-    return next.handle(req)
-      .do(event => {
-        return this.handleHeaders(req, next);
-      })
-      .catch(err => {
-        if (err instanceof HttpErrorResponse) {
-          let httpError = err as HttpErrorResponse;
-          //Redirect to login or maintenance page
-          if(httpError.error.message == 'API is in maintenance for: Testing purposse..') {
-            console.log("It's in maintenance...");
-          }
-        }
-        return Observable.throw(err);
-      });
-  }
-
-  private handleHeaders(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     if(this.authService.isAuthenticated()) {
       const authHeader = this.authService.getAuthorizationHeader();
       const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
       console.log("User is " + (this.authService.isAuthenticated() ? "" : " not ") +  " authenticated for " + authReq.url + " with " + authReq.headers.get("Authorization"));
       console.log("Are the headers equals: " + (authHeader == authReq.headers.get("Authorization")));
       console.log(authReq);
-      return this.logAndConvertDate(authReq, next);
+      return this.handleMaintenance(authReq, next);
     } else {
-      return this.logAndConvertDate(req, next);
+      return this.handleMaintenance(req, next);
     }
+  }
+
+  private handleMaintenance(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req)
+      .do(event => {
+        return this.logAndConvertDate(req, next);
+      })
+      .catch(err => {
+        if (err instanceof HttpErrorResponse) {
+          let httpError = err as HttpErrorResponse;
+          //Redirect to login or maintenance page
+          if(httpError.error.message.startsWith('API is in maintenance for:')) {
+            console.log("It's in maintenance, redirect !");
+            this.router.navigate(['/maintenance']);
+          }
+        }
+        return Observable.throw(err);
+      });
   }
 
   private logAndConvertDate(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
