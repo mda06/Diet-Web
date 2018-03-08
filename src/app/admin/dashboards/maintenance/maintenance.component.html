@@ -1,6 +1,18 @@
-<pre *ngIf="maintenance">
-  {{ maintenance | json }}
-</pre>
+<div *ngIf="maintenance" class="text-center pb-2">
+  <div *ngIf="maintenance.state == 'BEGIN'">
+    <p>It's in maintenance sins <strong>{{ maintenance.beginDate | date }}</strong></p>
+    <p>For <em>{{ maintenance.reason }}</em></p>
+  </div>
+  <div *ngIf="maintenance.state == 'END'">
+    <p>Last maintenance was at <strong>{{ maintenance.endDate | date }}</strong></p>
+    <p>For <em>{{ maintenance.reason }}</em></p>
+  </div>
+  <div *ngIf="maintenance.state == 'NONE'">
+    There are no maintenance history
+  </div>
 
-<button (click)="onPutInMaintenance()">Put in maintance</button>
-<button (click)="onRemoveMaintenance()">Remove the maintenance</button>
+  <input type="button" class="btn btn-primary" (click)="onPutInMaintenance()" value="Put in maintance"
+         [disabled]="maintenance.state == 'BEGIN' || maintenance.state == 'NONE'"/>
+  <input (click)="onRemoveMaintenance()" class="btn btn-primary" value="Remove the maintenance"
+         [disabled]="maintenance.state == 'END'"/>
+</div>
