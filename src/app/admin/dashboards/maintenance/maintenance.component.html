@@ -12,7 +12,7 @@
   </div>
 
   <input type="button" class="btn btn-primary" (click)="onPutInMaintenance()" value="Put in maintance"
-         [disabled]="maintenance.state == 'BEGIN' || maintenance.state == 'NONE'"/>
+         [disabled]="maintenance.state == 'BEGIN'"/>
   <input (click)="onRemoveMaintenance()" class="btn btn-primary" value="Remove the maintenance"
-         [disabled]="maintenance.state == 'END'"/>
+         [disabled]="maintenance.state == 'END' || maintenance.state == 'NONE'"/>
 </div>
