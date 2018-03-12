@@ -19,6 +19,8 @@ export class AdminService {
   private maintenanceStatusUrl = "api/maintenance/status";
   private maintenanceEnableUrl = "api/maintenance/enable";
   private maintenanceDisableUrl = "api/maintenance/disable";
+  private blacklistEnableUrl = "api/login-access/blacklist/enable";
+  private blacklistDisableUrl = "api/login-access/blacklist/disable";
 
   constructor(private http: HttpClient, private _food: FoodService) { }
 
@@ -52,6 +54,14 @@ export class AdminService {
 
   removeMaintenance() : Observable<Maintenance> {
     return this.http.delete<Maintenance>(this.maintenanceDisableUrl, httpOptions);
+  }
+
+  blacklistUser(id: string) : Observable<LoginAccess> {
+    return this.http.post<LoginAccess>(this.blacklistEnableUrl, {'id': id}, httpOptions);
+  }
+
+  unBlacklistUser(id: string) : Observable<LoginAccess> {
+    return this.http.post<LoginAccess>(this.blacklistDisableUrl, {'id': id}, httpOptions);
   }
 
 }
