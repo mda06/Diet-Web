@@ -4,5 +4,5 @@ export class LoginAccess {
   logOutTime: Date = new Date();
   expirationTime: Date = new Date();
   lastActivityTime: Date = new Date();
-  isBlacklisted: boolean = false;
+  blacklisted: boolean = false;
 }

@@ -37,7 +37,7 @@ export class LoginInfoComponent implements OnInit, OnDestroy {
     if(g < 0) g = 0;
     let b = 0;
     let a = 0.6;
-    if(this.login.isBlacklisted) {
+    if(this.login.blacklisted) {
       r = g = b = 65;
     } else if(this.login.logOutTime) {
       r = 255;
@@ -58,9 +58,8 @@ export class LoginInfoComponent implements OnInit, OnDestroy {
   }
 
   onBlacklistClicked() {
-    if(!this.login.isBlacklisted) {
+    if(!this.login.blacklisted) {
       this.service.blacklistUser(this.login.authId).subscribe(data => {
-          console.log(data);
           this.login = data;
           this.initStyle();
         } , err => {
@@ -69,7 +68,6 @@ export class LoginInfoComponent implements OnInit, OnDestroy {
       );
     } else {
       this.service.unBlacklistUser(this.login.authId).subscribe(data => {
-          console.log(data);
           this.login = data;
           this.initStyle();
         } , err => {

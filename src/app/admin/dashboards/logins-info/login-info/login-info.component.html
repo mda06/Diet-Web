@@ -4,13 +4,13 @@
     <img src="../../../../assets/img/blacklisted.png" alt="blacklised" width="auto" height="50px" (click)="onBlacklistClicked()">
   </div>
   <hr class="mt-0">
-  <div *ngIf="login.isBlacklisted" class="p-2">
+  <div *ngIf="login.blacklisted" class="p-2">
     This person is blacklisted
   </div>
-  <div *ngIf="login.logOutTime && !login.isBlacklisted" class="p-2">
+  <div *ngIf="login.logOutTime && !login.blacklisted" class="p-2">
     The person is logout sins {{login.logOutTime | date:'short'}}
   </div>
-  <div *ngIf="!login.logOutTime && !login.isBlacklisted"  class="p-2">
+  <div *ngIf="!login.logOutTime && !login.blacklisted" class="p-2">
     <p>The person is logged in sins {{login.loginTime | date:'short'}}</p>
     <p>With an expiration time of {{login.expirationTime | date:'short'}}</p>
     <p>Last activity was on {{login.lastActivityTime | date:'short'}}</p>
