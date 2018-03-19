@@ -21,11 +21,13 @@ import {LoginModule} from './login/login.module';
 import {CustomerModule} from "./customer/customer.module";
 import {PatientModule} from "./patient/patient.module";
 import { MaintenanceComponent } from './maintenance/maintenance.component';
+import { BlacklistComponent } from './blacklist/blacklist.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MaintenanceComponent
+    MaintenanceComponent,
+    BlacklistComponent
   ],
   imports: [
     BrowserModule,

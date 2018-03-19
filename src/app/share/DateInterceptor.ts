@@ -43,6 +43,10 @@ export class DateInterceptor implements HttpInterceptor {
             console.log("It's in maintenance, redirect !");
             this.router.navigate(['/maintenance']);
           }
+          if(httpError.error.message.startsWith('Blacklisted')) {
+            console.log("Blacklisted, redirect !");
+            this.router.navigate(['/blacklist']);
+          }
         }
         return Observable.throw(err);
       });
