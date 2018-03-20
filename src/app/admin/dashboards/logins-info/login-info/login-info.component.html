@@ -8,12 +8,12 @@
     This person is blacklisted
   </div>
   <div *ngIf="login.logOutTime && !login.blacklisted" class="p-2">
-    The person is logout sins {{login.logOutTime | date:'short'}}
+    The person is logout sins {{login.logOutTime | date:'short'}} UTC
   </div>
   <div *ngIf="!login.logOutTime && !login.blacklisted" class="p-2">
     <p>The person is logged in sins {{login.loginTime | date:'short'}}</p>
     <p>With an expiration time of {{login.expirationTime | date:'short'}}</p>
-    <p>Last activity was on {{login.lastActivityTime | date:'short'}}</p>
+    <p>Last activity was on {{login.lastActivityTime | date:'short'}} UTC</p>
     <p>Inactivity {{inactivityTime}} seconds</p>
   </div>
   <hr>

@@ -25,7 +25,7 @@ export class LoginInfoComponent implements OnInit, OnDestroy {
   }
 
   initInactivityTime() {
-    this.inactivityTime = moment(moment.now()).diff(this.login.lastActivityTime, 'seconds');
+    this.inactivityTime = moment.utc().diff(moment.utc(this.login.lastActivityTime), 'seconds');
     //console.log(this.inactivityTime);
     this.initStyle();
   }
