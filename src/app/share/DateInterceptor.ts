@@ -21,9 +21,9 @@ export class DateInterceptor implements HttpInterceptor {
     if(this.authService.isAuthenticated()) {
       const authHeader = this.authService.getAuthorizationHeader();
       const authReq = req.clone({headers: req.headers.set('Authorization', authHeader)});
-      console.log("User is " + (this.authService.isAuthenticated() ? "" : " not ") +  " authenticated for " + authReq.url + " with " + authReq.headers.get("Authorization"));
+      /*console.log("User is " + (this.authService.isAuthenticated() ? "" : " not ") +  " authenticated for " + authReq.url + " with " + authReq.headers.get("Authorization"));
       console.log("Are the headers equals: " + (authHeader == authReq.headers.get("Authorization")));
-      console.log(authReq);
+      console.log(authReq);*/
       return this.handleMaintenance(authReq, next);
     } else {
       return this.handleMaintenance(req, next);
@@ -31,10 +31,7 @@ export class DateInterceptor implements HttpInterceptor {
   }
 
   private handleMaintenance(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(req)
-      .do(event => {
-        return this.logAndConvertDate(req, next);
-      })
+    return this.logAndConvertDate(req, next)
       .catch(err => {
         if (err instanceof HttpErrorResponse) {
           let httpError = err as HttpErrorResponse;

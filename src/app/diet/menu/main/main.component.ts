@@ -163,6 +163,9 @@ export class MainComponent implements OnInit {
   containsMenu(date: NgbDateStruct) {
     const nativeDate = new Date();
     nativeDate.setUTCFullYear(date.year, date.month - 1, date.day);
+    this.menusOfTheMonth.forEach(menu => {
+      console.log(menu.date.getDate());
+    });
     return this.menusOfTheMonth.find(menu =>
       menu.date.getUTCMonth() == nativeDate.getUTCMonth()
       && menu.date.getUTCDate() == nativeDate.getUTCDate()
