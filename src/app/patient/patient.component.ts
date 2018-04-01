@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {NavItem} from "../model/nav-item";
 import {Router} from "@angular/router";
 
@@ -8,14 +8,22 @@ import {Router} from "@angular/router";
   styleUrls: ['./patient.component.css']
 })
 export class PatientComponent implements OnInit {
-
   _opened: boolean = true;
+  displayCollapsedNav = false;
+
   private dashboardItem: NavItem =
     {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/patient/dashboard", subMenus: []};
   private menuItem: NavItem =
     {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/patient/menu", subMenus: []};
 
   navItems: Array<NavItem> = [];
+
+  @ViewChild('sidebar') sidebar;
+
+  @HostListener('window:resize') onResize() {
+    const winWidth: number = window.innerWidth;
+    this.displayCollapsedNav = winWidth <= 500;
+  }
 
   constructor(private router: Router) { }
 
