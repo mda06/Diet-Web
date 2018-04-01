@@ -19,6 +19,7 @@ import {AuthenticationService} from "../services/authentication.service";
 export class DietComponent implements OnInit {
   _opened: boolean = true;
   displayCollapsedNav = false;
+
   private foodItemItem: NavItem =
     {img: "../../assets/img/food.ico", title: "NAV.FOOD_SEARCH", routerLink: "/diet/food", subMenus: []};
   private dashboardItem: NavItem =

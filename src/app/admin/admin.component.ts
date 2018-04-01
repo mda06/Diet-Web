@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import {NavItem} from "../model/nav-item";
 import {Router} from "@angular/router";
 
@@ -9,6 +9,8 @@ import {Router} from "@angular/router";
 })
 export class AdminComponent implements OnInit {
   _opened: boolean = true;
+  displayCollapsedNav = false;
+
   private dashboard: NavItem = {img: "../../assets/img/dashboard.png", title: "NAV.ADMIN.DASHBOARD",
     routerLink: "/admin/dashboard", subMenus: []};
   private food: NavItem = {img: "../../assets/img/food.ico", title: "NAV.ADMIN.FOOD",
@@ -19,6 +21,15 @@ export class AdminComponent implements OnInit {
     {img: "../../assets/img/diet.png", title: "NAV.DIET.SELECT", routerLink: "/admin/select-diet", subMenus: []};
 
   navItems: Array<NavItem> = [];
+
+  @ViewChild('sidebar') sidebar;
+
+
+  @HostListener('window:resize') onResize() {
+    const winWidth: number = window.innerWidth;
+    this.displayCollapsedNav = winWidth <= 500;
+  }
+
 
   constructor(private router: Router) { }
 
