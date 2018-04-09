@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AuthenticationService} from "./services/authentication.service";
 import { PatientGuardServiceService } from "./guard/patient-guard-service.service";
-import { PatientDashboardComponent } from "./patient/patient-dashboard/patient-dashboard.component";
 import {DateInterceptor} from "./share/DateInterceptor";
 import {DietModule} from "./diet/diet.module";
 import {AdminModule} from "./admin/admin.module";

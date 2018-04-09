@@ -15,6 +15,8 @@ export class PatientComponent implements OnInit {
     {img: "../../assets/img/dashboard.png", title: "NAV.DASHBOARD", routerLink: "/patient/dashboard", subMenus: []};
   private menuItem: NavItem =
     {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/patient/menu", subMenus: []};
+  private picturesItem: NavItem =
+    {img: "../../assets/img/picture.png", title: "NAV.PICTURES.TITLE", routerLink: "/patient/picture", subMenus: []};
 
   navItems: Array<NavItem> = [];
 
@@ -35,6 +37,7 @@ export class PatientComponent implements OnInit {
   initNavItems() {
     this.navItems.push(this.dashboardItem);
     this.navItems.push(this.menuItem);
+    this.navItems.push(this.picturesItem);
   }
 
   _toggleSidebar() {

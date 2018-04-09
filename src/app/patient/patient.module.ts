@@ -10,6 +10,11 @@ import {PatientGuardServiceService} from "../guard/patient-guard-service.service
 import {PatientDashboardComponent} from "./patient-dashboard/patient-dashboard.component";
 import { MenuComponent } from './menu/menu.component';
 import {MenuModule} from '../diet/menu/menu.module';
+import { MealPictureComponent } from './meal-picture/meal-picture.component';
+import {UploadPictureComponent} from '../pictures/upload-picture/upload-picture.component';
+import {ListPictureComponent} from '../pictures/list-picture/list-picture.component';
+import {DetailsPictureComponent} from '../pictures/details-picture/details-picture.component';
+import {UploadFileService} from '../services/upload-file.service';
 
 @NgModule({
   imports: [
@@ -21,7 +26,18 @@ import {MenuModule} from '../diet/menu/menu.module';
     NavbarModule,
     MenuModule
   ],
-  declarations: [PatientComponent, PatientDashboardComponent, MenuComponent],
-  providers: [PatientGuardServiceService]
+  declarations: [
+    PatientComponent,
+    PatientDashboardComponent,
+    MenuComponent,
+    MealPictureComponent,
+    UploadPictureComponent,
+    DetailsPictureComponent,
+    ListPictureComponent
+  ],
+  providers: [
+    PatientGuardServiceService,
+    UploadFileService
+  ]
 })
 export class PatientModule { }
