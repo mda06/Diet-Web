@@ -49,6 +49,7 @@ export class AdminComponent implements OnInit {
 
   navItemClicked(item: NavItem) {
     console.log("Navigate to %s", item.routerLink);
+    this.sidebar.triggerRerender();
     this.router.navigate([item.routerLink]);
   }
 
