@@ -6,12 +6,27 @@
   <div class="row pl-3 mb-2">
     <div id="upload">
       <h3>Upload a new picture</h3>
-      <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple" accept="image/*"></p-fileUpload>
+      <form class="form-inline mb-3">
+        <div class="form-group">
+          <div class="input-group">
+            <label for="meal-date" class="mr-1">Date of the meal: </label>
+            <input class="form-control" placeholder="yyyy-mm-dd" id="meal-date"
+                   name="meal-date" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                   (ngModelChange)="onDateChanged()" id="birthday">
+            <button class="input-group-addon" (click)="d.toggle()" type="button">
+              <img src="../../../assets/img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </button>
+          </div>
+        </div>
+      </form>
+      <p-fileUpload #fileUpload name="myfile[]" customUpload="true" (uploadHandler)="uploadFiles($event)"
+                    multiple="multiple" accept="image/*">
+      </p-fileUpload>
     </div>
   </div>
   <div class="row pl-3">
     <div id="pictures">
-      <h3>List of your pictures</h3>
+      <h3>List of all your pictures</h3>
     </div>
   </div>
 </div>
