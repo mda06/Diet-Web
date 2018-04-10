@@ -34,7 +34,7 @@ export class MealPictureComponent implements OnInit {
     }
 
     this.upload.progress = 0;
-    this.uploadService.addNewMealPictures(formData).subscribe(event => {
+    /*this.uploadService.addNewMealPictures(formData).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         console.log("Finish !");
         this.upload.progress = Math.round(100 * event.loaded / event.total);
@@ -42,7 +42,7 @@ export class MealPictureComponent implements OnInit {
         console.log('File is completely uploaded!');
         this.upload.clear();
       }
-    });
+    });*/
   }
 
 }
