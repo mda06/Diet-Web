@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {UploadFileService} from '../../services/upload-file.service';
+import {HttpEventType, HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-meal-picture',
@@ -28,33 +29,20 @@ export class MealPictureComponent implements OnInit {
 
   uploadFiles(event) {
     let formData = new FormData();
-
     for(let file of event.files) {
       formData.append("pictures", file, file.name);
     }
 
-    this.uploadService.addNewMealPictures(formData).subscribe(s => {
-      console.log(s);
-      this.upload.clear();
-    });
-    //Set the progress bar
-    //this.upload.progress = Math.round((e.loaded * 100) / e.total);
-
-    //Know the progress
-    /*
-    *  this.progress.percentage = 0;
-
-    this.currentFileUpload = this.selectedFiles.item(0)
-    this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
+    this.upload.progress = 0;
+    this.uploadService.addNewMealPictures(formData).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
-        this.progress.percentage = Math.round(100 * event.loaded / event.total);
+        console.log("Finish !");
+        this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
+        this.upload.clear();
       }
-    })
-
-    this.selectedFiles = undefined
-    * */
+    });
   }
 
 }
