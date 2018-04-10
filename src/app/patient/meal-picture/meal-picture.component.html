@@ -1,13 +1,17 @@
-<div class="container" style="width:400px">
-  <div style="color: blue; margin-bottom: 20px">
-    <h1>{{title}}</h1>
-    <h3>{{description}}</h3>
+<div class="container-fluid">
+  <div class="row">
+    <h2 class="mx-auto">Upload your meal pictures</h2>
   </div>
-
-  <app-upload-picture></app-upload-picture>
-
-  <br/>
-  <br/>
-
-  <app-list-picture></app-list-picture>
+  <hr>
+  <div class="row pl-3 mb-2">
+    <div id="upload">
+      <h3>Upload a new picture</h3>
+      <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple" accept="image/*"></p-fileUpload>
+    </div>
+  </div>
+  <div class="row pl-3">
+    <div id="pictures">
+      <h3>List of your pictures</h3>
+    </div>
+  </div>
 </div>

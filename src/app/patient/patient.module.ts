@@ -11,10 +11,8 @@ import {PatientDashboardComponent} from "./patient-dashboard/patient-dashboard.c
 import { MenuComponent } from './menu/menu.component';
 import {MenuModule} from '../diet/menu/menu.module';
 import { MealPictureComponent } from './meal-picture/meal-picture.component';
-import {UploadPictureComponent} from '../pictures/upload-picture/upload-picture.component';
-import {ListPictureComponent} from '../pictures/list-picture/list-picture.component';
-import {DetailsPictureComponent} from '../pictures/details-picture/details-picture.component';
 import {UploadFileService} from '../services/upload-file.service';
+import {FileUploadModule} from 'primeng/primeng';
 
 @NgModule({
   imports: [
@@ -24,16 +22,14 @@ import {UploadFileService} from '../services/upload-file.service';
     PatientRoutingModule,
     SidebarModule.forRoot(),
     NavbarModule,
-    MenuModule
+    MenuModule,
+    FileUploadModule
   ],
   declarations: [
     PatientComponent,
     PatientDashboardComponent,
     MenuComponent,
     MealPictureComponent,
-    UploadPictureComponent,
-    DetailsPictureComponent,
-    ListPictureComponent
   ],
   providers: [
     PatientGuardServiceService,
