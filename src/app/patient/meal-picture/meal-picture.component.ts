@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {UploadFileService} from '../../services/upload-file.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {MealPicture} from '../../model/mealpicture';
 
 @Component({
   selector: 'app-meal-picture',
@@ -36,10 +37,12 @@ export class MealPictureComponent implements OnInit {
     this.upload.progress = 0;
     this.uploadService.addNewMealPictures(formData).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
-        console.log("Finish !");
         this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
+        const pictures : Array<MealPicture> = event.body;
+        for(var pic in pictures)
+          console.log(pic);
         this.upload.clear();
       }
     });
