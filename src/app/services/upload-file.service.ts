@@ -3,6 +3,7 @@ import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {MealPicture} from '../model/mealpicture';
 import {Data} from '@angular/router';
+import * as moment from 'moment';
 
 @Injectable()
 export class UploadFileService {
@@ -14,7 +15,8 @@ export class UploadFileService {
 
   addNewMealPictures(files: File[], date: Data): Observable<HttpEvent<Array<MealPicture>>> {
     let formData = new FormData();
-    formData.append("data", JSON.stringify(date));
+    let pictureDate = moment(date).format("YYYY-MM-DD");
+    formData.append("date", pictureDate);
     for(let file of files) {
       formData.append("pictures", file, file.name);
     }
@@ -25,7 +27,6 @@ export class UploadFileService {
     });
 
     return this.http.request<Array<MealPicture>>(req);
-    //return this.http.post<Array<MealPicture>>(this.uploadUrl, formData, { reportProgress: true });
   }
 
   getFiles(): Observable<string[]> {
