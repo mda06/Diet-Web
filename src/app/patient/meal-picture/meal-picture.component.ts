@@ -3,6 +3,7 @@ import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {UploadFileService} from '../../services/upload-file.service';
 import {HttpEventType, HttpResponse} from '@angular/common/http';
 import {MealPicture} from '../../model/mealpicture';
+import {IAlert} from '../../model/i-alert';
 
 @Component({
   selector: 'app-meal-picture',
@@ -14,6 +15,8 @@ export class MealPictureComponent implements OnInit {
   @ViewChild('fileUpload') upload: any;
   model: NgbDateStruct;
   mealDate: Date = new Date();
+  public alerts: Array<IAlert> = [];
+  alertCounter: number = 0;
 
   constructor(private uploadService: UploadFileService) { }
 
@@ -34,12 +37,26 @@ export class MealPictureComponent implements OnInit {
       if (event.type === HttpEventType.UploadProgress) {
         this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
-        console.log('File is completely uploaded!');
         const pictures : Array<MealPicture> = event.body;
-        console.log(pictures);
+        this.alerts.push({id: this.alertCounter, type:'primary', message:'Successfully uploaded', subMessage: pictures.length + ' pictures '});
+        setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
         this.upload.clear();
       }
+    }, err => {
+      this.alerts.push({id: this.alertCounter, type:'warning', message:'Error while uploading', subMessage: err});
+      setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
     });
+  }
+
+  public closeAlert(alert: IAlert) {
+    const index: number = this.alerts.indexOf(alert);
+    this.alerts.splice(index, 1);
+  }
+
+  closeAlertWithId(id: number) {
+    const alert = this.alerts.find(a => a.id == id);
+    const index = this.alerts.indexOf(alert);
+    this.alerts.splice(index, 1);
   }
 
 }

@@ -6,6 +6,11 @@
   <div class="row pl-3 mb-2">
     <div class="col-md-6 col-sm-12">
       <h3>Upload a new picture</h3>
+      <div>
+        <p *ngFor="let alert of alerts">
+          <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message | translate }} {{alert.subMessage}}</ngb-alert>
+        </p>
+      </div>
       <form class="form-inline mb-3">
         <div class="form-group">
           <div class="input-group">
