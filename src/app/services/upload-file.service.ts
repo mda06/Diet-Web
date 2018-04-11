@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpEvent, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {MealPicture} from '../model/mealpicture';
+import {Data} from '@angular/router';
 
 @Injectable()
 export class UploadFileService {
@@ -11,8 +12,14 @@ export class UploadFileService {
 
   constructor(private http: HttpClient) {}
 
-  addNewMealPictures(formdata: FormData): Observable<HttpEvent<Array<MealPicture>>> {
-    const req = new HttpRequest('POST', this.uploadUrl, formdata, {
+  addNewMealPictures(files: File[], date: Data): Observable<HttpEvent<Array<MealPicture>>> {
+    let formData = new FormData();
+    formData.append("data", JSON.stringify(date));
+    for(let file of files) {
+      formData.append("pictures", file, file.name);
+    }
+
+    const req = new HttpRequest('POST', this.uploadUrl, formData, {
       reportProgress: true,
       responseType: 'text'
     });

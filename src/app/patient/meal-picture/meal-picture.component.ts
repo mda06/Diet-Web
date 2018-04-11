@@ -13,7 +13,7 @@ export class MealPictureComponent implements OnInit {
 
   @ViewChild('fileUpload') upload: any;
   model: NgbDateStruct;
-  tempDate: Date = new Date();
+  mealDate: Date = new Date();
 
   constructor(private uploadService: UploadFileService) { }
 
@@ -22,20 +22,15 @@ export class MealPictureComponent implements OnInit {
   }
 
   initDateModel() {
-    this.model = { day: this.tempDate.getUTCDate(), month: this.tempDate.getUTCMonth() + 1, year: this.tempDate.getUTCFullYear()};
+    this.model = { day: this.mealDate.getUTCDate(), month: this.mealDate.getUTCMonth() + 1, year: this.mealDate.getUTCFullYear()};
   }
   onDateChanged() {
-    this.tempDate.setUTCFullYear(this.model.year, this.model.month - 1, this.model.day);
+    this.mealDate.setUTCFullYear(this.model.year, this.model.month - 1, this.model.day);
   }
 
   uploadFiles(event) {
-    let formData = new FormData();
-    for(let file of event.files) {
-      formData.append("pictures", file, file.name);
-    }
-
     this.upload.progress = 0;
-    this.uploadService.addNewMealPictures(formData).subscribe(event => {
+    this.uploadService.addNewMealPictures(event.files, this.mealDate).subscribe(event => {
       if (event.type === HttpEventType.UploadProgress) {
         this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
