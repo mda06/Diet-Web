@@ -21,10 +21,11 @@ export class UploadFileService {
 
     const req = new HttpRequest('POST', this.uploadUrl, formData, {
       reportProgress: true,
-      responseType: 'text'
+      responseType: 'json'
     });
 
     return this.http.request<Array<MealPicture>>(req);
+    //return this.http.post<Array<MealPicture>>(this.uploadUrl, formData, { reportProgress: true });
   }
 
   getFiles(): Observable<string[]> {

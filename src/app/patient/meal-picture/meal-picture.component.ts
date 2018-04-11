@@ -36,8 +36,7 @@ export class MealPictureComponent implements OnInit {
       } else if (event instanceof HttpResponse) {
         console.log('File is completely uploaded!');
         const pictures : Array<MealPicture> = event.body;
-        for(var pic in pictures)
-          console.log(pic);
+        console.log(pictures);
         this.upload.clear();
       }
     });
