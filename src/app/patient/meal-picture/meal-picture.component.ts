@@ -18,7 +18,8 @@ export class MealPictureComponent implements OnInit {
   public alerts: Array<IAlert> = [];
   alertCounter: number = 0;
 
-  mealPictures: Map<MealPicture, Blob> = new Map<MealPicture, Blob>();
+  mealPictures: Array<MealPicture> = [];
+
   modelFiles: Array<MealPicture> = [];
   pictures = [];
 
@@ -43,9 +44,7 @@ export class MealPictureComponent implements OnInit {
         this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
         const pictures : Array<MealPicture> = event.body;
-        pictures.forEach(pic => {
-          this.mealPictures.set(pic, null);
-        });
+        this.mealPictures = this.mealPictures.concat(this.pictures);
         this.initMealPictures();
         this.alerts.push({id: this.alertCounter, type:'primary', message:'Successfully uploaded', subMessage: pictures.length + ' pictures '});
         setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
@@ -65,21 +64,19 @@ export class MealPictureComponent implements OnInit {
 
   initModelFiles() {
     this.uploadService.getModelFiles().subscribe(data => {
-      data.forEach(pic => {
-        this.mealPictures.set(pic, null);
-      });
+      this.mealPictures = data;
       this.initMealPictures();
       },err => console.log(err))
   }
 
   initMealPictures() {
-    this.mealPictures.forEach((val, key) => {
-      if(val == null) {
-        this.uploadService.getPicture(key.id).subscribe(data => {
+    this.mealPictures.forEach(pic => {
+      if(pic.blob == null) {
+        this.uploadService.getPicture(pic.id).subscribe(data => {
           const reader = new FileReader();
           const mealPics = this.mealPictures;
           reader.addEventListener("load", function() {
-            mealPics.set(key, reader.result);
+            pic.blob = reader.result;
           });
           reader.readAsDataURL(data);
 
