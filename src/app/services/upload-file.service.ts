@@ -4,12 +4,14 @@ import {Observable} from 'rxjs/Observable';
 import {MealPicture} from '../model/mealpicture';
 import {Data} from '@angular/router';
 import * as moment from 'moment';
+import {ResponseContentType} from '@angular/http';
 
 @Injectable()
 export class UploadFileService {
 
   private uploadUrl = "api/pictures/upload";
   private getModelUrl = "api/pictures/model";
+  private getPictureUrl = "api/pictures/model";
 
   constructor(private http: HttpClient) {}
 
@@ -31,6 +33,10 @@ export class UploadFileService {
 
   getModelFiles() : Observable<Array<MealPicture>> {
     return this.http.get<Array<MealPicture>>(this.getModelUrl);
+  }
+
+  getPicture(id: number): Observable<Blob> {
+    return this.http.get(this.getPictureUrl + "/" + id, { responseType: "blob"} )
   }
 
 }

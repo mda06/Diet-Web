@@ -19,6 +19,7 @@ export class MealPictureComponent implements OnInit {
   alertCounter: number = 0;
 
   modelFiles: Array<MealPicture> = [];
+  pictures = [];
 
   constructor(private uploadService: UploadFileService) { }
 
@@ -42,6 +43,7 @@ export class MealPictureComponent implements OnInit {
       } else if (event instanceof HttpResponse) {
         const pictures : Array<MealPicture> = event.body;
         this.modelFiles = this.modelFiles.concat(pictures);
+        this.initPictures();
         this.alerts.push({id: this.alertCounter, type:'primary', message:'Successfully uploaded', subMessage: pictures.length + ' pictures '});
         setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
         this.upload.clear();
@@ -60,8 +62,19 @@ export class MealPictureComponent implements OnInit {
 
   initModelFiles() {
     this.uploadService.getModelFiles().subscribe(
-      data => this.modelFiles = data,
+      data => {this.modelFiles = data; this.initPictures();},
       err => console.log(err))
+  }
+
+  initPictures() {
+    this.pictures = [];
+    this.modelFiles.forEach(model => {
+      const id = model.id;
+      this.uploadService.getPicture(id).subscribe(data => {
+        console.log("Picture " + id + " downloaded.");
+        this.pictures.push(window.URL.createObjectURL(data));
+      }, err => console.log(err));
+    });
   }
 
   public closeAlert(alert: IAlert) {
