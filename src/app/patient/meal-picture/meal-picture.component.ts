@@ -71,8 +71,16 @@ export class MealPictureComponent implements OnInit {
     this.modelFiles.forEach(model => {
       const id = model.id;
       this.uploadService.getPicture(id).subscribe(data => {
-        console.log("Picture " + id + " downloaded.");
-        this.pictures.push(window.URL.createObjectURL(data));
+        console.log(data);
+        this.pictures.push(data);
+        /*const reader = new FileReader();
+        const pic = this.pictures;
+        reader.addEventListener("load", function() {
+          pic.push(reader.result);
+          console.log("Added v2!");
+        });
+        reader.readAsDataURL(data);*/
+
       }, err => console.log(err));
     });
   }

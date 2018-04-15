@@ -33,7 +33,7 @@
     <div id="pictures">
       <h3>List of all your pictures..</h3>
       <div *ngFor="let pic of pictures">
-        <img [src]="pic" alt="picture">
+        <img src="{{pic}}" alt="picture">
       </div>
       <pre *ngFor="let model of modelFiles">
         {{ model | json}}

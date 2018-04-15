@@ -36,13 +36,14 @@ export class DateInterceptor implements HttpInterceptor {
         if (err instanceof HttpErrorResponse) {
           let httpError = err as HttpErrorResponse;
           //Redirect to login or maintenance page
-          if(httpError.error.message.startsWith('API is in maintenance for:')) {
-            console.log("It's in maintenance, redirect !");
-            this.router.navigate(['/maintenance']);
-          }
-          if(httpError.error.message.startsWith('Blacklisted')) {
-            console.log("Blacklisted, redirect !");
-            this.router.navigate(['/blacklist']);
+          if(httpError.error.message != null) {
+            if (httpError.error.message.startsWith('API is in maintenance for:')) {
+              console.log("It's in maintenance, redirect !");
+              this.router.navigate(['/maintenance']);
+            } else if (httpError.error.message.startsWith('Blacklisted')) {
+              console.log("Blacklisted, redirect !");
+              this.router.navigate(['/blacklist']);
+            }
           }
         }
         return Observable.throw(err);
