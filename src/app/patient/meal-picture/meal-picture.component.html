@@ -30,18 +30,18 @@
     </div>
   </div>
   <div class="row pl-3">
-    <div id="pictures">
-      <h3>List of all your pictures.. {{mealPictures.size}}</h3>
-
-      <div *ngFor="let pic of mealPictures">
-        <h5>{{ pic.filename }}</h5>
-        <img *ngIf="pic.blob != null" [src]="pic.blob" [alt]="pic.filename" width="100" height="100">
-        <p *ngIf="pic.blob == null">Loading...</p>
+    <div class="col-md-12">
+      <h3 class="row p-2">List of all your pictures</h3>
+      <div class="row">
+        <div *ngFor="let pic of mealPictures" class="meal-picture col-md-2 p-2">
+          <div class="p-2 d-flex justify-content-between align-items-center">
+            <h5>{{ pic.filename }}</h5>
+            <button class="btn btn-danger"><span class="fa fa-trash"></span></button>
+          </div>
+          <img *ngIf="pic.blob != null" [src]="pic.blob" [alt]="pic.filename" class="img-fluid">
+          <p *ngIf="pic.blob == null">Loading...</p>
+        </div>
       </div>
-      <pre *ngFor="let model of modelFiles">
-        {{ model | json}}
-      </pre>
-
     </div>
   </div>
 </div>

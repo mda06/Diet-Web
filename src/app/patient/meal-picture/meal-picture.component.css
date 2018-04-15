@@ -1,3 +1,8 @@
 #upload {
   min-width: 500px;
 }
+
+.meal-picture {
+  background-clip: content-box !important;
+  background: lightgray;
+}

@@ -20,9 +20,6 @@ export class MealPictureComponent implements OnInit {
 
   mealPictures: Array<MealPicture> = [];
 
-  modelFiles: Array<MealPicture> = [];
-  pictures = [];
-
   constructor(private uploadService: UploadFileService) { }
 
   ngOnInit() {
@@ -44,7 +41,7 @@ export class MealPictureComponent implements OnInit {
         this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
         const pictures : Array<MealPicture> = event.body;
-        this.mealPictures = this.mealPictures.concat(this.pictures);
+        this.mealPictures = this.mealPictures.concat(pictures);
         this.initMealPictures();
         this.alerts.push({id: this.alertCounter, type:'primary', message:'Successfully uploaded', subMessage: pictures.length + ' pictures '});
         setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
@@ -82,25 +79,6 @@ export class MealPictureComponent implements OnInit {
 
         }, err => console.log(err));
       }
-    });
-  }
-
-  initPictures() {
-    this.pictures = [];
-    this.modelFiles.forEach(model => {
-      const id = model.id;
-      this.uploadService.getPicture(id).subscribe(data => {
-        console.log(data);
-        //this.pictures.push(data);
-        const reader = new FileReader();
-        const pic = this.pictures;
-        reader.addEventListener("load", function() {
-          pic.push(reader.result);
-          console.log("Added v2!");
-        });
-        reader.readAsDataURL(data);
-
-      }, err => console.log(err));
     });
   }
 
