@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {UploadFileService} from '../../services/upload-file.service';
-import {HttpEventType, HttpResponse} from '@angular/common/http';
+import {HttpErrorResponse, HttpEventType, HttpResponse} from '@angular/common/http';
 import {MealPicture} from '../../model/mealpicture';
 import {IAlert} from '../../model/i-alert';
 
@@ -43,8 +43,13 @@ export class MealPictureComponent implements OnInit {
         this.upload.clear();
       }
     }, err => {
-      this.alerts.push({id: this.alertCounter, type:'warning', message:'Error while uploading', subMessage: err});
-      setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
+      if(err instanceof HttpErrorResponse) {
+        this.alerts.push({id: this.alertCounter, type: 'warning', message: 'Error while uploading', subMessage: ""});
+        setTimeout((index) => this.closeAlertWithId(index), 2500, this.alertCounter++);
+      } else {
+        console.log("Error isn't a httpErrorResponse");
+        console.log(err);
+      }
     });
   }
 
