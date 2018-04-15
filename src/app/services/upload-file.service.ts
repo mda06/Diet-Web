@@ -34,7 +34,7 @@ export class UploadFileService {
     return this.http.get<Array<MealPicture>>(this.getModelUrl);
   }
 
-  getPicture(id: number): Observable<any> {
-    return this.http.get(this.getPictureUrl + "/" + id)
+  getPicture(id: number): Observable<Blob> {
+    return this.http.get(this.getPictureUrl + "/" + id, {responseType: 'blob'})
   }
 }

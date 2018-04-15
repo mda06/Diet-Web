@@ -18,6 +18,7 @@ export class MealPictureComponent implements OnInit {
   public alerts: Array<IAlert> = [];
   alertCounter: number = 0;
 
+  mealPictures: Map<MealPicture, Blob> = new Map<MealPicture, Blob>();
   modelFiles: Array<MealPicture> = [];
   pictures = [];
 
@@ -42,8 +43,10 @@ export class MealPictureComponent implements OnInit {
         this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
         const pictures : Array<MealPicture> = event.body;
-        this.modelFiles = this.modelFiles.concat(pictures);
-        this.initPictures();
+        pictures.forEach(pic => {
+          this.mealPictures.set(pic, null);
+        });
+        this.initMealPictures();
         this.alerts.push({id: this.alertCounter, type:'primary', message:'Successfully uploaded', subMessage: pictures.length + ' pictures '});
         setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
         this.upload.clear();
@@ -61,9 +64,28 @@ export class MealPictureComponent implements OnInit {
   }
 
   initModelFiles() {
-    this.uploadService.getModelFiles().subscribe(
-      data => {this.modelFiles = data; this.initPictures();},
-      err => console.log(err))
+    this.uploadService.getModelFiles().subscribe(data => {
+      data.forEach(pic => {
+        this.mealPictures.set(pic, null);
+      });
+      this.initMealPictures();
+      },err => console.log(err))
+  }
+
+  initMealPictures() {
+    this.mealPictures.forEach((val, key) => {
+      if(val == null) {
+        this.uploadService.getPicture(key.id).subscribe(data => {
+          const reader = new FileReader();
+          const mealPics = this.mealPictures;
+          reader.addEventListener("load", function() {
+            mealPics.set(key, reader.result);
+          });
+          reader.readAsDataURL(data);
+
+        }, err => console.log(err));
+      }
+    });
   }
 
   initPictures() {
@@ -72,14 +94,14 @@ export class MealPictureComponent implements OnInit {
       const id = model.id;
       this.uploadService.getPicture(id).subscribe(data => {
         console.log(data);
-        this.pictures.push(data);
-        /*const reader = new FileReader();
+        //this.pictures.push(data);
+        const reader = new FileReader();
         const pic = this.pictures;
         reader.addEventListener("load", function() {
           pic.push(reader.result);
           console.log("Added v2!");
         });
-        reader.readAsDataURL(data);*/
+        reader.readAsDataURL(data);
 
       }, err => console.log(err));
     });

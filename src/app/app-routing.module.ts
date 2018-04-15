@@ -6,7 +6,7 @@ import {BlacklistComponent} from "./blacklist/blacklist.component";
 const routes: Routes = [
   {path: 'maintenance', component: MaintenanceComponent},
   {path: 'blacklist', component: BlacklistComponent},
-  //{path: '**', redirectTo:"/login"}
+  {path: '**', redirectTo:"/login"}
 ];
 
 @NgModule({
