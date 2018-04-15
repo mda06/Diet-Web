@@ -31,7 +31,10 @@
   </div>
   <div class="row pl-3">
     <div id="pictures">
-      <h3>List of all your pictures</h3>
+      <h3>List of all your pictures..</h3>
+      <pre *ngFor="let model of modelFiles">
+        {{ model | json}}
+      </pre>
     </div>
   </div>
 </div>

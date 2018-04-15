@@ -9,7 +9,7 @@ import * as moment from 'moment';
 export class UploadFileService {
 
   private uploadUrl = "api/pictures/upload";
-  private getUrl = "api/pictures/get";
+  private getModelUrl = "api/pictures/model";
 
   constructor(private http: HttpClient) {}
 
@@ -29,8 +29,8 @@ export class UploadFileService {
     return this.http.request<Array<MealPicture>>(req);
   }
 
-  getFiles(): Observable<string[]> {
-    return this.http.get<string[]>(this.getUrl)
+  getModelFiles() : Observable<Array<MealPicture>> {
+    return this.http.get<Array<MealPicture>>(this.getModelUrl);
   }
 
 }

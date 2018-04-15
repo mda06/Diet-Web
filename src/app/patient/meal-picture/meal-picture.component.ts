@@ -18,10 +18,13 @@ export class MealPictureComponent implements OnInit {
   public alerts: Array<IAlert> = [];
   alertCounter: number = 0;
 
+  modelFiles: Array<MealPicture> = [];
+
   constructor(private uploadService: UploadFileService) { }
 
   ngOnInit() {
     this.initDateModel();
+    this.initModelFiles();
   }
 
   initDateModel() {
@@ -38,12 +41,14 @@ export class MealPictureComponent implements OnInit {
         this.upload.progress = Math.round(100 * event.loaded / event.total);
       } else if (event instanceof HttpResponse) {
         const pictures : Array<MealPicture> = event.body;
+        this.modelFiles = this.modelFiles.concat(pictures);
         this.alerts.push({id: this.alertCounter, type:'primary', message:'Successfully uploaded', subMessage: pictures.length + ' pictures '});
         setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
         this.upload.clear();
       }
     }, err => {
       if(err instanceof HttpErrorResponse) {
+        console.log(err);
         this.alerts.push({id: this.alertCounter, type: 'warning', message: 'Error while uploading', subMessage: ""});
         setTimeout((index) => this.closeAlertWithId(index), 2500, this.alertCounter++);
       } else {
@@ -51,6 +56,12 @@ export class MealPictureComponent implements OnInit {
         console.log(err);
       }
     });
+  }
+
+  initModelFiles() {
+    this.uploadService.getModelFiles().subscribe(
+      data => this.modelFiles = data,
+      err => console.log(err))
   }
 
   public closeAlert(alert: IAlert) {
