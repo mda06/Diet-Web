@@ -37,7 +37,7 @@
           <div class="meal-picture d-flex flex-column">
             <div class="p-2 d-flex justify-content-between align-items-center">
               <h5>{{ pic.filename }}</h5>
-              <button class="btn btn-danger ml-1"><span class="fa fa-trash"></span></button>
+              <button class="btn btn-danger ml-1" (click)="onDeleteMealPicture(pic.id)"><span class="fa fa-trash"></span></button>
             </div>
             <img *ngIf="pic.blob != null" [src]="pic.blob" [alt]="pic.filename" class="img-fluid mt-auto mb-auto">
             <p *ngIf="pic.blob == null">Loading...</p>

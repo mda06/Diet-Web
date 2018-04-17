@@ -11,6 +11,7 @@ export class UploadFileService {
   private uploadUrl = "api/pictures/upload";
   private getModelUrl = "api/pictures/model";
   private getPictureUrl = "api/pictures";
+  private deletePictureUrl = "api/pictures";
 
   constructor(private http: HttpClient) {}
 
@@ -36,5 +37,9 @@ export class UploadFileService {
 
   getPicture(id: number): Observable<Blob> {
     return this.http.get(this.getPictureUrl + "/" + id, {responseType: 'blob'})
+  }
+
+  deletePicture(id: number): Observable<MealPicture> {
+    return this.http.delete<MealPicture>(this.deletePictureUrl + "/" + id);
   }
 }

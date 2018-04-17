@@ -93,4 +93,19 @@ export class MealPictureComponent implements OnInit {
     this.alerts.splice(index, 1);
   }
 
+  onDeleteMealPicture(id: number) {
+    this.uploadService.deletePicture(id).subscribe(data => {
+      if(data.id == id) {
+        const mp = this.mealPictures.find(mp => mp.id == id);
+        this.mealPictures.splice(this.mealPictures.indexOf(mp), 1);
+        this.alerts.push({id: this.alertCounter, type: 'success', message: 'Picture successfully deleted', subMessage: mp.filename});
+        setTimeout((index) => this.closeAlertWithId(index), 2500, this.alertCounter++);
+      }
+    }, err => {
+      console.log(err);
+      const mp = this.mealPictures.find(mp => mp.id == id);
+      this.alerts.push({id: this.alertCounter, type: 'danger', message: 'Cannot delete picture', subMessage: mp.filename});
+      setTimeout((index) => this.closeAlertWithId(index), 2500, this.alertCounter++);
+    });
+  }
 }
