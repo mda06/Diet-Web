@@ -28,7 +28,8 @@ export class DietComponent implements OnInit {
   private menuItem: NavItem =
     {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/diet/menu", subMenus: [
       {img: "../../assets/img/menu.png", title: "NAV.MENU.TITLE", routerLink: "/diet/menu", subMenus: []},
-      {img: "../../assets/img/meal-template.png", title: "NAV.MENU.TEMPLATE", routerLink: "/diet/menu/template", subMenus: []}
+      {img: "../../assets/img/meal-template.png", title: "NAV.MENU.TEMPLATE", routerLink: "/diet/menu/template", subMenus: []},
+      {img: "../../assets/img/picture.png", title: "NAV.PICTURES.TITLE", routerLink: "/diet/picture", subMenus: []}
     ]};
 
   private aboutPatientItem: NavItem =
@@ -42,6 +43,7 @@ export class DietComponent implements OnInit {
 
   private reportsItem: NavItem =
     {img: "../../assets/img/reports.png", title: "NAV.REPORTS.TITLE", routerLink: "/diet/reports", subMenus: []};
+
 
   navItems: Array<NavItem> = [];
   private subscriptions = new Subscription();

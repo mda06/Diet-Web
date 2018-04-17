@@ -11,6 +11,7 @@ import {TimesPipe} from "../../share/TimesPipe";
 import {NavbarModule} from "../../navbar/navbar.module";
 import {MealComponent} from './meal/meal.component';
 import { TemplateComponent } from './meal/template/template.component';
+import { MealPictureComponent } from './meal-picture/meal-picture.component';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { TemplateComponent } from './meal/template/template.component';
     MealComponent,
     MainComponent,
     TimesPipe,
-    TemplateComponent
+    TemplateComponent,
+    MealPictureComponent
   ],
   providers: [MenuService],
   exports: [MainComponent]

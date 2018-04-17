@@ -31,8 +31,8 @@ export class UploadFileService {
     return this.http.request<Array<MealPicture>>(req);
   }
 
-  getModelFiles() : Observable<Array<MealPicture>> {
-    return this.http.get<Array<MealPicture>>(this.getModelUrl);
+  getModelFiles(id: number = 0) : Observable<Array<MealPicture>> {
+    return this.http.get<Array<MealPicture>>(this.getModelUrl + (id == 0 ? "" : ("?patient=" + id)));
   }
 
   getPicture(id: number): Observable<Blob> {
