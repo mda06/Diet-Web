@@ -3,3 +3,10 @@ ngb-carousel {
   margin-left: auto;
   margin-right: auto;
 }
+
+img {
+  display: block;
+  height: 200px;
+  width: auto;
+  margin: 0 auto;
+}

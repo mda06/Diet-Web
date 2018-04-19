@@ -1,12 +1,12 @@
-<ngb-carousel class="pb-3">
-  <ng-template ngbSlide >
-    <img src="https://lorempixel.com/500/200/food?r=1" alt="Random first slide">
-  </ng-template>
-  <ng-template ngbSlide>
-    <img src="https://lorempixel.com/500/200/food?r=2" alt="Random second slide">
-  </ng-template>
-  <ng-template ngbSlide>
-    <img src="https://lorempixel.com/500/200/food?r=3" alt="Random third slide">
+<ngb-carousel class="pb-3" *ngIf="selectedPatient && mealPictures.length > 0">
+  <ng-template ngbSlide *ngFor="let pic of mealPictures" class="col-md-2 mb-3">
+    <img *ngIf="pic.blob != null" [src]="pic.blob" [alt]="pic.filename">
+    <p *ngIf="pic.blob == null">Loading...</p>
   </ng-template>
 </ngb-carousel>
-
+<div *ngIf="selectedPatient && mealPictures.length == 0">
+  There are no pictures
+</div>
+<div *ngIf="!selectedPatient">
+  Please select a patient before...
+</div>
