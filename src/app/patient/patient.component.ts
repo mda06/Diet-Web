@@ -50,4 +50,7 @@ export class PatientComponent implements OnInit {
     this.router.navigate([item.routerLink]);
   }
 
+  navTriggerRenderer() {
+    this.sidebar.triggerRerender();
+  }
 }

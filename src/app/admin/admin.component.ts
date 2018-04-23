@@ -53,4 +53,8 @@ export class AdminComponent implements OnInit {
     this.router.navigate([item.routerLink]);
   }
 
+  navTriggerRenderer() {
+    this.sidebar.triggerRerender();
+  }
+
 }

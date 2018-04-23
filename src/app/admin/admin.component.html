@@ -3,7 +3,7 @@
     [(opened)]="_opened"
     mode="push"
     autoCollapseWidth=500>
-    <app-navbar [navItems]="navItems" (navItemClicked)="navItemClicked($event)"></app-navbar>
+    <app-navbar [navItems]="navItems" (navItemClicked)="navItemClicked($event)" (triggerRenderer)="navTriggerRenderer()"></app-navbar>
   </ng-sidebar>
   <div ng-sidebar-content class="bg-light" id="content">
     <div *ngIf="displayCollapsedNav" class="d-flex justify-content-between p-1" id="nav-collapsed">

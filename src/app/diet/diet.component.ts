@@ -141,4 +141,8 @@ export class DietComponent implements OnInit {
     this.sidebar.triggerRerender();
     this.router.navigate([item.routerLink]);
   }
+
+  navTriggerRenderer() {
+    this.sidebar.triggerRerender();
+  }
 }

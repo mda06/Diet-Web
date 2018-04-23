@@ -14,6 +14,7 @@ export class NavbarComponent implements OnInit {
 
   @Input() navItems: Array<NavItem>;
   @Output() navItemClicked = new EventEmitter<NavItem>();
+  @Output() triggerRenderer = new EventEmitter();
   displaySettings: boolean = false;
   selectedLang = "en";
   activeNavItem: NavItem;
@@ -33,6 +34,7 @@ export class NavbarComponent implements OnInit {
 
   onSettingsCogClick() {
     this.displaySettings = !this.displaySettings;
+    this.triggerRenderer.emit();
   }
 
   onBackClick() {
