@@ -7,6 +7,7 @@ import {Patient} from '../../../model/patient';
 import {isNullOrUndefined} from "util";
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import * as moment from 'moment';
+import {TranslateService} from '@ngx-translate/core';
 
 const now = new Date();
 @Component({
@@ -24,7 +25,8 @@ export class MealPictureComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(private uploadService: UploadFileService,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.subscriptions.add(this.sharedService.patient$.subscribe(

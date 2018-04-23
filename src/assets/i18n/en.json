@@ -77,6 +77,13 @@
     }
   },
   "DIET": {
+    "PICTURES": {
+      "TITLE": "Pictures of ",
+      "DATE": "Date of pictures: ",
+      "LOADING": "Loading...",
+      "NO_PICTURES": "There are no pictures for ",
+      "NO_PATIENT": "Please select a patient before"
+    },
     "DELETE": {
       "TITLE": "You're trying to delete a patient !",
       "BODY": "Are you sure you want to delete this patient ?",
@@ -91,6 +98,11 @@
       "SELECT": "Select"
     },
     "DASHBOARD": {
+      "SLIDER": {
+        "LOADING": "Loading...",
+        "NO_PICTURES": "There are no pictures",
+        "NO_PATIENT": "Please select a patient"
+      },
       "TITLE": "Dashboard of ",
       "SELECTED": "Patient selected: ",
       "DESELECT_PATIENT": "Deselect patient",

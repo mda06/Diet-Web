@@ -77,6 +77,13 @@
     }
   },
   "DIET": {
+    "PICTURES": {
+      "TITLE": "Images de  ",
+      "DATE": "Date des images: ",
+      "LOADING": "Chargement...",
+      "NO_PICTURES": "Il n'y a pas d'images pour le ",
+      "NO_PATIENT": "Selectionner un patient avant"
+    },
     "DELETE": {
       "TITLE": "Vous êtes sur le point de supprimer un patient !",
       "BODY": "Êtes-vous sûr de vouloir supprimer ce patient ?",
@@ -91,6 +98,11 @@
       "SELECT": "Selectionner"
     },
     "DASHBOARD": {
+      "SLIDER": {
+        "LOADING": "Chargement...",
+        "NO_PICTURES": "Il n'y a pas d'images",
+        "NO_PATIENT": "Veuillez selectionner un patient"
+      },
       "TITLE": "Tableau de bord de ",
       "SELECTED": "Patient selectionner: ",
       "NO_PATIENT": "Veuillez selectionner un patient",

@@ -5,6 +5,7 @@ import {Patient} from '../../../model/patient';
 import {SharedService} from '../../service/shared.service';
 import {isNullOrUndefined} from "util";
 import {UploadFileService} from '../../../services/upload-file.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-food-slider',
@@ -18,7 +19,8 @@ export class FoodSliderComponent implements OnInit, OnDestroy {
   private subscriptions = new Subscription();
 
   constructor(private uploadService: UploadFileService,
-              private sharedService: SharedService) { }
+              private sharedService: SharedService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.subscriptions.add(this.sharedService.patient$.subscribe(
