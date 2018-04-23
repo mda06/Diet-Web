@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AdminService} from '../../service/admin.service';
 import {Maintenance} from '../../../model/maintenance';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-maintenance',
@@ -11,7 +12,8 @@ export class MaintenanceComponent implements OnInit {
 
   maintenance: Maintenance = null;
 
-  constructor(private service: AdminService) { }
+  constructor(private service: AdminService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.initMaintenanceStatus();
@@ -24,7 +26,7 @@ export class MaintenanceComponent implements OnInit {
   }
 
   onPutInMaintenance() {
-    let reason = "Testing purposse..";
+    let reason = "Testing purpose..";
     this.service.putInMaintenance(reason).subscribe(data => {
       this.maintenance = data;
     }, err => console.log(err));

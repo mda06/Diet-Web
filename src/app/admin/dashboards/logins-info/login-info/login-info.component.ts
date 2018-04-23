@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {LoginAccess} from '../../../../model/loginAccess';
 import * as moment from 'moment';
 import {AdminService} from '../../../service/admin.service';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-info',
@@ -16,7 +17,8 @@ export class LoginInfoComponent implements OnInit, OnDestroy {
   intervalId: any;
   style = {};
 
-  constructor(private service: AdminService) { }
+  constructor(private service: AdminService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     //TODO: Very bad this, use a websocket instead of this

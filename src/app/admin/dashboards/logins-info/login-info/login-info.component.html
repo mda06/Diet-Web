@@ -5,16 +5,16 @@
   </div>
   <hr class="mt-0">
   <div *ngIf="login.blacklisted" class="p-2">
-    This person is blacklisted
+    {{ 'ADMIN.LOGINS.BLACKLISTED' | translate}}
   </div>
   <div *ngIf="login.logOutTime && !login.blacklisted" class="p-2">
-    The person is logout sins {{login.logOutTime | date:'short'}} UTC
+    {{ 'ADMIN.LOGINS.LOGOUT' | translate}} {{login.logOutTime | date:'short'}} UTC
   </div>
   <div *ngIf="!login.logOutTime && !login.blacklisted" class="p-2">
-    <p>The person is logged in sins {{login.loginTime | date:'short'}}</p>
-    <p>With an expiration time of {{login.expirationTime | date:'short'}}</p>
-    <p>Last activity was on {{login.lastActivityTime | date:'short'}} UTC</p>
-    <p>Inactivity {{inactivityTime}} seconds</p>
+    <p>{{ 'ADMIN.LOGINS.LOGIN' | translate}} {{login.loginTime | date:'short'}}</p>
+    <p>{{ 'ADMIN.LOGINS.EXP_TIME' | translate}} {{login.expirationTime | date:'short'}}</p>
+    <p>{{ 'ADMIN.LOGINS.LAST_ACTIVITY' | translate}} {{login.lastActivityTime | date:'short'}} UTC</p>
+    <p>{{ 'ADMIN.LOGINS.INACTIVITY' | translate}} {{inactivityTime}} seconds</p>
   </div>
   <hr>
 </div>

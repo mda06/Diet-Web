@@ -1,18 +1,18 @@
 <div *ngIf="maintenance" class="text-center pb-2">
   <div *ngIf="maintenance.state == 'BEGIN'">
-    <p>It's in maintenance sins <strong>{{ maintenance.beginDate | date }}</strong></p>
-    <p>For <em>{{ maintenance.reason }}</em></p>
+    <p>{{ 'ADMIN.MAINTENANCE.SINCE' | translate }} <strong>{{ maintenance.beginDate | date }}</strong></p>
+    <p>{{ 'ADMIN.MAINTENANCE.SINCE_REASON' | translate }} <em>{{ maintenance.reason }}</em></p>
   </div>
   <div *ngIf="maintenance.state == 'END'">
-    <p>Last maintenance was at <strong>{{ maintenance.endDate | date }}</strong></p>
-    <p>For <em>{{ maintenance.reason }}</em></p>
+    <p>{{ 'ADMIN.MAINTENANCE.LAST' | translate }} <strong>{{ maintenance.endDate | date }}</strong></p>
+    <p>{{ 'ADMIN.MAINTENANCE.LAST_REASON' | translate }} <em>{{ maintenance.reason }}</em></p>
   </div>
   <div *ngIf="maintenance.state == 'NONE'">
-    There are no maintenance history
+    {{ 'ADMIN.MAINTENANCE.NO_HISTORY' | translate }}
   </div>
 
-  <input type="button" class="btn btn-primary" (click)="onPutInMaintenance()" value="Put in maintance"
+  <input type="button" class="btn btn-primary" (click)="onPutInMaintenance()" value="{{ 'ADMIN.MAINTENANCE.PUT' | translate }}"
          [disabled]="maintenance.state == 'BEGIN'"/>
-  <input (click)="onRemoveMaintenance()" class="btn btn-primary" value="Remove the maintenance"
+  <input (click)="onRemoveMaintenance()" class="btn btn-primary" value="{{ 'ADMIN.MAINTENANCE.REMOVE' | translate }}"
          [disabled]="maintenance.state == 'END' || maintenance.state == 'NONE'"/>
 </div>

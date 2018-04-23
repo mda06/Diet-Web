@@ -140,6 +140,23 @@
     }
   },
   "ADMIN": {
+    "LOGINS": {
+      "BLACKLISTED": "This person is blacklisted",
+      "LOGOUT": "This person is logout since ",
+      "LOGIN": "This person is login since ",
+      "EXP_TIME": "With an expiration time of ",
+      "LAST_ACTIVITY": "Last activity was on ",
+      "INACTIVITY": "Inactivity "
+    },
+    "MAINTENANCE": {
+      "PUT": "Put in maintenance",
+      "REMOVE": "Remove the maintenance",
+      "SINCE": "It's in maintenance since ",
+      "SINCE_REASON": "For ",
+      "LAST": "Last maintenance was at ",
+      "LAST_REASON": "For ",
+      "NO_HISTORY": "There are no maintenance history"
+    },
     "DELETE": {
       "TITLE": "You're trying to delete a dietetist !",
       "BODY": "Are you sure you want to delete this dietetist ?",
