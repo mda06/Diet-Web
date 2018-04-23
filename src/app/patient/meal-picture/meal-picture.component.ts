@@ -4,6 +4,7 @@ import {UploadFileService} from '../../services/upload-file.service';
 import {HttpErrorResponse, HttpEventType, HttpResponse} from '@angular/common/http';
 import {MealPicture} from '../../model/mealpicture';
 import {IAlert} from '../../model/i-alert';
+import {TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-meal-picture',
@@ -20,7 +21,8 @@ export class MealPictureComponent implements OnInit {
 
   mealPictures: Array<MealPicture> = [];
 
-  constructor(private uploadService: UploadFileService) { }
+  constructor(private uploadService: UploadFileService,
+              private translate: TranslateService) { }
 
   ngOnInit() {
     this.initDateModel();
@@ -43,14 +45,14 @@ export class MealPictureComponent implements OnInit {
         const pictures : Array<MealPicture> = event.body;
         this.mealPictures = this.mealPictures.concat(pictures);
         this.initMealPictures();
-        this.alerts.push({id: this.alertCounter, type:'primary', message:'Successfully uploaded', subMessage: pictures.length + ' pictures '});
+        this.alerts.push({id: this.alertCounter, type:'primary', message:'PICTURES.UPLOAD_SUCCESS', subMessage: pictures.length.toString()});
         setTimeout((index) => this.closeAlertWithId(index) ,1500, this.alertCounter++);
         this.upload.clear();
       }
     }, err => {
       if(err instanceof HttpErrorResponse) {
         console.log(err);
-        this.alerts.push({id: this.alertCounter, type: 'warning', message: 'Error while uploading', subMessage: ""});
+        this.alerts.push({id: this.alertCounter, type: 'warning', message: 'PICTURES.UPLOAD_ERROR', subMessage: ""});
         setTimeout((index) => this.closeAlertWithId(index), 2500, this.alertCounter++);
       } else {
         console.log("Error isn't a httpErrorResponse");
@@ -98,13 +100,13 @@ export class MealPictureComponent implements OnInit {
       if(data.id == id) {
         const mp = this.mealPictures.find(mp => mp.id == id);
         this.mealPictures.splice(this.mealPictures.indexOf(mp), 1);
-        this.alerts.push({id: this.alertCounter, type: 'success', message: 'Picture successfully deleted', subMessage: mp.filename});
+        this.alerts.push({id: this.alertCounter, type: 'success', message: 'PICTURES.DELETE_SUCCESS', subMessage: mp.filename});
         setTimeout((index) => this.closeAlertWithId(index), 2500, this.alertCounter++);
       }
     }, err => {
       console.log(err);
       const mp = this.mealPictures.find(mp => mp.id == id);
-      this.alerts.push({id: this.alertCounter, type: 'danger', message: 'Cannot delete picture', subMessage: mp.filename});
+      this.alerts.push({id: this.alertCounter, type: 'danger', message: 'PICTURES.DELETE_SUCCESS', subMessage: mp.filename});
       setTimeout((index) => this.closeAlertWithId(index), 2500, this.alertCounter++);
     });
   }

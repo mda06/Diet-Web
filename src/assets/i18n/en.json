@@ -11,6 +11,9 @@
     "CANNOT_CONNECT": "Cannot connect !"
   },
   "NAV": {
+    "PICTURES": {
+      "TITLE": "Pictures"
+    },
     "ADMIN": {
       "DASHBOARD": "Dashboard",
       "FOOD": "Products"
@@ -266,5 +269,16 @@
         "CANCEL": "Cancel"
       }
     }
+  },
+  "PICTURES": {
+    "UPLOAD_SUCCESS": "Successfully uploaded the pictures: ",
+    "UPLOAD_ERROR": "Error while uploading",
+    "DELETE_SUCCESS": "Picture successfully deleted",
+    "DELETE_ERROR": "Cannot delete picture",
+    "TITLE": "Upload your meal pictures",
+    "NEW": "Upload a new picture",
+    "DATE": "Date of the meal: ",
+    "LIST": "List of all your pictures",
+    "LOADING": "Loading..."
   }
 }

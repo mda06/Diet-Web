@@ -11,6 +11,9 @@
     "CANNOT_CONNECT": "Imposible de se connecter !"
   },
   "NAV": {
+    "PICTURES": {
+      "TITLE": "Images"
+    },
     "ADMIN": {
       "DASHBOARD": "Tableau de bord",
       "FOOD": "Produits"
@@ -266,5 +269,16 @@
         "CANCEL": "Annuler"
       }
     }
+  },
+  "PICTURES": {
+    "UPLOAD_SUCCESS": "Les images ont été sauvées: ",
+    "UPLOAD_ERROR": "Une erreure s'est produite",
+    "DELETE_SUCCESS": "L'image a été supprimée",
+    "DELETE_ERROR": "L'image n'a pas pu être supprimée",
+    "TITLE": "Envoyez vos images de repas",
+    "NEW": "Envoyez une nouvelle image",
+    "DATE": "Date du repas: ",
+    "LIST": "Liste de tous vos repas",
+    "LOADING": "Chargement..."
   }
 }

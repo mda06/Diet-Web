@@ -1,11 +1,11 @@
 <div class="container-fluid">
   <div class="row">
-    <h2 class="mx-auto">Upload your meal pictures</h2>
+    <h2 class="mx-auto">{{'PICTURES.TITLE' | translate}}</h2>
   </div>
   <hr>
   <div class="row pl-3 mb-2">
     <div class="col-md-6 col-sm-12">
-      <h3>Upload a new picture</h3>
+      <h3>{{'PICTURES.NEW' | translate}}</h3>
       <div>
         <p *ngFor="let alert of alerts">
           <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message | translate }} {{alert.subMessage}}</ngb-alert>
@@ -14,7 +14,7 @@
       <form class="form-inline mb-3">
         <div class="form-group">
           <div class="input-group">
-            <label for="meal-date" class="mr-1">Date of the meal: </label>
+            <label for="meal-date" class="mr-1">{{'PICTURES.DATE' | translate}}</label>
             <input class="form-control" placeholder="yyyy-mm-dd" id="meal-date"
                    name="meal-date" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
                    (ngModelChange)="onDateChanged()" id="birthday">
@@ -31,7 +31,7 @@
   </div>
   <div class="row pl-3">
     <div class="col-md-12">
-      <h3 class="row p-2">List of all your pictures</h3>
+      <h3 class="row p-2">{{'PICTURES.LIST' | translate}}</h3>
       <div class="row">
         <div *ngFor="let pic of mealPictures" class="col-md-2 mb-3">
           <div class="meal-picture d-flex flex-column">
@@ -40,7 +40,7 @@
               <button class="btn btn-danger ml-1" (click)="onDeleteMealPicture(pic.id)"><span class="fa fa-trash"></span></button>
             </div>
             <img *ngIf="pic.blob != null" [src]="pic.blob" [alt]="pic.filename" class="img-fluid mt-auto mb-auto">
-            <p *ngIf="pic.blob == null">Loading...</p>
+            <p *ngIf="pic.blob == null">{{'PICTURES.LOADING' | translate}}</p>
           </div>
         </div>
       </div>
