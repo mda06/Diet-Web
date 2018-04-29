@@ -21,6 +21,7 @@ import {CustomerModule} from "./customer/customer.module";
 import {PatientModule} from "./patient/patient.module";
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
+import {ChatModule} from "./chat/chat.module";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { BlacklistComponent } from './blacklist/blacklist.component';
     AdminModule,
     CustomerModule,
     PatientModule,
+    ChatModule,
     AppRoutingModule
   ],
   providers: [
