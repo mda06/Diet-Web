@@ -8,7 +8,7 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  private serverUrl = 'http://localhost:8080/socket';
+  private serverUrl = 'http://localhost:8080/api/socket';
   private title = 'WebSockets chat';
   private stompClient;
 
@@ -27,9 +27,8 @@ export class ChatComponent implements OnInit {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({}, function(frame) {
+    this.stompClient.connect({token: 'Bearer blah...'}, function(frame) {
       that.stompClient.subscribe("/chat/msg", (message) => {
-        console.log(message);
         if(message.body) {
           that.messages.push(message.body);
           console.log(message.body);
@@ -39,7 +38,7 @@ export class ChatComponent implements OnInit {
   }
 
   onSendMessage(){
-    this.stompClient.send("/app/send/msg" , {}, this.message);
+    this.stompClient.send("/api/send/msg" , {}, this.message);
     this.message = "";
   }
 
