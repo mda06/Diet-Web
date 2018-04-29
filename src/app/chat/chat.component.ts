@@ -28,10 +28,10 @@ export class ChatComponent implements OnInit {
     this.stompClient = Stomp.over(ws);
     let that = this;
     this.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/chat", (message) => {
+      that.stompClient.subscribe("/chat/msg", (message) => {
         console.log(message);
         if(message.body) {
-          this.messages.push(message.body);
+          that.messages.push(message.body);
           console.log(message.body);
         }
       });
@@ -39,7 +39,7 @@ export class ChatComponent implements OnInit {
   }
 
   onSendMessage(){
-    this.stompClient.send("/app/send/message" , {}, this.message);
+    this.stompClient.send("/app/send/msg" , {}, this.message);
     this.message = "";
   }
 
