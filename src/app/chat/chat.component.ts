@@ -9,14 +9,15 @@ import * as SockJS from 'sockjs-client';
 })
 export class ChatComponent implements OnInit {
   private serverUrl = 'http://localhost:8080/api/socket';
-  private title = 'WebSockets chat';
+  title = 'WebSockets chat';
   private stompClient;
 
   message: string = "";
   messages: Array<string> = [];
 
+  participants: Array<any> = [];
+
   constructor(){
-    this.initializeWebSocketConnection();
   }
 
   ngOnInit() {
@@ -27,11 +28,17 @@ export class ChatComponent implements OnInit {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({token: 'Bearer blah...'}, function(frame) {
+    this.stompClient.connect({}, function(_) {
       that.stompClient.subscribe("/chat/msg", (message) => {
         if(message.body) {
           that.messages.push(message.body);
           console.log(message.body);
+        }
+      });
+      that.stompClient.subscribe("/api/chat.participants", msg => {
+        if(msg.body) {
+          console.log(msg.body);
+          //that.participants = msg.body;
         }
       });
     });

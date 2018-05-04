@@ -1,7 +1,15 @@
 <h2>{{title}}</h2>
 
+<button (click)="initializeWebSocketConnection()">Connect to the chat</button>
+
 <input type="text" [(ngModel)]="message">
 <button (click)="onSendMessage()">Send</button>
 <div>
+  <h3>Messages</h3>
   <p *ngFor="let msg of messages">{{msg}}</p>
+</div>
+
+<div>
+  <h3>Presences</h3>
+  <p *ngFor="let part of participants">{{part.userName + "-" + part.sessionId}}</p>
 </div>

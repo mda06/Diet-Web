@@ -25,6 +25,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@ngx-translate/core": "^9.1.1",
     "@ngx-translate/http-loader": "^2.0.1",
+    "@stomp/ng2-stompjs": "^0.6.4",
     "angular-chart.js": "^1.1.1",
     "angular-pipes": "^6.5.3",
     "chart.js": "^2.7.2",
