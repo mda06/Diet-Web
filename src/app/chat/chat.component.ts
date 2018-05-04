@@ -40,6 +40,18 @@ export class ChatComponent implements OnInit {
           that.participants = JSON.parse(msg.body);
         }
       });
+      that.stompClient.subscribe("/topic/chat.login", msg => {
+        if(msg.body) {
+          that.participants.push(JSON.parse(msg.body));
+        }
+        console.log(msg);
+      });
+      that.stompClient.subscribe("/topic/chat.logout", msg => {
+        if(msg.body) {
+          const index: number = that.participants.indexOf(alert);
+          that.participants.splice(index, 1);
+        }
+      });
     });
   }
 
