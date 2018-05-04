@@ -37,8 +37,7 @@ export class ChatComponent implements OnInit {
       });
       that.stompClient.subscribe("/api/chat.participants", msg => {
         if(msg.body) {
-          console.log(msg.body);
-          //that.participants = msg.body;
+          that.participants = JSON.parse(msg.body);
         }
       });
     });
