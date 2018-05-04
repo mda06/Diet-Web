@@ -28,7 +28,7 @@ export class ChatComponent implements OnInit {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({}, function(_) {
+    this.stompClient.connect({username: "Yo !"}, function(_) {
       that.stompClient.subscribe("/chat/msg", (message) => {
         if(message.body) {
           that.messages.push(message.body);
