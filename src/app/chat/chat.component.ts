@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as Stomp from 'stompjs';
-import * as SockJS from 'sockjs-client';
+import {SocketService} from './service/socket.service';
 
 @Component({
   selector: 'app-chat',
@@ -8,9 +7,7 @@ import * as SockJS from 'sockjs-client';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent implements OnInit {
-  private serverUrl = 'http://localhost:8080/api/socket';
   title = 'WebSockets chat';
-  private stompClient;
 
   message: string = "";
   messages: Array<string> = [];
@@ -20,55 +17,32 @@ export class ChatComponent implements OnInit {
   privateMsg: string = "";
   sendTo: string = "";
 
-  constructor(){
+  constructor(private socket: SocketService){
   }
 
   ngOnInit() {
 
   }
 
-  initializeWebSocketConnection(){
-    let ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
-    let that = this;
-    this.stompClient.connect({username: this.username}, function(_) {
-      that.stompClient.subscribe("/chat/msg", (message) => {
-        if(message.body) {
-          that.messages.push(message.body);
-        }
-      });
-      that.stompClient.subscribe("/api/chat.participants", msg => {
-        if(msg.body) {
-          that.participants = JSON.parse(msg.body);
-        }
-      });
-      that.stompClient.subscribe("/topic/chat.login", msg => {
-        if(msg.body) {
-          that.participants.push(JSON.parse(msg.body));
-        }
-      });
-      that.stompClient.subscribe("/topic/chat.logout", msg => {
-        if(msg.body) {
-          const index: number = that.participants.indexOf(alert);
-          that.participants.splice(index, 1);
-        }
-      });
-      that.stompClient.subscribe("/chat/private/" + that.username, function(message) {
-        const parsed = JSON.parse(message.body);
-        that.messages.push(parsed.from + " send " + parsed.message + " to " + parsed.to);
-      });
+  initializeWebSocketConnection() {
+    this.socket.connect(this.username);
+    this.socket.participants$.subscribe(data => this.participants = data);
+    this.socket.publicMessage$.subscribe(data => this.messages.push(data == null ? "NULL" : data));
+    this.socket.privateMessage$.subscribe(data => this.messages.push(data.from + " send " + data.message + " to " + data.to));
+    this.socket.chatLogin$.subscribe(data => this.participants.push(data));
+    this.socket.chatLogout$.subscribe(data => {
+      const index: number = this.participants.indexOf(data);
+      this.participants.splice(index, 1);
     });
   }
 
   onSendMessage(){
-    this.stompClient.send("/api/send/msg" , {}, this.message);
+    this.socket.sendPublicMessage(this.message);
     this.message = "";
   }
 
-
   onSendPrivateMessage() {
-    this.stompClient.send("/api/chat.private." + this.sendTo,
-              {}, JSON.stringify({message: this.privateMsg}));
+    this.socket.sendPrivateMessage(this.sendTo, this.privateMsg);
     this.privateMsg = "";
   }
 }
