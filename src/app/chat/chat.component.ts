@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {SocketService} from './service/socket.service';
+import {isNullOrUndefined} from "util";
 
 @Component({
   selector: 'app-chat',
@@ -9,15 +10,13 @@ import {SocketService} from './service/socket.service';
 export class ChatComponent implements OnInit {
   title = 'WebSockets chat';
 
+  participants: Array<any> = [];
   message: string = "";
-  messages: Array<string> = [];
   username: string = "Incognito";
 
-  participants: Array<any> = [];
-  privateMsg: string = "";
-  sendTo: string = "";
+  selectedParticipant: any;
 
-  constructor(private socket: SocketService){
+  constructor(public socket: SocketService){
   }
 
   ngOnInit() {
@@ -26,14 +25,48 @@ export class ChatComponent implements OnInit {
 
   initializeWebSocketConnection() {
     this.socket.connect(this.username);
-    this.socket.participants$.subscribe(data => this.participants = data);
-    this.socket.publicMessage$.subscribe(data => this.messages.push(data == null ? "NULL" : data));
-    this.socket.privateMessage$.subscribe(data => this.messages.push(data.from + " send " + data.message + " to " + data.to));
-    this.socket.chatLogin$.subscribe(data => this.participants.push(data));
+    this.handleParticipants();
+    this.handleMessages();
+  }
+
+  private handleParticipants() {
+    this.socket.participants$.subscribe(data => {
+      data.forEach(part => part.messages = []);
+      this.participants = data;
+    });
+    this.socket.chatLogin$.subscribe(data => {
+      data.messages = [];
+      this.participants.push(data);
+    });
     this.socket.chatLogout$.subscribe(data => {
       const index: number = this.participants.indexOf(data);
       this.participants.splice(index, 1);
     });
+  }
+
+  private handleMessages() {
+    this.socket.publicMessage$.subscribe(data => {
+      this.participants.forEach(part => {
+        part.hasUnreadMessages = true;
+        part.messages.push("Globale message: " + data);
+      });
+    });
+    this.socket.privateMessage$.subscribe(msg => {
+      let participant = this.participants.find(part => part.userName === msg.from);
+      if(!isNullOrUndefined(participant)) {
+        participant.hasUnreadMessages = true;
+        participant.messages.push(msg);
+      }
+      participant = this.participants.find(part => part.userName === msg.to);
+      if(!isNullOrUndefined(participant)) {
+        participant.messages.push(msg);
+      }
+    });
+  }
+
+  onParticipantSelectedEvent(participant: any) {
+    participant.hasUnreadMessages = false;
+    this.selectedParticipant = participant;
   }
 
   onSendMessage(){
@@ -41,8 +74,4 @@ export class ChatComponent implements OnInit {
     this.message = "";
   }
 
-  onSendPrivateMessage() {
-    this.socket.sendPrivateMessage(this.sendTo, this.privateMsg);
-    this.privateMsg = "";
-  }
 }

@@ -1,0 +1,15 @@
+app-participants {
+  border: 1px solid red;
+}
+
+#init {
+  border: 1px solid blue;
+}
+
+#tmp-send {
+  border: 1px solid green;
+}
+
+#content {
+  min-height: 50vh;
+}

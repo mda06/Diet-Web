@@ -1,3 +1,12 @@
-<p>
-  message works!
-</p>
+<div *ngIf="participant">
+  <h3>{{ participant.userName }}</h3>
+  <h4>Messages</h4>
+  <div *ngFor="let msg of participant.messages">
+    <p class="from" *ngIf="msg.from === participant.userName">{{msg.message}}</p>
+    <p class="to" *ngIf="msg.to === participant.userName">{{msg.message}}</p>
+  </div>
+
+  <label for="send">Send:</label>
+  <input type="text" [(ngModel)]="message" id="send">
+  <button (click)="onSendMessage()">Send</button>
+</div>

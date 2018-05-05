@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {Observable} from 'rxjs/Observable';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 @Injectable()
 export class SocketService {
   private serverUrl = 'http://localhost:8080/api/socket';
   private stompClient;
+  private _username: string;
 
   private publicMsg = new ReplaySubject<any>(1);
   publicMessage$ = this.publicMsg.asObservable();
@@ -23,7 +23,8 @@ export class SocketService {
 
   constructor() { }
 
-  connect(username: String){
+  connect(username: string){
+    this._username = username;
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
@@ -85,4 +86,7 @@ export class SocketService {
       {}, JSON.stringify({message: msg}));
   }
 
+  get username(): string {
+    return this._username;
+  }
 }

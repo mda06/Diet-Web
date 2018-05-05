@@ -1,28 +1,20 @@
-<h2>{{title}}</h2>
+<div class="container-fluid">
+  <h2 class="row">{{title}}</h2>
 
-<input type="text" [(ngModel)]="username">
-<button (click)="initializeWebSocketConnection()">Connect to the chat</button>
-<br>
+  <div id="init" class="row">
+    <input type="text" [(ngModel)]="username">
+    <button (click)="initializeWebSocketConnection()">Connect to the chat</button>
+  </div>
 
-<label for="everyone">Everyone: </label>
-<input type="text" [(ngModel)]="message" id="everyone">
-<button (click)="onSendMessage()">Send</button>
-
-<br>
-<label for="private">Private:</label>
-<input type="text" [(ngModel)]="privateMsg" id="private">
-<label for="sendTo">Send to:</label>
-<input type="text" [(ngModel)]="sendTo" id="sendTo">
-<button (click)="onSendPrivateMessage()">Send</button>
-<br>
-
-
-<div>
-  <h3>Messages</h3>
-  <p *ngFor="let msg of messages">{{msg}}</p>
-</div>
-
-<div>
-  <h3>Presences</h3>
-  <p *ngFor="let part of participants">{{part.userName + "-" + part.sessionId}}</p>
+  <div class="row" id="content">
+    <app-participants class="col-md-3" [participants]="participants"
+     (onParticipantSelected)="onParticipantSelectedEvent($event)"></app-participants>
+    <app-message class="col-md-9" [socket]="socket" [participant]="selectedParticipant"
+      *ngIf="selectedParticipant"></app-message>
+  </div>
+  <div class="row" id="tmp-send">
+    <label for="everyone">Everyone: </label>
+    <input type="text" [(ngModel)]="message" id="everyone">
+    <button (click)="onSendMessage()">Send</button>
+  </div>
 </div>
