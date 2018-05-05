@@ -78,12 +78,13 @@ export class SocketService {
   }
 
   sendPublicMessage(msg: String): Observable<any> {
-    return this.stompClient.send("/api/send/msg" , {}, msg);
+    if(msg)
+      return this.stompClient.send("/api/send/msg" , {}, msg);
   }
 
   sendPrivateMessage(to: String, msg: String): Observable<any> {
-    return this.stompClient.send("/api/chat.private." + to,
-      {}, JSON.stringify({message: msg}));
+    if(msg && to)
+      return this.stompClient.send("/api/chat.private." + to, {}, JSON.stringify({message: msg}));
   }
 
   get username(): string {
