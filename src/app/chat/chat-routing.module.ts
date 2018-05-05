@@ -3,12 +3,12 @@ import { RouterModule, Routes } from '@angular/router';
 import {ChatComponent} from "./chat.component";
 
 const ROUTES: Routes = [
-  {path: 'chat', component: ChatComponent}
+  {path: '', component: ChatComponent}
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(ROUTES)
+    RouterModule.forChild(ROUTES)
   ],
   exports: [
     RouterModule

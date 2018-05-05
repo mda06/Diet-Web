@@ -13,6 +13,9 @@ import {SocketService} from './service/socket.service';
     ChatRoutingModule,
     FormsModule
   ],
+  exports: [
+    ChatComponent
+  ],
   declarations: [ChatComponent, ParticipantsComponent, MessageComponent],
   providers: [SocketService]
 })

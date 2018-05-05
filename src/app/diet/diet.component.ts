@@ -44,6 +44,9 @@ export class DietComponent implements OnInit {
   private reportsItem: NavItem =
     {img: "../../assets/img/reports.png", title: "NAV.REPORTS.TITLE", routerLink: "/diet/reports", subMenus: []};
 
+  private chatItem: NavItem =
+    {img: "../../assets/img/chat.png", title: "CHAT", routerLink: "/diet/chat", subMenus: []};
+
 
   navItems: Array<NavItem> = [];
   private subscriptions = new Subscription();
@@ -51,7 +54,6 @@ export class DietComponent implements OnInit {
   private diet: Dietetist;
 
   @ViewChild('sidebar') sidebar;
-
 
   @HostListener('window:resize') onResize() {
     const winWidth: number = window.innerWidth;
@@ -130,6 +132,7 @@ export class DietComponent implements OnInit {
     this.navItems.push(this.menuItem);
     this.navItems.push(this.patientItem);
     this.navItems.push(this.reportsItem);
+    this.navItems.push(this.chatItem);
   }
 
   _toggleSidebar() {

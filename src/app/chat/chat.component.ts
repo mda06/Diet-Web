@@ -17,10 +17,11 @@ export class ChatComponent implements OnInit {
   selectedParticipant: any;
 
   constructor(public socket: SocketService){
+    console.log("Ctr");
   }
 
   ngOnInit() {
-
+    console.log("Init the chat");
   }
 
   initializeWebSocketConnection() {
