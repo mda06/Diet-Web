@@ -1,9 +1,5 @@
-<aside class="d-flex">
-  <nav class="p-1">
-    <h2 class="pb-2">
-      Diet Pro. <i class="fa fa-cog" id="settings-cog" (click)="onSettingsCogClick()"></i>
-    </h2>
-
+<aside>
+  <nav class="p-1 d-flex flex-column justify-content-between">
     <div *ngIf="displaySettings" id="settings">
       <button class="btn btn-secondary" (click)="onBackClick()">
         <i class="fa fa-arrow-left"></i> {{"NAV.BACK" | translate}}
@@ -22,16 +18,17 @@
     <ul *ngIf="navItems && !displaySettings" id="menu">
       <li *ngFor="let item of navItems" class="menuItem"
           [class.activeMenu]="isActive(item)" (click)="onNavigate(item)">
-        <img src="{{item.img}}" placement="top" ngbTooltip="{{ (item.title) | translate}}"
+        <img src="{{item.img}}" placement="bottom" ngbTooltip="{{ (item.title) | translate}}"
              alt="{{ (item.title) | translate}}">
+      </li>
+      <li class="menuItem" (click)="onSettingsCogClick()">
+        <img src="../../assets/img/settings.png" alt="Settings">
       </li>
     </ul>
 
-    <div class="fixed-bottom" id="bottom">
-      <button type="button" class="btn btn-warning" id="logout" (click)="onLogout()">
-        {{ 'NAV.LOG_OUT' | translate}} <span class="fa fa-sign-out" aria-hidden="true"></span>
-      </button>
-    </div>
+    <button type="button" class="btn btn-warning" id="logout" (click)="onLogout()">
+      <span class="fa fa-sign-out" aria-hidden="true"></span>
+    </button>
   </nav>
 
   <div *ngIf="hasActiveMenuSubMenus() && !displaySettings" id="submenu" class="d-flex flex-column justify-content-center">

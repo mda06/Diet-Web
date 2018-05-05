@@ -7,21 +7,11 @@ nav {
   border-right: 2px solid darkgray;
 }
 
-#settings-cog:hover {
-  -webkit-animation:spin 4s linear infinite;
-  -moz-animation:spin 4s linear infinite;
-  animation:spin 4s linear infinite;
-}
-
-@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
-@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
-@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
-
 .menuItem {
   display: flex;
   justify-content: center;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
   border-right: transparent solid 2px;
 }
 
@@ -31,21 +21,11 @@ nav {
 
 .menuItem img {
   width: auto;
-  height: 90px;
+  height: 60px;
 }
 
 .activeMenu {
   border-right: dodgerblue solid 2px;
-}
-
-#bottom {
-  width: 150px;
-}
-
-#logout {
-  width: 150px;
-  margin-left: 10px;
-  margin-bottom: 10px;
 }
 
 #menu {
