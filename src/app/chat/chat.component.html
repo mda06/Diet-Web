@@ -1,9 +1,22 @@
 <h2>{{title}}</h2>
 
+<input type="text" [(ngModel)]="username">
 <button (click)="initializeWebSocketConnection()">Connect to the chat</button>
+<br>
 
-<input type="text" [(ngModel)]="message">
+<label for="everyone">Everyone: </label>
+<input type="text" [(ngModel)]="message" id="everyone">
 <button (click)="onSendMessage()">Send</button>
+
+<br>
+<label for="private">Private:</label>
+<input type="text" [(ngModel)]="privateMsg" id="private">
+<label for="sendTo">Send to:</label>
+<input type="text" [(ngModel)]="sendTo" id="sendTo">
+<button (click)="onSendPrivateMessage()">Send</button>
+<br>
+
+
 <div>
   <h3>Messages</h3>
   <p *ngFor="let msg of messages">{{msg}}</p>

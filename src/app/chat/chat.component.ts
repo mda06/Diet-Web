@@ -14,8 +14,11 @@ export class ChatComponent implements OnInit {
 
   message: string = "";
   messages: Array<string> = [];
+  username: string = "Incognito";
 
   participants: Array<any> = [];
+  privateMsg: string = "";
+  sendTo: string = "";
 
   constructor(){
   }
@@ -28,11 +31,10 @@ export class ChatComponent implements OnInit {
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({username: "Yo !"}, function(_) {
+    this.stompClient.connect({username: this.username}, function(_) {
       that.stompClient.subscribe("/chat/msg", (message) => {
         if(message.body) {
           that.messages.push(message.body);
-          console.log(message.body);
         }
       });
       that.stompClient.subscribe("/api/chat.participants", msg => {
@@ -44,13 +46,16 @@ export class ChatComponent implements OnInit {
         if(msg.body) {
           that.participants.push(JSON.parse(msg.body));
         }
-        console.log(msg);
       });
       that.stompClient.subscribe("/topic/chat.logout", msg => {
         if(msg.body) {
           const index: number = that.participants.indexOf(alert);
           that.participants.splice(index, 1);
         }
+      });
+      that.stompClient.subscribe("/chat/private/" + that.username, function(message) {
+        const parsed = JSON.parse(message.body);
+        that.messages.push(parsed.from + " send " + parsed.message + " to " + parsed.to);
       });
     });
   }
@@ -61,4 +66,9 @@ export class ChatComponent implements OnInit {
   }
 
 
+  onSendPrivateMessage() {
+    this.stompClient.send("/api/chat.private." + this.sendTo,
+              {}, JSON.stringify({message: this.privateMsg}));
+    this.privateMsg = "";
+  }
 }
