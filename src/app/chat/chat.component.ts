@@ -48,7 +48,7 @@ export class ChatComponent implements OnInit {
     this.socket.publicMessage$.subscribe(data => {
       this.participants.forEach(part => {
         part.hasUnreadMessages = true;
-        part.messages.push("Globale message: " + data);
+        part.messages.push({to: 'All', from: 'System', message: data});
       });
     });
     this.socket.privateMessage$.subscribe(msg => {

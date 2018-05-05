@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {SocketService} from '../service/socket.service';
-import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-participants',

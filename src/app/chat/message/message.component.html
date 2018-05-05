@@ -4,6 +4,7 @@
   <div *ngFor="let msg of participant.messages">
     <p class="from" *ngIf="msg.from === participant.userName">{{msg.message}}</p>
     <p class="to" *ngIf="msg.to === participant.userName">{{msg.message}}</p>
+    <p class="system" *ngIf="msg.from === 'System'">{{msg.message}}</p>
   </div>
 
   <label for="send">Send:</label>

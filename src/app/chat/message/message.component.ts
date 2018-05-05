@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SocketService} from '../service/socket.service';
-import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-message',
