@@ -39,6 +39,7 @@ export class NavbarComponent implements OnInit {
 
   onBackClick() {
     this.displaySettings = false;
+    this.triggerRenderer.emit();
   }
 
   onNavigate(navItem: NavItem) {
@@ -52,6 +53,7 @@ export class NavbarComponent implements OnInit {
 
   onChangeLang(lang: string) {
     this.translate.use(lang);
+    this.triggerRenderer.emit();
   }
 
   onLogout() {
