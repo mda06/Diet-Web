@@ -7,7 +7,7 @@
     <div *ngFor="let msg of participant.messages" class="message"
          [class.ml-auto]="msg.to === participant.username"
          [class.mr-auto]="msg.from === participant.username">
-      <p>{{ msg.message }}</p>
+      <p [placement]="msg.to === participant.username ? 'left' : 'right'" ngbTooltip="10:40">{{ msg.message }}</p>
     </div>
   </div>
 
