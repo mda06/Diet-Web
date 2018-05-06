@@ -13,6 +13,7 @@ import {MenuModule} from '../diet/menu/menu.module';
 import { MealPictureComponent } from './meal-picture/meal-picture.component';
 import {UploadFileService} from '../services/upload-file.service';
 import {FileUploadModule} from 'primeng/primeng';
+import {ChatModule} from '../chat/chat.module';
 
 @NgModule({
   imports: [
@@ -23,7 +24,8 @@ import {FileUploadModule} from 'primeng/primeng';
     SidebarModule.forRoot(),
     NavbarModule,
     MenuModule,
-    FileUploadModule
+    FileUploadModule,
+    ChatModule
   ],
   declarations: [
     PatientComponent,

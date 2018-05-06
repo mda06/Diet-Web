@@ -6,6 +6,7 @@ import {PatientGuardServiceService} from "../guard/patient-guard-service.service
 import {PatientDashboardComponent} from "./patient-dashboard/patient-dashboard.component";
 import {MenuComponent} from './menu/menu.component';
 import {MealPictureComponent} from './meal-picture/meal-picture.component';
+import {ChatComponent} from '../chat/chat.component';
 
 const ROUTES: Routes = [
   {
@@ -16,7 +17,8 @@ const ROUTES: Routes = [
       {path: '', component: PatientDashboardComponent, canActivate: [PatientGuardServiceService]},
       {path: 'dashboard', component: PatientDashboardComponent, canActivate: [PatientGuardServiceService]},
       {path: 'menu', component: MenuComponent, canActivate: [PatientGuardServiceService]},
-      {path: 'picture', component: MealPictureComponent, canActivate: [PatientGuardServiceService]}
+      {path: 'picture', component: MealPictureComponent, canActivate: [PatientGuardServiceService]},
+      {path: 'chat', component: ChatComponent, canActivate: [PatientGuardServiceService]}
     ]
   }
 ];

@@ -6,6 +6,7 @@ import {FoodComponent} from "./food/food.component";
 import {SelectDietComponent} from "./select-diet/select-diet.component";
 import {DetailDietComponent} from "./detail-diet/detail-diet.component";
 import {HomeComponent} from './dashboards/home/home.component';
+import {ChatComponent} from '../chat/chat.component';
 
 const ROUTES: Routes = [
   {
@@ -19,6 +20,7 @@ const ROUTES: Routes = [
       {path: 'detail-diet/:id', component: DetailDietComponent, canActivate: [AdminGuardServiceService]},
       {path: 'add-diet', component: DetailDietComponent, canActivate: [AdminGuardServiceService]},
       {path: 'food', component: FoodComponent, canActivate: [AdminGuardServiceService]},
+      {path: 'chat', component: ChatComponent, canActivate: [AdminGuardServiceService]}
     ]
   }
 ];

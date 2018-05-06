@@ -18,6 +18,9 @@ export class PatientComponent implements OnInit {
   private picturesItem: NavItem =
     {img: "../../assets/img/picture.png", title: "NAV.PICTURES.TITLE", routerLink: "/patient/picture", subMenus: []};
 
+  private chatItem: NavItem =
+    {img: "../../assets/img/chat.png", title: "CHAT", routerLink: "/patient/chat", subMenus: []};
+
   navItems: Array<NavItem> = [];
 
   @ViewChild('sidebar') sidebar;
@@ -38,6 +41,7 @@ export class PatientComponent implements OnInit {
     this.navItems.push(this.dashboardItem);
     this.navItems.push(this.menuItem);
     this.navItems.push(this.picturesItem);
+    this.navItems.push(this.chatItem);
   }
 
   _toggleSidebar() {

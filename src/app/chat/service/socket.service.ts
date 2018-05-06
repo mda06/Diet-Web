@@ -10,15 +10,15 @@ export class SocketService {
   private stompClient;
   private _username: string;
 
-  private publicMsg = new ReplaySubject<any>(10);
+  private publicMsg = new ReplaySubject<any>(100);
   publicMessage$ = this.publicMsg.asObservable();
-  private privateMsg = new ReplaySubject<any>(10);
+  private privateMsg = new ReplaySubject<any>(100);
   privateMessage$ = this.privateMsg.asObservable();
-  private chatLogin = new ReplaySubject<any>(10);
+  private chatLogin = new ReplaySubject<any>(100);
   chatLogin$ = this.chatLogin.asObservable();
-  private chatLogout = new ReplaySubject<any>(10);
+  private chatLogout = new ReplaySubject<any>(100);
   chatLogout$ = this.chatLogout.asObservable();
-  private participants = new ReplaySubject<any>(10);
+  private participants = new ReplaySubject<any>(100);
   participants$ = this.participants.asObservable();
 
   constructor() {}

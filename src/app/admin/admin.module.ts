@@ -18,6 +18,7 @@ import { ProductsInfoComponent } from './dashboards/products-info/products-info.
 import { LoginsInfoComponent } from './dashboards/logins-info/logins-info.component';
 import { LoginInfoComponent } from './dashboards/logins-info/login-info/login-info.component';
 import { MaintenanceComponent } from './dashboards/maintenance/maintenance.component';
+import {ChatModule} from '../chat/chat.module';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { MaintenanceComponent } from './dashboards/maintenance/maintenance.compo
     AdminRoutingModule,
     SidebarModule.forRoot(),
     NavbarModule,
-    CustomerModule
+    CustomerModule,
+    ChatModule
   ],
   entryComponents: [ProductsInfoComponent, LoginsInfoComponent, MaintenanceComponent],
   declarations: [
