@@ -1,7 +1,11 @@
-<div>
-  <h3>Participants {{ participants.length }}</h3>
-  <div *ngFor="let participant of participants" (click)="onParticipantSelectedClicked(participant)">
-    <p>{{ participant.username + "-" + participant.sessionId + "-" + participant.authId}}
-      <span *ngIf="participant.hasUnreadMessages">*</span> </p>
+<div id="wrapper" class="d-flex flex-column">
+  <div *ngFor="let participant of participants" class="participant" [class.active]="selectedParticipant === participant"
+       (click)="onParticipantSelectedClicked(participant)">
+    <p placement="bottom" ngbTooltip="{{ participant.authId + '-' + participant.sessionId }}">
+      <span *ngIf="participant.sessionId" class="fa fa-circle online" aria-hidden="true"></span>
+      <span *ngIf="!participant.sessionId" class="fa fa-circle-o offline" aria-hidden="true"></span>
+      {{ participant.username }}
+      <span *ngIf="participant.hasUnreadMessages">*</span>
+    </p>
   </div>
 </div>

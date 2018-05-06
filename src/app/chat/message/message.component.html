@@ -1,13 +1,24 @@
-<div *ngIf="participant">
-  <h3>{{ participant.username }}</h3>
-  <h4>Messages</h4>
-  <div *ngFor="let msg of participant.messages">
-    <p class="from" *ngIf="msg.from === participant.username">{{msg.message}}</p>
-    <p class="to" *ngIf="msg.to === participant.username">{{msg.message}}</p>
-    <p class="system" *ngIf="msg.from === 'System'">{{msg.message}}</p>
+<div *ngIf="participant" class="wrapper">
+  <div id="header" class="text-center">
+    <h3>{{ participant.username }}</h3>
   </div>
 
-  <label for="send">Send:</label>
-  <input type="text" [(ngModel)]="message" id="send">
-  <button (click)="onSendMessage()">Send</button>
+  <div id="messages" class="d-flex flex-column">
+    <div *ngFor="let msg of participant.messages" class="message"
+         [class.ml-auto]="msg.to === participant.username"
+         [class.mr-auto]="msg.from === participant.username">
+      <p class="from" *ngIf="msg.from === participant.username" >{{msg.message}}</p>
+      <p class="to" *ngIf="msg.to === participant.username">{{msg.message}}</p>
+      <p class="system" *ngIf="msg.from === 'System'">{{msg.message}}</p>
+    </div>
+  </div>
+
+  <div id="footer">
+    <label for="send">Send:</label>
+    <input type="text" [(ngModel)]="message" id="send">
+    <button (click)="onSendMessage()">Send</button>
+  </div>
+</div>
+<div *ngIf="!participant" class="wrapper">
+  <p>Please select a participant</p>
 </div>

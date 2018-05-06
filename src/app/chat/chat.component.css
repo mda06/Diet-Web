@@ -1,5 +1,5 @@
-app-participants {
-  border: 1px solid red;
+app-participants, app-message {
+  min-height: 50vh;
 }
 
 #init {
@@ -13,3 +13,4 @@ app-participants {
 #content {
   min-height: 50vh;
 }
+

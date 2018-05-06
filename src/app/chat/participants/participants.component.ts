@@ -10,6 +10,7 @@ export class ParticipantsComponent implements OnInit {
 
   @Input() participants: Array<ChatParticipant> = [];
   @Output() onParticipantSelected = new EventEmitter<any>();
+  selectedParticipant: ChatParticipant = null;
 
   constructor() { }
 
@@ -17,7 +18,7 @@ export class ParticipantsComponent implements OnInit {
   }
 
   onParticipantSelectedClicked(participant: any) {
-    console.log(participant.username + " has been selected");
+    this.selectedParticipant = participant;
     this.onParticipantSelected.emit(participant);
   }
 }

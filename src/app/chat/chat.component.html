@@ -7,10 +7,9 @@
   </div>
 
   <div class="row" id="content">
-    <app-participants class="col-md-3" [participants]="participants"
+    <app-participants class="col-md-3 p-0" [participants]="participants"
      (onParticipantSelected)="onParticipantSelectedEvent($event)"></app-participants>
-    <app-message class="col-md-9" [socket]="socket" [participant]="selectedParticipant"
-      *ngIf="selectedParticipant"></app-message>
+    <app-message class="col-md-9 p-0" [socket]="socket" [participant]="selectedParticipant"></app-message>
   </div>
   <div class="row" id="tmp-send">
     <label for="everyone">Everyone: </label>
@@ -18,3 +17,4 @@
     <button (click)="onSendMessage()">Send</button>
   </div>
 </div>
+

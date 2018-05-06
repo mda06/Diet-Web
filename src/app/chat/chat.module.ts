@@ -6,12 +6,15 @@ import {FormsModule} from "@angular/forms";
 import { ParticipantsComponent } from './participants/participants.component';
 import { MessageComponent } from './message/message.component';
 import {SocketService} from './service/socket.service';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     ChatRoutingModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
   ],
   exports: [
     ChatComponent

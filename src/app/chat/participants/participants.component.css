@@ -1,0 +1,23 @@
+#wrapper {
+  background: #2c3e50;
+  height: 100%;
+  color: white;
+  padding-top: 10px;
+}
+
+.participant {
+  padding-left: 20px;
+}
+
+.participant.active {
+  background: #32465a;
+  border-right: 5px solid #435f7a
+}
+
+.participant > p > span.offline {
+  color: red;
+}
+
+.participant > p > span.online {
+  color: green;
+}
