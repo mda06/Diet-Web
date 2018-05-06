@@ -27,14 +27,14 @@
   padding: 10px 15px 10px 15px;
 }
 
-p.from {
+.message.ml-auto > p {
   /*margin-left: 10px;
   margin-right: 30%;*/
   background-color: #435f7a;
   color: white;
 }
 
-p.to {
+.message.mr-auto > p {
   /*margin-right: 10px;
   margin-left: 30%;*/
   background-color: white;

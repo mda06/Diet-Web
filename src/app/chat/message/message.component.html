@@ -3,13 +3,11 @@
     <h3>{{ participant.username }}</h3>
   </div>
 
-  <div id="messages" class="d-flex flex-column">
+  <div id="messages" class="d-flex flex-column p-2">
     <div *ngFor="let msg of participant.messages" class="message"
          [class.ml-auto]="msg.to === participant.username"
          [class.mr-auto]="msg.from === participant.username">
-      <p class="from" *ngIf="msg.from === participant.username" >{{msg.message}}</p>
-      <p class="to" *ngIf="msg.to === participant.username">{{msg.message}}</p>
-      <p class="system" *ngIf="msg.from === 'System'">{{msg.message}}</p>
+      <p>{{ msg.message }}</p>
     </div>
   </div>
 
