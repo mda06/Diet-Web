@@ -3,6 +3,7 @@ import {SocketService} from './service/socket.service';
 import {isNullOrUndefined} from "util";
 import {AuthenticationService} from '../services/authentication.service';
 import {Subscription} from 'rxjs/Subscription';
+import {ChatParticipant} from '../model/chatparticipant';
 
 @Component({
   selector: 'app-chat',
@@ -12,11 +13,11 @@ import {Subscription} from 'rxjs/Subscription';
 export class ChatComponent implements OnInit {
   title = 'WebSockets chat';
 
-  participants: Array<any> = [];
+  participants: Array<ChatParticipant> = [];
   message: string = "";
-  username: string = "Incognito";
+  authId: string = "";
 
-  selectedParticipant: any;
+  selectedParticipant: ChatParticipant;
 
   constructor(public socket: SocketService,
               private authService: AuthenticationService){
@@ -25,14 +26,14 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.authService.getConnectedUser().subscribe(
       user => {
-        this.username = user.firstName + " " + user.lastName;
+        this.authId = user.authId;
       },
       err => {console.log("Error trying to get the connected user");}
     );
   }
 
   initializeWebSocketConnection() {
-    this.socket.connect(this.username);
+    this.socket.connect(this.authId);
     this.handleSubscribes();
   }
 
@@ -43,45 +44,38 @@ export class ChatComponent implements OnInit {
 
   private handleParticipants() {
     this.socket.participants$.subscribe(data => {
-      console.log("Participants");
-      console.log(data);
       data.forEach(part => part.messages = []);
       this.participants = data;
     });
     this.socket.chatLogin$.subscribe(data => {
-      console.log("Chat login");
-      console.log(data);
       data.messages = [];
+      //Remove the previous participant if he was connected before
+      let participant = this.participants.find(part => part.authId === data.authId);
+      const index: number = this.participants.indexOf(participant);
+      this.participants.splice(index, 1);
       this.participants.push(data);
     });
     this.socket.chatLogout$.subscribe(data => {
-      console.log("Chat logout");
-      console.log(data);
-      const index: number = this.participants.indexOf(data);
-      this.participants.splice(index, 1);
+      let participant = this.participants.find(part => part.authId === data.authId);
+      if(!isNullOrUndefined(participant))
+        participant.sessionId = null;
     });
   }
 
   private handleMessages() {
     this.socket.publicMessage$.subscribe(data => {
-      console.log("Public msg");
-      console.log(data);
       this.participants.forEach(part => {
         part.hasUnreadMessages = true;
         part.messages.push({to: 'All', from: 'System', message: data});
       });
     });
     this.socket.privateMessage$.subscribe(msg => {
-      console.log("Private msg");
-      console.log(msg);
-      console.log("With participants: ");
-      console.log(this.participants);
-      let participant = this.participants.find(part => part.userName === msg.from);
+      let participant = this.participants.find(part => part.username === msg.from);
       if(!isNullOrUndefined(participant)) {
         participant.hasUnreadMessages = true;
         participant.messages.push(msg);
       }
-      participant = this.participants.find(part => part.userName === msg.to);
+      participant = this.participants.find(part => part.username === msg.to);
       if(!isNullOrUndefined(participant)) {
         participant.messages.push(msg);
       }

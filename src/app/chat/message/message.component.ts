@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {SocketService} from '../service/socket.service';
+import {ChatParticipant} from '../../model/chatparticipant';
 
 @Component({
   selector: 'app-message',
@@ -8,7 +9,7 @@ import {SocketService} from '../service/socket.service';
 })
 export class MessageComponent implements OnInit {
 
-  @Input() participant: any;
+  @Input() participant: ChatParticipant;
   @Input() socket: SocketService;
 
   message: String = "";
@@ -19,7 +20,7 @@ export class MessageComponent implements OnInit {
   }
 
   onSendMessage() {
-    this.socket.sendPrivateMessage(this.participant.userName, this.message);
+    this.socket.sendPrivateMessage(this.participant.authId, this.message);
     this.participant.hasUnreadMessages = false;
     this.message = "";
   }

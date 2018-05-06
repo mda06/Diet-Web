@@ -1,9 +1,9 @@
 <div *ngIf="participant">
-  <h3>{{ participant.userName }}</h3>
+  <h3>{{ participant.username }}</h3>
   <h4>Messages</h4>
   <div *ngFor="let msg of participant.messages">
-    <p class="from" *ngIf="msg.from === participant.userName">{{msg.message}}</p>
-    <p class="to" *ngIf="msg.to === participant.userName">{{msg.message}}</p>
+    <p class="from" *ngIf="msg.from === participant.username">{{msg.message}}</p>
+    <p class="to" *ngIf="msg.to === participant.username">{{msg.message}}</p>
     <p class="system" *ngIf="msg.from === 'System'">{{msg.message}}</p>
   </div>
 

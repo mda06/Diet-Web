@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {ChatParticipant} from '../../model/chatparticipant';
 
 @Component({
   selector: 'app-participants',
@@ -7,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 })
 export class ParticipantsComponent implements OnInit {
 
-  @Input() participants: Array<any> = [];
+  @Input() participants: Array<ChatParticipant> = [];
   @Output() onParticipantSelected = new EventEmitter<any>();
 
   constructor() { }
@@ -16,7 +17,7 @@ export class ParticipantsComponent implements OnInit {
   }
 
   onParticipantSelectedClicked(participant: any) {
-    console.log(participant.userName + " has been selected");
+    console.log(participant.username + " has been selected");
     this.onParticipantSelected.emit(participant);
   }
 }

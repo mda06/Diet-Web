@@ -3,34 +3,35 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {ChatParticipant} from '../../model/chatparticipant';
 
 @Injectable()
 export class SocketService {
   private serverUrl = 'http://localhost:8080/api/socket';
   private stompClient;
-  private _username: string;
+  private _authId: string;
 
   private publicMsg = new ReplaySubject<any>(100);
   publicMessage$ = this.publicMsg.asObservable();
   private privateMsg = new ReplaySubject<any>(100);
   privateMessage$ = this.privateMsg.asObservable();
-  private chatLogin = new ReplaySubject<any>(100);
+  private chatLogin = new ReplaySubject<ChatParticipant>(100);
   chatLogin$ = this.chatLogin.asObservable();
-  private chatLogout = new ReplaySubject<any>(100);
+  private chatLogout = new ReplaySubject<ChatParticipant>(100);
   chatLogout$ = this.chatLogout.asObservable();
-  private participants = new ReplaySubject<any>(100);
+  private participants = new ReplaySubject<Array<ChatParticipant>>(100);
   participants$ = this.participants.asObservable();
 
   constructor() {}
 
-  connect(username: string){
-    this._username = username;
+  connect(authId: string){
+    this._authId = authId;
     let ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
     let that = this;
-    this.stompClient.connect({username: username}, function(_) {
+    this.stompClient.connect({authId: authId}, function(_) {
       that.initPublicMessage();
-      that.initPrivateMessage(username);
+      that.initPrivateMessage(authId);
       that.initParticipants();
       that.initChatLogin();
       that.initChatLogout();
@@ -45,8 +46,8 @@ export class SocketService {
     });
   }
 
-  private initPrivateMessage(username: String) {
-    this.stompClient.subscribe("/chat/private/" + username, msg => {
+  private initPrivateMessage(authId: String) {
+    this.stompClient.subscribe("/chat/private/" + authId, msg => {
       if(msg.body) {
         this.privateMsg.next(JSON.parse(msg.body));
       }
@@ -56,9 +57,6 @@ export class SocketService {
   private initParticipants() {
     this.stompClient.subscribe("/api/chat.participants", msg => {
       if(msg.body) {
-        console.log("In the service: ");
-        console.log(this.participants$);
-        console.log(this.participants);
         this.participants.next(JSON.parse(msg.body));
       }
     }, other => console.log(other));
@@ -94,7 +92,7 @@ export class SocketService {
     return this.stompClient != null && this.stompClient.connected;
   }
 
-  get username(): string {
-    return this._username;
+  get authId(): string {
+    return this._authId;
   }
 }
