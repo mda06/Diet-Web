@@ -21,7 +21,8 @@ import {CustomerModule} from "./customer/customer.module";
 import {PatientModule} from "./patient/patient.module";
 import { MaintenanceComponent } from './maintenance/maintenance.component';
 import { BlacklistComponent } from './blacklist/blacklist.component';
-import {ChatModule} from "./chat/chat.module";
+import {CustomReuseStrategy} from './share/CustomReuseStrategy';
+import {RouteReuseStrategy} from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,6 @@ import {ChatModule} from "./chat/chat.module";
     AdminModule,
     CustomerModule,
     PatientModule,
-    ChatModule,
     AppRoutingModule
   ],
   providers: [
@@ -61,6 +61,10 @@ import {ChatModule} from "./chat/chat.module";
       provide: HTTP_INTERCEPTORS,
       useClass: DateInterceptor,
       multi: true,
+    },
+    {
+      provide: RouteReuseStrategy,
+      useClass: CustomReuseStrategy
     }],
   bootstrap: [AppComponent]
 })

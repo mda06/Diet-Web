@@ -21,6 +21,7 @@ import { FoodInfoComponent } from './dashboards/food-info/food-info.component';
 import { FoodSliderComponent } from './dashboards/food-slider/food-slider.component';
 import {DashboardHomeComponent} from "./dashboards/home/dashboard-home.component";
 import {ReportService} from "./service/report.service";
+import {ChatModule} from '../chat/chat.module';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import {ReportService} from "./service/report.service";
     NavbarModule,
     FoodModule,
     MenuModule,
-    CustomerModule
+    CustomerModule,
+    ChatModule
   ],
   declarations: [
     DetailPatientComponent,
@@ -42,7 +44,7 @@ import {ReportService} from "./service/report.service";
     PatientInfoComponent,
     FoodInfoComponent,
     FoodSliderComponent,
-    DashboardHomeComponent,
+    DashboardHomeComponent
   ],
   entryComponents: [
     PatientInfoComponent,

@@ -17,6 +17,8 @@ import {SocketService} from './service/socket.service';
     ChatComponent
   ],
   declarations: [ChatComponent, ParticipantsComponent, MessageComponent],
-  providers: [SocketService]
+  providers: [
+    SocketService,
+  ]
 })
 export class ChatModule { }

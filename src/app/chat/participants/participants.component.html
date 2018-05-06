@@ -1,5 +1,5 @@
 <div>
-  <h3>Participants</h3>
+  <h3>Participants {{ participants.length }}</h3>
   <div *ngFor="let participant of participants" (click)="onParticipantSelectedClicked(participant)">
     <p>{{ participant.userName + "-" + participant.sessionId }} <span *ngIf="participant.hasUnreadMessages">*</span> </p>
   </div>
