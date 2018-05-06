@@ -1,22 +1,30 @@
-<div *ngIf="participant" class="wrapper">
-  <div id="header" class="text-center">
-    <h3>{{ participant.username }}</h3>
+<div id="wrapper" class="d-flex flex-column">
+  <div *ngIf="participant" id="header" class="text-center">
+    <h3 class="p-1">{{ participant.username }}</h3>
+  </div>
+  <div *ngIf="!participant">
+    Please select a participant
   </div>
 
-  <div id="messages" class="d-flex flex-column p-2">
-    <div *ngFor="let msg of participant.messages" class="message"
-         [class.ml-auto]="msg.to === participant.username"
-         [class.mr-auto]="msg.from === participant.username">
-      <p [placement]="msg.to === participant.username ? 'left' : 'right'" ngbTooltip="10:40">{{ msg.message }}</p>
+  <ng-scrollbar>
+    <div id="messages" class="d-flex flex-column p-2" *ngIf="participant">
+      <div *ngFor="let msg of participant.messages" class="message"
+           [class.ml-auto]="msg.to === participant.username"
+           [class.mr-auto]="msg.from === participant.username">
+        <p [placement]="msg.to === participant.username ? 'left' : 'right'" ngbTooltip="10:40">{{ msg.message }}</p>
+      </div>
+    </div>
+  </ng-scrollbar>
+
+  <div class="input-group" id="footer">
+    <input type="text" class="form-control" placeholder="Message"
+           [(ngModel)]="message" (keyup.enter)="onSendMessage()" [disabled]="!participant"
+           aria-label="Message" aria-describedby="basic-addon2">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="button" (click)="onSendMessage()" [disabled]="!participant">
+        Send
+      </button>
     </div>
   </div>
 
-  <div id="footer">
-    <label for="send">Send:</label>
-    <input type="text" [(ngModel)]="message" id="send">
-    <button (click)="onSendMessage()">Send</button>
-  </div>
-</div>
-<div *ngIf="!participant" class="wrapper">
-  <p>Please select a participant</p>
 </div>

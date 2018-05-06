@@ -27,6 +27,7 @@ export class ChatComponent implements OnInit {
     this.authService.getConnectedUser().subscribe(
       user => {
         this.authId = user.authId;
+        this.initializeWebSocketConnection();
       },
       err => {console.log("Error trying to get the connected user");}
     );

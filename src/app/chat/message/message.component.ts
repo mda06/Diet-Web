@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {SocketService} from '../service/socket.service';
 import {ChatParticipant} from '../../model/chatparticipant';
+import {ScrollbarComponent} from 'ngx-scrollbar';
 
 @Component({
   selector: 'app-message',
@@ -8,6 +9,7 @@ import {ChatParticipant} from '../../model/chatparticipant';
   styleUrls: ['./message.component.css']
 })
 export class MessageComponent implements OnInit {
+  @ViewChild(ScrollbarComponent) scrollRef: ScrollbarComponent;
 
   @Input() participant: ChatParticipant;
   @Input() socket: SocketService;
@@ -23,5 +25,6 @@ export class MessageComponent implements OnInit {
     this.socket.sendPrivateMessage(this.participant.authId, this.message);
     this.participant.hasUnreadMessages = false;
     this.message = "";
+    this.scrollRef.scrollYTo(this.scrollRef.view.scrollHeight);
   }
 }

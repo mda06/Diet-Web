@@ -7,7 +7,7 @@ import { ParticipantsComponent } from './participants/participants.component';
 import { MessageComponent } from './message/message.component';
 import {SocketService} from './service/socket.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {RouterModule} from '@angular/router';
+import {ScrollbarModule} from 'ngx-scrollbar';
 
 @NgModule({
   imports: [
@@ -15,6 +15,7 @@ import {RouterModule} from '@angular/router';
     ChatRoutingModule,
     FormsModule,
     NgbModule,
+    ScrollbarModule
   ],
   exports: [
     ChatComponent
