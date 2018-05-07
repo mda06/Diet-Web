@@ -10,14 +10,13 @@ import {ChatParticipant} from '../model/chatparticipant';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit, AfterContentChecked {
+export class ChatComponent implements OnInit {
 
   selectedParticipant: ChatParticipant;
   participants: Array<ChatParticipant> = [];
 
   authId: string = "";
   private isConnecting: boolean = false;
-  private hasAuthId: boolean = false;
 
 
   constructor(public socket: SocketService,
@@ -27,26 +26,18 @@ export class ChatComponent implements OnInit, AfterContentChecked {
   ngOnInit() {
     this.authService.getConnectedUser().subscribe(
       user => {
-        console.log("Get auth id");
-        this.hasAuthId = true;
         this.authId = user.authId;
+        this.selectedParticipant = null;
+        this.participants = [];
+        this.isConnecting = false;
         this.initializeWebSocketConnection();
       },
       err => {console.log("Error trying to get the connected user");}
     );
   }
 
-  ngAfterContentChecked() {
-    if(!this.socket.isConnected() && !this.isConnecting && this.hasAuthId) {
-      console.log("I need to be connected, connecting ? ", this.isConnecting);
-      console.log("Auth now: ", this.hasAuthId);
-      this.participants = [];
-      //this.initializeWebSocketConnection();
-    }
-  }
-
   initializeWebSocketConnection() {
-    if(this.isConnecting && !this.authId) return;
+    if(this.isConnecting) return;
     this.isConnecting = true;
     this.socket.connect(this.authId);
     this.handleSubscribes();
@@ -86,6 +77,7 @@ export class ChatComponent implements OnInit, AfterContentChecked {
       });
     });
     this.socket.privateMessage$.subscribe(msg => {
+      console.log("Receiving: ", msg);
       let participant = this.participants.find(part => part.username === msg.from);
       if(!isNullOrUndefined(participant)) {
         participant.hasUnreadMessages = true;

@@ -34,7 +34,8 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
   shouldAttach(route: ActivatedRouteSnapshot): boolean {
     //If we go to the login
     //Clear the cache
-    if(route.routeConfig.path)
+    console.log(route.routeConfig.path);
+    if(route.routeConfig.path == 'login')
       this.storedRouteHandles.clear();
     return this.storedRouteHandles.has(this.takeFullUrl(route));
   }
