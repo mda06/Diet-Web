@@ -10,6 +10,7 @@ import {isNullOrUndefined} from "util";
 import {SignupAsk} from '../model/signupAsk';
 import {SignupReturn} from '../model/signupReturn';
 import {Patient} from '../model/patient';
+import {SocketService} from '../chat/service/socket.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -28,7 +29,7 @@ export class AuthenticationService {
   private _role: Role;
   private _id: number;
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private socketService: SocketService) {
     this._token = JSON.parse(localStorage.getItem("token"));
   }
 
@@ -63,6 +64,7 @@ export class AuthenticationService {
   }
 
   onLogout() {
+    this.socketService.logout();
     this.http.post<any>(this.logoutUrl, httpOptions).subscribe(() => {
       console.log("Logout successfully");
       this._id = null;

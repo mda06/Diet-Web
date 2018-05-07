@@ -92,7 +92,18 @@ export class SocketService {
     return this.stompClient != null && this.stompClient.connected;
   }
 
+  logout() {
+    if(!this.isConnected()) return;
+    this.publicMsg.complete();
+    this.participants.complete();
+    this.privateMsg.complete();
+    this.chatLogout.complete();
+    this.chatLogin.complete();
+    this.stompClient.disconnect();
+  }
+
   get authId(): string {
     return this._authId;
   }
+
 }

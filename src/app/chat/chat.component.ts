@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {SocketService} from './service/socket.service';
 import {isNullOrUndefined} from "util";
 import {AuthenticationService} from '../services/authentication.service';
@@ -10,14 +10,15 @@ import {ChatParticipant} from '../model/chatparticipant';
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent implements OnInit {
-  title = 'WebSockets chat';
-
-  participants: Array<ChatParticipant> = [];
-  message: string = "";
-  authId: string = "";
+export class ChatComponent implements OnInit, AfterContentChecked {
 
   selectedParticipant: ChatParticipant;
+  participants: Array<ChatParticipant> = [];
+
+  authId: string = "";
+  private isConnecting: boolean = false;
+  private hasAuthId: boolean = false;
+
 
   constructor(public socket: SocketService,
               private authService: AuthenticationService){
@@ -26,6 +27,8 @@ export class ChatComponent implements OnInit {
   ngOnInit() {
     this.authService.getConnectedUser().subscribe(
       user => {
+        console.log("Get auth id");
+        this.hasAuthId = true;
         this.authId = user.authId;
         this.initializeWebSocketConnection();
       },
@@ -33,7 +36,18 @@ export class ChatComponent implements OnInit {
     );
   }
 
+  ngAfterContentChecked() {
+    if(!this.socket.isConnected() && !this.isConnecting && this.hasAuthId) {
+      console.log("I need to be connected, connecting ? ", this.isConnecting);
+      console.log("Auth now: ", this.hasAuthId);
+      this.participants = [];
+      //this.initializeWebSocketConnection();
+    }
+  }
+
   initializeWebSocketConnection() {
+    if(this.isConnecting && !this.authId) return;
+    this.isConnecting = true;
     this.socket.connect(this.authId);
     this.handleSubscribes();
   }
@@ -45,6 +59,7 @@ export class ChatComponent implements OnInit {
 
   private handleParticipants() {
     this.socket.participants$.subscribe(data => {
+      this.isConnecting = false;
       data.forEach(part => part.messages = []);
       this.participants = data;
     });
@@ -86,10 +101,5 @@ export class ChatComponent implements OnInit {
   onParticipantSelectedEvent(participant: any) {
     participant.hasUnreadMessages = false;
     this.selectedParticipant = participant;
-  }
-
-  onSendMessage(){
-    this.socket.sendPublicMessage(this.message);
-    this.message = "";
   }
 }
