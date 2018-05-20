@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {ChatParticipant} from '../../model/chatparticipant';
 import {Subscription} from 'rxjs/Subscription';
+import {environment} from "../../../environments/environment";
 
 @Injectable()
 export class SocketService {
@@ -25,7 +26,11 @@ export class SocketService {
 
   private subscriptions = new Subscription();
 
-  constructor() {}
+  constructor() {
+    if (environment.production) {
+      this.serverUrl = "http://http://159.203.98.254:80/api/socket";
+    }
+  }
 
   connect(authId: string){
     this._authId = authId;
