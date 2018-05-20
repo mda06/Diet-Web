@@ -28,7 +28,7 @@ export class SocketService {
 
   constructor() {
     if (environment.production) {
-      this.serverUrl = "http://http://159.203.98.254:80/api/socket";
+      this.serverUrl = "http://159.203.98.254:80/api/socket";
     }
   }
 
